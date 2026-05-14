@@ -48,14 +48,14 @@ while (condition == true)
             }
             else
             {
-                WriteLine("you dont have any items");
+                WriteLine("you don't have any items");
             }
             break;
         case "inspect":
             /*
             checks if 'input' has more than one word, if so it checks against the key of the dictionary
             if the second word is in the dictionary as a key it will print all the values of the key
-            otherwise, "you dont have that item"
+            otherwise, "you don't have that item"
             do i need to use proper grammar in these comments? like full stops or capitol letters?
             are most of these even necessary?
             */
@@ -69,7 +69,7 @@ while (condition == true)
             
             else
             {
-                WriteLine("you dont have that item");
+                WriteLine("you don't have that item");
             } 
             break;
         //give command, takes the value from the item dictionary and copies it into inventory
