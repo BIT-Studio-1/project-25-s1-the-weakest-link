@@ -1,4 +1,6 @@
-﻿using System.Net.Quic;
+﻿using System.Globalization;
+using System.Net.Quic;
+using static System.Console;
 
 namespace AwesomeGame
 {
@@ -10,17 +12,17 @@ namespace AwesomeGame
 
             while (option != "quit" && option != "exit")
             {
-                Console.WriteLine("what do you want to do");
+                WriteLine("what do you want to do");
                 try
                 {
-                    option = Console.ReadLine().Substring(0, 4).ToLower();
+                    option = ReadLine().Substring(0, 4).ToLower();
                 }
                 catch
                 {
-                    Console.WriteLine("please input a valid command");
+                    WriteLine("please input a valid command");
                 }
 
-                Console.WriteLine(option);
+                WriteLine(option);
             }
         }
     }
