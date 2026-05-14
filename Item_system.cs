@@ -15,7 +15,7 @@ string json = File.ReadAllText("items.json");
 Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
-WriteLine("write h, or help for a list of commands");
+WriteLine("input h, or help for a current list of commands");
 bool secretsEnabled = false;
 bool condition = true;
 while (condition == true)
