@@ -16,6 +16,7 @@ Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string,
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
 WriteLine("write h, or help for a list of commands");
+bool secretsEnabled = false;
 bool condition = true;
 while (condition == true)
 {
@@ -32,8 +33,12 @@ while (condition == true)
             WriteLine("inventory: prints contents of the inventory");
             WriteLine("inspect: inspects item with more detail than originally shown");
             WriteLine("help: shows a list and description of commands");
-            WriteLine("give: gives a provided item");
             WriteLine("quit, kill, exit: closes the game");
+            if (secretsEnabled)
+            {
+                WriteLine("give: gives a provided item");
+            }
+
             break;
         case "inventory":
 
@@ -74,21 +79,32 @@ while (condition == true)
             break;
         //give command, takes the value from the item dictionary and copies it into inventory
         case "give":
-            if (input.Length > 1 && Items.ContainsKey(input[1]))
+            if (secretsEnabled)
             {
-                Inventory[input[1]] = Items[input[1]];
-                WriteLine($"you now have {input[1]}");
+                if (input.Length > 1 && Items.ContainsKey(input[1]))
+                {
+                    Inventory[input[1]] = Items[input[1]];
+                    WriteLine($"you now have {input[1]}");
+                }
+                else
+                {
+                    WriteLine("this item does not exist");
+                }
             }
-            else
-            { 
-                WriteLine("this item does not exist");
-            }
-            break;
+            else { WriteLine("unknown command");  }
+                break;
         case "quit":
         case "exit":
         case "kill":
             condition = false;
             break;
+        case "secret":
+            WriteLine("you thought lol");
+            break;
+        case "secret2":
+            if (!secretsEnabled) { secretsEnabled = true; WriteLine("enabled"); }
+            else { secretsEnabled = false; WriteLine("disabled"); }
+                break;
         default:
             WriteLine("unknown command");
             break;
