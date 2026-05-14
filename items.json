@@ -1,4 +1,0 @@
-{
-    "dagger": {"description": "A sharp blade, you can feel that too much pressure would cut your finger.", "attack": 10, "weight": 100},
-    "book": {"description": "a book, the cover is made out of some sort of card", "weight": 2000}
-}
