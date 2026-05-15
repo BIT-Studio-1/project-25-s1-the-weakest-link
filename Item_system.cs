@@ -37,6 +37,7 @@ while (condition == true)
             //someone make this better
             WriteLine("inventory: prints contents of the inventory");
             WriteLine("inspect: inspects item with more detail than originally shown");
+            WriteLine("stats: shows your current EXP");
             WriteLine("help: shows a list and description of commands");
             WriteLine("quit, kill, exit: closes the game");
             if (secretsEnabled)
@@ -82,6 +83,9 @@ while (condition == true)
                 WriteLine("you don't have that item");
             } 
             break;
+        case "stats":
+            WriteLine($"You have {PropertyDamage.TotalCost} EXP");
+            break;
         //give command, takes the value from the item dictionary and copies it into inventory
         case "give":
             if (secretsEnabled)
@@ -98,6 +102,29 @@ while (condition == true)
             }
             else { WriteLine("unknown command");  }
                 break;
+        // Debug commands to test property damage system
+        case "do_damage":
+            if (secretsEnabled)
+            {
+                PropertyDamage.CauseDamage("Did a scary test thing that cost $200", 200);
+                WriteLine("You did a test, you gained 200 EXP!");
+            }
+            else
+            {
+                WriteLine("unknown command");
+            }
+            break;
+        case "show_bill":
+            if (secretsEnabled)
+            {
+                PropertyDamage.WriteBill();
+            }
+            else
+            {
+                WriteLine("unknown command");
+            }
+            break;
+        // ^ End of debug commands for property damage
         case "quit":
         case "exit":
         case "kill":
