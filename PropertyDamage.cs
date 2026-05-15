@@ -1,7 +1,11 @@
 namespace AwesomeGame;
 
-// Keeping this in a seperate file for now just for ease of development, might merge into program later for simplicity
-public class PropertyDamage
+/* File for keeping track of the various things you have damaged in your adventure
+ If you want to make it so that, for example, "cut vines" means damaging network cables,
+ causing $2000 in damage, just add PropertyDamage.CauseDamage("Damaged network cables", 2000);
+ If you want to get the total "EXP", use PropertyDamage.TotalCost
+*/
+public static class PropertyDamage
 {
     public static int TotalCost;
     public static Dictionary<string, int> AllDamages = new Dictionary<string, int>();
@@ -31,40 +35,4 @@ public class PropertyDamage
         AllDamages[reason] = amount;
         TotalCost += amount;
     }
-
-    public static void TempMain()
-    {
-        Dictionary<string, int> AllDamages = new Dictionary<string, int>();
-        int TotalCost = 0;
-        bool condition = true;
-
-        while (condition)
-        {
-            Console.WriteLine("Example things you can do: cut vines, attack monster, show stats, show bill, exit");
-            Console.Write("What do you want to do? ");
-            string command = Console.ReadLine();
-
-            switch (command)
-            {
-                case "cut vines":
-                    Console.WriteLine("You cut through the vines, clearing a path forward. You gain 2000 EXP!");
-                    CauseDamage("Damaged wiring in network room", 2000);
-                    break;
-                case "attack monster":
-                    Console.WriteLine("You knock the monster to the ground, killing it. You gain 250 EXP!");
-                    CauseDamage("Destroyed office chair", 250);
-
-                    break;
-                case "show stats":
-                    Console.WriteLine($"You have {TotalCost} EXP.");
-                    break;
-                case "show bill":
-                    WriteBill();
-                    break;
-                case "exit":
-                    condition = false;
-                    break;
-            }
-        }
-    } 
 }
