@@ -6,6 +6,11 @@ using System.Text.Json;
 using System.Windows.Markup;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
+using AwesomeGame;
+
+// This is a test for my (that is, Abby's) property damage system, it does not need to be uncommented unless you are also testing it.
+// PropertyDamage.TempMain();
+
 /*
 as far as im aware this just interprets the json as a list of objects (i think this is the best way to do it), so we can have a list of items in there for simplicties sake.
 i think this does mean that we will have to do some extra stuff later to get the values out of the json
