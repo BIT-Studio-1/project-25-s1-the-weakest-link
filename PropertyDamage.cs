@@ -8,7 +8,8 @@ namespace AwesomeGame;
 public static class PropertyDamage
 {
     public static int TotalCost;
-    public static Dictionary<string, int> AllDamages = new Dictionary<string, int>();
+    public static List<string> DamageReasons = new List<string>();
+    public static List<int> DamageAmount = new List<int>();
 
     public static void WriteBill()
     {
@@ -22,9 +23,9 @@ public static class PropertyDamage
         """;
 
         bill += "Reason".PadRight(50) + "Cost".PadLeft(50) + '\n';
-        foreach (KeyValuePair<string, int> pair in AllDamages)
+        for (int i = 0; i < DamageReasons.Count; i++)
         {
-            bill += pair.Key.PadRight(50) + pair.Value.ToString("c2").PadLeft(50) + '\n';
+            bill += DamageReasons[i].PadRight(50) + DamageAmount[i].ToString("c2").PadLeft(50) + '\n';
         }
 
         Console.WriteLine(bill);
@@ -32,7 +33,8 @@ public static class PropertyDamage
 
     public static void CauseDamage(string reason, int amount)
     {
-        AllDamages[reason] = amount;
+        DamageReasons.Add(reason);
+        DamageAmount.Add(amount);
         TotalCost += amount;
     }
 }
