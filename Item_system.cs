@@ -17,6 +17,18 @@ string json = File.ReadAllText("items.json");
 Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
+string[] exposition = ("waking up disoriented, you open your eyes|everything is dark, in your panic you flail you limbs until you feel something around you|you are blind").ToLower().Split('|');
+// turns above string into three line, scroling text
+for (int i = 0; i < exposition.Length; i++)
+{
+    string temp = exposition[i];
+    foreach (char o in temp)
+    {
+        Write(o);
+        Thread.Sleep(50);
+    }
+    WriteLine("");
+}
 WriteLine("input h, or help for a current list of commands");
 bool secretsEnabled = false;
 bool condition = true;
@@ -37,6 +49,7 @@ while (condition == true)
             WriteLine("stats: shows your current EXP");
             WriteLine("help: shows a list and description of commands");             // please add any commands you add to the program to this help section !!
             WriteLine("quit, kill, exit: closes the game");
+            //these are dev commands, activated by typing 'secret2'
             if (secretsEnabled)
             {
                 WriteLine("give: gives a provided item");
