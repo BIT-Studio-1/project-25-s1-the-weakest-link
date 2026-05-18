@@ -38,11 +38,13 @@ while (condition == true)
             WriteLine("inventory: prints contents of the inventory");
             WriteLine("inspect: inspects item with more detail than originally shown");
             WriteLine("stats: shows your current EXP");
-            WriteLine("help: shows a list and description of commands");
+            WriteLine("help: shows a list and description of commands");             // please add any commands you add to the program to this help section !!
             WriteLine("quit, kill, exit: closes the game");
             if (secretsEnabled)
             {
                 WriteLine("give: gives a provided item");
+                WriteLine("do_damage: command to test property damage system");
+                WriteLine("show_bill: command to show the current property damage");
             }
 
             break;
