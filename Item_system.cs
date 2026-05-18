@@ -17,7 +17,7 @@ string json = File.ReadAllText("items.json");
 Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
-string[] exposition = ("waking up disoriented, you open your eyes|everything is dark, in your panic you flail you limbs until you feel something around you|you are blind").ToLower().Split('|');
+string[] exposition = ("Waking up disoriented, you open your eyes.|Everything is dark, in your panic you flail your limbs until you feel something around you.|You cannot see this thing, you are blind.").Split('|');
 // turns above string into three line, scroling text
 for (int i = 0; i < exposition.Length; i++)
 {
