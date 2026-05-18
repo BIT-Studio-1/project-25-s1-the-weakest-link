@@ -30,10 +30,16 @@ for (int i = 0; i < exposition.Length; i++)
     WriteLine("");
 }
 WriteLine("input h, or help for a current list of commands");
+int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
 while (condition == true)
 {
+    if (actionsCompleted >5) //Replace value 5 with however many actions are in the room
+    {
+        Console.WriteLine("You hear the beast approaching");
+        Console.WriteLine("You should move on");
+    }
     //gets the first word of input, possibility for arguments, i.e 'inspect dagger'
     string[] input = ReadLine().ToLower().Split(' ');
     //switch for commands, dont know how we will introduce commands to player right now, maybe a 'help' command?
@@ -93,7 +99,8 @@ while (condition == true)
             else
             {
                 WriteLine("you don't have that item");
-            } 
+            }
+            actionsCompleted++;
             break;
         case "stats":
             WriteLine($"You have {PropertyDamage.TotalCost} EXP");
