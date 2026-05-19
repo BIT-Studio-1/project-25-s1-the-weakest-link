@@ -1,12 +1,61 @@
 {
-    "startRoom": {},
+    "startRoom": {
+        "connections": {
+            "sideRoom": {},
+            "hallway1": {},
+            "hallway4": {}
+        },
+        "items": ["book"]
+    },
     "sideRoom": {},
-    "hallway1": {},
-    "knifeRoom": {},
-    "vinesRoom": {},
-    "tabletRoom": {},
-    "hallway2": {},
-    "hallway3": {},
-    "hallway4": {},
-    "keyRoom": {}
+    "hallway1": {
+        "connections": {
+            "vinesRoom": {},
+            "knifeRoom": {},
+            "tabletRoom": {},
+            "hallway2": {}
+        }
+    },
+    "knifeRoom": {
+        "connections": {
+            "hallway1": {}
+        }
+    },
+    "vinesRoom": {
+        "connections": {
+            "hallway1": {},
+            "tabletRoom": {}
+        }
+    },
+    "tabletRoom": {
+        "connections": {
+            "vinesRoom": {},
+            "hallway1": {}
+        }
+    },
+    "hallway2": {
+        "connections": {
+            "stairs": {},
+            "hallway1": {},
+            "hallway3": {}
+        }
+    },
+    "hallway3": {
+        "connections": {
+            "hallway2": {},
+            "hallway4": {}
+        }
+    },
+    "hallway4": {
+        "connections": {
+            "startRoom": {},
+            "keyRoom": {},
+            "hallway3": {}
+        }
+    },
+    "keyRoom": {
+        "connections": {
+            "hallway4": {}
+        }
+    }
 }
