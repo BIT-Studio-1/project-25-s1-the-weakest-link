@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using AwesomeGame;
 //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
-static void scrolltext(string Text, int speed = 1)
+static void scrolltext(string Text, int speed = 50)
 {
         foreach (char o in Text)
         {
@@ -18,19 +18,17 @@ static void scrolltext(string Text, int speed = 1)
         WriteLine("");
 }
 /*
-as far as im aware this just interprets the json as a list of objects (i think this is the best way to do it), so we can have a list of items in there for simplicties sake.
-i think this does mean that we will have to do some extra stuff later to get the values out of the json
-i believe a json is probably the best way to do this as it's very 'modular'
+interprets the json as a list of , so we can have a list of items in there for simplicties sake.
+to get values, needs to be deserialised later
 */
 string json = File.ReadAllText("items.json");
 Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
-
 scrolltext( "Waking up disoriented, you open your eyes.\n" +
             "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
             "You cannot see this thing, you are blind.");
-WriteLine("input h, or help for a current list of commands");
+scrolltext("input h, or help for a current list of commands");
 int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
@@ -41,20 +39,16 @@ while (condition == true)
         Console.WriteLine("You hear the beast approaching");
         Console.WriteLine("You should move on");
     }
-    //gets the first word of input, possibility for arguments, i.e 'inspect dagger'
     string[] input = ReadLine().ToLower().Split(' ');
-    //switch for commands, dont know how we will introduce commands to player right now, maybe a 'help' command?
-    
     switch (input[0])
-    {
-        //lists all commands
+    { 
         case "help":
         case "h":
-            //someone make this better
+            // please add any commands you add to the program to this help section !!
             WriteLine("inventory: prints contents of the inventory");
             WriteLine("inspect: inspects item with more detail than originally shown");
             WriteLine("stats: shows your current EXP");
-            WriteLine("help: shows a list and description of commands");             // please add any commands you add to the program to this help section !!
+            WriteLine("help: shows a list and description of commands");            
             WriteLine("quit, kill, exit: closes the game");
             //these are dev commands, activated by typing 'secret2'
             if (secretsEnabled)
@@ -63,11 +57,8 @@ while (condition == true)
                 WriteLine("do_damage: command to test property damage system");
                 WriteLine("show_bill: command to show the current property damage");
             }
-
             break;
         case "inventory":
-
-            //i think a var would work with the below but i think one of the teachers dissaproves of var
             if (Inventory.Count > 0)
             {
                 WriteLine("you have:");
@@ -91,12 +82,11 @@ while (condition == true)
             */
             if (input.Length > 1 && Inventory.ContainsKey(input[1]))
             {
-                //turns the item back into a json to get the values, then prints them. i think?
+                //retrieves values from json
                 JsonElement item = (JsonElement)Items[input[1]];
                 foreach (JsonProperty property in item.EnumerateObject())
                     WriteLine($"{property.Name}: {property.Value}");
             }
-            
             else
             {
                 WriteLine("you don't have that item");
