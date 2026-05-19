@@ -21,8 +21,10 @@ static void scrolltext(string Text, int speed = 50)
 interprets the json as a list of , so we can have a list of items in there for simplicties sake.
 to get values, needs to be deserialised later
 */
-string json = File.ReadAllText("items.json");
-Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+string items_import = File.ReadAllText("items.json");
+Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import);
+string rooms_import = File.ReadAllText("rooms.json");
+Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
 scrolltext( "Waking up disoriented, you open your eyes.\n" +
@@ -73,19 +75,18 @@ while (condition == true)
             }
             break;
         case "inspect":
-            /*
-            checks if 'input' has more than one word, if so it checks against the key of the dictionary
-            if the second word is in the dictionary as a key it will print all the values of the key
-            otherwise, "you don't have that item"
-            do i need to use proper grammar in these comments? like full stops or capitol letters?
-            are most of these even necessary?
-            */
             if (input.Length > 1 && Inventory.ContainsKey(input[1]))
             {
                 //retrieves values from json
                 JsonElement item = (JsonElement)Items[input[1]];
                 foreach (JsonProperty property in item.EnumerateObject())
                     WriteLine($"{property.Name}: {property.Value}");
+            }
+            else if (input.Length == 1 || input[1] == "room")
+            {
+                JsonElement room = (JsonElement)Rooms[input[1]];
+                foreach (JsonProperty property in room.EnumerateObject())
+                    scrolltext($"{property.Name}: {property.Value}");
             }
             else
             {
@@ -147,6 +148,11 @@ while (condition == true)
             if (!secretsEnabled) { secretsEnabled = true; WriteLine("enabled"); }
             else { secretsEnabled = false; WriteLine("disabled"); }
                 break;
+        
+        
+        
+        
+        
         default:
             WriteLine("unknown command");
             break;
