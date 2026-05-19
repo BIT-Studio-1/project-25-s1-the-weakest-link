@@ -2,13 +2,16 @@
     "startRoom": {
         "connections": {
             "sideRoom": {
-                "requirements": []
+                "requirements": [],
+                "command": "enter side room"
             },
             "hallway1": {
-                "requirements": []
+                "requirements": [],
+                "command": "exit main entrance"
             },
             "hallway4": {
-                "requirements": ["tablet"]
+                "requirements": ["tablet"],
+                "command": "exit second entrance"
             }
         },
         "items": ["book"]
@@ -16,88 +19,113 @@
     "sideRoom": {},
     "hallway1": {
         "connections": {
+            "startRoom": {
+                "requirements": [],
+                "command": "enter starting room"
+            },
             "vinesRoom": {
-                "requirements": []
+                "requirements": [],
+                "command": "enter small room"
             },
             "knifeRoom": {
-                "requirements": []
+                "requirements": [],
+                "command": "enter open room"
             },
             "tabletRoom": {
-                "requirements": ["tablet"]
+                "requirements": ["tablet"],
+                "command": "enter locked door"
             },
             "hallway2": {
-                "requirements": ["tablet"]
+                "requirements": ["tablet"],
+                "command": "go south"
             }
         }
     },
     "knifeRoom": {
         "connections": {
             "hallway1": {
-                "requirements": []
+                "requirements": [],
+                "command": "exit room"
             }
-        }
+        },
+        "items": ["book"]
     },
     "vinesRoom": {
         "connections": {
             "hallway1": {
-                "requirements": []
+                "requirements": [],
+                "command": "exit main entrance"
             },
             "tabletRoom": {
-                "requirements": ["cut vines"]
+                "requirements": ["cut vines"],
+                "command": "enter main room"
             }
         }
     },
     "tabletRoom": {
         "connections": {
             "vinesRoom": {
-                "requirements": []
+                "requirements": [],
+                "command": "enter side room"
             },
             "hallway1": {
-                "requirements": []
+                "requirements": [],
+                "command": "exit main entrance"
             }
-        }
+        },
+        "items": ["tablet"]
     },
     "hallway2": {
         "connections": {
             "stairs": {
-                "requirements": ["key"]
+                "requirements": ["key"],
+                "command": "enter glass door"
             },
             "hallway1": {
-                "requirements": []
+                "requirements": [],
+                "command": "go north"
             },
             "hallway3": {
-                "requirements": []
+                "requirements": [],
+                "command": "go west"
             }
         }
     },
     "hallway3": {
         "connections": {
             "hallway2": {
-                "requirements": []
+                "requirements": [],
+                "command": "go east"
             },
             "hallway4": {
-                "requirements": []
+                "requirements": [],
+                "command": "go north"
             }
         }
     },
     "hallway4": {
         "connections": {
             "startRoom": {
-                "requirements": ["tablet"]
+                "requirements": ["tablet"],
+                "command": "enter starting room"
             },
             "keyRoom": {
-                "requirements": ["tablet"]
+                "requirements": ["tablet"],
+                "connections": "enter locked door"
             },
             "hallway3": {
-                "requirements": []
+                "requirements": [],
+                "command": "go south"
             }
         }
     },
     "keyRoom": {
         "connections": {
             "hallway4": {
-                "requirements": []
+                "requirements": [],
+                "command": "exit room"
             }
-        }
+        },
+        "items": ["key"]
     }
 }
