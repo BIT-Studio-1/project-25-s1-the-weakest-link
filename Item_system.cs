@@ -30,7 +30,7 @@ var Inventory = new Dictionary<string, object>();
 scrolltext( "Waking up disoriented, you open your eyes.\n" +
             "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
             "You cannot see this thing, you are blind.");
-scrolltext("input h, or help for a current list of commands");
+scrolltext("input h, or help for a current list of commands", 10);
 int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
@@ -82,7 +82,7 @@ while (condition == true)
                 foreach (JsonProperty property in item.EnumerateObject())
                     WriteLine($"{property.Name}: {property.Value}");
             }
-            else if (input.Length == 1 || input[1] == "room")
+            else if (input.Length > 1 && input[1] == "room")
             {
                 JsonElement room = (JsonElement)Rooms[input[1]];
                 foreach (JsonProperty property in room.EnumerateObject())
