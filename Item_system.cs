@@ -7,7 +7,21 @@ using System.Windows.Markup;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using AwesomeGame;
-
+//To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
+static void scrolltext(string Text, int speed = 50)
+{
+    string[] split = Text.Split('|');
+    for (int i = 0; i < split.Length; i++)
+    {
+        string temp = split[i];
+        foreach (char o in temp)
+        {
+            Write(o);
+            Thread.Sleep(speed);
+        }
+        WriteLine("");
+    }
+}
 /*
 as far as im aware this just interprets the json as a list of objects (i think this is the best way to do it), so we can have a list of items in there for simplicties sake.
 i think this does mean that we will have to do some extra stuff later to get the values out of the json
@@ -17,18 +31,9 @@ string json = File.ReadAllText("items.json");
 Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
 //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
 var Inventory = new Dictionary<string, object>();
-string[] exposition = ("Waking up disoriented, you open your eyes.|Everything is dark, in your panic you flail your limbs until you feel something around you.|You cannot see this thing, you are blind.").Split('|');
-// turns above string into three line, scroling text
-for (int i = 0; i < exposition.Length; i++)
-{
-    string temp = exposition[i];
-    foreach (char o in temp)
-    {
-        Write(o);
-        Thread.Sleep(50);
-    }
-    WriteLine("");
-}
+string exposition = "Waking up disoriented, you open your eyes.|Everything is dark, in your panic you flail your limbs until you feel something around you.|You cannot see this thing, you are blind.";
+// turns above string into three line, scroling 
+scrolltext(exposition);
 WriteLine("input h, or help for a current list of commands");
 bool secretsEnabled = false;
 bool condition = true;
