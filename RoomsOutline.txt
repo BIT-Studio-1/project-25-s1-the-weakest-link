@@ -1,0 +1,10 @@
+startRoom - sideRoom door, hallway1 door, hallway4 door (tablet locked), item book (maybe?)
+sideRoom - 
+hallway1 - vinesRoom door, knifeRoom door, tabletRoom door (tablet locked), connection to hallway 2
+knifeRoom -  item dagger, hallway1 door
+vinesRoom - hallway1 door, tabletRoom door (blocked with vines)
+tabletRoom -  red eyes, vinesRoom door (blocked with vines), hallway1 door (tablet locked), item tablet
+hallway2 - 3 doors to TBD rooms (tablet locked), stairs door (locked with key), connection to hallway 1, 3
+hallway3 - 1 door to TBD room, connection to hallway 2, 4
+hallway4 -  startRoom door (tablet locked), keyRoom door (tablet locked), connection to hallway 3
+keyRoom - hallway4 door (tablet locked), item key
