@@ -1,61 +1,103 @@
 {
     "startRoom": {
         "connections": {
-            "sideRoom": {},
-            "hallway1": {},
-            "hallway4": {}
+            "sideRoom": {
+                "requirements": []
+            },
+            "hallway1": {
+                "requirements": []
+            },
+            "hallway4": {
+                "requirements": ["tablet"]
+            }
         },
         "items": ["book"]
     },
     "sideRoom": {},
     "hallway1": {
         "connections": {
-            "vinesRoom": {},
-            "knifeRoom": {},
-            "tabletRoom": {},
-            "hallway2": {}
+            "vinesRoom": {
+                "requirements": []
+            },
+            "knifeRoom": {
+                "requirements": []
+            },
+            "tabletRoom": {
+                "requirements": ["tablet"]
+            },
+            "hallway2": {
+                "requirements": ["tablet"]
+            }
         }
     },
     "knifeRoom": {
         "connections": {
-            "hallway1": {}
+            "hallway1": {
+                "requirements": []
+            }
         }
     },
     "vinesRoom": {
         "connections": {
-            "hallway1": {},
-            "tabletRoom": {}
+            "hallway1": {
+                "requirements": []
+            },
+            "tabletRoom": {
+                "requirements": ["cut vines"]
+            }
         }
     },
     "tabletRoom": {
         "connections": {
-            "vinesRoom": {},
-            "hallway1": {}
+            "vinesRoom": {
+                "requirements": []
+            },
+            "hallway1": {
+                "requirements": []
+            }
         }
     },
     "hallway2": {
         "connections": {
-            "stairs": {},
-            "hallway1": {},
-            "hallway3": {}
+            "stairs": {
+                "requirements": ["key"]
+            },
+            "hallway1": {
+                "requirements": []
+            },
+            "hallway3": {
+                "requirements": []
+            }
         }
     },
     "hallway3": {
         "connections": {
-            "hallway2": {},
-            "hallway4": {}
+            "hallway2": {
+                "requirements": []
+            },
+            "hallway4": {
+                "requirements": []
+            }
         }
     },
     "hallway4": {
         "connections": {
-            "startRoom": {},
-            "keyRoom": {},
-            "hallway3": {}
+            "startRoom": {
+                "requirements": ["tablet"]
+            },
+            "keyRoom": {
+                "requirements": ["tablet"]
+            },
+            "hallway3": {
+                "requirements": []
+            }
         }
     },
     "keyRoom": {
         "connections": {
-            "hallway4": {}
+            "hallway4": {
+                "requirements": []
+            }
         }
     }
 }
