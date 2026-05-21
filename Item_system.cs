@@ -7,6 +7,7 @@ using System.Windows.Markup;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using AwesomeGame;
+using System.Security;
 //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
 static void scrolltext(string Text, int speed = 50)
 {
@@ -43,6 +44,7 @@ scrolltext("input h, or help for a current list of actions", 10);
 int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
+Boolean vinescut = false;
 //temp variable for current room, will be replaced when josh is finished the movement system
 string currentRoomTemp = "startRoom";
 while (condition == true)
@@ -64,8 +66,11 @@ while (condition == true)
             WriteLine("help: shows a list and description of commands");            
             WriteLine("quit, kill, exit: closes the game");
             //these are dev commands, activated by typing 'secret2'
+            if (currentRoomTemp == "vineroom" && vinescut == false)
+                WriteLine("cut vines: cuts the vines covering the door");
             if (secretsEnabled)
             {
+                WriteLine("goto: sends you to a room");
                 WriteLine("give: gives a provided item");
                 WriteLine("do_damage: command to test property damage system");
                 WriteLine("show_bill: command to show the current property damage");
@@ -124,7 +129,17 @@ while (condition == true)
             }
             else { WriteLine("you can't do that right now");  }
                 break;
-        // Debug commands to test property damage system
+        case "cut":
+            if (input[1] == "vines")
+                if (Inventory.ContainsKey("dagger"))
+                {
+                    vinescut = true;
+                    scrolltext("you cut the vines on the door");
+                }
+                else
+                    scrolltext("you need something sharp to cut these vines");
+            break;
+        // Debug commands
         case "do_damage":
             if (secretsEnabled)
             {
@@ -146,7 +161,15 @@ while (condition == true)
                 WriteLine("you can't do that right now");
             }
             break;
-        // ^ End of debug commands for property damage
+        case "goto":
+            if (secretsEnabled)
+            {
+                currentRoomTemp = input[1];
+                if (Inventory.ContainsKey(input[1]))
+                    scrolltext($"you are now in: {currentRoomTemp}");
+            }
+            break;
+        // ^ End of debug commands
         case "quit":
         case "exit":
         case "kill":
