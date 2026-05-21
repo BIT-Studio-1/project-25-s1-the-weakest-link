@@ -1,6 +1,6 @@
 {
   "startRoom": {
-      "description": {}
+      "description": {},
     "connections": {
       "sideRoom": {
         "requirements": [],
@@ -19,6 +19,7 @@
   },
     "sideRoom": {},
     "hallway1": {
+        "description": "",
         "connections": {
             "startRoom": {
                 "requirements": [],
@@ -43,6 +44,7 @@
         }
     },
     "knifeRoom": {
+        "description": "",
         "connections": {
             "hallway1": {
                 "requirements": [],
@@ -52,6 +54,7 @@
         "items": ["book"]
     },
     "vinesRoom": {
+      "description": "",
       "connections": {
         "hallway1": {
           "requirements": [],
@@ -69,6 +72,7 @@
       }
     },
     "tabletRoom": {
+      "description": "",
         "connections": {
             "vinesRoom": {
                 "requirements": [],
@@ -82,6 +86,7 @@
         "items": ["tablet"]
     },
     "hallway2": {
+      "description": {},
         "connections": {
             "stairs": {
                 "requirements": ["key"],
@@ -98,6 +103,7 @@
         }
     },
     "hallway3": {
+        "description": "",
         "connections": {
             "hallway2": {
                 "requirements": [],
@@ -110,6 +116,7 @@
         }
     },
     "hallway4": {
+        "description": "",
         "connections": {
             "startRoom": {
                 "requirements": ["tablet"],
@@ -126,6 +133,7 @@
         }
     },
     "keyRoom": {
+        "description": "",
         "connections": {
             "hallway4": {
                 "requirements": [],
