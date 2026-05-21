@@ -1,13 +1,29 @@
-public void Move(string movement) {
-   string currentRoom = "startRoom";
+string currentRoom = "startroom";
+
+public void StartRoom(string movement) {
    switch (movement) {
-      case "sideroom":
+      case "side room":
          currentRoom = "sideroom";
-      case "hallway1":
+      case "main entrance":
          currentRoom = "hallway1";
-      case "hallway4":
+      case "second entrance":
          if (Inventory.Contains("tablet")) {
          currentRoom = "hallway4";
          }        
+   }
+}
+
+public void MainEntrance(string movement) {
+   switch (movement) {
+      case "starting room":
+         currentRoom = "startroom";
+      case "small room":
+         currentRoom = "vinesroom";
+      case "open room":
+         currentRoom = "kniferoom";
+      case "locked door":
+      if (Inventory.Contains("tablet")) {
+         currentRoom = "tabletroom";
+      }
    }
 }
