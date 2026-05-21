@@ -1,17 +1,13 @@
-public class Movement 
-{
-   string moveEast;
-   string moveWest;
-   string moveSouth;
-   string moveNorth;
-}
-
-Movement direction = new Movement();
-
-public string MoveEast(string moveEast) 
-{
-   if (moveEast == "Go East") 
-   {
-      Console.WriteLine("You move east.");
+public void Move(string movement) {
+   string currentRoom = "startRoom";
+   switch (movement) {
+      case "sideroom":
+         currentRoom = "sideroom";
+      case "hallway1":
+         currentRoom = "hallway1";
+      case "hallway4":
+         if (Inventory.Contains("tablet")) {
+         currentRoom = "hallway4";
+         }        
    }
 }
