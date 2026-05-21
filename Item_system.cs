@@ -11,21 +11,34 @@ using System.Security;
 //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
 static void scrolltext(string Text, int speed = 50)
 {
-        foreach (char o in Text)
+    int i = 0;
+    bool skipped = false;
+    while (i < Text.Length && !skipped)
+    {
+        char o = Text[i];
+        // Checks if key has been pressed without blocking the rest of the code from running
+        if (Console.KeyAvailable)
         {
-            // Checks if key has been pressed without blocking the rest of the code from running
-            if (Console.KeyAvailable)
-            {
-                var key = ReadKey(true).Key;
-                if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
-                {
-                    speed = 1;
-                }
-            }
+            var key = ReadKey(true).Key;
+
+            // Skip if pressing space or enter
+            skipped = (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter);
+        }
+
+        if (skipped)
+        {
+            string restOfText = Text.Substring(i);
+            Write(restOfText);
+        }
+        else
+        {
             Write(o);
             Thread.Sleep(speed);
         }
-        WriteLine("");
+
+        i++;
+    }
+    WriteLine("");
 }
 /*
 interprets the json as a list of , so we can have a list of items in there for simplicties sake.
