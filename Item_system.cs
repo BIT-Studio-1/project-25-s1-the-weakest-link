@@ -16,7 +16,7 @@ static void scrolltext(string Text, int speed = 50)
             // Checks if key has been pressed without blocking the rest of the code from running
             if (Console.KeyAvailable)
             {
-                var key = ReadKey().Key;
+                var key = ReadKey(true).Key;
                 if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                 {
                     speed = 1;
