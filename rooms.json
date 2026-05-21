@@ -1,21 +1,22 @@
 {
-    "startRoom": {
-        "connections": {
-            "sideRoom": {
-                "requirements": [],
-                "command": "side room"
-            },
-            "hallway1": {
-                "requirements": [],
-                "command": "main entrance"
-            },
-            "hallway4": {
-                "requirements": ["tablet"],
-                "command": "second entrance"
-            }
-        },
-        "items": ["book"]
+  "startRoom": {
+      "description": {}
+    "connections": {
+      "sideRoom": {
+        "requirements": [],
+        "command": "side room"
+      },
+      "hallway1": {
+        "requirements": [],
+        "command": "main entrance"
+      },
+      "hallway4": {
+        "requirements": [ "tablet" ],
+        "command": "second entrance"
+      }
     },
+    "items": [ "book" ]
+  },
     "sideRoom": {},
     "hallway1": {
         "connections": {
@@ -51,16 +52,21 @@
         "items": ["book"]
     },
     "vinesRoom": {
-        "connections": {
-            "hallway1": {
-                "requirements": [],
-                "command": "main entrance"
-            },
-            "tabletRoom": {
-                "requirements": ["cut vines"],
-                "command": "main room"
-            }
+      "connections": {
+        "hallway1": {
+          "requirements": [],
+          "command": "main entrance"
+        },
+        "tabletRoom": {
+          "requirements": [ "cut vines" ],
+          "command": "main room"
         }
+      },
+      "actions": {
+        "cut vines": {
+          "requirements":  ["knife"]
+        }
+      }
     },
     "tabletRoom": {
         "connections": {

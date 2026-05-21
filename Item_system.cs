@@ -38,8 +38,8 @@ Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string,
 var Inventory = new Dictionary<string, object>();
 scrolltext( "Waking up disoriented, you open your eyes.\n" +
             "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
-            "You cannot see this thing, you are blind.");
-scrolltext("input h, or help for a current list of commands", 10);
+            "you are blind.");
+scrolltext("input h, or help for a current list of actions", 10);
 int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
@@ -47,7 +47,7 @@ while (condition == true)
 {
     if (actionsCompleted >5) //Replace value 5 with however many actions are in the room
     {
-        Console.WriteLine("You hear the beast approaching");
+        Console.WriteLine("You hear something loud approaching");
         Console.WriteLine("You should move on");
     }
     string[] input = ReadLine().ToLower().Split(' ');
@@ -120,7 +120,7 @@ while (condition == true)
                     WriteLine("this item does not exist");
                 }
             }
-            else { WriteLine("unknown command");  }
+            else { WriteLine("you can't do that right now");  }
                 break;
         // Debug commands to test property damage system
         case "do_damage":
@@ -131,7 +131,7 @@ while (condition == true)
             }
             else
             {
-                WriteLine("unknown command");
+                WriteLine("you can't do that right now");
             }
             break;
         case "show_bill":
@@ -141,7 +141,7 @@ while (condition == true)
             }
             else
             {
-                WriteLine("unknown command");
+                WriteLine("you can't do that right now");
             }
             break;
         // ^ End of debug commands for property damage
@@ -163,7 +163,7 @@ while (condition == true)
         
         
         default:
-            WriteLine("unknown command");
+            WriteLine("you can't do that right now");
             break;
     }
 }
