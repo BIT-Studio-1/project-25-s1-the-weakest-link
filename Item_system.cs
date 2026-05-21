@@ -66,7 +66,7 @@ while (condition == true)
             WriteLine("help: shows a list and description of commands");            
             WriteLine("quit, kill, exit: closes the game");
             //these are dev commands, activated by typing 'secret2'
-            if (currentRoomTemp == "vineroom" && vinescut == false)
+            if (currentRoomTemp == "vinesroom" && vinescut == false)
                 WriteLine("cut vines: cuts the vines covering the door");
             if (secretsEnabled)
             {
@@ -174,7 +174,7 @@ while (condition == true)
             if (secretsEnabled)
             {
                 currentRoomTemp = input[1];
-                if (Inventory.ContainsKey(input[1]))
+                if (Rooms.ContainsKey(input[1]))
                     scrolltext($"you are now in: {currentRoomTemp}");
             }
             break;
