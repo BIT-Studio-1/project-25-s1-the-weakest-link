@@ -1,8 +1,8 @@
 {
-  "startRoom": {
+  "startroom": {
     "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
     "connections": {
-      "sideRoom": {
+      "sideroom": {
         "requirements": [],
         "command": "side room"
       },
@@ -17,23 +17,23 @@
     },
     "items": [ "book" ]
   },
-    "sideRoom": {},
+    "sideroom": {},
     "hallway1": {
         "description": "you are in a small sideroom of unknown purpose with only one door back to the previous room \n this could be a good place to hide",
         "connections": {
-            "startRoom": {
+            "startroom": {
                 "requirements": [],
                 "command": "starting room"
             },
-            "vinesRoom": {
+            "vinesroom": {
                 "requirements": [],
                 "command": "small room"
             },
-            "knifeRoom": {
+            "kniferoom": {
                 "requirements": [],
                 "command": "open room"
             },
-            "tabletRoom": {
+            "tabletroom": {
                 "requirements": ["tablet"],
                 "command": "locked door"
             },
@@ -43,7 +43,7 @@
             }
         }
     },
-    "knifeRoom": {
+    "kniferoom": {
         "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
         "connections": {
             "hallway1": {
@@ -53,14 +53,14 @@
         },
         "items": ["book"]
     },
-    "vinesRoom": {
+    "vinesroom": {
       "description": "you are in a small room tight enough to reach both sides with your arms out, with two doors \n one back to the corridor south of you \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
       "connections": {
         "hallway1": {
           "requirements": [],
           "command": "main entrance"
         },
-        "tabletRoom": {
+        "tabletroom": {
           "requirements": [ "cut vines" ],
           "command": "main room"
         }
@@ -71,11 +71,11 @@
         }
       }
     },
-  "tabletRoom": {
+  "tabletroom": {
     "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
     "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above",
     "connections": {
-      "vinesRoom": {
+      "vinesroom": {
         "requirements": [],
         "command": "side room"
       },
@@ -119,11 +119,11 @@
     "hallway4": {
         "description": "",
         "connections": {
-            "startRoom": {
+            "startroom": {
                 "requirements": ["tablet"],
                 "command": "starting room"
             },
-            "keyRoom": {
+            "keyroom": {
                 "requirements": ["tablet"],
                 "connections": "locked door"
             },
@@ -133,7 +133,7 @@
             }
         }
     },
-    "keyRoom": {
+    "keyroom": {
       "description": "",
         "description2": "",
         "connections": {
