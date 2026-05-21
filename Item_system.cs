@@ -84,14 +84,14 @@ while (condition == true)
             }
             break;
         case "inspect":
-            if (input.Length > 1 && Inventory.ContainsKey(input[1]))
+            if (input.Length > 1 && Inventory.ContainsKey(input[1])) //this looks for items in the player's command
             {
                 //retrieves values from json
                 JsonElement item = (JsonElement)Items[input[1]];
                 foreach (JsonProperty property in item.EnumerateObject())
                     WriteLine($"{property.Name}: {property.Value}");
             }
-            else if (input.Length > 1 && input[1] == "room")
+            else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
             {
                 JsonElement room = (JsonElement)Rooms[input[1]];
                 foreach (JsonProperty property in room.EnumerateObject())
