@@ -43,6 +43,8 @@ scrolltext("input h, or help for a current list of actions", 10);
 int actionsCompleted = 0;
 bool secretsEnabled = false;
 bool condition = true;
+//temp variable for current room, will be replaced when josh is finished the movement system
+string currentRoomTemp = "startRoom";
 while (condition == true)
 {
     if (actionsCompleted >5) //Replace value 5 with however many actions are in the room
@@ -93,9 +95,9 @@ while (condition == true)
             }
             else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
             {
-                JsonElement room = (JsonElement)Rooms[input[1]];
-                foreach (JsonProperty property in room.EnumerateObject())
-                    scrolltext($"{property.Name}: {property.Value}");
+                JsonElement room = (JsonElement)Rooms[currentRoomTemp];
+                string description = room.GetProperty("description").GetString();
+                WriteLine(description);
             }
             else
             {
