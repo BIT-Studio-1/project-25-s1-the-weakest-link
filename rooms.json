@@ -71,20 +71,21 @@
         }
       }
     },
-    "tabletRoom": {
-      "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
-        "connections": {
-            "vinesRoom": {
-                "requirements": [],
-                "command": "side room"
-            },
-            "hallway1": {
-                "requirements": [],
-                "command": "main entrance"
-            }
-        },
-        "items": ["tablet"]
+  "tabletRoom": {
+    "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
+    "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above",
+    "connections": {
+      "vinesRoom": {
+        "requirements": [],
+        "command": "side room"
+      },
+      "hallway1": {
+        "requirements": [],
+        "command": "main entrance"
+      }
     },
+    "items": [ "tablet" ]
+  },
     "hallway2": {
       "description": "",
         "connections": {
@@ -133,7 +134,8 @@
         }
     },
     "keyRoom": {
-        "description": "",
+      "description": "",
+        "description2": "",
         "connections": {
             "hallway4": {
                 "requirements": [],
