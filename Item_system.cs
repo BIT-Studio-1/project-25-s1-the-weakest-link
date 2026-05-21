@@ -103,7 +103,10 @@ while (condition == true)
                 JsonElement room = (JsonElement)Rooms[currentRoomTemp];
                 string description = null;
                 // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
-                if ((currentRoomTemp == "startRoom" && Inventory.ContainsKey("book")) || (currentRoomTemp == "knifeRoom" && Inventory.ContainsKey("dagger")))
+                if ((currentRoomTemp == "startRoom" && Inventory.ContainsKey("book")) || 
+                    (currentRoomTemp == "knifeRoom" && Inventory.ContainsKey("dagger")) || 
+                    (currentRoomTemp == "vinesRoom" && vinescut == true) ||
+                    (currentRoomTemp == "tabletRoom" && Inventory.ContainsKey("tablet")))
                 {
                     description = room.GetProperty("description2").GetString();
                 }
