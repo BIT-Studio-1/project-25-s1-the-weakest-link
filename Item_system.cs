@@ -55,7 +55,7 @@ while (condition == true)
     { 
         case "help":
         case "h":
-            // please add any commands you add to the program to this help section !!
+            // please add any commands you add to the program to this help section !!!
             WriteLine("inventory: prints contents of the inventory");
             WriteLine("inspect: inspects item with more detail than originally shown");
             WriteLine("stats: shows your current EXP");
