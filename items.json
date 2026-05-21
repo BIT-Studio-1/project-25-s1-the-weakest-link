@@ -1,4 +1,5 @@
 {
     "dagger": {"description": "A sharp blade, you can feel that too much pressure would cut your finger.", "attack": 10, "weight": 100},
-    "book": {"description": "a book, the cover is made out of some sort of card. You tried to read it but you're blind", "weight": 2000}
+    "book": {"description": "a book, the cover is made out of some sort of card. You tried to read it but you're blind", "weight": 2000},
+    "tablet":  {"description":  "a strange tablet small enough to fit in the palm of your hand, you aren't sure why but you feel like it might open some doors", "weight":  10}
 }
