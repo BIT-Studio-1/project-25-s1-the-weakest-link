@@ -101,7 +101,13 @@ while (condition == true)
             else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
             {
                 JsonElement room = (JsonElement)Rooms[currentRoomTemp];
-                string description = room.GetProperty("description").GetString();
+                string description = null;
+                // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
+                if ((currentRoomTemp == "startRoom" && Inventory.ContainsKey("book")) || (currentRoomTemp == "knifeRoom" && Inventory.ContainsKey("dagger")))
+                {
+                    description = room.GetProperty("description2").GetString();
+                }
+                else { description = room.GetProperty("description").GetString(); }                    
                 WriteLine(description);
             }
             else
