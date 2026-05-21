@@ -1,6 +1,6 @@
 {
   "startRoom": {
-      "description": {}
+    "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out"
     "connections": {
       "sideRoom": {
         "requirements": [],
