@@ -95,7 +95,9 @@ while (condition == true)
             }
             else if (input.Length > 1 && input[1] == "room")
             {
-                
+                JsonElement room = (JsonElement)Rooms[currentRoomTemp];
+                string description = room.GetProperty("description").GetString();
+                WriteLine(description);
             }
             else
             {
