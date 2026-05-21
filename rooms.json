@@ -43,16 +43,17 @@
             }
         }
     },
-    "knifeRoom": {
-        "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
-        "connections": {
-            "hallway1": {
-                "requirements": [],
-                "command": "hallway"
-            }
-        },
-        "items": ["book"]
+  "knifeRoom": {
+    "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+    "description2": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves (minus the one in your inventory), this could be an armoury of some kind \n there is only one door, back into the corridor",
+    "connections": {
+      "hallway1": {
+        "requirements": [],
+        "command": "hallway"
+      }
     },
+    "items": [ "book" ]
+  },
     "vinesRoom": {
       "description": "you are in a small room tight enough to reach both sides with your arms out, with two doors \n one back to the corridor south of you \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
       "connections": {
