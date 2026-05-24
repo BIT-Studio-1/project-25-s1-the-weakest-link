@@ -163,6 +163,7 @@ internal static class Game
                         if (Inventory.ContainsKey("dagger"))
                         {
                             VinesCut = true;
+                            PropertyDamage.CauseDamage("Destroyed cabling in network room", 2000);
                             scrolltext("you cut the vines on the door");
                         }
                         else
