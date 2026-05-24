@@ -7,8 +7,11 @@ namespace AwesomeGame;
 
 internal static class Game
 {
+    //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
+    public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
+
     //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
-    static void scrolltext(string Text, int speed = 50)
+    public static void scrolltext(string Text, int speed = 50)
     {
         int i = 0;
         bool skipped = false;
@@ -50,8 +53,7 @@ internal static class Game
         Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import);
         string rooms_import = File.ReadAllText("rooms.json");
         Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
-        //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
-        var Inventory = new Dictionary<string, object>();
+        
         scrolltext( "Waking up disoriented, you open your eyes.\n" +
                     "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
                     "you are blind.");
