@@ -2,7 +2,10 @@ namespace AwesomeGame;
 
 public class MovementSystem
 {
+    // Assigns string "startroom" to the currentRoom variable
     public static string currentRoom = "startroom";
+
+    // Movement system for Start Room
     public static void StartRoom(string movement)
     {
         switch (movement)
@@ -27,6 +30,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for hallway1
     public static void hallway1(string movement)
     {
         switch (movement)
@@ -54,6 +58,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for Knife Room
     public static void kniferoom(string movement)
     {
         if (movement == "hallway")
@@ -62,6 +67,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for Vines Room
     public static void vinesroom(string movement)
     {
         switch (movement)
@@ -83,6 +89,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for Tablet Room
     public static void tabletroom(string movement)
     {
         switch (movement)
@@ -96,6 +103,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for hallway2
     public static void hallway2(string movement)
     {
         switch (movement)
@@ -120,6 +128,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for hallway3
     public static void hallway3(string movement)
     {
         switch (movement)
@@ -133,6 +142,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for hallway4
     public static void hallway4(string movement)
     {
         switch (movement)
@@ -163,6 +173,7 @@ public class MovementSystem
         }
     }
 
+    // Movement system for Key Room
     public static void keyroom(string movement)
     {
         switch (movement)
