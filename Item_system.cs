@@ -65,8 +65,6 @@ internal static class Game
         bool secretsEnabled = false;
         bool condition = true;
 
-        //temp variable for current room, will be replaced when josh is finished the movement system
-        string currentRoomTemp = "startRoom";
         while (condition == true)
         {
             if (actionsCompleted >5) //Replace value 5 with however many actions are in the room
@@ -86,7 +84,7 @@ internal static class Game
                     WriteLine("help: shows a list and description of commands");            
                     WriteLine("quit, kill, exit: closes the game");
                     //these are dev commands, activated by typing 'secret2'
-                    if (currentRoomTemp == "vinesroom" && VinesCut == false)
+                    if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         WriteLine("cut vines: cuts the vines covering the door");
                     if (secretsEnabled)
                     {
@@ -120,13 +118,13 @@ internal static class Game
                     }
                     else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
                     {
-                        JsonElement room = (JsonElement)Rooms[currentRoomTemp];
+                        JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
                         string description = null;
                         // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
-                        if ((currentRoomTemp == "startRoom" && Inventory.ContainsKey("book")) || 
-                            (currentRoomTemp == "knifeRoom" && Inventory.ContainsKey("dagger")) || 
-                            (currentRoomTemp == "vinesRoom" && VinesCut == true) ||
-                            (currentRoomTemp == "tabletRoom" && Inventory.ContainsKey("tablet")))
+                        if ((MovementSystem.currentRoom == "startRoom" && Inventory.ContainsKey("book")) || 
+                            (MovementSystem.currentRoom == "knifeRoom" && Inventory.ContainsKey("dagger")) || 
+                            (MovementSystem.currentRoom == "vinesRoom" && VinesCut == true) ||
+                            (MovementSystem.currentRoom == "tabletRoom" && Inventory.ContainsKey("tablet")))
                         {
                             description = room.GetProperty("description2").GetString();
                         }
@@ -159,7 +157,7 @@ internal static class Game
                     else { WriteLine("you can't do that right now");  }
                         break;
                 case "cut":
-                    if (input[1] == "vines" && MovementSystem.currentRoom == "vinesRoom")
+                    if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
                         if (Inventory.ContainsKey("dagger"))
                         {
                             VinesCut = true;
@@ -194,9 +192,9 @@ internal static class Game
                 case "goto":
                     if (secretsEnabled)
                     {
-                        currentRoomTemp = input[1];
+                        MovementSystem.currentRoom = input[1];
                         if (Rooms.ContainsKey(input[1]))
-                            scrolltext($"you are now in: {currentRoomTemp}");
+                            scrolltext($"you are now in: {MovementSystem.currentRoom}");
                     }
                     break;
                 // ^ End of debug commands
