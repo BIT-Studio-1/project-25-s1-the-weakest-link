@@ -1,7 +1,9 @@
+namespace AwesomeGame;
+
 public class MovementSystem
 {
-    string currentRoom = "startroom";
-    public void StartRoom(string movement)
+    public static string currentRoom = "startroom";
+    public static void StartRoom(string movement)
     {
         switch (movement)
         {
@@ -12,7 +14,7 @@ public class MovementSystem
                 currentRoom = "hallway1";
                 break;
             case "second entrance":
-                if (Inventory.Contains("tablet"))
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "hallway4";
                     break;
@@ -25,7 +27,7 @@ public class MovementSystem
         }
     }
 
-    public void hallway1(string movement)
+    public static void hallway1(string movement)
     {
         switch (movement)
         {
@@ -39,7 +41,7 @@ public class MovementSystem
                 currentRoom = "kniferoom";
                 break;
             case "locked door":
-                if (Inventory.Contains("tablet"))
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "tabletroom";
                     break;
@@ -52,7 +54,7 @@ public class MovementSystem
         }
     }
 
-    public void kniferoom(string movement)
+    public static void kniferoom(string movement)
     {
         if (movement == "hallway")
         {
@@ -60,7 +62,7 @@ public class MovementSystem
         }
     }
 
-    public void vinesroom(string movement)
+    public static void vinesroom(string movement)
     {
         switch (movement)
         {
@@ -68,7 +70,7 @@ public class MovementSystem
                 currentRoom = "hallway1";
                 break;
             case "main room":
-                if (vinescut == true)
+                if (Game.VinesCut)
                 {
                     currentRoom = "tabletroom";
                     break;
@@ -81,7 +83,7 @@ public class MovementSystem
         }
     }
 
-    public void tabletroom(string movement)
+    public static void tabletroom(string movement)
     {
         switch (movement)
         {
@@ -94,12 +96,12 @@ public class MovementSystem
         }
     }
 
-    public void hallway2(string movement)
+    public static void hallway2(string movement)
     {
         switch (movement)
         {
             case "glass door":
-                if (Inventory.Contains("key"))
+                if (Game.Inventory.ContainsKey("key"))
                 {
                     currentRoom = "stairs";
                     break;
@@ -118,7 +120,7 @@ public class MovementSystem
         }
     }
 
-    public void hallway3(string movement)
+    public static void hallway3(string movement)
     {
         switch (movement)
         {
@@ -131,38 +133,37 @@ public class MovementSystem
         }
     }
 
-    public void hallway4(string movement)
+    public static void hallway4(string movement)
     {
         switch (movement)
         {
             case "starting room":
-                if (Inventory.Contains("tablet"))
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "startroom";
-                    break;
                 }
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
                 }
+                break;
             case "locked door":
-                if (Inventory.Contains("tablet"))
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "keyroom";
-                    break;
                 }
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
-                    break;
                 }
+                break;
             case "south":
                 currentRoom = "hallway3";
                 break;
         }
     }
 
-    public void keyroom(string movement)
+    public static void keyroom(string movement)
     {
         switch (movement)
         {

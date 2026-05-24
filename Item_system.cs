@@ -10,6 +10,9 @@ internal static class Game
     //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
 
+    // Flags to show that an action has been completed
+    public static bool VinesCut = false;
+
     //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
     public static void scrolltext(string Text, int speed = 50)
     {
@@ -61,7 +64,7 @@ internal static class Game
         int actionsCompleted = 0;
         bool secretsEnabled = false;
         bool condition = true;
-        Boolean vinescut = false;
+
         //temp variable for current room, will be replaced when josh is finished the movement system
         string currentRoomTemp = "startRoom";
         while (condition == true)
@@ -83,7 +86,7 @@ internal static class Game
                     WriteLine("help: shows a list and description of commands");            
                     WriteLine("quit, kill, exit: closes the game");
                     //these are dev commands, activated by typing 'secret2'
-                    if (currentRoomTemp == "vinesroom" && vinescut == false)
+                    if (currentRoomTemp == "vinesroom" && VinesCut == false)
                         WriteLine("cut vines: cuts the vines covering the door");
                     if (secretsEnabled)
                     {
@@ -122,7 +125,7 @@ internal static class Game
                         // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
                         if ((currentRoomTemp == "startRoom" && Inventory.ContainsKey("book")) || 
                             (currentRoomTemp == "knifeRoom" && Inventory.ContainsKey("dagger")) || 
-                            (currentRoomTemp == "vinesRoom" && vinescut == true) ||
+                            (currentRoomTemp == "vinesRoom" && VinesCut == true) ||
                             (currentRoomTemp == "tabletRoom" && Inventory.ContainsKey("tablet")))
                         {
                             description = room.GetProperty("description2").GetString();
@@ -156,10 +159,10 @@ internal static class Game
                     else { WriteLine("you can't do that right now");  }
                         break;
                 case "cut":
-                    if (input[1] == "vines")
+                    if (input[1] == "vines" && MovementSystem.currentRoom == "vinesRoom")
                         if (Inventory.ContainsKey("dagger"))
                         {
-                            vinescut = true;
+                            VinesCut = true;
                             scrolltext("you cut the vines on the door");
                         }
                         else
