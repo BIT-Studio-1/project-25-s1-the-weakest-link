@@ -1,13 +1,7 @@
-using System.Collections.Generic;
-using System.Net.Quic;
 using static System.Console;
 //for grabbing values from json
 using System.Text.Json;
-using System.Windows.Markup;
-using System.ComponentModel.Design;
-using System.Runtime.CompilerServices;
 using AwesomeGame;
-using System.Security;
 //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
 static void scrolltext(string Text, int speed = 50)
 {
