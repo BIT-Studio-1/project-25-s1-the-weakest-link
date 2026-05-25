@@ -19,7 +19,7 @@
   },
   "sideroom":
    {
-    "description": "you are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide",
+    "description": "you are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
    },
     "hallway1": {
         "description": "you are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'",
