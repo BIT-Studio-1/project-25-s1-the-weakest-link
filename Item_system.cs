@@ -72,7 +72,8 @@ internal static class Game
                 Console.WriteLine("You hear something loud approaching");
                 Console.WriteLine("You should move on");
             }
-            string[] input = ReadLine().ToLower().Split(' ');
+            string inputString = Console.ReadLine();
+            string[] input = inputString.ToLower().Split(' ');
             switch (input[0])
             { 
                 case "help":
@@ -217,7 +218,16 @@ internal static class Game
                 
                 
                 default:
-                    WriteLine("you can't do that right now");
+                    bool movementSucceeded = MovementSystem.Move(inputString.Trim());
+
+                    if (movementSucceeded == true)
+                    {
+                        Console.WriteLine("You move to the next room");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You can't do that right now");
+                    }
                     break;
             }
         }
