@@ -1,151 +1,46 @@
 {
   "startroom": {
-    "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
-    "connections": {
-      "sideroom": {
-        "requirements": [],
-        "command": "side room"
-      },
-      "hallway1": {
-        "requirements": [],
-        "command": "main entrance"
-      },
-      "hallway4": {
-        "requirements": [ "tablet" ],
-        "command": "second entrance"
-      }
-    },
-    "items": [ "book" ]
+    "totalactions": "4",
+    "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables"
   },
-  "sideroom":
-   {
+
+  "sideroom": {
     "description": "you are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
-   },
-    "hallway1": {
-        "description": "you are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'",
-        "connections": {
-            "startroom": {
-                "requirements": [],
-                "command": "starting room"
-            },
-            "vinesroom": {
-                "requirements": [],
-                "command": "small room"
-            },
-            "kniferoom": {
-                "requirements": [],
-                "command": "open room"
-            },
-            "tabletroom": {
-                "requirements": ["tablet"],
-                "command": "locked door"
-            },
-            "hallway2": {
-                "requirements": ["tablet"],
-                "command": "south"
-            }
-        }
-    },
-    "kniferoom": {
-        "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
-        "connections": {
-            "hallway1": {
-                "requirements": [],
-                "command": "hallway"
-            }
-        },
-        "items": ["book"]
-    },
-    "vinesroom": {
-      "description": "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
-      "description2":  "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby",
-      "connections": {
-        "hallway1": {
-          "requirements": [],
-          "command": "main entrance"
-        },
-        "tabletroom": {
-          "requirements": [ "cut vines" ],
-          "command": "main room"
-        }
-      },
-      "actions": {
-        "cut vines": {
-          "requirements":  ["knife"]
-        }
-      }
-    },
-  "tabletroom": {
-    "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
-    "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above",
-    "connections": {
-      "vinesroom": {
-        "requirements": [],
-        "command": "side room"
-      },
-      "hallway1": {
-        "requirements": [],
-        "command": "main entrance"
-      }
-    },
-    "items": [ "tablet" ]
   },
-    "hallway2": {
-      "description": "",
-        "connections": {
-            "stairs": {
-                "requirements": ["key"],
-                "command": "glass door"
-            },
-            "hallway1": {
-                "requirements": [],
-                "command": "north"
-            },
-            "hallway3": {
-                "requirements": [],
-                "command": "west"
-            }
-        }
-    },
-    "hallway3": {
-        "description": "",
-        "connections": {
-            "hallway2": {
-                "requirements": [],
-                "command": "east"
-            },
-            "hallway4": {
-                "requirements": [],
-                "command": "north"
-            }
-        }
-    },
-    "hallway4": {
-        "description": "",
-        "connections": {
-            "startroom": {
-                "requirements": ["tablet"],
-                "command": "starting room"
-            },
-            "keyroom": {
-                "requirements": ["tablet"],
-                "connections": "locked door"
-            },
-            "hallway3": {
-                "requirements": [],
-                "command": "south"
-            }
-        }
-    },
-    "keyroom": {
-      "description": "",
-        "description2": "",
-        "connections": {
-            "hallway4": {
-                "requirements": [],
-                "command": "hallway"
-            }
-        },
-        "items": ["key"]
-    }
+
+  "hallway1": {
+    "description": "you are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'"
+  },
+
+  "kniferoom": {
+    "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor"
+  },
+
+  "vinesroom": {
+    "description": "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
+    "description2": "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+  },
+
+  "tabletroom": {
+    "totalactions": "2",
+    "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
+    "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above"
+  },
+
+  "hallway2": {
+    "description": ""
+  },
+
+  "hallway3": {
+    "description": ""
+  },
+
+  "hallway4": {
+    "description": ""
+  },
+
+  "keyroom": {
+    "description": "",
+    "description2": ""
+  }
 }
