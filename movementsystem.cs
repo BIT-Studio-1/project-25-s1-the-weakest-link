@@ -6,8 +6,9 @@ public class MovementSystem
     public static string currentRoom = "startroom";
 
     // Movement system for Start Room
-    public static void StartRoom(string movement)
+    public static bool StartRoom(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "side room":
@@ -25,14 +26,33 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
+                    succeeded = false;
                     break;
                 }
+            default:
+                succeeded = false;
+                break;
         }
+        return succeeded;
+    }
+    public static bool SideRoom(string movement)
+    {
+        bool succeeded = true;
+        if (movement == "start room")
+        {
+            currentRoom = "startroom";
+        }
+        else
+        {
+            succeeded = false;
+        }
+        return succeeded;
     }
 
     // Movement system for hallway1
-    public static void hallway1(string movement)
+    public static bool hallway1(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "starting room":
@@ -53,23 +73,35 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
+                    succeeded = false;
                     break;
                 }
+            default:
+                succeeded = false;
+                break;
         }
+        return succeeded;
     }
 
     // Movement system for Knife Room
-    public static void kniferoom(string movement)
+    public static bool kniferoom(string movement)
     {
+        bool succeeded = true;
         if (movement == "hallway")
         {
             currentRoom = "hallway1";
         }
+        else
+        {
+            succeeded = false;
+        }
+        return succeeded;
     }
 
     // Movement system for Vines Room
-    public static void vinesroom(string movement)
+    public static bool vinesroom(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "main entrance":
@@ -84,14 +116,20 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("Vines have not been cut.");
+                    succeeded = false;
                     break;
                 }
+            default:
+                succeeded = false;
+                break;
         }
+        return succeeded;
     }
 
     // Movement system for Tablet Room
-    public static void tabletroom(string movement)
+    public static bool tabletroom(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "side room":
@@ -100,12 +138,17 @@ public class MovementSystem
             case "main entrance":
                 currentRoom = "hallway1";
                 break;
+            default: 
+                succeeded = false;
+                break;
         }
+        return succeeded;
     }
 
     // Movement system for hallway2
-    public static void hallway2(string movement)
+    public static bool hallway2(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "glass door":
@@ -117,6 +160,7 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("You do not have a key.");
+                    succeeded = false;
                     break;
                 }
             case "north":
@@ -125,12 +169,17 @@ public class MovementSystem
             case "west":
                 currentRoom = "hallway3";
                 break;
+            default: 
+                succeeded = false;
+                break;
         }
+        return succeeded;
     }
 
     // Movement system for hallway3
-    public static void hallway3(string movement)
+    public static bool hallway3(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "east":
@@ -139,12 +188,17 @@ public class MovementSystem
             case "north":
                 currentRoom = "hallway4";
                 break;
+            default: 
+                succeeded = false;
+                break;     
         }
+        return succeeded;
     }
 
     // Movement system for hallway4
-    public static void hallway4(string movement)
+    public static bool hallway4(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "starting room":
@@ -155,6 +209,7 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
+                    succeeded = false;
                 }
                 break;
             case "locked door":
@@ -165,22 +220,61 @@ public class MovementSystem
                 else
                 {
                     Console.WriteLine("You do not have a tablet.");
+                    succeeded = false;
                 }
                 break;
             case "south":
                 currentRoom = "hallway3";
                 break;
+        default:
+            succeeded = false;
+            break;
         }
+        return succeeded;
     }
 
     // Movement system for Key Room
-    public static void keyroom(string movement)
+    public static bool keyroom(string movement)
     {
+        bool succeeded = true;
         switch (movement)
         {
             case "hallway":
                 currentRoom = "hallway4";
                 break;
+            default:
+                succeeded = false;
+                break;
+        }
+        return succeeded;
+    }
+
+    public static bool Move(string movement)
+    {
+        switch (currentRoom)
+        {
+            case "startroom":
+                return StartRoom(movement);
+            case "sideroom":
+                return SideRoom(movement);
+            case "hallway1":
+                return hallway1(movement);
+            case "kniferoom":
+                return kniferoom(movement);
+            case "vinesroom":
+                return vinesroom(movement);
+            case "tabletroom":
+                return tabletroom(movement);
+            case "hallway2":
+                return hallway2(movement);
+            case "hallway3":
+                return hallway3(movement);
+            case "hallway4":
+                return hallway4(movement);
+            case "keyroom":
+                return keyroom(movement);
+            default:
+                return false;
         }
     }
 }

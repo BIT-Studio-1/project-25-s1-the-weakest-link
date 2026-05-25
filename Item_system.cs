@@ -72,17 +72,19 @@ internal static class Game
                 Console.WriteLine("You hear something loud approaching");
                 Console.WriteLine("You should move on");
             }
-            string[] input = ReadLine().ToLower().Split(' ');
+            string inputString = Console.ReadLine();
+            string[] input = inputString.ToLower().Split(' ');
             switch (input[0])
             { 
                 case "help":
                 case "h":
-                    // please add any commands you add to the program to this help section !!!
-                    WriteLine("inventory: prints contents of the inventory");
+                    // please add any commands you add to the program to this help section 
                     WriteLine("inspect: inspects item with more detail than originally shown");
                     WriteLine("stats: shows your current EXP");
                     WriteLine("help: shows a list and description of commands");            
                     WriteLine("quit, kill, exit: closes the game");
+                    if (Inventory.Count > 0)
+                        WriteLine("inventory: prints contents of the inventory");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         WriteLine("cut vines: cuts the vines covering the door");
@@ -103,10 +105,10 @@ internal static class Game
                             WriteLine(Inv.Key);
                         }
                     }
+                    else if (Inventory.Count! > 0)
+                        WriteLine("you cant do that right now");
                     else
-                    {
                         WriteLine("you don't have any items");
-                    }
                     break;
                 case "inspect":
                     if (input.Length > 1 && Inventory.ContainsKey(input[1])) //this looks for items in the player's command
@@ -216,7 +218,16 @@ internal static class Game
                 
                 
                 default:
-                    WriteLine("you can't do that right now");
+                    bool movementSucceeded = MovementSystem.Move(inputString.Trim());
+
+                    if (movementSucceeded == true)
+                    {
+                        Console.WriteLine("You move to the next room");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You can't do that right now");
+                    }
                     break;
             }
         }
