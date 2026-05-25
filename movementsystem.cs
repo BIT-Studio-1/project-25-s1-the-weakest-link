@@ -29,6 +29,13 @@ public class MovementSystem
                 }
         }
     }
+    public static void SideRoom(string movement)
+    {
+        if (movement == "start room")
+        {
+            currentRoom = "startroom";
+        }
+    }
 
     // Movement system for hallway1
     public static void hallway1(string movement)
@@ -180,6 +187,43 @@ public class MovementSystem
         {
             case "hallway":
                 currentRoom = "hallway4";
+                break;
+        }
+    }
+
+    public static void Move(string movement)
+    {
+        switch (currentRoom)
+        {
+            case "startroom":
+                StartRoom(movement);
+                break;
+            case "sideroom":
+                SideRoom(movement);
+                break;
+            case "hallway1":
+                hallway1(movement);
+                break;
+            case "kniferoom":
+                kniferoom(movement);
+                break;
+            case "vinesroom":
+                vinesroom(movement);
+                break;
+            case "tabletroom":
+                tabletroom(movement);
+                break;
+            case "hallway2":
+                hallway2(movement);
+                break;
+            case "hallway3":
+                hallway3(movement);
+                break;
+            case "hallway4":
+                hallway4(movement);
+                break;
+            case "keyroom":
+                keyroom(movement);
                 break;
         }
     }
