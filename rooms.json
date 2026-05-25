@@ -1,6 +1,5 @@
 {
   "startroom": {
-    "totalactions": "4",
     "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables"
   },
 
@@ -22,7 +21,6 @@
   },
 
   "tabletroom": {
-    "totalactions": "2",
     "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
     "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above"
   },
@@ -38,6 +36,26 @@
   "hallway4": {
     "description": ""
   },
+
+  "renovatedRoom": {
+    "description": "",
+    "description2": ""
+  }
+
+  "spidersRoom": {
+    "description": "",
+    "description2":  ""
+  }
+
+  "smashingRoom": {
+    "description": "",
+    "description2":  ""
+  }
+
+  "eyesRoom": {
+    "description": "",
+    "description2":  ""
+  }
 
   "keyroom": {
     "description": "",
