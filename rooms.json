@@ -40,22 +40,22 @@
   "renovatedroom": {
     "description": "",
     "description2": ""
-  }
+  },
 
   "spidersroom": {
-    "description": "",
+    "description": "You feel what appears to be a large egg sac blocking the exit out of this room. Perhaps this room was a nest for some monster?",
     "description2":  ""
-  }
+  },
 
   "smashingroom": {
     "description": "",
     "description2":  ""
-  }
+  },
 
   "eyesroom": {
     "description": "",
     "description2":  ""
-  }
+  },
 
   "keyroom": {
     "description": "",
