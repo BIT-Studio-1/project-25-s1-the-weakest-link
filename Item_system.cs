@@ -255,7 +255,7 @@ internal static class Game
                     switch (MovementSystem.currentRoom)
                     {
                         case "tabletroom":
-                            if (input.Length > 1 && input[1] == "tablet")
+                            if (input.Length > 1 && input[1] == "corpse")
                             {
                                 if (Inventory.ContainsKey("tablet"))
                                 {
