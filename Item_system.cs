@@ -259,7 +259,7 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("tablet"))
                                 {
-                                    WriteLine("You already have the tablet.");
+                                    WriteLine("You have already looted the corpse.");
                                 }
                                 else
                                 {
