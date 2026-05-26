@@ -6,8 +6,7 @@ using static System.Console;
 namespace AwesomeGame;
 
 internal static class Game
-{
-    //makes a new dictionary for inventory, references the 'items' dictionary, google says var is good practice in 
+{ 
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
 
     // Flags to show that an action has been completed
@@ -83,10 +82,9 @@ internal static class Game
                     WriteLine("stats: shows your current EXP");
                     WriteLine("help: shows a list and description of commands");
                     WriteLine("quit, kill, exit: closes the game");
+                    WriteLine("inventory: prints contents of the inventory");
                     if (MovementSystem.currentRoom.Contains("features"))
                         WriteLine("loot: takes a given item in the current room");
-                    if (Inventory.Count > 0)
-                        WriteLine("inventory: prints contents of the inventory");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         WriteLine("cut vines: cuts the vines covering the door");
@@ -125,10 +123,10 @@ internal static class Game
                         JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
                         string description = null;
                         // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
-                        if ((MovementSystem.currentRoom == "startRoom" && Inventory.ContainsKey("book")) ||
-                            (MovementSystem.currentRoom == "knifeRoom" && Inventory.ContainsKey("dagger")) ||
-                            (MovementSystem.currentRoom == "vinesRoom" && VinesCut == true) ||
-                            (MovementSystem.currentRoom == "tabletRoom" && Inventory.ContainsKey("tablet")))
+                        if ((MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+                            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
+                            (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
+                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")))
                         {
                             description = room.GetProperty("description2").GetString();
                         }
@@ -138,7 +136,10 @@ internal static class Game
                         WriteLine(description);
                         foreach (var features in room.GetProperty("features").EnumerateArray())
                         {
-                            WriteLine($"You feel: {features.GetString()}");
+                            if (Inventory.ContainsKey(features.GetString()))
+                                break;
+                            else
+                                WriteLine($"You feel: {features.GetString()}");
                         }
                     }
                     else
@@ -258,7 +259,7 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("tablet"))
                                 {
-                                    scrolltext("You already have the tablet.");
+                                    WriteLine("You already have the tablet.");
                                 }
                                 else
                                 {
@@ -273,7 +274,7 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("dagger"))
                                 {
-                                    scrolltext("You already have the dagger.");
+                                    WriteLine("You already have the dagger.");
                                 }
                                 else
                                 {
@@ -287,7 +288,7 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("book"))
                                 {
-                                    scrolltext("You already have the book.");
+                                    WriteLine("You already have the book.");
                                 }
                                 else
                                 {
