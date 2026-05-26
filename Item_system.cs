@@ -79,10 +79,12 @@ internal static class Game
                 case "h":
                     // please add any commands you add to the program to this help section !!!
 
-                    WriteLine("inspect: inspects item or room with more detail than originally shown");
+                    WriteLine("inspect: inspects item or room with more detail than the description, inspect room");
                     WriteLine("stats: shows your current EXP");
                     WriteLine("help: shows a list and description of commands");
                     WriteLine("quit, kill, exit: closes the game");
+                    if (MovementSystem.currentRoom.Contains("features"))
+                        WriteLine("loot: takes a given item in the current room");
                     if (Inventory.Count > 0)
                         WriteLine("inventory: prints contents of the inventory");
                     //these are dev commands, activated by typing 'secret2'
@@ -114,8 +116,8 @@ internal static class Game
                     if (input.Length > 1 && Inventory.ContainsKey(input[1])) //this looks for items in the player's command
                     {
                         //retrieves values from json
-                        JsonElement item = (JsonElement)Items[input[1]];
-                        foreach (JsonProperty property in item.EnumerateObject())
+                        var item = (JsonElement)Items[input[1]];
+                        foreach (var property in item.EnumerateObject())
                             WriteLine($"{property.Name}: {property.Value}");
                     }
                     else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
@@ -130,8 +132,14 @@ internal static class Game
                         {
                             description = room.GetProperty("description2").GetString();
                         }
-                        else { description = room.GetProperty("description").GetString(); }
+                        else { 
+                            description = room.GetProperty("description").GetString(); 
+                            }
                         WriteLine(description);
+                        foreach (var features in room.GetProperty("features").EnumerateArray())
+                        {
+                            WriteLine($"You feel: {features.GetString()}");
+                        }
                     }
                     else
                     {
@@ -199,9 +207,20 @@ internal static class Game
                 case "goto":
                     if (secretsEnabled)
                     {
-                        MovementSystem.currentRoom = input[1];
-                        if (Rooms.ContainsKey(input[1]))
-                            scrolltext($"you are now in: {MovementSystem.currentRoom}");
+                        if (input.Length > 1 && Rooms.ContainsKey(input[1]))
+                        {
+                            MovementSystem.currentRoom = input[1];
+                            if (Rooms.ContainsKey(input[1]))
+                                scrolltext($"you are now in: {MovementSystem.currentRoom}");
+                        }
+                        else
+                        {
+                            WriteLine("this room does not exist");
+                        }
+                    }
+                    else
+                    {
+                        WriteLine("you can't do that right now");
                     }
                     break;
                 // ^ End of debug commands

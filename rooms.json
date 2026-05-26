@@ -1,7 +1,8 @@
 {
     "startroom": {
         "actions": 3,
-        "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables"
+        "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
+        "features": ["book"]
     },
 
     "sideroom": {
@@ -16,7 +17,8 @@
 
     "kniferoom": {
         "actions": 3,
-        "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor"
+        "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+        "features": ["dagger"]
     },
 
     "vinesroom": {
@@ -27,7 +29,8 @@
     "tabletroom": {
         "actions": 4,
         "description": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n You feel a corpse placed half way up the steps, still warm",
-        "description2": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n The corpse is still present, now lacking what you took"
+        "description2": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n The corpse is still present, now lacking what you took",
+        "features": ["corpse"]
     },
 
     "hallway2": {
