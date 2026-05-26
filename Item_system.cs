@@ -160,14 +160,19 @@ internal static class Game
                     break;
                 case "cut":
                     if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
+                    {
                         if (Inventory.ContainsKey("dagger"))
                         {
                             VinesCut = true;
                             PropertyDamage.CauseDamage("Destroyed cabling in network room", 2000);
-                            scrolltext("you cut the vines on the door");
+                            WriteLine("you cut the vines on the door");
                         }
                         else
-                            scrolltext("you need something sharp to cut these vines");
+                        {
+                            WriteLine("you need something sharp to cut these vines");
+                        }
+                    }
+
                     break;
                 // Debug commands
                 case "do_damage":
@@ -225,11 +230,33 @@ internal static class Game
                         }
                     }
                     break;
-                
-
-
-                default:
-                    WriteLine("you can't do that right now");
+                //switch for looting items
+                case "loot":
+                    switch (MovementSystem.currentRoom)
+                    {
+                        case "tabletroom":
+                            if (input.Length > 1 && input[1] == "tablet")
+                            {
+                                if (Inventory.ContainsKey("tablet"))
+                                {
+                                    scrolltext("You already have the tablet.");
+                                }
+                                else
+                                {
+                                    Inventory["tablet"] = Items["tablet"];
+                                    Inventory["coins"] = Items["coins"];
+                                    WriteLine($"From the corpse you loot some sort of tablet, and an array of coins.");
+                                }
+                            }
+                            else
+                            {
+                                WriteLine("there's nothing to loot here");
+                            }
+                            break;
+                        default:
+                            WriteLine("you can't do that right now");
+                            break;
+                    }
                     break;
             }
         }
