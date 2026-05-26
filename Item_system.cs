@@ -1,7 +1,7 @@
-using static System.Console;
 //for grabbing values from json
 using System.Text.Json;
 using AwesomeGame;
+using static System.Console;
 
 namespace AwesomeGame;
 
@@ -50,15 +50,14 @@ internal static class Game
     public static void Main()
     {
         /*
-        interprets the json as a list of , so we can have a list of items in there for simplicties sake.
-        to get values, needs to be deserialised later
+        interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
         */
         string items_import = File.ReadAllText("items.json");
         Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import);
         string rooms_import = File.ReadAllText("rooms.json");
         Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
-        
-        scrolltext( "Waking up disoriented, you open your eyes.\n" +
+
+        scrolltext("Waking up disoriented, you open your eyes.\n" +
                     "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
                     "you are blind.");
         scrolltext("input h, or help for a current list of actions", 10);
@@ -68,22 +67,24 @@ internal static class Game
 
         while (condition == true)
         {
-            if (actionsCompleted >5) //Replace value 5 with however many actions are in the room
+            if (actionsCompleted > 5) //Replace value 5 with however many actions are in the room
             {
                 Console.WriteLine("You hear something loud approaching");
                 Console.WriteLine("You should move on");
             }
             string[] input = ReadLine().ToLower().Split(' ');
             switch (input[0])
-            { 
+            {
                 case "help":
                 case "h":
                     // please add any commands you add to the program to this help section !!!
-                    WriteLine("inventory: prints contents of the inventory");
+
                     WriteLine("inspect: inspects item or room with more detail than originally shown");
                     WriteLine("stats: shows your current EXP");
-                    WriteLine("help: shows a list and description of commands");            
+                    WriteLine("help: shows a list and description of commands");
                     WriteLine("quit, kill, exit: closes the game");
+                    if (Inventory.Count > 0)
+                        WriteLine("inventory: prints contents of the inventory");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         WriteLine("cut vines: cuts the vines covering the door");
@@ -122,14 +123,14 @@ internal static class Game
                         JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
                         string description = null;
                         // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
-                        if ((MovementSystem.currentRoom == "startRoom" && Inventory.ContainsKey("book")) || 
-                            (MovementSystem.currentRoom == "knifeRoom" && Inventory.ContainsKey("dagger")) || 
+                        if ((MovementSystem.currentRoom == "startRoom" && Inventory.ContainsKey("book")) ||
+                            (MovementSystem.currentRoom == "knifeRoom" && Inventory.ContainsKey("dagger")) ||
                             (MovementSystem.currentRoom == "vinesRoom" && VinesCut == true) ||
                             (MovementSystem.currentRoom == "tabletRoom" && Inventory.ContainsKey("tablet")))
                         {
                             description = room.GetProperty("description2").GetString();
                         }
-                        else { description = room.GetProperty("description").GetString(); }                    
+                        else { description = room.GetProperty("description").GetString(); }
                         WriteLine(description);
                     }
                     else
@@ -155,8 +156,8 @@ internal static class Game
                             WriteLine("this item does not exist");
                         }
                     }
-                    else { WriteLine("you can't do that right now");  }
-                        break;
+                    else { WriteLine("you can't do that right now"); }
+                    break;
                 case "cut":
                     if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
                         if (Inventory.ContainsKey("dagger"))
@@ -210,7 +211,7 @@ internal static class Game
                 case "secret2":
                     if (!secretsEnabled) { secretsEnabled = true; WriteLine("enabled"); }
                     else { secretsEnabled = false; WriteLine("disabled"); }
-                        break;
+                    break;
 
                 case "attack":
                     // Spider room, Abby's responsibility
@@ -219,14 +220,14 @@ internal static class Game
                         if (Inventory.ContainsKey("dagger"))
                         {
                             SpiderSacBurst = true;
-                            
+
                             scrolltext("You stab at the sac, slashing your way through...");
                         }
                     }
                     break;
-                
-                
-                
+                case
+
+
                 default:
                     WriteLine("you can't do that right now");
                     break;
