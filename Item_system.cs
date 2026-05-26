@@ -282,6 +282,20 @@ internal static class Game
                                 }
                             }
                             break;
+                            case "startroom":
+                            if (input.Length > 1 && input[1] == "book")
+                            {
+                                if (Inventory.ContainsKey("book"))
+                                {
+                                    scrolltext("You already have the book.");
+                                }
+                                else
+                                {
+                                    Inventory["book"] = Items["book"];
+                                    WriteLine($"You take the book from the table");
+                                }
+                            }
+                            break;
                         default:
                             WriteLine("there is nothing to loot here");
                             break;
