@@ -267,13 +267,23 @@ internal static class Game
                                     WriteLine($"From the corpse you loot some sort of tablet, and an array of coins.");
                                 }
                             }
-                            else
+                            break;
+                        case "kniferoom":
+                            if (input.Length > 1 && input[1] == "dagger")
                             {
-                                WriteLine("there's nothing to loot here");
+                                if (Inventory.ContainsKey("dagger"))
+                                {
+                                    scrolltext("You already have the dagger.");
+                                }
+                                else
+                                {
+                                    Inventory["dagger"] = Items["dagger"];
+                                    WriteLine($"You take a dagger from its position on the bench");
+                                }
                             }
                             break;
                         default:
-                            WriteLine("you can't do that right now");
+                            WriteLine("there is nothing to loot here");
                             break;
                     }
                     break;
