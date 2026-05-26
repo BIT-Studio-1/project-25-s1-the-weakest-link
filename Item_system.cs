@@ -63,13 +63,21 @@ internal static class Game
         int actionsCompleted = 0;
         bool secretsEnabled = false;
         bool condition = true;
-
+        string temproom = "startroom";
         while (condition == true)
         {
-            if (actionsCompleted > 5) //Replace value 5 with however many actions are in the room
+            var roomtemp= (JsonElement)Rooms[MovementSystem.currentRoom]; 
+            int room_actions = roomtemp.GetProperty("actions").GetInt32();
+            if (actionsCompleted > room_actions) //Replace value 5 with however many actions are in the room
+                condition = false;
+            if (temproom != MovementSystem.currentRoom)
+                actionsCompleted = 0;
             {
+                if (actionsCompleted > room_actions/2 && actionsCompleted < room_actions)
                 Console.WriteLine("You hear something loud approaching");
+                if (actionsCompleted >= room_actions-1)
                 Console.WriteLine("You should move on");
+
             }
             string[] input = ReadLine().ToLower().Split(' ');
             switch (input[0])
