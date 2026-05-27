@@ -50,12 +50,12 @@
         "description": ""
     },
 
-    "renovatedroom": {
-        "actions": 3,
-        "description": "",
-        "description2": ""
-        "features":  ["hammer"]
-    },
+  "renovatedroom": {
+    "actions": 3,
+    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement. Through touch, you sense exposed timber and cold metal beams jutting from the walls like ribs. Tools and loose materials are scattered across the floor. The air carries fresh paint and wet plaster, but beneath it lingers something older and stale, as if the room has been stripped open and left mid-repair.",
+    "description2": "",
+    "features": [ "hammer" ]
+  },
 
     "spidersroom": {
         "actions": 3,
