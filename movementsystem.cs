@@ -250,6 +250,34 @@ public class MovementSystem
         return succeeded;
     }
 
+    public static bool spidersroom(string movement)
+    {
+        bool succeeded = true;
+        switch (movement)
+        {
+            case "main entrance":
+                if (!Game.SpiderSacBurst)
+                {
+                    Game.scrolltext("The exit is blocked by an egg sac. You should attack it");
+                    succeeded = false;
+                }
+                else
+                {
+                    currentRoom = "hallway2";
+                }
+                break;
+            case "side entrance":
+                currentRoom = "renovated room";
+                succeeded = true;
+                break;
+            default:
+                succeeded = false;
+                break;
+        }
+
+        return succeeded;
+    }
+
     // Movement system for Key Room
     public static bool keyroom(string movement)
     {
@@ -292,6 +320,8 @@ public class MovementSystem
                 return keyroom(movement);
             case "smashingroom":
                 return smashingroom(movement);
+            case "spidersroom":
+                return spidersroom(movement);
             default:
                 return false;
         }
