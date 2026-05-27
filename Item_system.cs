@@ -44,12 +44,26 @@ internal static class Game
         }
         WriteLine("");
     }
-
+    // uses regex to find text within two <> tags
+    public static void tagtext(string input)
+    {
+        var match = Regex.Match(input, @"(.*?)<g>(.*?)<g>(.*)");
+        // gets input string, checks for <g> and gets wildcard inside <g>
+        if (!match.Success)
+        {
+            Write(input);
+            return;
+        }
+        // turns text inside tags green and uppercase, could add something that makes text [LIKE THIS], in brackets?
+        Console.Write(match.Groups[1].Value);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(match.Groups[2].Value.ToUpper());
+        Console.ResetColor();
+        Console.Write(match.Groups[3].Value);
+    }
     public static void Main()
     {
-        /*
-        interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
-        */
+        // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
         string items_import = File.ReadAllText("items.json");
         Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import);
         string rooms_import = File.ReadAllText("rooms.json");
