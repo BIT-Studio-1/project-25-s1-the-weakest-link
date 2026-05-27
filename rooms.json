@@ -76,12 +76,12 @@
         "description2": ""
     },
 
-    "keyroom": {
-        "actions": 3,
-        "description": "",
-        "description2": "",
-        "features": ["key"]
-    },
+  "keyroom": {
+    "actions": 3,
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles. Sharp chemical fumes sting your nose, your exhausted mind imagines ancient potions and failed alchemical mixtures. As your hands move through the clutter, something small and metallic shifts softly in the dark — a hidden key.",
+    "description2": "",
+    "features": [ "key" ]
+  },
 
   "staircase": {
     "actions": 0,
