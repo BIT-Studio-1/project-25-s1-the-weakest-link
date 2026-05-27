@@ -6,7 +6,7 @@ using static System.Console;
 namespace AwesomeGame;
 
 internal static class Game
-{ 
+{
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
 
     // Flags to show that an action has been completed
@@ -64,17 +64,17 @@ internal static class Game
         string temproom = "startroom";
         while (condition == true)
         {
-            var roomtemp= (JsonElement)Rooms[MovementSystem.currentRoom]; 
+            var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = roomtemp.GetProperty("actions").GetInt32();
             if (actionsCompleted > room_actions) //Replace value 5 with however many actions are in the room
                 condition = false;
             if (temproom != MovementSystem.currentRoom)
                 actionsCompleted = 0;
             {
-                if (actionsCompleted > room_actions/2 && actionsCompleted < room_actions)
-                Console.WriteLine("You hear something loud approaching");
-                if (actionsCompleted >= room_actions-1)
-                Console.WriteLine("You should move on");
+                if (actionsCompleted > room_actions / 2 && actionsCompleted < room_actions)
+                    Console.WriteLine("You hear something loud approaching");
+                if (actionsCompleted >= room_actions - 1)
+                    Console.WriteLine("You should move on");
 
             }
             string[] input = ReadLine().ToLower().Split(' ');
@@ -133,14 +133,15 @@ internal static class Game
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
                             (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
                             (MovementSystem.currentRoom == "hallway2" && VinesCut == true && LurkerMoved == false) ||
-                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) || 
+                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
                             (MovementSystem.currentRoom == "smashingroom" && LurkerMoved = true))
                         {
                             description = room.GetProperty("description2").GetString();
                         }
-                        else { 
-                            description = room.GetProperty("description").GetString(); 
-                            }
+                        else
+                        {
+                            description = room.GetProperty("description").GetString();
+                        }
                         WriteLine(description);
                         foreach (var features in room.GetProperty("features").EnumerateArray())
                         {
@@ -291,7 +292,7 @@ internal static class Game
                                 }
                             }
                             break;
-                            case "startroom":
+                        case "startroom":
                             if (input.Length > 1 && input[1] == "book")
                             {
                                 if (Inventory.ContainsKey("book"))
@@ -302,6 +303,35 @@ internal static class Game
                                 {
                                     Inventory["book"] = Items["book"];
                                     WriteLine($"You take the book from the table");
+                                }
+                            }
+                            break;
+                        case "renovatedroom":
+                            if (input.Length > 1 && input[1] == "hammer")
+                            {
+                                if (Inventory.ContainsKey("hammer"))
+                                {
+                                    WriteLine("You already have the hammer.");
+                                }
+                                else
+                                {
+                                    Inventory["hammer"] = Items["hammer"];
+                                    WriteLine($"You take the hammer from its place on the ground, it is cumbersome but comforting");
+                                }
+                            }
+
+                            break;
+                        case "keyroom":
+                            if (input.Length > 1 && input[1] == "key")
+                            {
+                                if (Inventory.ContainsKey("key"))
+                                {
+                                    WriteLine("You already have the key.");
+                                }
+                                else
+                                {
+                                    Inventory["key"] = Items["key"];
+                                    WriteLine($"You take the key");
                                 }
                             }
                             break;

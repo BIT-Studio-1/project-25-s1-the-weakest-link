@@ -54,6 +54,7 @@
         "actions": 3,
         "description": "",
         "description2": ""
+        "features":  ["hammer"]
     },
 
     "spidersroom": {
@@ -78,5 +79,6 @@
         "actions": 3,
         "description": "",
         "description2": ""
+        "features": ["key"]
     }
 }
