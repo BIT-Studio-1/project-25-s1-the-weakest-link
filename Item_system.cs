@@ -134,7 +134,7 @@ internal static class Game
                             (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
                             (MovementSystem.currentRoom == "hallway2" && VinesCut == true && LurkerMoved == false) ||
                             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved = true))
+                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == true))
                         {
                             description = room.GetProperty("description2").GetString();
                         }
