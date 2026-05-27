@@ -78,7 +78,7 @@
     "keyroom": {
         "actions": 3,
         "description": "",
-        "description2": ""
+        "description2": "",
         "features": ["key"]
     },
 
