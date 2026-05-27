@@ -40,10 +40,10 @@
     "description2": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem locked \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could go back up the corridor \nbut you hear something lurking and grumbling further down the corridor, best not to continue that way"
   },
 
-    "hallway3": {
-        "actions": 3,
-        "description": ""
-    },
+  "hallway3": {
+    "actions": 3,
+    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay. Ahead, something breathes heavily in the dark. A tall, hunched figure sways beneath the flickering lights, its movements uneven and unnatural. Fabric drags softly across the floor as it lets out a low exhausted groan. Whatever the creature is, it blocks the only path forward."
+  },
 
     "hallway4": {
         "actions": 3,
@@ -81,4 +81,9 @@
         "description2": ""
         "features": ["key"]
     }
+
+  "staircase": {
+    "actions": 0,
+    "description": "You find yourself at the top of a staircase descending deep into darkness. The air below feels colder, heavier, as though something is waiting beneath you. As you take your first cautious step, your footing slips slightly. The stairs are wet. Your pulse quickens as you descend further into the black, imagining crimson footprints trailing behind you."
+  }
 }
