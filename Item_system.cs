@@ -132,12 +132,15 @@ internal static class Game
                         JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
                         string description = null;
                         // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
-                        if ((MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+                        if (
+                            (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
                             (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
                             (MovementSystem.currentRoom == "hallway2" && VinesCut == true && LurkerMoved == false) ||
                             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == true))
+                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == true) ||
+                            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
+                        )
                         {
                             description = room.GetProperty("description2").GetString();
                         }
@@ -262,6 +265,13 @@ internal static class Game
                             SpiderSacBurst = true;
 
                             scrolltext("You stab at the sac, slashing your way through...");
+                            Thread.Sleep(500);
+
+                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.");
+
+                            PropertyDamage.CauseDamage("Shredded bean bag", 60);
+                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 300);
+
                         }
                     }
                     break;
