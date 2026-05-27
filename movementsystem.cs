@@ -170,8 +170,15 @@ public class MovementSystem
                 currentRoom = "hallway3";
                 break;
             case "south":
-                currentRoom = "smashingroom";
-                break;
+                if (!Game.LurkerMoved)
+                {
+                    currentRoom = "smashingroom";
+                }
+                else
+                {
+                    Console.WriteLine("you hear the lurker in this room, so you shouldn't go in");
+                }
+                    break;
             default: 
                 succeeded = false;
                 break;
