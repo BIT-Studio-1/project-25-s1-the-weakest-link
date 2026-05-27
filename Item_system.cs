@@ -10,8 +10,7 @@ internal static class Game
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
 
     // Flags to show that an action has been completed
-    public static bool VinesCut = false;
-    public static bool SpiderSacBurst = false;
+    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
 
     //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
     public static void scrolltext(string Text, int speed = 50)
@@ -61,8 +60,7 @@ internal static class Game
                     "you are blind.");
         scrolltext("input h, or help for a current list of actions", 10);
         int actionsCompleted = 0;
-        bool secretsEnabled = false;
-        bool condition = true;
+        bool condition = true, secretsEnabled = false;
         string temproom = "startroom";
         while (condition == true)
         {
@@ -134,7 +132,9 @@ internal static class Game
                         if ((MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
                             (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
-                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")))
+                            (MovementSystem.currentRoom == "hallway2" && VinesCut == true && LurkerMoved == false) ||
+                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) || 
+                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved = true))
                         {
                             description = room.GetProperty("description2").GetString();
                         }

@@ -169,6 +169,9 @@ public class MovementSystem
             case "west":
                 currentRoom = "hallway3";
                 break;
+            case "south":
+                currentRoom = "smashingroom";
+                break;
             default: 
                 succeeded = false;
                 break;
@@ -233,6 +236,13 @@ public class MovementSystem
         return succeeded;
     }
 
+    // UNFINISHED movement system for smashingroom, put here as a placeholder
+    public static bool smashingroom(string movement)
+    {
+        bool succeeded = true;
+        return succeeded;
+    }
+
     // Movement system for Key Room
     public static bool keyroom(string movement)
     {
@@ -273,6 +283,8 @@ public class MovementSystem
                 return hallway4(movement);
             case "keyroom":
                 return keyroom(movement);
+            case "smashingroom":
+                return smashingroom(movement);
             default:
                 return false;
         }

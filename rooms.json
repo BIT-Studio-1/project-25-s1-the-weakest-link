@@ -1,31 +1,31 @@
 {
     "startroom": {
         "actions": 3,
-        "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
-        "description2": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
+        "description": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
+        "description2": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
         "features": ["book"]
     },
 
     "sideroom": {
         "actions": 3,
-        "description": "you are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
+        "description": "You are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
     },
 
     "hallway1": {
         "actions": 3,
-        "description": "you are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'"
+        "description": "You are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'"
     },
 
     "kniferoom": {
         "actions": 3,
-        "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+        "description": "You are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
         "features": ["dagger"]
     },
 
     "vinesroom": {
         "actions": 3,
-        "description": "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
-        "description2": "you are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+        "description": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
+        "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
     },
     "tabletroom": {
         "actions": 4,
@@ -34,10 +34,11 @@
         "features": ["corpse"]
     },
 
-    "hallway2": {
-        "actions": 3,
-        "description": ""
-    },
+  "hallway2": {
+    "actions": 3, 
+    "description": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem locked \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could also continue further down or back up the corridor'",
+    "description2": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem locked \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could go back up the corridor \nbut you hear something lurking and grumbling further down the corridor, best not to continue that way"
+  },
 
     "hallway3": {
         "actions": 3,
@@ -63,8 +64,8 @@
 
     "smashingroom": {
         "actions": 3,
-        "description": "",
-        "description2": ""
+        "description": "You find yourself in a large, mostly open chamber, with tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange obelisk sculptures in rows, \nif you smashed something in here it would get the lurker's attention \nthere are two doors here, one to the corridor at the north end \nand another door at the west end of the chamber",
+        "description2": "You can hear the lurker coming from the corridor, you should leave out the west door"
     },
 
     "eyesroom": {
