@@ -61,23 +61,26 @@ internal static class Game
         scrolltext("input h, or help for a current list of actions", 10);
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
-        string temproom = "startroom";
+        
         while (condition == true)
         {
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = roomtemp.GetProperty("actions").GetInt32();
-            if (actionsCompleted > room_actions) //Replace value 5 with however many actions are in the room
-                condition = false;
-            if (temproom != MovementSystem.currentRoom)
-                actionsCompleted = 0;
-            {
-                if (actionsCompleted > room_actions / 2 && actionsCompleted < room_actions)
-                    Console.WriteLine("You hear something loud approaching");
-                if (actionsCompleted >= room_actions - 1)
-                    Console.WriteLine("You should move on");
 
+            if (room_actions != -1)
+            {
+                if (actionsCompleted > room_actions)
+                    condition = false;
+                {
+                    if (actionsCompleted > room_actions / 2 && actionsCompleted < room_actions)
+                        scrolltext("You hear something loud approaching");
+                    if (actionsCompleted >= room_actions - 1)
+                        scrolltext("You should move on");
+                }
             }
-            string[] input = ReadLine().ToLower().Split(' ');
+
+            string inputString = ReadLine().ToLower();
+            string[] input = inputString.Split(' ');
             switch (input[0])
             {
                 case "help":
@@ -221,7 +224,10 @@ internal static class Game
                         {
                             MovementSystem.currentRoom = input[1];
                             if (Rooms.ContainsKey(input[1]))
+                            {
                                 scrolltext($"you are now in: {MovementSystem.currentRoom}");
+                                actionsCompleted = 0;
+                            }
                         }
                         else
                         {
@@ -339,6 +345,15 @@ internal static class Game
                             WriteLine("there is nothing to loot here");
                             break;
                     }
+                    break;
+                default:
+                    bool movementSucceeded = MovementSystem.Move(inputString);
+                    if (movementSucceeded)
+                    {
+                        actionsCompleted = 0;
+                        scrolltext("You move....");
+                    }
+
                     break;
             }
         }
