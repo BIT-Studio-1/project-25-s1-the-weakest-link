@@ -82,7 +82,7 @@ internal static class Game
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = roomtemp.GetProperty("actions").GetInt32();
 
-            if (room_actions != 0)
+            if (room_actions > 0)
             {
                 if (actionsCompleted > room_actions)
                     condition = false;
