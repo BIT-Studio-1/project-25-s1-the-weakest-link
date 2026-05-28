@@ -150,10 +150,10 @@ internal static class Game
                         if (
                             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-                            (MovementSystem.currentRoom == "vinesroom" && VinesCut == true) ||
-                            (MovementSystem.currentRoom == "hallway2" && VinesCut == true && LurkerMoved == false) ||
+                            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+                            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
                             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == true) ||
+                            (MovementSystem.currentRoom == "smashingroom") ||
                             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
                         )
                         {
@@ -163,16 +163,19 @@ internal static class Game
                         {
                             description = room.GetProperty("description").GetString();
                         }
-                        WriteLine(description);
+                        scrolltext(description);
 
                         if (room.TryGetProperty("features", out JsonElement featuresElement))
                         {
-                            foreach (var features in featuresElement.EnumerateArray())
+                            foreach (var features in room.GetProperty("features").EnumerateArray())
                             {
-                                if (Inventory.ContainsKey(features.GetString()))
-                                    break;
-                                else
-                                    WriteLine($"You feel: {features.GetString()}");
+                                foreach (var features in featuresElement.EnumerateArray())
+                                {
+                                    if (Inventory.ContainsKey(features.GetString()))
+                                        break;
+                                    else
+                                        WriteLine($"You feel: {features.GetString()}");
+                                }
                             }
                         }
                     }
@@ -277,7 +280,7 @@ internal static class Game
 
                 case "attack":
                     // Spider room, Abby's responsibility
-                    if (MovementSystem.currentRoom == "spidersroom")
+                    if (MovementSystem.currentRoom == "spidersroom" && !SpiderSacBurst)
                     {
                         if (Inventory.ContainsKey("dagger"))
                         {
@@ -296,7 +299,24 @@ internal static class Game
                         {
                             scrolltext("How did you get here without a knife?");
                         }
+                    } 
+                    else { WriteLine("you can't do that right now"); }
+                    break;
+                case "smash":  // SMASHING ROOM WOOP WOOP
+                    if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
+                    {
+                        if (Inventory.ContainsKey("hammer"))
+                        {
+                            LurkerMoved = true;
+
+                            scrolltext("with a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
+                            scrolltext("it's time to get moving");
+
+                            PropertyDamage.CauseDamage("destroyed Two PCs and a monitor  in D201", 5300);
+                        }
+                        else { scrolltext("you tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
                     }
+                    else { WriteLine("you can't do that right now"); }
                     break;
                 //switch for looting items
                 case "loot":
@@ -346,7 +366,7 @@ internal static class Game
                             }
                             break;
                         case "renovatedroom":
-                            if (input.Length > 1 && input[1] == "hammer")
+                            if (input.Length > 1 && (input[1] == "hammer" || input[1] == "warhammer"))
                             {
                                 if (Inventory.ContainsKey("hammer"))
                                 {
@@ -355,7 +375,7 @@ internal static class Game
                                 else
                                 {
                                     Inventory["hammer"] = Items["hammer"];
-                                    WriteLine($"You take the hammer from its place on the ground, it is cumbersome but comforting");
+                                    WriteLine($"You take the warhammer from its place on the ground, it is cumbersome but comforting");
                                 }
                             }
 

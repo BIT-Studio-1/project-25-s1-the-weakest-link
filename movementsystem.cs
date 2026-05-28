@@ -176,7 +176,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("you hear the lurker in this room, so you shouldn't go in");
+                    Console.WriteLine("you hear the lurker in this room, you shouldn't go in");
                 }
                     break;
             default: 
