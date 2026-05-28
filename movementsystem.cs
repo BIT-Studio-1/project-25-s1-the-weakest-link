@@ -6,7 +6,7 @@ public class MovementSystem
     public static string currentRoom = "startroom";
 
     // Movement system for Start Room
-    public static bool startroom(string movement)
+    public static bool startRoom(string movement)
     {
         bool succeeded = true;
         switch (movement)
@@ -35,7 +35,7 @@ public class MovementSystem
         }
         return succeeded;
     }
-    public static bool sideroom(string movement)
+    public static bool sideRoom(string movement)
     {
         bool succeeded = true;
         if (movement == "start room")
@@ -87,10 +87,10 @@ public class MovementSystem
     }
 
     // Movement system for Knife Room
-    public static bool kniferoom(string movement)
+    public static bool knifeRoom(string movement)
     {
         bool succeeded = true;
-        if (movement == "north")
+        if (movement == "main entrance")
         {
             currentRoom = "hallway1";
         }
@@ -102,7 +102,7 @@ public class MovementSystem
     }
 
     // Movement system for Vines Room
-    public static bool vinesroom(string movement)
+    public static bool vinesRoom(string movement)
     {
         bool succeeded = true;
         switch (movement)
@@ -113,7 +113,7 @@ public class MovementSystem
             case "main room":
                 if (Game.VinesCut)
                 {
-                    currentRoom = "tabletroom";
+                    currentRoom = "tabletRoom";
                     break;
                 }
                 else
@@ -130,16 +130,16 @@ public class MovementSystem
     }
 
     // Movement system for Tablet Room
-    public static bool tabletroom(string movement)
+    public static bool tabletRoom(string movement)
     {
         bool succeeded = true;
         switch (movement)
         {
-            case "side room":
+            case "side entrance":
                 currentRoom = "vinesroom";
                 break;
             case "main entrance":
-                currentRoom = "hallway1";
+                currentRoom = "hallway2";
                 break;
             default: 
                 succeeded = false;
@@ -172,7 +172,19 @@ public class MovementSystem
             case "west":
                 currentRoom = "hallway3";
                 break;
-            case "south":
+            case "first door":
+                currentRoom = "renovatedroom";
+                break;
+            case "second door":
+                currentRoom = "spidersroom";
+                break;
+            case "go back":
+                currentRoom = "hallway1";
+                break;
+            case "turn corner":
+                currentRoom = "hallway3";
+                break;
+            case "end door":
                 if (!Game.LurkerMoved)
                 {
                     currentRoom = "smashingroom";
@@ -195,21 +207,11 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "east":
+            case "go back":
                 currentRoom = "hallway2";
                 break;
-            case "north":
+            case "turn corner":
                 currentRoom = "hallway4";
-                break;
-            case "south": 
-                if (Game.Inventory.ContainsKey("key"))
-                {
-                    currentRoom = "eyesroom";
-                }
-                else
-                {
-                    Console.WriteLine("You do not have a key");
-                }
                 break;
             default: 
                 succeeded = false;
@@ -224,7 +226,7 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "starting room":
+            case "end door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "startroom";
@@ -235,7 +237,7 @@ public class MovementSystem
                     succeeded = false;
                 }
                 break;
-            case "locked door":
+            case "side door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "keyroom";
@@ -245,9 +247,6 @@ public class MovementSystem
                     Console.WriteLine("You do not have a tablet.");
                     succeeded = false;
                 }
-                break;
-            case "south":
-                currentRoom = "hallway3";
                 break;
             default:
             succeeded = false;
@@ -292,7 +291,7 @@ public class MovementSystem
                 }
                 break;
             case "side entrance":
-                currentRoom = "renovated room";
+                currentRoom = "renovatedroom";
                 succeeded = true;
                 break;
             default:
@@ -323,8 +322,11 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "spider room":
+            case "side entrance":
                 currentRoom = "spidersroom";
+                break;
+            case "main entrance":
+                currentRoom = "hallway2";
                 break;
             default:
                 succeeded = false;
@@ -341,8 +343,8 @@ public class MovementSystem
             case "main entrance":
                 currentRoom = "hallway3";
                 break;
-            case "secret door":
-                Console.WriteLine("You cannot go back through that door");
+            case "side entrance":
+                Console.WriteLine("smashingroom");
                 break;
             default:
                 succeeded = false;
