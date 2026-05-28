@@ -218,8 +218,9 @@ internal static class Game
                             WriteLine("you need something sharp to cut these vines");
                         }
                     }
+                    else { WriteLine("you can't do that right now"); }
 
-                    break;
+                        break;
                 // Debug commands
                 case "do_damage":
                     if (secretsEnabled)
