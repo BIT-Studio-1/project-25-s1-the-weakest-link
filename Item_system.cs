@@ -11,59 +11,42 @@ internal static class Game
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
-        var match = Regex.Match(Text, @"(.*?)<g>(.*?)<g>(.*)");
-        if (match.Success)
+        var matches = Regex.Matches(Text, @"<g>(.*?)<g>");
+        bool skipped = false;
+        void Writeportion(string portion, ConsoleColor? color = null)
         {
-            bool skipped = false;
-            // function recursion lmao, couldnt think if an easier way to do this
-            void Writeportion(string portion, ConsoleColor? color = null)
+            for (int i = 0; i < portion.Length; i++)
             {
-                for (int i = 0; i < portion.Length; i++)
-                {
-                    if (!skipped && KeyAvailable)
-                    {
-                        var key = ReadKey(true).Key;
-                        if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
-                            skipped = true;
-                    }
-                    if (color.HasValue) ForegroundColor = color.Value;
-                    if (skipped)
-                    {
-                        Write(portion.Substring(i));
-                        break;
-                    }
-                    Write(portion[i]);
-                    Thread.Sleep(speed);
-                }
-                ResetColor();
-            }
-            Writeportion(match.Groups[1].Value);
-            Writeportion(match.Groups[2].Value.ToUpper(), ConsoleColor.Green);
-            Writeportion(match.Groups[3].Value);
-            WriteLine();
-        }
-        else
-        {
-            bool skipped = false;
-            for (int i = 0; i < Text.Length; i++)
-            {
-                if (!skipped && Console.KeyAvailable)
+                if (!skipped && KeyAvailable)
                 {
                     var key = ReadKey(true).Key;
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
+                if (color.HasValue) ForegroundColor = color.Value;
                 if (skipped)
                 {
-                    Write(Text.Substring(i));
+                    Write(portion.Substring(i));
                     break;
                 }
-
-                Write(Text[i]);
+                Write(portion[i]);
                 Thread.Sleep(speed);
             }
-            WriteLine();
+            ResetColor();
         }
+
+        int lastIndex = 0;
+        foreach (Match match in matches)
+        {
+            if (match.Index > lastIndex)
+                Writeportion(Text.Substring(lastIndex, match.Index - lastIndex));
+            Writeportion(match.Groups[1].Value.ToUpper(), ConsoleColor.Green);
+            lastIndex = match.Index + match.Length;
+        }
+        if (lastIndex < Text.Length)
+            Writeportion(Text.Substring(lastIndex));
+
+        WriteLine();
     }
     public static void Main()
     {
