@@ -249,6 +249,33 @@ public class MovementSystem
         return succeeded;
     }
 
+    public static bool spiderroom(string movement)
+    {
+        bool succeeded = true;
+        switch (movement)
+        {
+            case "main entrance":
+                currentRoom = "hallway1";
+                break;
+            case "renovated room":
+                currentRoom = "renovatedroom";
+                break;
+            default:
+                succeeded = false;
+                break;
+        }
+        return succeeded;
+    }
+
+    public static bool renovatedroom(string movement)
+    {
+        bool succeeded = true;
+        switch (movement)
+        {
+            case 
+        }
+    }
+
     public static bool Move(string movement)
     {
         switch (currentRoom)
