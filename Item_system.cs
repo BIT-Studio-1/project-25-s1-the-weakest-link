@@ -164,12 +164,16 @@ internal static class Game
                             description = room.GetProperty("description").GetString();
                         }
                         WriteLine(description);
-                        foreach (var features in room.GetProperty("features").EnumerateArray())
+
+                        if (room.TryGetProperty("features", out JsonElement featuresElement))
                         {
-                            if (Inventory.ContainsKey(features.GetString()))
-                                break;
-                            else
-                                WriteLine($"You feel: {features.GetString()}");
+                            foreach (var features in featuresElement.EnumerateArray())
+                            {
+                                if (Inventory.ContainsKey(features.GetString()))
+                                    break;
+                                else
+                                    WriteLine($"You feel: {features.GetString()}");
+                            }
                         }
                     }
                     else
