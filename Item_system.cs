@@ -76,7 +76,7 @@ internal static class Game
         scrolltext("Waking up disoriented, you open your eyes.\n" +
                     "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
                     "you are blind.", 50);
-        scrolltext("input h, or help for a current list of actions", 10);
+        scrolltext("input <g>help<g> for a current list of actions", 10);
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
         while (condition == true)
@@ -101,25 +101,24 @@ internal static class Game
             switch (input[0])
             {
                 case "help":
-                case "h":
                     // please add any commands you add to the program to this help section !!!
 
-                    scrolltext("inspect: <g>inspects<g> item or room with more detail than the description, inspect room");
-                    scrolltext("stats: shows your current EXP");
-                    scrolltext("help: shows a list and description of commands");
-                    scrolltext("quit, kill, exit: closes the game");
-                    scrolltext("inventory: prints contents of the inventory");
+                    scrolltext("<g>inspect<g>: inspects item or room with more detail than the description, inspect room");
+                    scrolltext("<g>stats<g>: shows your current EXP");
+                    scrolltext("<g>help<g>: shows a list and description of commands");
+                    scrolltext("<g>quit<g>, <g>kill<g>, <g>exit<g>: closes the game");
+                    scrolltext("<g>inventory<g>: prints contents of the inventory");
                     if (MovementSystem.currentRoom.Contains("features"))
-                        scrolltext("loot: takes a given item in the current room");
+                        scrolltext("<g>loot<g>: takes a given item in the current room");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         scrolltext("cut vines: cuts the vines covering the door");
                     if (secretsEnabled)
                     {
-                        scrolltext("goto: sends you to a room");
-                        scrolltext("give: gives a provided item");
-                        scrolltext("do_damage: command to test property damage system");
-                        scrolltext("show_bill: command to show the current property damage");
+                        scrolltext("<g>goto<g>: sends you to a room");
+                        scrolltext("<g>give<g>: gives a provided item");
+                        scrolltext("<g>do_damage<g>: command to test property damage system");
+                        scrolltext("<g>show_bill<g>: command to show the current property damage");
                     }
                     break;
                 case "inventory":
