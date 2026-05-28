@@ -169,6 +169,16 @@ public class MovementSystem
             case "west":
                 currentRoom = "hallway3";
                 break;
+            case "south":
+                if (!Game.LurkerMoved)
+                {
+                    currentRoom = "smashingroom";
+                }
+                else
+                {
+                    Console.WriteLine("you hear the lurker in this room, so you shouldn't go in");
+                }
+                    break;
             default: 
                 succeeded = false;
                 break;
@@ -230,6 +240,41 @@ public class MovementSystem
             succeeded = false;
             break;
         }
+        return succeeded;
+    }
+
+    // UNFINISHED movement system for smashingroom, put here as a placeholder
+    public static bool smashingroom(string movement)
+    {
+        bool succeeded = true;
+        return succeeded;
+    }
+
+    public static bool spidersroom(string movement)
+    {
+        bool succeeded = true;
+        switch (movement)
+        {
+            case "main entrance":
+                if (!Game.SpiderSacBurst)
+                {
+                    Game.scrolltext("The exit is blocked by an egg sac. You should attack it");
+                    succeeded = false;
+                }
+                else
+                {
+                    currentRoom = "hallway2";
+                }
+                break;
+            case "side entrance":
+                currentRoom = "renovated room";
+                succeeded = true;
+                break;
+            default:
+                succeeded = false;
+                break;
+        }
+
         return succeeded;
     }
 
@@ -300,6 +345,10 @@ public class MovementSystem
                 return hallway4(movement);
             case "keyroom":
                 return keyroom(movement);
+            case "smashingroom":
+                return smashingroom(movement);
+            case "spidersroom":
+                return spidersroom(movement);
             default:
                 return false;
         }
