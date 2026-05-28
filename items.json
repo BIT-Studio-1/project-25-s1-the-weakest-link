@@ -3,6 +3,6 @@
     "book": {"description": "a book, the cover is made out of some sort of card. You tried to read it but you're blind", "weight": 2000},
     "tablet":  {"description":  "a strange tablet small enough to fit in the palm of your hand, you aren't sure why but you feel like it might open some doors", "weight":  10},
     "coins": { "description": "a pile of coins looted from an unfortunate soul that was trapped here with you, this could be valuable" },
-    "key": { "description": "a smooth key, made of an unknown medal", "weight": 9 },
+    "key": { "description": "a smooth key, made of an unknown medal", "weight": 10 },
     "hammer": {"description": "a hammer, a strangely familiar object for where you find yourself", "weight": 2500}
 }
