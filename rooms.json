@@ -1,7 +1,7 @@
 {
     "startroom": {
         "actions": 3,
-        "description": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
+        "description": "You find yourself, dazed and confused, in a room that is completely pitch black. You find yourself stumbling into what appears to you as a ",
         "description2": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
         "features": ["book"]
     },
@@ -59,8 +59,8 @@
 
     "spidersroom": {
         "actions": 0,
-        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a [side entrance] and a blocked [main entrance]",
-        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe [side entrance] remains unblocked, while the [main entrance] is now open.",
+        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance</g> and a blocked </g>main entrance</g>",
+        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance</g> remains unblocked, while the <g>main entrance</g> is now open.",
         "features": ["sac"]
     },
 
