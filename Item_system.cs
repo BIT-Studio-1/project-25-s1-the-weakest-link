@@ -283,7 +283,7 @@ internal static class Game
                     }
                     else { scrolltext("you can't do that right now"); }
                     break;
-                case "smash":  // SMASHING ROOM WOOP WOOP
+                case "smash":  // SMASHING ROOM POO POO
                     if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
                     {
                         if (Inventory.ContainsKey("hammer"))
@@ -378,8 +378,8 @@ internal static class Game
                         default:
                             scrolltext("there is nothing to loot here");
                             break;
-                        
                     }
+                    break;
                 default:
                     bool movementSucceeded = MovementSystem.move(inputString);
                     if (movementSucceeded)
