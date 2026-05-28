@@ -82,7 +82,7 @@ internal static class Game
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = roomtemp.GetProperty("actions").GetInt32();
 
-            if (room_actions != 0)
+            if (room_actions > 0)
             {
                 if (actionsCompleted > room_actions)
                     condition = false;
@@ -164,12 +164,19 @@ internal static class Game
                             description = room.GetProperty("description").GetString();
                         }
                         scrolltext(description);
-                        foreach (var features in room.GetProperty("features").EnumerateArray())
+
+                        if (room.TryGetProperty("features", out JsonElement featuresElement))
                         {
-                            if (Inventory.ContainsKey(features.GetString()))
-                                break;
-                            else
-                                WriteLine($"You feel: {features.GetString()}");
+                            foreach (var features in room.GetProperty("features").EnumerateArray())
+                            {
+                                foreach (var feature in featuresElement.EnumerateArray())
+                                {
+                                    if (Inventory.ContainsKey(feature.GetString()))
+                                        break;
+                                    else
+                                        WriteLine($"You feel: {feature.GetString()}");
+                                }
+                            }
                         }
                     }
                     else
@@ -282,11 +289,15 @@ internal static class Game
                             scrolltext("You stab at the sac, slashing your way through...");
                             Thread.Sleep(500);
 
-                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.");
+                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
 
                             PropertyDamage.CauseDamage("Shredded bean bag", 60);
-                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 300);
+                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 50);
 
+                        }
+                        else
+                        {
+                            scrolltext("How did you get here without a knife?");
                         }
                     } 
                     else { WriteLine("you can't do that right now"); }
