@@ -353,7 +353,7 @@ public class MovementSystem
         return succeeded;
     }
 
-    public static bool Move(string movement)
+    public static bool move(string movement)
     {
         switch (currentRoom)
         {
