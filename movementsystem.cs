@@ -6,7 +6,7 @@ public class MovementSystem
     public static string currentRoom = "startroom";
 
     // Movement system for Start Room
-    public static bool startRoom(string movement)
+    public static bool startroom(string movement)
     {
         bool succeeded = true;
         switch (movement)
@@ -35,7 +35,7 @@ public class MovementSystem
         }
         return succeeded;
     }
-    public static bool sideRoom(string movement)
+    public static bool sideroom(string movement)
     {
         bool succeeded = true;
         if (movement == "start room")
@@ -87,7 +87,7 @@ public class MovementSystem
     }
 
     // Movement system for Knife Room
-    public static bool knifeRoom(string movement)
+    public static bool kniferoom(string movement)
     {
         bool succeeded = true;
         if (movement == "main entrance")
@@ -102,7 +102,7 @@ public class MovementSystem
     }
 
     // Movement system for Vines Room
-    public static bool vinesRoom(string movement)
+    public static bool vinesroom(string movement)
     {
         bool succeeded = true;
         switch (movement)
@@ -130,7 +130,7 @@ public class MovementSystem
     }
 
     // Movement system for Tablet Room
-    public static bool tabletRoom(string movement)
+    public static bool tabletroom(string movement)
     {
         bool succeeded = true;
         switch (movement)

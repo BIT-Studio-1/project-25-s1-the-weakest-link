@@ -137,7 +137,7 @@ internal static class Game
                 case "h":
                     // please add any commands you add to the program to this help section !!!
 
-                    scrolltext("inspect: <g>inspects<g> item or room with more detail than the description, inspect room", 50);
+                    scrolltext("inspect: <g>inspects<g> item or room with more detail than the description, inspect room");
                     scrolltext("stats: shows your current EXP");
                     scrolltext("help: shows a list and description of commands");
                     scrolltext("quit, kill, exit: closes the game");
