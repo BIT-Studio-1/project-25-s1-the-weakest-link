@@ -89,13 +89,13 @@ internal static class Game
                     scrolltext("<g>inspect<g>: inspects item or room with more detail than the description, inspect room");
                     scrolltext("<g>stats<g>: shows your current EXP");
                     scrolltext("<g>help<g>: shows a list and description of commands");
-                    scrolltext("<g>quit<g>, <g>kill<g>, <g>exit<g>: closes the game");
+                    scrolltext("<g>exit<g>: closes the game");
                     scrolltext("<g>inventory<g>: prints contents of the inventory");
                     if (MovementSystem.currentRoom.Contains("features"))
                         scrolltext("<g>loot<g>: takes a given item in the current room");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
-                        scrolltext("cut vines: cuts the vines covering the door");
+                        scrolltext("<g>cut vines<g>: cuts the vines covering the door");
                     if (secretsEnabled)
                     {
                         scrolltext("<g>goto<g>: sends you to a room");
@@ -156,7 +156,7 @@ internal static class Game
                                     if (Inventory.ContainsKey(feature.GetString()))
                                         break;
                                     else
-                                        WriteLine($"You feel: {feature.GetString()}");
+                                        scrolltext($"You feel: {feature.GetString()}");
                                 }
                             }
                         }
@@ -200,7 +200,7 @@ internal static class Game
                             scrolltext("you need something sharp to cut these vines");
                         }
                     }
-                    else { WriteLine("you can't do that right now"); }
+                    else { scrolltext("you can't do that right now"); }
 
                         break;
                 // Debug commands
@@ -248,9 +248,7 @@ internal static class Game
                     }
                     break;
                 // ^ End of debug commands
-                case "quit":
                 case "exit":
-                case "kill":
                     condition = false;
                     break;
                 case "secret":
@@ -283,7 +281,7 @@ internal static class Game
                             scrolltext("How did you get here without a knife?");
                         }
                     }
-                    else { WriteLine("you can't do that right now"); }
+                    else { scrolltext("you can't do that right now"); }
                     break;
                 case "smash":  // SMASHING ROOM WOOP WOOP
                     if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
@@ -299,7 +297,7 @@ internal static class Game
                         }
                         else { scrolltext("you tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
                     }
-                    else { WriteLine("you can't do that right now"); }
+                    else { scrolltext("you can't do that right now"); }
                     break;
                 //switch for looting items
                 case "loot":
@@ -380,16 +378,15 @@ internal static class Game
                         default:
                             scrolltext("there is nothing to loot here");
                             break;
+                        
                     }
-                    break;
                 default:
-                    bool movementSucceeded = MovementSystem.Move(inputString);
+                    bool movementSucceeded = MovementSystem.move(inputString);
                     if (movementSucceeded)
                     {
                         actionsCompleted = 0;
                         scrolltext("You move....");
                     }
-
                     break;
             }
         }
