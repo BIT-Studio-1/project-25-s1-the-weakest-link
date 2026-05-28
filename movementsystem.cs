@@ -6,7 +6,7 @@ public class MovementSystem
     public static string currentRoom = "startroom";
 
     // Movement system for Start Room
-    public static bool StartRoom(string movement)
+    public static bool startroom(string movement)
     {
         bool succeeded = true;
         switch (movement)
@@ -35,7 +35,7 @@ public class MovementSystem
         }
         return succeeded;
     }
-    public static bool SideRoom(string movement)
+    public static bool sideroom(string movement)
     {
         bool succeeded = true;
         if (movement == "start room")
@@ -64,6 +64,9 @@ public class MovementSystem
             case "open room":
                 currentRoom = "kniferoom";
                 break;
+            case "south":
+                currentRoom = "hallway2";
+                break;
             case "locked door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
@@ -87,7 +90,7 @@ public class MovementSystem
     public static bool kniferoom(string movement)
     {
         bool succeeded = true;
-        if (movement == "hallway")
+        if (movement == "north")
         {
             currentRoom = "hallway1";
         }
@@ -198,6 +201,16 @@ public class MovementSystem
             case "north":
                 currentRoom = "hallway4";
                 break;
+            case "south": 
+                if (Game.Inventory.ContainsKey("key"))
+                {
+                    currentRoom = "eyesroom";
+                }
+                else
+                {
+                    Console.WriteLine("You do not have a key");
+                }
+                break;
             default: 
                 succeeded = false;
                 break;     
@@ -218,7 +231,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a tablet.");
+                    Console.WriteLine("You do not have a tablet");
                     succeeded = false;
                 }
                 break;
@@ -236,7 +249,7 @@ public class MovementSystem
             case "south":
                 currentRoom = "hallway3";
                 break;
-        default:
+            default:
             succeeded = false;
             break;
         }
@@ -247,6 +260,18 @@ public class MovementSystem
     public static bool smashingroom(string movement)
     {
         bool succeeded = true;
+        switch (movement)
+        {
+            case "main entrance":
+                currentRoom = "hallway2";
+                break;
+            case "secret door":
+                currentRoom = "eyesroom";
+                break;
+            default:
+                succeeded = false;
+                break;
+        }
         return succeeded;
     }
 
@@ -274,7 +299,6 @@ public class MovementSystem
                 succeeded = false;
                 break;
         }
-
         return succeeded;
     }
 
@@ -284,26 +308,8 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "hallway":
-                currentRoom = "hallway4";
-                break;
-            default:
-                succeeded = false;
-                break;
-        }
-        return succeeded;
-    }
-
-    public static bool spiderroom(string movement)
-    {
-        bool succeeded = true;
-        switch (movement)
-        {
             case "main entrance":
-                currentRoom = "hallway1";
-                break;
-            case "renovated room":
-                currentRoom = "renovatedroom";
+                currentRoom = "hallway4";
                 break;
             default:
                 succeeded = false;
@@ -317,8 +323,32 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case 
+            case "spider room":
+                currentRoom = "spidersroom";
+                break;
+            default:
+                succeeded = false;
+                break;
         }
+        return succeeded;
+    }
+
+    public static bool eyesroom(string movement)
+    {
+        bool succeeded = true;
+        switch (movement)
+        {
+            case "main entrance":
+                currentRoom = "hallway3";
+                break;
+            case "secret door":
+                Console.WriteLine("You cannot go back through that door");
+                break;
+            default:
+                succeeded = false;
+                break;
+        }
+        return succeeded;
     }
 
     public static bool Move(string movement)
@@ -326,9 +356,9 @@ public class MovementSystem
         switch (currentRoom)
         {
             case "startroom":
-                return StartRoom(movement);
+                return startroom(movement);
             case "sideroom":
-                return SideRoom(movement);
+                return sideroom(movement);
             case "hallway1":
                 return hallway1(movement);
             case "kniferoom":
@@ -349,6 +379,10 @@ public class MovementSystem
                 return smashingroom(movement);
             case "spidersroom":
                 return spidersroom(movement);
+            case "renovatedroom":
+                return renovatedroom(movement);
+            case "eyesroom":
+                return eyesroom(movement);
             default:
                 return false;
         }
