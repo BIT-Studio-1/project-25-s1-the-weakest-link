@@ -169,12 +169,12 @@ internal static class Game
                         {
                             foreach (var features in room.GetProperty("features").EnumerateArray())
                             {
-                                foreach (var features in featuresElement.EnumerateArray())
+                                foreach (var feature in featuresElement.EnumerateArray())
                                 {
-                                    if (Inventory.ContainsKey(features.GetString()))
+                                    if (Inventory.ContainsKey(feature.GetString()))
                                         break;
                                     else
-                                        WriteLine($"You feel: {features.GetString()}");
+                                        WriteLine($"You feel: {feature.GetString()}");
                                 }
                             }
                         }
