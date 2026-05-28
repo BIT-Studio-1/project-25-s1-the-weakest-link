@@ -282,11 +282,15 @@ internal static class Game
                             scrolltext("You stab at the sac, slashing your way through...");
                             Thread.Sleep(500);
 
-                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.");
+                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
 
                             PropertyDamage.CauseDamage("Shredded bean bag", 60);
-                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 300);
+                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 50);
 
+                        }
+                        else
+                        {
+                            scrolltext("How did you get here without a knife?");
                         }
                     }
                     break;
