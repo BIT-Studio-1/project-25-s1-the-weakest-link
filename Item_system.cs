@@ -1,8 +1,8 @@
 //for grabbing values from json
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using AwesomeGame;
 using static System.Console;
-using System.Text.RegularExpressions;
 namespace AwesomeGame;
 
 internal static class Game
@@ -12,56 +12,91 @@ internal static class Game
     // Flags to show that an action has been completed
     public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
 
-    //To use this, make a string and split different lines with | to alter speed do scrolltext('example string', 100), this will slow it
-    public static void scrolltext(string Text, int speed = 50)
+
+    //this sucks and i hate it but it works
+    public static void scrolltext(string Text, int speed = 10)
     {
-        int i = 0;
-        bool skipped = false;
-        while (i < Text.Length && !skipped)
+        var match = Regex.Match(Text, @"(.*?)<g>(.*?)<g>(.*)");
+        if (match.Success)
         {
-            char o = Text[i];
-            // Checks if key has been pressed without blocking the rest of the code from running
-            if (Console.KeyAvailable)
+            bool skipped = false;
+            // function recursion lmao, couldnt think if an easier way to do this
+            void Writeportion(string portion, ConsoleColor? color = null)
             {
-                var key = ReadKey(true).Key;
-
-                // Skip if pressing space or enter
-                skipped = (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter);
+                for (int i = 0; i < portion.Length; i++)
+                {
+                    if (!skipped && KeyAvailable)
+                    {
+                        var key = ReadKey(true).Key;
+                        if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
+                            skipped = true;
+                    }
+                    if (color.HasValue) ForegroundColor = color.Value;
+                    if (skipped)
+                    {
+                        Write(portion.Substring(i));
+                        break;
+                    }
+                    Write(portion[i]);
+                    Thread.Sleep(speed);
+                }
+                ResetColor();
             }
+            Writeportion(match.Groups[1].Value);
+            Writeportion(match.Groups[2].Value.ToUpper(), ConsoleColor.Green);
+            Writeportion(match.Groups[3].Value);
+            WriteLine();
+        }
+        else
+        {
+            bool skipped = false;
+            for (int i = 0; i < Text.Length; i++)
+            {
+                if (!skipped && Console.KeyAvailable)
+                {
+                    var key = ReadKey(true).Key;
+                    if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
+                        skipped = true;
+                }
 
-            if (skipped)
-            {
-                string restOfText = Text.Substring(i);
-                Write(restOfText);
-            }
-            else
-            {
-                Write(o);
+                if (skipped)
+                {
+                    Write(Text.Substring(i));
+                    break;
+                }
+
+                Write(Text[i]);
                 Thread.Sleep(speed);
             }
-
-            i++;
+            WriteLine();
         }
-        WriteLine("");
     }
-    // uses regex to find text within two <> tags
-    public static void colourtext(string input)
+    /*
     {
-        var match = Regex.Match(input, @"(.*?)<g>(.*?)<g>(.*)");
-        // gets input string, checks for <g> and gets wildcard inside <g>
-        if (!match.Success)
-        {
-            Write(input);
-            return;
-        }
-        // turns text inside tags green and uppercase, could add something that makes text [LIKE THIS], in brackets?
-        Console.Write(match.Groups[1].Value);
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(match.Groups[2].Value.ToUpper());
-        Console.ResetColor();
-        Console.Write(match.Groups[3].Value);
-        WriteLine();
-    }
+                char o = Text[i];
+                // Checks if key has been pressed without blocking the rest of the code from running
+                if (Console.KeyAvailable)
+                {
+                    var key = ReadKey(true).Key;
+
+                    // Skip if pressing space or enter
+                    skipped = (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter);
+                }
+
+                if (skipped)
+                {
+                    string restOfText = Text.Substring(i);
+                    Write(restOfText);
+                }
+                else
+                {
+                    Write(o);
+                    Thread.Sleep(speed);
+                }
+
+                i++;
+            }
+            */
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -72,11 +107,11 @@ internal static class Game
 
         scrolltext("Waking up disoriented, you open your eyes.\n" +
                     "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
-                    "you are blind.");
+                    "you are blind.", 50);
         scrolltext("input h, or help for a current list of actions", 10);
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
-        
+
         while (condition == true)
         {
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
@@ -102,36 +137,36 @@ internal static class Game
                 case "h":
                     // please add any commands you add to the program to this help section !!!
 
-                    colourtext("inspect: inspects item or room with more detail than the description, inspect room");
-                    WriteLine("stats: shows your current EXP");
-                    WriteLine("help: shows a list and description of commands");
-                    WriteLine("quit, kill, exit: closes the game");
-                    WriteLine("inventory: prints contents of the inventory");
+                    scrolltext("inspect: <g>inspects<g> item or room with more detail than the description, inspect room", 50);
+                    scrolltext("stats: shows your current EXP");
+                    scrolltext("help: shows a list and description of commands");
+                    scrolltext("quit, kill, exit: closes the game");
+                    scrolltext("inventory: prints contents of the inventory");
                     if (MovementSystem.currentRoom.Contains("features"))
-                        WriteLine("loot: takes a given item in the current room");
+                        scrolltext("loot: takes a given item in the current room");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
-                        WriteLine("cut vines: cuts the vines covering the door");
+                        scrolltext("cut vines: cuts the vines covering the door");
                     if (secretsEnabled)
                     {
-                        WriteLine("goto: sends you to a room");
-                        WriteLine("give: gives a provided item");
-                        WriteLine("do_damage: command to test property damage system");
-                        WriteLine("show_bill: command to show the current property damage");
+                        scrolltext("goto: sends you to a room");
+                        scrolltext("give: gives a provided item");
+                        scrolltext("do_damage: command to test property damage system");
+                        scrolltext("show_bill: command to show the current property damage");
                     }
                     break;
                 case "inventory":
                     if (Inventory.Count > 0)
                     {
-                        WriteLine("you have:");
+                        scrolltext("you have:");
                         foreach (KeyValuePair<string, object> Inv in Inventory)
                         {
-                            WriteLine(Inv.Key);
+                            scrolltext(Inv.Key);
                         }
                     }
                     else
                     {
-                        WriteLine("you don't have any items");
+                        scrolltext("you don't have any items");
                     }
                     break;
                 case "inspect":
@@ -140,7 +175,7 @@ internal static class Game
                         //retrieves values from json
                         var item = (JsonElement)Items[input[1]];
                         foreach (var property in item.EnumerateObject())
-                            WriteLine($"{property.Name}: {property.Value}");
+                            scrolltext($"{property.Name}: {property.Value}");
                     }
                     else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
                     {
@@ -181,12 +216,12 @@ internal static class Game
                     }
                     else
                     {
-                        WriteLine("you don't have that item");
+                        scrolltext("you don't have that item");
                     }
                     actionsCompleted++;
                     break;
                 case "stats":
-                    WriteLine($"You have {PropertyDamage.TotalCost} EXP");
+                    scrolltext($"You have {PropertyDamage.TotalCost} EXP");
                     break;
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
@@ -195,14 +230,14 @@ internal static class Game
                         if (input.Length > 1 && Items.ContainsKey(input[1]))
                         {
                             Inventory[input[1]] = Items[input[1]];
-                            WriteLine($"you now have {input[1]}");
+                            scrolltext($"you now have {input[1]}");
                         }
                         else
                         {
-                            WriteLine("this item does not exist");
+                            scrolltext("this item does not exist");
                         }
                     }
-                    else { WriteLine("you can't do that right now"); }
+                    else { scrolltext("you can't do that right now"); }
                     break;
                 case "cut":
                     if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
@@ -211,11 +246,11 @@ internal static class Game
                         {
                             VinesCut = true;
                             PropertyDamage.CauseDamage("Destroyed cabling in network room", 2000);
-                            WriteLine("you cut the vines on the door");
+                            scrolltext("you cut the vines on the door");
                         }
                         else
                         {
-                            WriteLine("you need something sharp to cut these vines");
+                            scrolltext("you need something sharp to cut these vines");
                         }
                     }
 
@@ -225,11 +260,11 @@ internal static class Game
                     if (secretsEnabled)
                     {
                         PropertyDamage.CauseDamage("Did a scary test thing that cost $200", 200);
-                        WriteLine("You did a test, you gained 200 EXP!");
+                        scrolltext("You did a test, you gained 200 EXP!");
                     }
                     else
                     {
-                        WriteLine("you can't do that right now");
+                        scrolltext("you can't do that right now");
                     }
                     break;
                 case "show_bill":
@@ -239,7 +274,7 @@ internal static class Game
                     }
                     else
                     {
-                        WriteLine("you can't do that right now");
+                        scrolltext("you can't do that right now");
                     }
                     break;
                 case "goto":
@@ -256,12 +291,12 @@ internal static class Game
                         }
                         else
                         {
-                            WriteLine("this room does not exist");
+                            scrolltext("this room does not exist");
                         }
                     }
                     else
                     {
-                        WriteLine("you can't do that right now");
+                        scrolltext("you can't do that right now");
                     }
                     break;
                 // ^ End of debug commands
@@ -271,11 +306,11 @@ internal static class Game
                     condition = false;
                     break;
                 case "secret":
-                    WriteLine("you thought lol");
+                    scrolltext("you thought lol");
                     break;
                 case "secret2":
-                    if (!secretsEnabled) { secretsEnabled = true; WriteLine("enabled"); }
-                    else { secretsEnabled = false; WriteLine("disabled"); }
+                    if (!secretsEnabled) { secretsEnabled = true; scrolltext("enabled"); }
+                    else { secretsEnabled = false; scrolltext("disabled"); }
                     break;
 
                 case "attack":
@@ -327,13 +362,13 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("tablet"))
                                 {
-                                    WriteLine("You have already looted the corpse.");
+                                    scrolltext("You have already looted the corpse.");
                                 }
                                 else
                                 {
                                     Inventory["tablet"] = Items["tablet"];
                                     Inventory["coins"] = Items["coins"];
-                                    WriteLine($"From the corpse you loot some sort of tablet, and an array of coins.");
+                                    scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
                                 }
                             }
                             break;
@@ -342,12 +377,12 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("dagger"))
                                 {
-                                    WriteLine("You already have the dagger.");
+                                    scrolltext("You already have the dagger.");
                                 }
                                 else
                                 {
                                     Inventory["dagger"] = Items["dagger"];
-                                    WriteLine($"You take a dagger from its position on the bench");
+                                    scrolltext($"You take a dagger from its position on the bench");
                                 }
                             }
                             break;
@@ -356,12 +391,12 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("book"))
                                 {
-                                    WriteLine("You already have the book.");
+                                    scrolltext("You already have the book.");
                                 }
                                 else
                                 {
                                     Inventory["book"] = Items["book"];
-                                    WriteLine($"You take the book from the table");
+                                    scrolltext($"You take the book from the table");
                                 }
                             }
                             break;
@@ -370,12 +405,12 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("hammer"))
                                 {
-                                    WriteLine("You already have the hammer.");
+                                    scrolltext("You already have the hammer.");
                                 }
                                 else
                                 {
                                     Inventory["hammer"] = Items["hammer"];
-                                    WriteLine($"You take the warhammer from its place on the ground, it is cumbersome but comforting");
+                                    scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
                                 }
                             }
 
@@ -385,17 +420,17 @@ internal static class Game
                             {
                                 if (Inventory.ContainsKey("key"))
                                 {
-                                    WriteLine("You already have the key.");
+                                    scrolltext("You already have the key.");
                                 }
                                 else
                                 {
                                     Inventory["key"] = Items["key"];
-                                    WriteLine($"You take the key");
+                                    scrolltext($"You take the key");
                                 }
                             }
                             break;
                         default:
-                            WriteLine("there is nothing to loot here");
+                            scrolltext("there is nothing to loot here");
                             break;
                     }
                     break;
