@@ -2,7 +2,7 @@
 using System.Text.Json;
 using AwesomeGame;
 using static System.Console;
-
+using System.Text.RegularExpressions;
 namespace AwesomeGame;
 
 internal static class Game
@@ -45,7 +45,7 @@ internal static class Game
         WriteLine("");
     }
     // uses regex to find text within two <> tags
-    public static void tagtext(string input)
+    public static void colourtext(string input)
     {
         var match = Regex.Match(input, @"(.*?)<g>(.*?)<g>(.*)");
         // gets input string, checks for <g> and gets wildcard inside <g>
@@ -60,6 +60,7 @@ internal static class Game
         Console.Write(match.Groups[2].Value.ToUpper());
         Console.ResetColor();
         Console.Write(match.Groups[3].Value);
+        WriteLine();
     }
     public static void Main()
     {
@@ -101,7 +102,7 @@ internal static class Game
                 case "h":
                     // please add any commands you add to the program to this help section !!!
 
-                    WriteLine("inspect: inspects item or room with more detail than the description, inspect room");
+                    colourtext("inspect: inspects item or room with more detail than the description, inspect room");
                     WriteLine("stats: shows your current EXP");
                     WriteLine("help: shows a list and description of commands");
                     WriteLine("quit, kill, exit: closes the game");
