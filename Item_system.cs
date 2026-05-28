@@ -1,18 +1,13 @@
-//for grabbing values from json
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using AwesomeGame;
 using static System.Console;
 namespace AwesomeGame;
-
 internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
-
     // Flags to show that an action has been completed
     public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
-
-
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
@@ -58,7 +53,6 @@ internal static class Game
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
-
                 if (skipped)
                 {
                     Write(Text.Substring(i));
@@ -71,32 +65,6 @@ internal static class Game
             WriteLine();
         }
     }
-    /*
-    {
-                char o = Text[i];
-                // Checks if key has been pressed without blocking the rest of the code from running
-                if (Console.KeyAvailable)
-                {
-                    var key = ReadKey(true).Key;
-
-                    // Skip if pressing space or enter
-                    skipped = (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter);
-                }
-
-                if (skipped)
-                {
-                    string restOfText = Text.Substring(i);
-                    Write(restOfText);
-                }
-                else
-                {
-                    Write(o);
-                    Thread.Sleep(speed);
-                }
-
-                i++;
-            }
-            */
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -111,7 +79,6 @@ internal static class Game
         scrolltext("input h, or help for a current list of actions", 10);
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
-
         while (condition == true)
         {
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
@@ -170,9 +137,8 @@ internal static class Game
                     }
                     break;
                 case "inspect":
-                    if (input.Length > 1 && Inventory.ContainsKey(input[1])) //this looks for items in the player's command
+                    if (input.Length > 1 && Inventory.ContainsKey(input[1]))
                     {
-                        //retrieves values from json
                         var item = (JsonElement)Items[input[1]];
                         foreach (var property in item.EnumerateObject())
                             scrolltext($"{property.Name}: {property.Value}");
@@ -181,7 +147,6 @@ internal static class Game
                     {
                         JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
                         string description = null;
-                        // i will add more rooms with changing conditions to this if statement once we have the conditions sorted
                         if (
                             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
@@ -334,7 +299,7 @@ internal static class Game
                         {
                             scrolltext("How did you get here without a knife?");
                         }
-                    } 
+                    }
                     else { WriteLine("you can't do that right now"); }
                     break;
                 case "smash":  // SMASHING ROOM WOOP WOOP
