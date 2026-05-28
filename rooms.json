@@ -59,8 +59,8 @@
 
     "spidersroom": {
         "actions": 0,
-        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a [side entrance] and a blocked [main entrance]",
-        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe [side entrance] remains unblocked, while the [main entrance] is now open.",
+        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance</g> and a blocked </g>main entrance</g>",
+        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance</g> remains unblocked, while the <g>main entrance</g> is now open.",
         "features": ["sac"]
     },
 
