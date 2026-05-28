@@ -1,148 +1,90 @@
 {
-  "startRoom": {
-    "description": "this is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
-    "connections": {
-      "sideRoom": {
-        "requirements": [],
-        "command": "side room"
-      },
-      "hallway1": {
-        "requirements": [],
-        "command": "main entrance"
-      },
-      "hallway4": {
-        "requirements": [ "tablet" ],
-        "command": "second entrance"
-      }
+    "startroom": {
+        "actions": 3,
+        "description": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out \n there is a book on one of the tables",
+        "description2": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
+        "features": ["book"]
     },
-    "items": [ "book" ]
-  },
-    "sideRoom": {},
+
+    "sideroom": {
+        "actions": 3,
+        "description": "You are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
+    },
+
     "hallway1": {
-        "description": "you are in a small sideroom of unknown purpose with only one door back to the previous room \n this could be a good place to hide",
-        "connections": {
-            "startRoom": {
-                "requirements": [],
-                "command": "starting room"
-            },
-            "vinesRoom": {
-                "requirements": [],
-                "command": "small room"
-            },
-            "knifeRoom": {
-                "requirements": [],
-                "command": "open room"
-            },
-            "tabletRoom": {
-                "requirements": ["tablet"],
-                "command": "locked door"
-            },
-            "hallway2": {
-                "requirements": ["tablet"],
-                "command": "south"
-            }
-        }
+        "actions": 3,
+        "description": "You are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'"
     },
-  "knifeRoom": {
-    "description": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
-    "description2": "you are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves (minus the one in your inventory), this could be an armoury of some kind \n there is only one door, back into the corridor",
-    "connections": {
-      "hallway1": {
-        "requirements": [],
-        "command": "hallway"
-      }
+
+    "kniferoom": {
+        "actions": 3,
+        "description": "You are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+        "features": ["dagger"]
     },
-    "items": [ "book" ]
+
+    "vinesroom": {
+        "actions": 3,
+        "description": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
+        "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+    },
+    "tabletroom": {
+        "actions": 4,
+        "description": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n You feel a corpse placed half way up the steps, still warm",
+        "description2": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n The corpse is still present, now lacking what you took",
+        "features": ["corpse"]
+    },
+
+  "hallway2": {
+    "actions": 3, 
+    "description": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem locked \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could also continue further down or back up the corridor'",
+    "description2": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem locked \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could go back up the corridor \nbut you hear something lurking and grumbling further down the corridor, best not to continue that way"
   },
-    "vinesRoom": {
-      "description": "you are in a small room tight enough to reach both sides with your arms out, with two doors \n one back to the corridor south of you \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
-      "connections": {
-        "hallway1": {
-          "requirements": [],
-          "command": "main entrance"
-        },
-        "tabletRoom": {
-          "requirements": [ "cut vines" ],
-          "command": "main room"
-        }
-      },
-      "actions": {
-        "cut vines": {
-          "requirements":  ["knife"]
-        }
-      }
-    },
-  "tabletRoom": {
-    "description": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above \n there is a strange small tablet on one of the tables in this room",
-    "description2": "this room is large and made up of steps leading up and away to the other side \n strangely, you can almost see at least a dozen strange red eyes watching you from above",
-    "connections": {
-      "vinesRoom": {
-        "requirements": [],
-        "command": "side room"
-      },
-      "hallway1": {
-        "requirements": [],
-        "command": "main entrance"
-      }
-    },
-    "items": [ "tablet" ]
+
+  "hallway3": {
+    "actions": 3,
+    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay. Ahead, something breathes heavily in the dark. A tall, hunched figure sways beneath the flickering lights, its movements uneven and unnatural. Fabric drags softly across the floor as it lets out a low exhausted groan. Whatever the creature is, it blocks the only path forward."
   },
-    "hallway2": {
-      "description": "",
-        "connections": {
-            "stairs": {
-                "requirements": ["key"],
-                "command": "glass door"
-            },
-            "hallway1": {
-                "requirements": [],
-                "command": "north"
-            },
-            "hallway3": {
-                "requirements": [],
-                "command": "west"
-            }
-        }
+
+  "hallway4": {
+    "actions": 3,
+    "description": "The corridor stretches quietly before you. At the northern end stands a heavy door that feels strangely familiar, though your exhausted mind cannot place why. To the east, another doorway sits slightly open, cold air drifting faintly from within."
+  },
+
+  "renovatedroom": {
+    "actions": 3,
+    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement. Through touch, you sense exposed timber and cold metal beams jutting from the walls like ribs. Tools and loose materials are scattered across the floor. The air carries fresh paint and wet plaster, but beneath it lingers something older and stale, as if the room has been stripped open and left mid-repair.",
+    "description2": "",
+    "features": [ "hammer" ]
+  },
+
+    "spidersroom": {
+        "actions": -1,
+        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a [side entrance] and a blocked [main entrance]",
+        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe [side entrance] remains unblocked, while the [main entrance] is now open.",
+        "features": ["sac"]
     },
-    "hallway3": {
+
+    "smashingroom": {
+        "actions": 3,
+        "description": "You find yourself in a large, mostly open chamber, with tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange obelisk sculptures in rows, \nif you smashed something in here it would get the lurker's attention \nthere are two doors here, one to the corridor at the north end \nand another door at the west end of the chamber",
+        "description2": "You can hear the lurker coming from the corridor, you should leave out the west door"
+    },
+
+    "eyesroom": {
+        "actions": 3,
         "description": "",
-        "connections": {
-            "hallway2": {
-                "requirements": [],
-                "command": "east"
-            },
-            "hallway4": {
-                "requirements": [],
-                "command": "north"
-            }
-        }
+        "description2": ""
     },
-    "hallway4": {
-        "description": "",
-        "connections": {
-            "startRoom": {
-                "requirements": ["tablet"],
-                "command": "starting room"
-            },
-            "keyRoom": {
-                "requirements": ["tablet"],
-                "connections": "locked door"
-            },
-            "hallway3": {
-                "requirements": [],
-                "command": "south"
-            }
-        }
-    },
-    "keyRoom": {
-      "description": "",
-        "description2": "",
-        "connections": {
-            "hallway4": {
-                "requirements": [],
-                "command": "hallway"
-            }
-        },
-        "items": ["key"]
-    }
+
+  "keyroom": {
+    "actions": 3,
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles. Sharp chemical fumes sting your nose, your exhausted mind imagines ancient potions and failed alchemical mixtures. As your hands move through the clutter, something small and metallic shifts softly in the dark — a hidden key.",
+    "description2": "",
+    "features": [ "key" ]
+  },
+
+  "staircase": {
+    "actions": 0,
+    "description": "You find yourself at the top of a staircase descending deep into darkness. The air below feels colder, heavier, as though something is waiting beneath you. As you take your first cautious step, your footing slips slightly. The stairs are wet. Your pulse quickens as you descend further into the black, imagining crimson footprints trailing behind you."
+  }
 }
