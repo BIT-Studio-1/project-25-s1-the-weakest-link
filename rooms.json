@@ -1,7 +1,7 @@
 {
     "startroom": {
         "actions": 3,
-        "description": "You find yourself, dazed and confused, in a room that is completely pitch black. You find yourself stumbling into what appears to you as a ",
+        "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
         "description2": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
         "features": ["book"]
     },
@@ -59,8 +59,8 @@
 
     "spidersroom": {
         "actions": 0,
-        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance</g> and a blocked </g>main entrance</g>",
-        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance</g> remains unblocked, while the <g>main entrance</g> is now open.",
+        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>",
+        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open.",
         "features": ["sac"]
     },
 
@@ -78,8 +78,8 @@
 
   "keyroom": {
     "actions": 3,
-    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, your exhausted mind imagines ancient potions and failed alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark a hidden key?.",
-    "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, your exhausted mind imagines ancient potions and failed alchemical mixtures.\n As your hands move through the clutter.",
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and failed alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark a hidden key?.",
+    "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and failed alchemical mixtures.\n As your hands move through the clutter.",
     "features": [ "key" ]
   },
 

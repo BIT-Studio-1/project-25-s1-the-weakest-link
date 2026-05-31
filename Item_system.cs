@@ -56,9 +56,7 @@ internal static class Game
         string rooms_import = File.ReadAllText("rooms.json");
         Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
 
-        scrolltext("Waking up disoriented, you open your eyes.\n" +
-                    "Everything is dark, in your panic you flail your limbs until you feel something around you.\n" +
-                    "you are blind.", 50);
+        scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
         scrolltext("input <g>help<g> for a current list of actions", 10);
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
