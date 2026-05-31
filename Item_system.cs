@@ -168,7 +168,7 @@ internal static class Game
                     actionsCompleted++;
                     break;
                 case "stats":
-                    scrolltext($"You have {PropertyDamage.TotalCost} EXP");
+                    scrolltext($"You have {PropertyDamage.totalcost} EXP");
                     break;
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
@@ -192,7 +192,7 @@ internal static class Game
                         if (Inventory.ContainsKey("dagger"))
                         {
                             VinesCut = true;
-                            PropertyDamage.CauseDamage("Destroyed cabling in network room", 2000);
+                            PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
                             scrolltext("you cut the vines on the door");
                         }
                         else
@@ -207,7 +207,7 @@ internal static class Game
                 case "do_damage":
                     if (secretsEnabled)
                     {
-                        PropertyDamage.CauseDamage("Did a scary test thing that cost $200", 200);
+                        PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
                         scrolltext("You did a test, you gained 200 EXP!");
                     }
                     else
@@ -218,7 +218,7 @@ internal static class Game
                 case "show_bill":
                     if (secretsEnabled)
                     {
-                        PropertyDamage.WriteBill();
+                        PropertyDamage.writebill();
                     }
                     else
                     {
@@ -272,8 +272,8 @@ internal static class Game
 
                             scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
 
-                            PropertyDamage.CauseDamage("Shredded bean bag", 60);
-                            PropertyDamage.CauseDamage("Cleanup of bean bag beans in common room", 50);
+                            PropertyDamage.causedamage("Shredded bean bag", 60);
+                            PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
 
                         }
                         else
@@ -293,7 +293,7 @@ internal static class Game
                             scrolltext("with a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
                             scrolltext("it's time to get moving");
 
-                            PropertyDamage.CauseDamage("destroyed Two PCs and a monitor  in D201", 5300);
+                            PropertyDamage.causedamage("destroyed Two PCs and a monitor  in D201", 5300);
                         }
                         else { scrolltext("you tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
                     }

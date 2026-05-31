@@ -7,15 +7,15 @@ namespace AwesomeGame;
 */
 public static class PropertyDamage
 {
-    public static int TotalCost;
-    public static List<string> DamageReasons = new List<string>();
-    public static List<int> DamageAmount = new List<int>();
+    public static int totalcost;
+    public static List<string> damagereasons = new List<string>();
+    public static List<int> damageamount = new List<int>();
 
-    public static void WriteBill()
+    public static void writebill()
     {
         string bill = $"""
         To Mr. XXXX,
-        you have incurred damages in excess of {TotalCost:c2}.
+        you have incurred damages in excess of {totalcost:c2}.
         You have until next Sunday to pay Otago Polytechnic this cost
         otherwise you risk facing legal action. Attached is an itemised bill of damages.
 
@@ -23,18 +23,18 @@ public static class PropertyDamage
         """;
 
         bill += "Reason".PadRight(50) + "Cost".PadLeft(50) + '\n';
-        for (int i = 0; i < DamageReasons.Count; i++)
+        for (int i = 0; i < damagereasons.Count; i++)
         {
-            bill += DamageReasons[i].PadRight(50) + DamageAmount[i].ToString("c2").PadLeft(50) + '\n';
+            bill += damagereasons[i].PadRight(50) + damageamount[i].ToString("c2").PadLeft(50) + '\n';
         }
 
         Console.WriteLine(bill);
     }
 
-    public static void CauseDamage(string reason, int amount)
+    public static void causedamage(string reason, int amount)
     {
-        DamageReasons.Add(reason);
-        DamageAmount.Add(amount);
-        TotalCost += amount;
+        damagereasons.Add(reason);
+        damageamount.Add(amount);
+        totalcost += amount;
     }
 }
