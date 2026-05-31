@@ -94,6 +94,7 @@ internal static class Game
                     scrolltext("<g>stats<g>: Shows your current EXP");
                     scrolltext("<g>help<g>: Shows a list and description of commands");
                     scrolltext("<g>inventory<g>: Prints contents of the inventory");
+                    scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
                     if (roomtemp.TryGetProperty("features", out _))
                         scrolltext("<g>loot<g>: Takes an item from the room");
                     //these are dev commands, activated by typing 'secret2'
