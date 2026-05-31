@@ -57,11 +57,12 @@ internal static class Game
         Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
 
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
-        scrolltext("input <g>help<g> for a current list of actions", 10);
+
         int actionsCompleted = 0;
         bool condition = true, secretsEnabled = false;
         while (condition == true)
         {
+            WriteLine("===============================================");
             var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = roomtemp.GetProperty("actions").GetInt32();
 
@@ -77,6 +78,8 @@ internal static class Game
                 }
             }
 
+            scrolltext("(Input <g>help<g> for a current list of actions)", 10);
+
             string inputString = ReadLine().ToLower();
             string[] input = inputString.Split(' ');
             switch (input[0])
@@ -84,13 +87,12 @@ internal static class Game
                 case "help":
                     // please add any commands you add to the program to this help section !!!
 
-                    scrolltext("<g>inspect<g>: inspects item or room with more detail than the description, inspect room");
-                    scrolltext("<g>stats<g>: shows your current EXP");
-                    scrolltext("<g>help<g>: shows a list and description of commands");
-                    scrolltext("<g>exit<g>: closes the game");
-                    scrolltext("<g>inventory<g>: prints contents of the inventory");
-                    if (MovementSystem.currentRoom.Contains("features"))
-                        scrolltext("<g>loot<g>: takes a given item in the current room");
+                    scrolltext("<g>inspect<g> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
+                    scrolltext("<g>stats<g>: Shows your current EXP");
+                    scrolltext("<g>help<g>: Shows a list and description of commands");
+                    scrolltext("<g>inventory<g>: Prints contents of the inventory");
+                    if (roomtemp.TryGetProperty("features", out _))
+                        scrolltext("<g>loot<g>: Takes an item from the room");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         scrolltext("<g>cut vines<g>: cuts the vines covering the door");
@@ -101,19 +103,20 @@ internal static class Game
                         scrolltext("<g>do_damage<g>: command to test property damage system");
                         scrolltext("<g>show_bill<g>: command to show the current property damage");
                     }
+                    scrolltext("<g>exit<g>: Closes the game");
                     break;
                 case "inventory":
                     if (Inventory.Count > 0)
                     {
-                        scrolltext("you have:");
+                        scrolltext("You have:");
                         foreach (KeyValuePair<string, object> Inv in Inventory)
                         {
-                            scrolltext(Inv.Key);
+                            scrolltext($"<g>{Inv.Key}<g>");
                         }
                     }
                     else
                     {
-                        scrolltext("you don't have any items");
+                        scrolltext("You don't have any items");
                     }
                     break;
                 case "inspect":
@@ -121,7 +124,7 @@ internal static class Game
                     {
                         var item = (JsonElement)Items[input[1]];
                         foreach (var property in item.EnumerateObject())
-                            scrolltext($"{property.Name}: {property.Value}");
+                            scrolltext($"<g>{property.Name}<g>: {property.Value}");
                     }
                     else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
                     {
@@ -161,7 +164,7 @@ internal static class Game
                     }
                     else
                     {
-                        scrolltext("you don't have that item");
+                        scrolltext("You don't have that item");
                     }
                     actionsCompleted++;
                     break;
@@ -175,14 +178,14 @@ internal static class Game
                         if (input.Length > 1 && Items.ContainsKey(input[1]))
                         {
                             Inventory[input[1]] = Items[input[1]];
-                            scrolltext($"you now have {input[1]}");
+                            scrolltext($"You now have {input[1]}");
                         }
                         else
                         {
-                            scrolltext("this item does not exist");
+                            scrolltext("This item does not exist");
                         }
                     }
-                    else { scrolltext("you can't do that right now"); }
+                    else { scrolltext("You can't do that right now"); }
                     break;
                 case "cut":
                     if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
@@ -191,14 +194,14 @@ internal static class Game
                         {
                             VinesCut = true;
                             PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                            scrolltext("you cut the vines on the door");
+                            scrolltext("You cut the vines on the door");
                         }
                         else
                         {
-                            scrolltext("you need something sharp to cut these vines");
+                            scrolltext("You need something sharp to cut these vines");
                         }
                     }
-                    else { scrolltext("you can't do that right now"); }
+                    else { scrolltext("You can't do that right now"); }
 
                         break;
                 // Debug commands
@@ -210,7 +213,7 @@ internal static class Game
                     }
                     else
                     {
-                        scrolltext("you can't do that right now");
+                        scrolltext("You can't do that right now");
                     }
                     break;
                 case "show_bill":
@@ -220,7 +223,7 @@ internal static class Game
                     }
                     else
                     {
-                        scrolltext("you can't do that right now");
+                        scrolltext("You can't do that right now");
                     }
                     break;
                 case "goto":
@@ -231,18 +234,18 @@ internal static class Game
                             MovementSystem.currentRoom = input[1];
                             if (Rooms.ContainsKey(input[1]))
                             {
-                                scrolltext($"you are now in: {MovementSystem.currentRoom}");
+                                scrolltext($"You are now in: {MovementSystem.currentRoom}");
                                 actionsCompleted = 0;
                             }
                         }
                         else
                         {
-                            scrolltext("this room does not exist");
+                            scrolltext("This room does not exist");
                         }
                     }
                     else
                     {
-                        scrolltext("you can't do that right now");
+                        scrolltext("You can't do that right now");
                     }
                     break;
                 // ^ End of debug commands
@@ -279,7 +282,7 @@ internal static class Game
                             scrolltext("How did you get here without a knife?");
                         }
                     }
-                    else { scrolltext("you can't do that right now"); }
+                    else { scrolltext("You can't do that right now"); }
                     break;
                 case "smash":  // SMASHING ROOM POO POO
                     if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
@@ -288,14 +291,14 @@ internal static class Game
                         {
                             LurkerMoved = true;
 
-                            scrolltext("with a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
-                            scrolltext("it's time to get moving");
+                            scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
+                            scrolltext("Tt's time to get moving");
 
-                            PropertyDamage.causedamage("destroyed Two PCs and a monitor  in D201", 5300);
+                            PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
                         }
-                        else { scrolltext("you tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
+                        else { scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
                     }
-                    else { scrolltext("you can't do that right now"); }
+                    else { scrolltext("You can't do that right now"); }
                     break;
                 //switch for looting items
                 case "loot":
