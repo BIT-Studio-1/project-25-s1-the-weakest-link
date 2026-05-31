@@ -53,9 +53,9 @@ internal static class Game
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
         string items_import = File.ReadAllText("items.json");
-        Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import);
+        Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         string rooms_import = File.ReadAllText("rooms.json");
-        Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import);
+        Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");;
 
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
 
@@ -82,7 +82,9 @@ internal static class Game
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
 
             Write("Input: ");
-            string inputString = ReadLine().ToLower();
+
+            // The "??" is to stop everything from breaking if for some reason the game can't read an input
+            string inputString = (ReadLine() ?? "").ToLower();
             string[] input = inputString.Split(' ');
 
             switch (input[0])
@@ -96,7 +98,7 @@ internal static class Game
                     scrolltext("<g>inventory<g>: Prints contents of the inventory");
                     scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
                     if (roomtemp.TryGetProperty("features", out _))
-                        scrolltext("<g>loot<g>: Takes an item from the room");
+                        scrolltext("<g>loot<g> (<g>item<g>/<g>object<g>): Takes an item from the room");
                     //these are dev commands, activated by typing 'secret2'
                     if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
                         scrolltext("<g>cut vines<g>: cuts the vines covering the door");
@@ -133,7 +135,7 @@ internal static class Game
                     else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
                     {
                         JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
-                        string description = null;
+                        string description;
                         if (
                             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
                             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
@@ -144,11 +146,11 @@ internal static class Game
                             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
                         )
                         {
-                            description = room.GetProperty("description2").GetString();
+                            description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
                         }
                         else
                         {
-                            description = room.GetProperty("description").GetString();
+                            description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
                         }
                         scrolltext(description);
 
@@ -158,10 +160,11 @@ internal static class Game
                             {
                                 foreach (var feature in featuresElement.EnumerateArray())
                                 {
-                                    if (Inventory.ContainsKey(feature.GetString()))
+                                    string featureStr = feature.GetString() ?? throw new ArrayTypeMismatchException($"A feature in {MovementSystem.currentRoom} is not a string");
+                                    if (Inventory.ContainsKey(featureStr))
                                         break;
                                     else
-                                        scrolltext($"You feel: {feature.GetString()}");
+                                        scrolltext($"You feel: {featureStr}");
                                 }
                             }
                         }
