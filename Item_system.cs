@@ -8,6 +8,7 @@ internal static class Game
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
     public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
+
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
@@ -80,8 +81,10 @@ internal static class Game
 
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
 
+            Write("Input: ");
             string inputString = ReadLine().ToLower();
             string[] input = inputString.Split(' ');
+
             switch (input[0])
             {
                 case "help":
