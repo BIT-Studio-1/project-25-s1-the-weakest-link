@@ -4,5 +4,5 @@
     "tablet":  {"description":  "A strange tablet small enough to fit in the palm of your hand, you aren't sure why but you feel like it might open some doors", "weight":  10},
     "coins": { "description": "A pile of coins looted from an unfortunate soul that was trapped here with you, this could be valuable" },
     "key": { "description": "A smooth key, made of an unknown medal", "weight": 10 },
-    "hammer": {"description": "A hammer, a strangely familiar object for where you find yourself", "weight": 2500}
+    "hammer": { "description": "A hammer, a strangely familiar object for where you find yourself", "weight": 2500 }
 }

@@ -78,8 +78,8 @@
 
   "keyroom": {
     "actions": 0,
-    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and failed alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark a hidden key?.",
-    "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and failed alchemical mixtures.\n As your hands move through the clutter.",
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <g>key</g>",
+    "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.",
     "features": [ "key" ]
   },
 
