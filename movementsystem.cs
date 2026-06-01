@@ -56,7 +56,15 @@ public class MovementSystem
         switch (movement)
         {
             case "starting room":
-                currentRoom = "startroom";
+                if (!Game.Inventory.ContainsKey("dagger") || Game.Inventory.ContainsKey("tablet"))
+                {
+                    currentRoom = "startroom";
+                }
+                else
+                {
+                    Console.WriteLine("there is a presence in this room, best not to enter");
+                    succeeded = false;
+                }
                 break;
             case "small room":
                 currentRoom = "vinesroom";
@@ -71,14 +79,13 @@ public class MovementSystem
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "tabletroom";
-                    break;
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a tablet.");
+                    Console.WriteLine("this door is sealed with some kind of dark magic, you will need some sort of artifact to access it");
                     succeeded = false;
-                    break;
                 }
+                break;
             default:
                 succeeded = false;
                 break;
