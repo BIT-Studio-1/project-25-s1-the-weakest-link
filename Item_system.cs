@@ -134,6 +134,26 @@ internal static class Game
         }
         actionscompleted++;
     }
+    public static void stats() 
+    {
+        scrolltext($"You have {PropertyDamage.totalcost} EXP");
+    }
+    public static void give(bool secretsenabled, string[] input, Dictionary<string, object> Items)
+    {
+        if (secretsenabled)
+        {
+            if (input.Length > 1 && Items.ContainsKey(input[1]))
+            {
+                Inventory[input[1]] = Items[input[1]];
+                scrolltext($"You now have {input[1]}");
+            }
+            else
+            {
+                scrolltext("This item does not exist");
+            }
+        }
+        else { scrolltext("You can't do that right now"); }
+    }
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -184,23 +204,11 @@ internal static class Game
                     inspect(input, Rooms, Items, actionscompleted);
                     break;
                 case "stats":
-                    scrolltext($"You have {PropertyDamage.totalcost} EXP");
+                    stats();
                     break;
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
-                    if (secretsenabled)
-                    {
-                        if (input.Length > 1 && Items.ContainsKey(input[1]))
-                        {
-                            Inventory[input[1]] = Items[input[1]];
-                            scrolltext($"You now have {input[1]}");
-                        }
-                        else
-                        {
-                            scrolltext("This item does not exist");
-                        }
-                    }
-                    else { scrolltext("You can't do that right now"); }
+                    give();
                     break;
                 case "cut":
                     if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
