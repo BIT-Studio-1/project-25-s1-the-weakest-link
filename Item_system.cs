@@ -49,18 +49,52 @@ internal static class Game
 
         WriteLine();
     }
+    public static void help(JsonElement roomtemp, bool secretsenabled)
+    {
+        // please add any commands you add to the program to this help section !!!
+
+        scrolltext("<g>inspect<g> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
+        scrolltext("<g>stats<g>: Shows your current EXP");
+        scrolltext("<g>help<g>: Shows a list and description of commands");
+        scrolltext("<g>inventory<g>: Prints contents of the inventory");
+        scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
+        if (roomtemp.TryGetProperty("features", out _))
+            scrolltext("<g>loot<g> (<g>item<g>/<g>object<g>): Takes an item from the room");
+        //these are dev commands, activated by typing 'secret2'
+        if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
+            scrolltext("<g>cut vines<g>: cuts the vines covering the door");
+        if (secretsenabled)
+        {
+            scrolltext("<g>goto<g>: sends you to a room");
+            scrolltext("<g>give<g>: gives a provided item");
+            scrolltext("<g>do_damage<g>: command to test property damage system");
+            scrolltext("<g>show_bill<g>: command to show the current property damage");
+        }
+        scrolltext("<g>exit<g>: Closes the game");
+    }
+    public static void inventory()
+    {
+        if (Inventory.Count > 0)
+        {
+            scrolltext("You have:");
+            foreach (KeyValuePair<string, object> Inv in Inventory)
+                scrolltext($"<g>{Inv.Key}<g>");
+        }
+        else
+            scrolltext("You don't have any items");
+        }
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
         string items_import = File.ReadAllText("items.json");
         Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         string rooms_import = File.ReadAllText("rooms.json");
-        Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");;
+        Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found"); ;
 
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
 
         int actionsCompleted = 0;
-        bool condition = true, secretsEnabled = false;
+        bool condition = true, secretsenabled = false;
         while (condition == true)
         {
             WriteLine("===============================================");
@@ -90,40 +124,10 @@ internal static class Game
             switch (input[0])
             {
                 case "help":
-                    // please add any commands you add to the program to this help section !!!
-
-                    scrolltext("<g>inspect<g> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
-                    scrolltext("<g>stats<g>: Shows your current EXP");
-                    scrolltext("<g>help<g>: Shows a list and description of commands");
-                    scrolltext("<g>inventory<g>: Prints contents of the inventory");
-                    scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
-                    if (roomtemp.TryGetProperty("features", out _))
-                        scrolltext("<g>loot<g> (<g>item<g>/<g>object<g>): Takes an item from the room");
-                    //these are dev commands, activated by typing 'secret2'
-                    if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
-                        scrolltext("<g>cut vines<g>: cuts the vines covering the door");
-                    if (secretsEnabled)
-                    {
-                        scrolltext("<g>goto<g>: sends you to a room");
-                        scrolltext("<g>give<g>: gives a provided item");
-                        scrolltext("<g>do_damage<g>: command to test property damage system");
-                        scrolltext("<g>show_bill<g>: command to show the current property damage");
-                    }
-                    scrolltext("<g>exit<g>: Closes the game");
+                    help(roomtemp, secretsenabled);
                     break;
                 case "inventory":
-                    if (Inventory.Count > 0)
-                    {
-                        scrolltext("You have:");
-                        foreach (KeyValuePair<string, object> Inv in Inventory)
-                        {
-                            scrolltext($"<g>{Inv.Key}<g>");
-                        }
-                    }
-                    else
-                    {
-                        scrolltext("You don't have any items");
-                    }
+                    inventory();
                     break;
                 case "inspect":
                     if (input.Length > 1 && Inventory.ContainsKey(input[1]))
@@ -180,7 +184,7 @@ internal static class Game
                     break;
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
-                    if (secretsEnabled)
+                    if (secretsenabled)
                     {
                         if (input.Length > 1 && Items.ContainsKey(input[1]))
                         {
@@ -210,10 +214,10 @@ internal static class Game
                     }
                     else { scrolltext("You can't do that right now"); }
 
-                        break;
+                    break;
                 // Debug commands
                 case "do_damage":
-                    if (secretsEnabled)
+                    if (secretsenabled)
                     {
                         PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
                         scrolltext("You did a test, you gained 200 EXP!");
@@ -224,7 +228,7 @@ internal static class Game
                     }
                     break;
                 case "show_bill":
-                    if (secretsEnabled)
+                    if (secretsenabled)
                     {
                         PropertyDamage.writebill();
                     }
@@ -234,7 +238,7 @@ internal static class Game
                     }
                     break;
                 case "goto":
-                    if (secretsEnabled)
+                    if (secretsenabled)
                     {
                         if (input.Length > 1 && Rooms.ContainsKey(input[1]))
                         {
@@ -263,8 +267,8 @@ internal static class Game
                     scrolltext("you thought lol");
                     break;
                 case "secret2":
-                    if (!secretsEnabled) { secretsEnabled = true; scrolltext("enabled"); }
-                    else { secretsEnabled = false; scrolltext("disabled"); }
+                    if (!secretsenabled) { secretsenabled = true; scrolltext("enabled"); }
+                    else { secretsenabled = false; scrolltext("disabled"); }
                     break;
 
                 case "attack":
