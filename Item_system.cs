@@ -150,7 +150,7 @@ internal static class Game
         {
             if (input.Length > 1 && Items.ContainsKey(input[1]))
             {
-                Inventory[input[1]] = Items[input[1]];
+                takeitem(input[1]);
                 scrolltext($"You now have {input[1]}");
             }
             else
