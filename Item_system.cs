@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using AwesomeGame;
@@ -8,7 +9,12 @@ internal static class Game
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
     public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
-
+    public static Dictionary<string, object> Items;
+    public static Dictionary<string, object> Rooms;
+    public static int actionscompleted = 0;
+    public static bool condition = true, secretsenabled = false;
+    public static JsonElement currentroomjson;
+    static string[] input;
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
@@ -49,7 +55,7 @@ internal static class Game
 
         WriteLine();
     }
-    public static void help(JsonElement roomtemp, bool secretsenabled)
+    public static void help()
     {
         // please add any commands you add to the program to this help section !!!
 
@@ -58,7 +64,7 @@ internal static class Game
         scrolltext("<g>help<g>: Shows a list and description of commands");
         scrolltext("<g>inventory<g>: Prints contents of the inventory");
         scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
-        if (roomtemp.TryGetProperty("features", out _))
+        if (currentroomjson.TryGetProperty("features", out _))
             scrolltext("<g>loot<g> (<g>item<g>/<g>object<g>): Takes an item from the room");
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
@@ -82,8 +88,8 @@ internal static class Game
         }
         else
             scrolltext("You don't have any items");
-        }
-    public static void inspect(string[] input, Dictionary<string, object> Rooms, Dictionary<string, object> Items, int actionscompleted) 
+    }
+    public static void inspect()
     {
         if (input.Length > 1 && Inventory.ContainsKey(input[1]))
         {
@@ -134,11 +140,11 @@ internal static class Game
         }
         actionscompleted++;
     }
-    public static void stats() 
+    public static void stats()
     {
         scrolltext($"You have {PropertyDamage.totalcost} EXP");
     }
-    public static void give(bool secretsenabled, string[] input, Dictionary<string, object> Items)
+    public static void give()
     {
         if (secretsenabled)
         {
@@ -154,23 +160,202 @@ internal static class Game
         }
         else { scrolltext("You can't do that right now"); }
     }
+    public static void cut()
+    {
+        if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
+        {
+            if (Inventory.ContainsKey("dagger"))
+            {
+                VinesCut = true;
+                PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
+                scrolltext("You cut the vines on the door");
+            }
+            else
+                scrolltext("You need something sharp to cut these vines");
+        }
+        else
+            scrolltext("You can't do that right now");
+    }
+    public static void do_damage()
+    {
+        if (secretsenabled)
+        {
+            PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
+            scrolltext("You did a test, you gained 200 EXP!");
+        }
+        else
+            scrolltext("You can't do that right now");
+    }
+    public static void show_bill()
+    {
+        if (secretsenabled)
+            PropertyDamage.writebill();
+        else
+            scrolltext("You can't do that right now");
+    }
+    public static void go_to()
+    {
+        if (secretsenabled)
+        {
+            if (input.Length > 1 && Rooms.ContainsKey(input[1]))
+            {
+                MovementSystem.currentRoom = input[1];
+                if (Rooms.ContainsKey(input[1]))
+                {
+                    scrolltext($"You are now in: {MovementSystem.currentRoom}");
+                    actionscompleted = 0;
+                }
+            }
+            else
+                scrolltext("This room does not exist");
+        }
+        else
+            scrolltext("You can't do that right now");
+    }
+    public static void exit()
+    {
+        condition = false;
+    }
+    public static void enabledebug()
+    {
+        if (!secretsenabled) { secretsenabled = true; scrolltext("enabled"); }
+        else { secretsenabled = false; scrolltext("disabled"); }
+    }
+    public static void attack()
+    {
+        // Spider room, Abby's responsibility
+        if (MovementSystem.currentRoom == "spidersroom" && !SpiderSacBurst)
+        {
+            if (Inventory.ContainsKey("dagger"))
+            {
+                SpiderSacBurst = true;
+
+                scrolltext("You stab at the sac, slashing your way through...");
+                Thread.Sleep(500);
+
+                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
+
+                PropertyDamage.causedamage("Shredded bean bag", 60);
+                PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
+
+            }
+            else scrolltext("How did you get here without a knife?");
+        }
+        else scrolltext("You can't do that right now");
+    }
+    public static void smash()
+    {
+        if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
+        {
+            if (Inventory.ContainsKey("hammer"))
+            {
+                LurkerMoved = true;
+
+                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
+                scrolltext("Tt's time to get moving");
+
+                PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
+            }
+            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead, ouch");
+        }
+        else scrolltext("You can't do that right now");
+    }
+    public static void loot()
+        {
+        switch (MovementSystem.currentRoom)
+        {
+            case "tabletroom":
+                if (input.Length > 1 && input[1] == "corpse")
+                {
+                    if (Inventory.ContainsKey("tablet"))
+                    {
+                        scrolltext("You have already looted the corpse.");
+                    }
+                    else
+                    {
+                        Inventory["tablet"] = Items["tablet"];
+                        Inventory["coins"] = Items["coins"];
+                        scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
+                    }
+                }
+                break;
+            case "kniferoom":
+                if (input.Length > 1 && input[1] == "dagger")
+                {
+                    if (Inventory.ContainsKey("dagger"))
+                    {
+                        scrolltext("You already have the dagger.");
+                    }
+                    else
+                    {
+                        Inventory["dagger"] = Items["dagger"];
+                        scrolltext($"You take a dagger from its position on the bench");
+                    }
+                }
+                break;
+            case "startroom":
+                if (input.Length > 1 && input[1] == "book")
+                {
+                    if (Inventory.ContainsKey("book"))
+                    {
+                        scrolltext("You already have the book.");
+                    }
+                    else
+                    {
+                        Inventory["book"] = Items["book"];
+                        scrolltext($"You take the book from the table");
+                    }
+                }
+                break;
+            case "renovatedroom":
+                if (input.Length > 1 && (input[1] == "hammer" || input[1] == "warhammer"))
+                {
+                    if (Inventory.ContainsKey("hammer"))
+                    {
+                        scrolltext("You already have the hammer.");
+                    }
+                    else
+                    {
+                        Inventory["hammer"] = Items["hammer"];
+                        scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
+                    }
+                }
+
+                break;
+            case "keyroom":
+                if (input.Length > 1 && input[1] == "key")
+                {
+                    if (Inventory.ContainsKey("key"))
+                    {
+                        scrolltext("You already have the key.");
+                    }
+                    else
+                    {
+                        Inventory["key"] = Items["key"];
+                        scrolltext($"You take the key");
+                    }
+                }
+                break;
+            default:
+                scrolltext("there is nothing to loot here");
+                break;
+        }
+    }
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
         string items_import = File.ReadAllText("items.json");
-        Dictionary<string, object> Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         string rooms_import = File.ReadAllText("rooms.json");
-        Dictionary<string, object> Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found"); ;
-
+        Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
+        Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
 
-        int actionscompleted = 0;
-        bool condition = true, secretsenabled = false;
+
         while (condition == true)
         {
             WriteLine("===============================================");
-            var roomtemp = (JsonElement)Rooms[MovementSystem.currentRoom];
-            int room_actions = roomtemp.GetProperty("actions").GetInt32();
+            var currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
+            int room_actions = currentroomjson.GetProperty("actions").GetInt32();
 
             if (room_actions > 0)
             {
@@ -195,13 +380,13 @@ internal static class Game
             switch (input[0])
             {
                 case "help":
-                    help(roomtemp, secretsenabled);
+                    help();
                     break;
                 case "inventory":
                     inventory();
                     break;
                 case "inspect":
-                    inspect(input, Rooms, Items, actionscompleted);
+                    inspect();
                     break;
                 case "stats":
                     stats();
@@ -211,198 +396,37 @@ internal static class Game
                     give();
                     break;
                 case "cut":
-                    if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
-                    {
-                        if (Inventory.ContainsKey("dagger"))
-                        {
-                            VinesCut = true;
-                            PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                            scrolltext("You cut the vines on the door");
-                        }
-                        else
-                        {
-                            scrolltext("You need something sharp to cut these vines");
-                        }
-                    }
-                    else { scrolltext("You can't do that right now"); }
-
+                    cut();
                     break;
                 // Debug commands
                 case "do_damage":
-                    if (secretsenabled)
-                    {
-                        PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
-                        scrolltext("You did a test, you gained 200 EXP!");
-                    }
-                    else
-                    {
-                        scrolltext("You can't do that right now");
-                    }
+                    do_damage();
                     break;
                 case "show_bill":
-                    if (secretsenabled)
-                    {
-                        PropertyDamage.writebill();
-                    }
-                    else
-                    {
-                        scrolltext("You can't do that right now");
-                    }
+                    show_bill();
                     break;
                 case "goto":
-                    if (secretsenabled)
-                    {
-                        if (input.Length > 1 && Rooms.ContainsKey(input[1]))
-                        {
-                            MovementSystem.currentRoom = input[1];
-                            if (Rooms.ContainsKey(input[1]))
-                            {
-                                scrolltext($"You are now in: {MovementSystem.currentRoom}");
-                                actionscompleted = 0;
-                            }
-                        }
-                        else
-                        {
-                            scrolltext("This room does not exist");
-                        }
-                    }
-                    else
-                    {
-                        scrolltext("You can't do that right now");
-                    }
+                    go_to();
                     break;
                 // ^ End of debug commands
                 case "exit":
-                    condition = false;
+                    exit();
                     break;
                 case "secret":
                     scrolltext("you thought lol");
                     break;
                 case "secret2":
-                    if (!secretsenabled) { secretsenabled = true; scrolltext("enabled"); }
-                    else { secretsenabled = false; scrolltext("disabled"); }
+                    enabledebug();
                     break;
-
                 case "attack":
-                    // Spider room, Abby's responsibility
-                    if (MovementSystem.currentRoom == "spidersroom" && !SpiderSacBurst)
-                    {
-                        if (Inventory.ContainsKey("dagger"))
-                        {
-                            SpiderSacBurst = true;
-
-                            scrolltext("You stab at the sac, slashing your way through...");
-                            Thread.Sleep(500);
-
-                            scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
-
-                            PropertyDamage.causedamage("Shredded bean bag", 60);
-                            PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
-
-                        }
-                        else
-                        {
-                            scrolltext("How did you get here without a knife?");
-                        }
-                    }
-                    else { scrolltext("You can't do that right now"); }
+                    attack();
                     break;
-                case "smash":  // SMASHING ROOM POO POO
-                    if (MovementSystem.currentRoom == "smashingroom" && !LurkerMoved)
-                    {
-                        if (Inventory.ContainsKey("hammer"))
-                        {
-                            LurkerMoved = true;
-
-                            scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
-                            scrolltext("Tt's time to get moving");
-
-                            PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
-                        }
-                        else { scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead, ouch"); }
-                    }
-                    else { scrolltext("You can't do that right now"); }
+                case "smash":
+                    smash();
                     break;
                 //switch for looting items
                 case "loot":
-                    switch (MovementSystem.currentRoom)
-                    {
-                        case "tabletroom":
-                            if (input.Length > 1 && input[1] == "corpse")
-                            {
-                                if (Inventory.ContainsKey("tablet"))
-                                {
-                                    scrolltext("You have already looted the corpse.");
-                                }
-                                else
-                                {
-                                    Inventory["tablet"] = Items["tablet"];
-                                    Inventory["coins"] = Items["coins"];
-                                    scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
-                                }
-                            }
-                            break;
-                        case "kniferoom":
-                            if (input.Length > 1 && input[1] == "dagger")
-                            {
-                                if (Inventory.ContainsKey("dagger"))
-                                {
-                                    scrolltext("You already have the dagger.");
-                                }
-                                else
-                                {
-                                    Inventory["dagger"] = Items["dagger"];
-                                    scrolltext($"You take a dagger from its position on the bench");
-                                }
-                            }
-                            break;
-                        case "startroom":
-                            if (input.Length > 1 && input[1] == "book")
-                            {
-                                if (Inventory.ContainsKey("book"))
-                                {
-                                    scrolltext("You already have the book.");
-                                }
-                                else
-                                {
-                                    Inventory["book"] = Items["book"];
-                                    scrolltext($"You take the book from the table");
-                                }
-                            }
-                            break;
-                        case "renovatedroom":
-                            if (input.Length > 1 && (input[1] == "hammer" || input[1] == "warhammer"))
-                            {
-                                if (Inventory.ContainsKey("hammer"))
-                                {
-                                    scrolltext("You already have the hammer.");
-                                }
-                                else
-                                {
-                                    Inventory["hammer"] = Items["hammer"];
-                                    scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
-                                }
-                            }
-
-                            break;
-                        case "keyroom":
-                            if (input.Length > 1 && input[1] == "key")
-                            {
-                                if (Inventory.ContainsKey("key"))
-                                {
-                                    scrolltext("You already have the key.");
-                                }
-                                else
-                                {
-                                    Inventory["key"] = Items["key"];
-                                    scrolltext($"You take the key");
-                                }
-                            }
-                            break;
-                        default:
-                            scrolltext("there is nothing to loot here");
-                            break;
-                    }
+                    loot();
                     break;
                 default:
                     bool movementSucceeded = MovementSystem.move(inputString);
