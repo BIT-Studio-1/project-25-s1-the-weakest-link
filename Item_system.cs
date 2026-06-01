@@ -8,7 +8,7 @@ internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
-    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false;
+    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false, EyesSmashed = false;
     public static Dictionary<string, object> Items;
     public static Dictionary<string, object> Rooms;
     public static int actionscompleted = 0;
@@ -97,15 +97,15 @@ internal static class Game
             foreach (var property in item.EnumerateObject())
                 scrolltext($"<g>{property.Name}<g>: {property.Value}");
         }
-        else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
             JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
             string description;
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-           (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom") ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
@@ -241,6 +241,18 @@ internal static class Game
             }
             else scrolltext("How did you get here without a knife?");
         }
+        else if (MovementSystem.currentRoom == "eyesroom" && !EyesSmashed)
+        {
+            if (Inventory.ContainsKey("hammer"))
+            {
+                EyesSmashed = true;
+
+                scrolltext("you begin to attack the strange eyes with your hammer \nas you bring it down upon the eyes it meets with more of those strange monoliths, smashing them apart \nyou keep smashing until all the eyes are gone, and the moniliths they were on lie in pieces");
+                PropertyDamage.causedamage("destroyed 20 computers and several monitors in another classroom", 30000);
+                PropertyDamage.causedamage("seriously dude what the fuck, these cleaners don't pay for themselves", 200);
+            }
+            else scrolltext("how did you get here without a hammer?");
+        }
         else scrolltext("You can't do that right now");
     }
     public static void smash()
@@ -255,6 +267,7 @@ internal static class Game
                 scrolltext("Tt's time to get moving");
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
+                PropertyDamage.causedamage("more work for the cleaners, overtime", 100);
             }
             else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead, ouch");
         }
@@ -365,7 +378,6 @@ internal static class Game
             WriteLine("===============================================");
             currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = currentroomjson.GetProperty("actions").GetInt32();
-
             if (room_actions > 0)
             {
                 if (actionscompleted > room_actions)
@@ -378,9 +390,7 @@ internal static class Game
                 }
             }
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
-
             Write("> ");
-
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');

@@ -72,8 +72,8 @@
 
     "eyesroom": {
         "actions": 0,
-        "description": "You find yourself in another terraced chamber \nstrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above \nthere are two doors in this chamber, one <g>side entrance</g> to the other room \nand a <g>main entrance</g> out to the corridor \nyou are in immediate danger and need to fight back",
-        "description2": "You are in a large terraced chamber filled with the remains of strange monliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance</g> to the other room \nand a <g>main entrance</g> out to the corridor"
+        "description": "You find yourself in another terraced chamber \nstrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above \nthere are two doors in this chamber, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor \nyou are in immediate danger and need to <g>attack<g>",
+        "description2": "You are in a large terraced chamber filled with the remains of strange monliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance</g> to the other room \nand a <g>main entrance<g> out to the corridor"
     },
 
   "keyroom": {
