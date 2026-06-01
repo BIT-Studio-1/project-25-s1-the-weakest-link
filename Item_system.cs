@@ -273,8 +273,8 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["tablet"] = Items["tablet"];
-                        Inventory["coins"] = Items["coins"];
+                        takeitem("tablet");
+                        takeitem("coint");
                         scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
                     }
                 }
@@ -288,7 +288,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["dagger"] = Items["dagger"];
+                        takeitem("dagger");
                         scrolltext($"You take a dagger from its position on the bench");
                     }
                 }
@@ -302,7 +302,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["book"] = Items["book"];
+                        takeitem("book");
                         scrolltext($"You take the book from the table");
                     }
                 }
@@ -316,7 +316,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["hammer"] = Items["hammer"];
+                        takeitem("hammer");
                         scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
                     }
                 }
@@ -331,7 +331,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["key"] = Items["key"];
+                        takeitem("key");
                         scrolltext($"You take the key");
                     }
                 }
@@ -341,6 +341,17 @@ internal static class Game
                 break;
         }
     }
+
+    private static void takeitem(string item)
+    {
+        JsonElement itemJSON = (JsonElement)Items[item];
+        string realName = itemJSON.GetProperty("real_name").GetString();
+        int cost = itemJSON.GetProperty("cost").GetInt32();
+
+        Inventory[item] = Items[item];
+        PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
+    }
+
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
