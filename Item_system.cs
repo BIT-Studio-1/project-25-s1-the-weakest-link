@@ -349,12 +349,10 @@ internal static class Game
         Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
-
-
         while (condition == true)
         {
             WriteLine("===============================================");
-            var currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
+            currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = currentroomjson.GetProperty("actions").GetInt32();
 
             if (room_actions > 0)
@@ -368,15 +366,11 @@ internal static class Game
                         scrolltext("You should move on");
                 }
             }
-
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
-
             Write("Input: ");
-
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             string[] input = inputString.Split(' ');
-
             switch (input[0])
             {
                 case "help":
