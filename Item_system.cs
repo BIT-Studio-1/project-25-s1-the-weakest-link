@@ -354,7 +354,6 @@ internal static class Game
             WriteLine("===============================================");
             currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = currentroomjson.GetProperty("actions").GetInt32();
-
             if (room_actions > 0)
             {
                 if (actionscompleted > room_actions)
@@ -367,9 +366,7 @@ internal static class Game
                 }
             }
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
-
             Write("> ");
-
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');
