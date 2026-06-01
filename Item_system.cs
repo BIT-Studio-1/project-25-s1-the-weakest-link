@@ -371,7 +371,7 @@ internal static class Game
 
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
 
-            Write("Input: ");
+            Write("> ");
 
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
