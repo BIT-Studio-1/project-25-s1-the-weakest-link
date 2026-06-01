@@ -165,7 +165,7 @@ public class MovementSystem
             case "glass door":
                 if (Game.Inventory.ContainsKey("key"))
                 {
-                    currentRoom = "stairs";
+                    currentRoom = "staircase";
                     break;
                 }
                 else
