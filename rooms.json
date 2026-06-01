@@ -22,11 +22,11 @@
         "features": ["dagger"]
     },
 
-    "vinesroom": {
-        "actions": 3,
-        "description": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
-        "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
-    },
+  "vinesroom": {
+    "actions": 3,
+    "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown doorway choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance</g>./nTo the south is the <g>small room</g> door, leading back the way you came.\n",
+    "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+  },
     "tabletroom": {
         "actions": 4,
         "description": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n You feel a corpse placed half way up the steps, still warm",
