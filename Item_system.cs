@@ -97,15 +97,15 @@ internal static class Game
             foreach (var property in item.EnumerateObject())
                 scrolltext($"<g>{property.Name}<g>: {property.Value}");
         }
-        if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
             JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
             string description;
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-           (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom") ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
@@ -286,8 +286,8 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["tablet"] = Items["tablet"];
-                        Inventory["coins"] = Items["coins"];
+                        takeitem("tablet");
+                        takeitem("coint");
                         scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
                     }
                 }
@@ -301,7 +301,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["dagger"] = Items["dagger"];
+                        takeitem("dagger");
                         scrolltext($"You take a dagger from its position on the bench");
                     }
                 }
@@ -315,7 +315,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["book"] = Items["book"];
+                        takeitem("book");
                         scrolltext($"You take the book from the table");
                     }
                 }
@@ -329,7 +329,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["hammer"] = Items["hammer"];
+                        takeitem("hammer");
                         scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
                     }
                 }
@@ -344,7 +344,7 @@ internal static class Game
                     }
                     else
                     {
-                        Inventory["key"] = Items["key"];
+                        takeitem("key");
                         scrolltext($"You take the key");
                     }
                 }
@@ -354,6 +354,17 @@ internal static class Game
                 break;
         }
     }
+
+    private static void takeitem(string item)
+    {
+        JsonElement itemJSON = (JsonElement)Items[item];
+        string realName = itemJSON.GetProperty("real_name").GetString();
+        int cost = itemJSON.GetProperty("cost").GetInt32();
+
+        Inventory[item] = Items[item];
+        PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
+    }
+
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -367,7 +378,6 @@ internal static class Game
             WriteLine("===============================================");
             currentroomjson = (JsonElement)Rooms[MovementSystem.currentRoom];
             int room_actions = currentroomjson.GetProperty("actions").GetInt32();
-
             if (room_actions > 0)
             {
                 if (actionscompleted > room_actions)
@@ -380,9 +390,7 @@ internal static class Game
                 }
             }
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
-
             Write("> ");
-
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');
@@ -447,5 +455,22 @@ internal static class Game
                     break;
             }
         }
+
+        Console.ReadLine();
+    }
+    public static void EndGame()
+    {
+        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you find yourself in?", 30);
+        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
+        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly descending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
+        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
+        scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
+        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
+        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
+        scrolltext("\"It's 4am, go home.\"\r\n", 30);
+        scrolltext("THE NEXT DAY.....\r\n", 75);
+        scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
+        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
+        PropertyDamage.writebill();
     }
 }

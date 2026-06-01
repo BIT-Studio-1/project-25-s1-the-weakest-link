@@ -50,7 +50,7 @@ public class MovementSystem
         return succeeded;
     }
 
-    // Movement system for hallway1
+    // Movement system for hel
     public static bool hallway1(string movement)
     {
         bool succeeded = true;
@@ -121,7 +121,7 @@ public class MovementSystem
             case "main room":
                 if (Game.VinesCut)
                 {
-                    currentRoom = "tabletRoom";
+                    currentRoom = "tabletroom";
                     break;
                 }
                 else
