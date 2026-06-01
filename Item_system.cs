@@ -97,19 +97,19 @@ internal static class Game
             foreach (var property in item.EnumerateObject())
                 scrolltext($"<g>{property.Name}<g>: {property.Value}");
         }
-        else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
         {
             JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
             string description;
             if (
-                (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
-                (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-                (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-                (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
-                (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                (MovementSystem.currentRoom == "smashingroom") ||
-                (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
-            )
+            (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
+           (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
+            (MovementSystem.currentRoom == "smashingroom") ||
+            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
+        )
             {
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             }
@@ -261,7 +261,7 @@ internal static class Game
         else scrolltext("You can't do that right now");
     }
     public static void loot()
-        {
+    {
         switch (MovementSystem.currentRoom)
         {
             case "tabletroom":
@@ -383,7 +383,7 @@ internal static class Game
 
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
-            string[] input = inputString.Split(' ');
+            input = inputString.Split(' ');
             switch (input[0])
             {
                 case "help":
@@ -445,5 +445,22 @@ internal static class Game
                     break;
             }
         }
+
+        Console.ReadLine();
+    }
+    public static void EndGame()
+    {
+        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you find yourself in?", 30);
+        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
+        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly descending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
+        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
+        scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
+        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
+        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
+        scrolltext("\"It's 4am, go home.\"\r\n", 30);
+        scrolltext("THE NEXT DAY.....\r\n", 75);
+        scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
+        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
+        PropertyDamage.writebill();
     }
 }
