@@ -83,6 +83,57 @@ internal static class Game
         else
             scrolltext("You don't have any items");
         }
+    public static void inspect(string[] input, Dictionary<string, object> Rooms, Dictionary<string, object> Items, int actionscompleted) 
+    {
+        if (input.Length > 1 && Inventory.ContainsKey(input[1]))
+        {
+            var item = (JsonElement)Items[input[1]];
+            foreach (var property in item.EnumerateObject())
+                scrolltext($"<g>{property.Name}<g>: {property.Value}");
+        }
+        else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        {
+            JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
+            string description;
+            if (
+                (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+                (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
+                (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+                (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+                (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
+                (MovementSystem.currentRoom == "smashingroom") ||
+                (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
+            )
+            {
+                description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
+            }
+            else
+            {
+                description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
+            }
+            scrolltext(description);
+
+            if (room.TryGetProperty("features", out JsonElement featuresElement))
+            {
+                foreach (var features in room.GetProperty("features").EnumerateArray())
+                {
+                    foreach (var feature in featuresElement.EnumerateArray())
+                    {
+                        string featureStr = feature.GetString() ?? throw new ArrayTypeMismatchException($"A feature in {MovementSystem.currentRoom} is not a string");
+                        if (Inventory.ContainsKey(featureStr))
+                            break;
+                        else
+                            scrolltext($"You feel: {featureStr}");
+                    }
+                }
+            }
+        }
+        else
+        {
+            scrolltext("You don't have that item");
+        }
+        actionscompleted++;
+    }
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -93,7 +144,7 @@ internal static class Game
 
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
 
-        int actionsCompleted = 0;
+        int actionscompleted = 0;
         bool condition = true, secretsenabled = false;
         while (condition == true)
         {
@@ -103,12 +154,12 @@ internal static class Game
 
             if (room_actions > 0)
             {
-                if (actionsCompleted > room_actions)
+                if (actionscompleted > room_actions)
                     condition = false;
                 {
-                    if (actionsCompleted > room_actions / 2 && actionsCompleted < room_actions)
+                    if (actionscompleted > room_actions / 2 && actionscompleted < room_actions)
                         scrolltext("You hear something loud approaching");
-                    if (actionsCompleted >= room_actions - 1)
+                    if (actionscompleted >= room_actions - 1)
                         scrolltext("You should move on");
                 }
             }
@@ -130,54 +181,7 @@ internal static class Game
                     inventory();
                     break;
                 case "inspect":
-                    if (input.Length > 1 && Inventory.ContainsKey(input[1]))
-                    {
-                        var item = (JsonElement)Items[input[1]];
-                        foreach (var property in item.EnumerateObject())
-                            scrolltext($"<g>{property.Name}<g>: {property.Value}");
-                    }
-                    else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
-                    {
-                        JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
-                        string description;
-                        if (
-                            (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
-                            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-                            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-                            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
-                            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                            (MovementSystem.currentRoom == "smashingroom") ||
-                            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
-                        )
-                        {
-                            description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
-                        }
-                        else
-                        {
-                            description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-                        }
-                        scrolltext(description);
-
-                        if (room.TryGetProperty("features", out JsonElement featuresElement))
-                        {
-                            foreach (var features in room.GetProperty("features").EnumerateArray())
-                            {
-                                foreach (var feature in featuresElement.EnumerateArray())
-                                {
-                                    string featureStr = feature.GetString() ?? throw new ArrayTypeMismatchException($"A feature in {MovementSystem.currentRoom} is not a string");
-                                    if (Inventory.ContainsKey(featureStr))
-                                        break;
-                                    else
-                                        scrolltext($"You feel: {featureStr}");
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        scrolltext("You don't have that item");
-                    }
-                    actionsCompleted++;
+                    inspect(input, Rooms, Items, actionscompleted);
                     break;
                 case "stats":
                     scrolltext($"You have {PropertyDamage.totalcost} EXP");
@@ -246,7 +250,7 @@ internal static class Game
                             if (Rooms.ContainsKey(input[1]))
                             {
                                 scrolltext($"You are now in: {MovementSystem.currentRoom}");
-                                actionsCompleted = 0;
+                                actionscompleted = 0;
                             }
                         }
                         else
@@ -396,7 +400,7 @@ internal static class Game
                     bool movementSucceeded = MovementSystem.move(inputString);
                     if (movementSucceeded)
                     {
-                        actionsCompleted = 0;
+                        actionscompleted = 0;
                         scrolltext("You move....");
                     }
                     break;
