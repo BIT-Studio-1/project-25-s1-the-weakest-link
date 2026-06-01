@@ -1,5 +1,6 @@
 namespace AwesomeGame;
 
+// Class containing all code for moving between rooms, 
 public class MovementSystem
 {
     // Assigns string "startroom" to the currentRoom variable
@@ -25,7 +26,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a tablet.");
+                    Game.scrolltext("You do not have a tablet.");
                     succeeded = false;
                     break;
                 }
@@ -82,7 +83,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("this door is sealed with some kind of dark magic, you will need some sort of artifact to access it");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it");
                     succeeded = false;
                 }
                 break;
@@ -169,7 +170,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a key.");
+                    Game.scrolltext("You do not have a key.");
                     succeeded = false;
                     break;
                 }
@@ -198,7 +199,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("you hear the lurker in this room, you shouldn't go in");
+                    Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
                 }
                     break;
             default: 
@@ -240,7 +241,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a tablet");
+                    Game.scrolltext("You do not have a tablet");
                     succeeded = false;
                 }
                 break;
@@ -251,7 +252,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("You do not have a tablet.");
+                    Game.scrolltext("You do not have a tablet.");
                     succeeded = false;
                 }
                 break;
@@ -351,7 +352,7 @@ public class MovementSystem
                 currentRoom = "hallway3";
                 break;
             case "side entrance":
-                Console.WriteLine("smashingroom");
+                Game.scrolltext("The door locked behind you.");
                 break;
             default:
                 succeeded = false;
