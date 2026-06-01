@@ -367,13 +367,9 @@ internal static class Game
                 }
             }
             scrolltext("(Input <g>help<g> for a current list of actions)", 10);
-<<<<<<< HEAD
 
             Write("> ");
 
-=======
-            Write("Input: ");
->>>>>>> 63a511c63361f116de89375f0ac56a43a33db503
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             string[] input = inputString.Split(' ');
