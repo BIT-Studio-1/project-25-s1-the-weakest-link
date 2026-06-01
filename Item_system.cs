@@ -445,8 +445,6 @@ internal static class Game
                     break;
             }
         }
-
-        Console.ReadLine();
     }
     public static void EndGame()
     {
@@ -462,5 +460,7 @@ internal static class Game
         scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
         scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
         PropertyDamage.writebill();
+
+        Console.ReadLine();
     }
 }
