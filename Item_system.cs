@@ -97,15 +97,15 @@ internal static class Game
             foreach (var property in item.EnumerateObject())
                 scrolltext($"<g>{property.Name}<g>: {property.Value}");
         }
-        else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
             JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
             string description;
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-           (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom") ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
