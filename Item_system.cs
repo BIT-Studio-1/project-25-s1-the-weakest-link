@@ -97,19 +97,19 @@ internal static class Game
             foreach (var property in item.EnumerateObject())
                 scrolltext($"<g>{property.Name}<g>: {property.Value}");
         }
-        else if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
+        if (input.Length > 1 && input[1] == "room") //this looks for the word 'room' in the player's command and then inspects the room
         {
             JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
             string description;
             if (
-                (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
-                (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-                (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-                (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
-                (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-                (MovementSystem.currentRoom == "smashingroom") ||
-                (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
-            )
+            (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
+           (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
+            (MovementSystem.currentRoom == "smashingroom") ||
+            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst)
+        )
             {
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             }
@@ -261,7 +261,7 @@ internal static class Game
         else scrolltext("You can't do that right now");
     }
     public static void loot()
-        {
+    {
         switch (MovementSystem.currentRoom)
         {
             case "tabletroom":
@@ -372,7 +372,7 @@ internal static class Game
 
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
-            string[] input = inputString.Split(' ');
+            input = inputString.Split(' ');
             switch (input[0])
             {
                 case "help":
