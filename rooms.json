@@ -1,10 +1,10 @@
 {
-    "startroom": {
-        "actions": 3,
-        "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
-        "description2": "This is a large room with several long tables and chairs all around you, maybe this is some sort of eating hall? \n there are three doors you could find while stumbling about \n one to the west that leads to what seems to be a side room \n a door that won't budge to the south, \n and a door on the east side of the room that leads out",
-        "features": ["book"]
-    },
+  "startroom": {
+    "actions": 3,
+    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
+    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
+    "features": [ "book" ]
+  },
 
   "sideroom": {
     "actions": 0,
@@ -25,7 +25,7 @@
   "vinesroom": {
     "actions": 0,
     "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown doorway choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in",
-    "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the<g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in"
   },
   "tabletroom": {
     "actions": 4,
@@ -37,7 +37,7 @@
   "hallway2": {
     "actions": 0,
     "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest as the darkness presses in around you. For a moment, your fear gets the best of you.\nYou consider <g>go back<g> to the first hallway but you push on.\n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover yet another <g>side entrance<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>end door<g>, silent and unmoving in the darkness.\nThese doors seem to be sealed by the same dark magic as the terraced chamber.\nThe passage seems to continue further west around a <g>turn corner<g>, where the darkness feels heavier.\nAhead, something breathes heavily in the dark. A presence, its movements uneven and unnatural.\nWhatever the creature is, it is blocking the only way forward",
-    "description2": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem sealed \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could go back up the corridor \nbut you hear something lurking and grumbling further down the corridor, best not to continue that way"
+    "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest as the darkness presses in around you. For a moment, your fear gets the best of you.\nYou consider <g>go back<g> to the first hallway but you push on.\n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover yet another <g>side entrance<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>end door<g>, silent and unmoving in the darkness.\nThese doors seem to be sealed by the same dark magic as the terraced chamber.\nThe passage seems to continue further west around a <g>turn corner<g>"
   },
 
   "hallway3": {
@@ -52,8 +52,8 @@
 
   "renovatedroom": {
     "actions": 0,
-    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams jutting from the walls like ribs.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\n Must be a war hammer you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left mid-repair.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
-    "description2": "",
+    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams jutting from the walls like ribs.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\n Must be a <g>war hammer<g> you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left mid-repair.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
+    "description2": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams jutting from the walls like ribs.\nIt feels like tools or maybe weapons are scattered across the floor.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left mid-repair.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
     "features": [ "hammer" ]
   },
 
@@ -73,12 +73,12 @@
     "eyesroom": {
         "actions": 0,
         "description": "You find yourself in another terraced chamber \nstrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above \nthere are two doors in this chamber, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor \nyou are in immediate danger and need to <g>attack<g>",
-        "description2": "You are in a large terraced chamber filled with the remains of strange monliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor"
+        "description2": "You are in a large terraced chamber filled with the remains of strange monoliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor"
     },
 
   "keyroom": {
     "actions": 0,
-    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <g>key<g>",
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <g>key<g>\nTo exit this room you must return through the <g>side door<g>",
     "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.",
     "features": [ "key" ]
   },
