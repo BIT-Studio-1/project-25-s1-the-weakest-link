@@ -133,21 +133,6 @@ internal static class Game
             else
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
             scrolltext(description);
-
-            if (room.TryGetProperty("features", out JsonElement featuresElement))
-            {
-                foreach (var features in room.GetProperty("features").EnumerateArray())
-                {
-                    foreach (var feature in featuresElement.EnumerateArray())
-                    {
-                        string featureStr = feature.GetString() ?? throw new ArrayTypeMismatchException($"A feature in {MovementSystem.currentRoom} is not a string");
-                        if (Inventory.ContainsKey(featureStr))
-                            break;
-                        else
-                            scrolltext($"You feel: <y>{featureStr}<y>");
-                    }
-                }
-            }
         }
         else
             scrolltext("You don't have that item");
