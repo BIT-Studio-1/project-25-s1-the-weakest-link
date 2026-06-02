@@ -1,4 +1,3 @@
-using static AwesomeGame.Game;
 namespace AwesomeGame;
 
 // Class containing all code for moving between rooms, 
