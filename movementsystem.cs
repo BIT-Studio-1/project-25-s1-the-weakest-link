@@ -1,3 +1,4 @@
+using static AwesomeGame.Game;
 namespace AwesomeGame;
 
 // Class containing all code for moving between rooms, 
@@ -153,7 +154,7 @@ public class MovementSystem
                 currentRoom = "hallway2";
                 }
                 break;
-            default: 
+            default:
                 succeeded = false;
                 break;
         }
@@ -255,7 +256,7 @@ public class MovementSystem
                 break;
             default: 
                 succeeded = false;
-                break;     
+                break;
         }
         return succeeded;
     }
@@ -289,8 +290,8 @@ public class MovementSystem
                 }
                 break;
             default:
-            succeeded = false;
-            break;
+                succeeded = false;
+                break;
         }
         return succeeded;
     }

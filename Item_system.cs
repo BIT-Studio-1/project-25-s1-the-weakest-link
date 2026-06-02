@@ -122,7 +122,6 @@ internal static class Game
             string description;
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
-            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
             (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
