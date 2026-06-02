@@ -6,15 +6,15 @@
         "features": ["book"]
     },
 
-    "sideroom": {
-        "actions": 0,
-        "description": "You are in a small side chamber of unknown purpose with only one door back to the previous room \n this could be a good place to hide"
-    },
+  "sideroom": {
+    "actions": 0,
+    "description": "You find yourself in a small side chamber of unknown purpose. The room is cramped and quiet, with bare walls closing in around you.\nThe silence here feels protective rather than threatening, making this seem like a good place to hide should danger draw near.\nThe only exit is the <g>side room<g> door, leading back to the chamber from which you came"
+  },
 
-    "hallway1": {
-        "actions": 0,
-        "description": "You are at one end of a corridor that probably connects most of the rooms in the dungeon \n you can't tell where it ends, but you can feel four doors near you \n one to the west back the way you came \n another door to the south of you \n a third door north of you \n and a door that won't budge to the east \n or you could continue further down the corridor'"
-    },
+  "hallway1": {
+    "actions": 0,
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover several doorways nearby.\nOn the north wall is the <g>main entrance<g> leading back to the dining hall, \nFurther along the north wall you feel a door to another <g>small room<g>.\nNext to the <g>small room<g> is a <g>locked door<g> that is sealed shut.\nTo the north is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue down the corridor toward the <g>turn corner<g>, where the passage disappears into darkness"
+  },
 
     "kniferoom": {
         "actions": 0,
@@ -22,11 +22,11 @@
         "features": ["dagger"]
     },
 
-    "vinesroom": {
-        "actions": 0,
-        "description": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east that is overgrown and blocked by vines \n you will need to cut these vines to get through it",
-        "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
-    },
+  "vinesroom": {
+    "actions": 0,
+    "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown doorway choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in",
+    "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
+  },
     "tabletroom": {
         "actions": 4,
         "description": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n You feel a corpse placed half way up the steps, still warm",
