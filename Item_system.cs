@@ -18,16 +18,16 @@ internal static class Game
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
-        var colorMap = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
-{
-    { "g", ConsoleColor.Green },
-    { "r", ConsoleColor.Red },
-    { "b", ConsoleColor.Blue },
-    { "y", ConsoleColor.Yellow },
-};
+        var colour = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "g", ConsoleColor.Green },
+            { "r", ConsoleColor.Red },
+            { "b", ConsoleColor.Blue },
+            { "y", ConsoleColor.Yellow },
+        };
         var matches = Regex.Matches(Text, @"<(\w)>(.*?)<\1>");
         bool skipped = false;
-        void Writeportion(string portion, ConsoleColor? color = null)
+        void Writeportion(string portion, ConsoleColor? colour = null)
         {
             for (int i = 0; i < portion.Length; i++)
             {
@@ -37,8 +37,8 @@ internal static class Game
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
-                if (color.HasValue)
-                    Console.ForegroundColor = color.Value;
+                if (colour.HasValue)
+                    Console.ForegroundColor = colour.Value;
                 if (skipped)
                 {
                     Console.Write(portion.Substring(i));
@@ -56,7 +56,7 @@ internal static class Game
                 Writeportion(Text.Substring(lastIndex, match.Index - lastIndex));
             string tag = match.Groups[1].Value;
             string content = match.Groups[2].Value;
-            if (colorMap.TryGetValue(tag, out var color))
+            if (colour.TryGetValue(tag, out var color))
                 Writeportion(content.ToUpper(), color);
             else
                 Writeportion(content);
@@ -96,7 +96,7 @@ internal static class Game
         {
             scrolltext("You have:");
             foreach (KeyValuePair<string, object> Inv in Inventory)
-                scrolltext($"<g>{Inv.Key}<g>");
+                scrolltext($"<y>{Inv.Key}<y>");
         }
         else
             scrolltext("You don't have any items");
