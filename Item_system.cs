@@ -23,7 +23,7 @@ internal static class Game
     add to it as you please
     */
     {
-        var colour = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
+        var colour = new Dictionary<string, ConsoleColor>
         {
             { "g", ConsoleColor.Green },
             { "r", ConsoleColor.Red },
@@ -299,7 +299,7 @@ internal static class Game
                     {
                         takeitem("tablet");
                         takeitem("coint");
-                        scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
+                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                     }
                 }
                 break;
@@ -308,12 +308,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("dagger"))
                     {
-                        scrolltext("You already have the dagger.");
+                        scrolltext("You already have the <y>dagger<y>.");
                     }
                     else
                     {
                         takeitem("dagger");
-                        scrolltext($"You take a dagger from its position on the bench");
+                        scrolltext($"You take a <y>dagger<y> from its position on the bench");
                     }
                 }
                 break;
@@ -327,7 +327,7 @@ internal static class Game
                     else
                     {
                         takeitem("book");
-                        scrolltext($"You take the book from the table");
+                        scrolltext($"You take the <y>book<y> from the table");
                     }
                 }
                 break;
@@ -336,12 +336,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("hammer"))
                     {
-                        scrolltext("You already have the hammer.");
+                        scrolltext("You already have the <y>hammer<y>.");
                     }
                     else
                     {
                         takeitem("hammer");
-                        scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
+                        scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting");
                     }
                 }
 
@@ -351,12 +351,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("key"))
                     {
-                        scrolltext("You already have the key.");
+                        scrolltext("You already have the <y>key<y>.");
                     }
                     else
                     {
                         takeitem("key");
-                        scrolltext($"You take the key");
+                        scrolltext($"You take the <y>key<y>");
                     }
                 }
                 break;
