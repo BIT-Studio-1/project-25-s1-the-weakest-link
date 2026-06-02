@@ -27,16 +27,16 @@
     "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown doorway choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in",
     "description2": "You are in a small room tight enough to reach both walls with your arms out, with two doors \n one back to the corridor to the south \n and one to the east with the remains of the vines you cut scattered across the floor nearby"
   },
-    "tabletroom": {
-        "actions": 4,
-        "description": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n You feel a corpse placed half way up the steps, still warm",
-        "description2": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n The corpse is still present, now lacking what you took",
-        "features": ["corpse"]
-    },
+  "tabletroom": {
+    "actions": 4,
+    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you, forming a terraced chamber that climbs toward the far side of the room.\nAs you carefully make your way forward, your foot catches on something. Reaching down, your hands find a body sprawled across the steps.\nThe body lies completely still.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of useful supplies is difficult to ignore.\n The <g>locked door<g> to your east will not open. Whether it is locked or sealed by some ancient rune, you cannot tell",
+    "description2": "This room is formed of a terraced design, steps leading up and away to the far side of the room \n The corpse is still present, now lacking what you took",
+    "features": [ "corpse" ]
+  },
 
   "hallway2": {
-    "actions": 0, 
-    "description": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem sealed \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could also continue further down or back up the corridor'",
+    "actions": 0,
+    "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest as the darkness presses in around you. For a moment, your fear gets the best of you.\nYou consider <g>go back<g> to the first hallway but you push on.\n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover yet another <g>side entrance<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>end door<g>, silent and unmoving in the darkness.\nThese doors seem to be sealed by the same dark magic as the terraced chamber.\nThe passage seems to continue further west around a <g>turn corner<g>, where the darkness feels heavier.\nAhead, something breathes heavily in the dark. A presence, its movements uneven and unnatural.\nWhatever the creature is, it is blocking the only way forward",
     "description2": "You are somewhere in the middle of the corridor, there doesn't seem to be anything immediately around you \n but there are four doors here, all of them seem sealed \none at the northern end of this section \none to the east \none to the west that seems different from the others \nand one to the south \nyou could go back up the corridor \nbut you hear something lurking and grumbling further down the corridor, best not to continue that way"
   },
 
@@ -52,7 +52,7 @@
 
   "renovatedroom": {
     "actions": 0,
-    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams jutting from the walls like ribs.\nTools and loose materials are scattered across the floor. The air carries fresh paint and wet plaster, but beneath it lingers something older and stale, as if the room has been stripped open and left mid-repair.",
+    "description": "You find yourself in an unfinished room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams jutting from the walls like ribs.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\n Must be a war hammer you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left mid-repair.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
     "description2": "",
     "features": [ "hammer" ]
   },
