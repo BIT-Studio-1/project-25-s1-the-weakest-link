@@ -1,36 +1,36 @@
 {
-  "<y>dagger<y>": {
+  "dagger": {
     "description": "A sharp blade, you can feel that too much pressure would cut your finger.",
     "attack": 10,
     "weight": 100,
     "real_name": "knife from the kitchen",
     "cost": 5
   },
-  "<y>book<y>": {
+  "book": {
     "description": "A book, the cover is made out of some sort of card. You tried to read it but you're blind",
     "weight": 2000,
     "real_name": "student's coursebook",
     "cost": 70
   },
-  "<y>tablet<y>": {
+  "tablet": {
     "description": "A strange tablet small enough to fit in the palm of your hand, you aren't sure why but you feel like it might open some doors",
     "weight": 10,
     "real_name": "ID card from sleeping student",
     "cost": 5
   },
-  "<y>coins<y>": {
+  "coins": {
     "description": "A pile of coins looted from an unfortunate soul that was trapped here with you, this could be valuable",
     "weight": 100,
     "real_name": "student's money",
     "cost": 4
   },
-  "<y>key<y>": {
+  "key": {
     "description": "A smooth key, made of an unknown medal",
     "weight": 10,
     "real_name": "maintenance key",
     "cost": 13
   },
-  "<y>hammer<y>": {
+  "hammer": {
     "description": "A hammer, a strangely familiar object for where you find yourself",
     "weight": 2500,
     "real_name": "hammer",
