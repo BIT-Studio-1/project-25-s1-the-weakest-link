@@ -15,8 +15,13 @@ internal static class Game
     public static bool condition = true, secretsenabled = false;
     public static JsonElement currentroomjson;
     static string[] input;
-    //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
+    /*  
+    this sucks and i hate it but it works
+    its responsible for printing text in colour and in caps when important, it does this by using tags <g> similar to html
+    it detects a specific string of text in input via regex and then colours that specific piece in a colour determined by the dictionary of colours
+    add to it as you please
+    */
     {
         var colour = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
         {
