@@ -111,9 +111,10 @@ internal static class Game
         if (input.Length > 1 && Inventory.ContainsKey(input[1]))
         {
             var item = (JsonElement)Items[input[1]];
-            string itemDescription;
-            itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for {item}");
-            scrolltext($"<g>{item}<g>: {itemDescription}");
+            string itemDescription, itemName;
+            itemName = item.GetProperty("name").GetString() ?? throw new MissingFieldException($"items.json has no name for the requested item");
+            itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
+            scrolltext($"<g>{itemName}<g>: {itemDescription}");
         }
         else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
