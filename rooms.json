@@ -18,14 +18,14 @@
 
   "kniferoom": {
     "actions": 0,
-    "description": "You are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+    "description": "You are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back through the <g>main entrance<g>",
     "features": [ "dagger" ]
   },
 
   "vinesroom": {
     "actions": 0,
     "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown doorway choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in",
-    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the<g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in"
+    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the <g>side entrance<g>.\nTo the south is the <g>small room<g> door, leading back the way you came in"
   },
   "tabletroom": {
     "actions": 4,

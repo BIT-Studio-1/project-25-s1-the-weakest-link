@@ -120,7 +120,6 @@ internal static class Game
             string description;
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
-            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
             (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
             (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
@@ -298,7 +297,7 @@ internal static class Game
                     else
                     {
                         takeitem("tablet");
-                        takeitem("coint");
+                        takeitem("coins");
                         scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                     }
                 }

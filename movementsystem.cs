@@ -1,3 +1,4 @@
+using static AwesomeGame.Game;
 namespace AwesomeGame;
 
 // Class containing all code for moving between rooms, 
@@ -115,10 +116,10 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "main entrance":
+            case "small room":
                 currentRoom = "hallway1";
                 break;
-            case "main room":
+            case "side entrance":
                 if (Game.VinesCut)
                 {
                     currentRoom = "tabletroom";
@@ -147,9 +148,12 @@ public class MovementSystem
                 currentRoom = "vinesroom";
                 break;
             case "main entrance":
-                currentRoom = "hallway2";
+                if (Inventory.ContainsKey("tablet"))
+                    currentRoom = "locked door";
+                else
+                    scrolltext("this door is locked, you need something to unlock it");
                 break;
-            default: 
+            default:
                 succeeded = false;
                 break;
         }
@@ -201,8 +205,8 @@ public class MovementSystem
                 {
                     Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
                 }
-                    break;
-            default: 
+                break;
+            default:
                 succeeded = false;
                 break;
         }
@@ -221,9 +225,9 @@ public class MovementSystem
             case "turn corner":
                 currentRoom = "hallway4";
                 break;
-            default: 
+            default:
                 succeeded = false;
-                break;     
+                break;
         }
         return succeeded;
     }
@@ -257,8 +261,8 @@ public class MovementSystem
                 }
                 break;
             default:
-            succeeded = false;
-            break;
+                succeeded = false;
+                break;
         }
         return succeeded;
     }
