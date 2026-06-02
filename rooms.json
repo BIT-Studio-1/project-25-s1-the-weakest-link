@@ -33,7 +33,6 @@
     "description2": "You find yourself in a room of unusual design. A series of wide steps rise away from you, forming a terraced chamber that climbs toward the far side of the room.\nAs you carefully make your way forward, your foot catches on something. Reaching down, your hands find a body sprawled across the steps.\nThe body is still there.\nits pockets now empty.\n The <g>locked door<g> to your east will not open.\n perhaps something you found could break the magic seal",
     "features": [ "corpse" ]
   },
-  =-
   "hallway2": {
     "actions": 0,
     "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on \n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nexcept for the glass door, these doors seem to be sealed by the same dark magic as many others\nyou could go <g>up<g> the corridor\nbut around the corner the other way there seems to be something lurking and grumbling in the darkness, blocking the way <g>down<g> the corridor",
@@ -57,12 +56,12 @@
     "features": [ "hammer" ]
   },
 
-    "spidersroom": {
-        "actions": 0,
-        "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>",
-        "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open.",
-        "features": ["sac"]
-    },
+  "spidersroom": {
+    "actions": 0,
+    "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>",
+    "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they kill you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open.",
+    "features": [ "sac" ]
+  },
 
     "smashingroom": {
         "actions": 0,
@@ -70,11 +69,11 @@
         "description2": "You can hear the lurker coming from the corridor, you should leave out the <g>side entrance<g>"
     },
 
-    "eyesroom": {
-        "actions": 0,
-        "description": "You find yourself in another terraced chamber \nstrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above \nthere are two doors in this chamber, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor \nyou are in immediate danger and need to <g>attack<g>",
-        "description2": "You are in a large terraced chamber filled with the remains of strange monoliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor"
-    },
+  "eyesroom": {
+    "actions": 0,
+    "description": "You find yourself in another terraced chamber \nstrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above \nthere are two doors in this chamber, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor \nyou are in immediate danger and need to <g>attack<g>",
+    "description2": "You are in a large terraced chamber filled with the remains of strange monoliths you have smashed \nyou swear these bore glowing red eyes, but darkness has returned... \nyou are no longer certain what was real and what wasn't, or isn't \n\nthere are two doors, one <g>side entrance<g> to the other room \nand a <g>main entrance<g> out to the corridor"
+  },
 
   "keyroom": {
     "actions": 0,

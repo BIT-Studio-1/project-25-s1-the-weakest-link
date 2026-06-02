@@ -4,7 +4,7 @@
     "attack": 10,
     "weight": 100,
     "real_name": "knife from the kitchen",
-    "cost":  5
+    "cost": 5
   },
   "book": {
     "description": "A book, the cover is made out of some sort of card. You tried to read it but you're blind",
@@ -28,7 +28,7 @@
     "description": "A smooth key, made of an unknown medal",
     "weight": 10,
     "real_name": "maintenance key",
-    "cost":  13
+    "cost": 13
   },
   "hammer": {
     "description": "A hammer, a strangely familiar object for where you find yourself",

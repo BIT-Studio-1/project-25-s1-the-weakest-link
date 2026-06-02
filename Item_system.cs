@@ -15,45 +15,62 @@ internal static class Game
     public static bool condition = true, secretsenabled = false;
     public static JsonElement currentroomjson;
     static string[] input;
-    //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
+    /*  
+    this sucks and i hate it but it works
+    its responsible for printing text in colour and in caps when important, it does this by using tags <g> similar to html
+    it detects a specific string of text in input via regex and then colours that specific piece in a colour determined by the dictionary of colours
+    add to it as you please
+    */
     {
-        var matches = Regex.Matches(Text, @"<g>(.*?)<g>");
+        var colour = new Dictionary<string, ConsoleColor>
+        {
+            { "g", ConsoleColor.Green },
+            { "r", ConsoleColor.Red },
+            { "b", ConsoleColor.Blue },
+            { "y", ConsoleColor.Yellow },
+        };
+        var matches = Regex.Matches(Text, @"<(\w)>(.*?)<\1>");
         bool skipped = false;
-        void Writeportion(string portion, ConsoleColor? color = null)
+        void Writeportion(string portion, ConsoleColor? colour = null)
         {
             for (int i = 0; i < portion.Length; i++)
             {
-                if (!skipped && KeyAvailable)
+                if (!skipped && Console.KeyAvailable)
                 {
-                    var key = ReadKey(true).Key;
+                    var key = Console.ReadKey(true).Key;
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
-                if (color.HasValue) ForegroundColor = color.Value;
+                if (colour.HasValue)
+                    Console.ForegroundColor = colour.Value;
                 if (skipped)
                 {
-                    Write(portion.Substring(i));
+                    Console.Write(portion.Substring(i));
                     break;
                 }
-                Write(portion[i]);
+                Console.Write(portion[i]);
                 Thread.Sleep(speed);
             }
-            ResetColor();
+            Console.ResetColor();
         }
-
         int lastIndex = 0;
         foreach (Match match in matches)
         {
             if (match.Index > lastIndex)
                 Writeportion(Text.Substring(lastIndex, match.Index - lastIndex));
-            Writeportion(match.Groups[1].Value.ToUpper(), ConsoleColor.Green);
+            string tag = match.Groups[1].Value;
+            string content = match.Groups[2].Value;
+            if (colour.TryGetValue(tag, out var color))
+                Writeportion(content.ToUpper(), color);
+            else
+                Writeportion(content);
+            lastIndex = match.Index + match.Length;
             lastIndex = match.Index + match.Length;
         }
         if (lastIndex < Text.Length)
             Writeportion(Text.Substring(lastIndex));
-
-        WriteLine();
+        Console.WriteLine();
     }
     public static void help()
     {
@@ -84,7 +101,7 @@ internal static class Game
         {
             scrolltext("You have:");
             foreach (KeyValuePair<string, object> Inv in Inventory)
-                scrolltext($"<g>{Inv.Key}<g>");
+                scrolltext($"<y>{Inv.Key}<y>");
         }
         else
             scrolltext("You don't have any items");
@@ -110,13 +127,9 @@ internal static class Game
             (MovementSystem.currentRoom == "smashingroom") ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed))
-            {
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
-            }
             else
-            {
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-            }
             scrolltext(description);
 
             if (room.TryGetProperty("features", out JsonElement featuresElement))
@@ -129,15 +142,13 @@ internal static class Game
                         if (Inventory.ContainsKey(featureStr))
                             break;
                         else
-                            scrolltext($"You feel: {featureStr}");
+                            scrolltext($"You feel: <y>{featureStr}<y>");
                     }
                 }
             }
         }
         else
-        {
             scrolltext("You don't have that item");
-        }
         actionscompleted++;
     }
     public static void stats()
@@ -288,7 +299,7 @@ internal static class Game
                     {
                         takeitem("tablet");
                         takeitem("coint");
-                        scrolltext($"From the corpse you loot some sort of tablet, and an array of coins.");
+                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                     }
                 }
                 break;
@@ -297,12 +308,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("dagger"))
                     {
-                        scrolltext("You already have the dagger.");
+                        scrolltext("You already have the <y>dagger<y>.");
                     }
                     else
                     {
                         takeitem("dagger");
-                        scrolltext($"You take a dagger from its position on the bench");
+                        scrolltext($"You take a <y>dagger<y> from its position on the bench");
                     }
                 }
                 break;
@@ -316,7 +327,7 @@ internal static class Game
                     else
                     {
                         takeitem("book");
-                        scrolltext($"You take the book from the table");
+                        scrolltext($"You take the <y>book<y> from the table");
                     }
                 }
                 break;
@@ -325,12 +336,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("hammer"))
                     {
-                        scrolltext("You already have the hammer.");
+                        scrolltext("You already have the <y>hammer<y>.");
                     }
                     else
                     {
                         takeitem("hammer");
-                        scrolltext($"You take the hammer from its place on the ground, it is cumbersome but comforting");
+                        scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting");
                     }
                 }
 
@@ -340,12 +351,12 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("key"))
                     {
-                        scrolltext("You already have the key.");
+                        scrolltext("You already have the <y>key<y>.");
                     }
                     else
                     {
                         takeitem("key");
-                        scrolltext($"You take the key");
+                        scrolltext($"You take the <y>key<y>");
                     }
                 }
                 break;
@@ -354,7 +365,6 @@ internal static class Game
                 break;
         }
     }
-
     private static void takeitem(string item)
     {
         JsonElement itemJSON = (JsonElement)Items[item];
@@ -364,7 +374,26 @@ internal static class Game
         Inventory[item] = Items[item];
         PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
     }
+    public static void EndGame()
+    {
+        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you find yourself in?", 30);
+        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
+        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly descending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
+        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
+        scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
+        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
+        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
+        scrolltext("\"It's 4am, go home.\"\r\n", 30);
+        scrolltext("THE NEXT DAY.....\r\n", 75);
+        scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
+        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
+        PropertyDamage.writebill();
+        ReadLine();
+        Thread.Sleep(60000);
+        Clear();
 
+        condition = true;
+    }
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
@@ -445,6 +474,10 @@ internal static class Game
                 case "loot":
                     loot();
                     break;
+                case "endgame":
+                    if (secretsenabled == true)
+                        EndGame();
+                    break;
                 default:
                     bool movementSucceeded = MovementSystem.move(inputString);
                     if (movementSucceeded)
@@ -455,22 +488,6 @@ internal static class Game
                     break;
             }
         }
-    }
-    public static void EndGame()
-    {
-        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you find yourself in?", 30);
-        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
-        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly descending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
-        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
-        scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
-        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
-        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
-        scrolltext("\"It's 4am, go home.\"\r\n", 30);
-        scrolltext("THE NEXT DAY.....\r\n", 75);
-        scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
-        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
-        PropertyDamage.writebill();
-
-        Console.ReadLine();
+        scrolltext("game is over");
     }
 }
