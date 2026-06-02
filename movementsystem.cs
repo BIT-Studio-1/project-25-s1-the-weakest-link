@@ -26,7 +26,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet.");
+                    Game.scrolltext("this door needs a tablet");
                     succeeded = false;
                     break;
                 }
@@ -39,7 +39,7 @@ public class MovementSystem
     public static bool sideroom(string movement)
     {
         bool succeeded = true;
-        if (movement == "start room")
+        if (movement == "door")
         {
             currentRoom = "startroom";
         }
@@ -73,7 +73,7 @@ public class MovementSystem
             case "open room":
                 currentRoom = "kniferoom";
                 break;
-            case "south":
+            case "down":
                 currentRoom = "hallway2";
                 break;
             case "locked door":
@@ -98,7 +98,7 @@ public class MovementSystem
     public static bool kniferoom(string movement)
     {
         bool succeeded = true;
-        if (movement == "main entrance")
+        if (movement == "doorway")
         {
             currentRoom = "hallway1";
         }
@@ -174,25 +174,19 @@ public class MovementSystem
                     succeeded = false;
                     break;
                 }
-            case "north":
+            case "up":
                 currentRoom = "hallway1";
                 break;
-            case "west":
+            case "down":
                 currentRoom = "hallway3";
                 break;
             case "first door":
                 currentRoom = "renovatedroom";
                 break;
-            case "second door":
+            case "side door":
                 currentRoom = "spidersroom";
                 break;
-            case "go back":
-                currentRoom = "hallway1";
-                break;
-            case "turn corner":
-                currentRoom = "hallway3";
-                break;
-            case "end door":
+            case "fourth door":
                 if (!Game.LurkerMoved)
                 {
                     currentRoom = "smashingroom";
@@ -215,10 +209,10 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "go back":
+            case "up":
                 currentRoom = "hallway2";
                 break;
-            case "turn corner":
+            case "down":
                 currentRoom = "hallway4";
                 break;
             default: 
@@ -234,14 +228,14 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "end door":
+            case "forward door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "startroom";
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet");
+                    Game.scrolltext("This door needs a tablet");
                     succeeded = false;
                 }
                 break;
@@ -252,7 +246,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet.");
+                    Game.scrolltext("This door needs a tablet.");
                     succeeded = false;
                 }
                 break;
@@ -272,8 +266,12 @@ public class MovementSystem
             case "main entrance":
                 currentRoom = "hallway2";
                 break;
-            case "secret door":
-                currentRoom = "eyesroom";
+            case "side door":
+                if (Game.LurkerMoved)
+                {
+                    currentRoom = "eyesroom";
+                }
+                else Console.WriteLine("something feels strange about this door, you can't bring yourself to step through yet");
                 break;
             default:
                 succeeded = false;

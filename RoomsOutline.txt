@@ -17,7 +17,7 @@ stairs			-	exit for the game
 DOOR NAMES:
 from startroom - "side room" (to sideroom), "main entrance" (to hallway1), "second entrance" (to hallway4)
 from sideroom - "start room" (to startroom)
-from hallway1 - "starting room" (to startroom), "small room" (to vinesroom), "open room" (to knife room), "locked door" (to vinesroom), "turn corner" (to hallway2)
+from hallway1 - "starting room" (to startroom), "small room" (to vinesroom), "open room" (to knife room), "locked door" (to tabletroom), "turn corner" (to hallway2)
 from tabletroom - "side entrance" (to vinesroom), "main entrance" (to hallway2)
 from hallway2 - "glass door" (to stairs), "first door" (to renovatedroom), "second door" (to spidersroom), "end door" (to smashingroom), "go back" (to hallway1), "turn corner" (to hallway3)
 from renovatedroom - "side entrance" (to spidersroom), "main entrance" (to hallway2)

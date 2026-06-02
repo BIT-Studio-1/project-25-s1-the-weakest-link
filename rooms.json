@@ -1,24 +1,24 @@
 {
   "startroom": {
     "actions": 3,
-    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
-    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of great dining hall where people once gathered before the darkness claimed it.\nThere are three exits.\nTo the west lies a small <g>side room<g>.(maybe somewhere you could hide?)\nTo the south stands a <g>second entrance<g> that refuses to budge.\nThe <g>main entrance<g> seems to be to your east.\nThe <g>main entrance<g> and <g>second entrance<g> lead into the unknown.",
+    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, perhaps resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east",
+    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, perhaps resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east",
     "features": [ "book" ]
   },
 
   "sideroom": {
     "actions": 0,
-    "description": "You find yourself in a small side chamber of unknown purpose. The room is cramped and quiet, with bare walls closing in around you.\nThe silence here feels protective rather than threatening, making this seem like a good place to hide should danger draw near.\nThe only exit is the <g>side room<g> door, leading back to the chamber from which you came"
+    "description": "You find yourself in a small side chamber of unknown purpose. The room is cramped and quiet\nThe silence here feels protective rather than threatening, making this seem like a good place to hide if you need to\nThe only exit is the <g>door<g>, leading back to the chamber from which you came"
   },
 
   "hallway1": {
     "actions": 0,
-    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover several doorways nearby.\nOn the north wall is the <g>main entrance<g> leading back to the dining hall, \nFurther along the north wall you feel a door to another <g>small room<g>.\nNext to the <g>small room<g> is a <g>locked door<g> that is sealed shut.\nTo the north is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue down the corridor toward the <g>turn corner<g>, where the passage disappears into darkness"
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in\nfurther along the north wall you feel a door to a <g>small room<g>\nnext to this is a <g>locked door<g> that is sealed shut with a strange magic\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness"
   },
 
     "kniferoom": {
         "actions": 0,
-        "description": "You are in a small chamber with shelves along the walls, the floor here is unnaturally smooth \n there are a few knives on one of the shelves, this could be an armoury of some kind \n there is only one door, back into the corridor",
+        "description": "You are in a small chamber with shelves along the walls \nthe room is filled with stale smells that are hard to place\n you feel a <g>dagger<g> on one of the tables there is only one <g>doorway<g>, back into the corridor",
         "features": ["dagger"]
     },
 
@@ -36,8 +36,8 @@
   =-
   "hallway2": {
     "actions": 0,
-    "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest as the darkness presses in around you. For a moment, your fear gets the best of you.\nYou consider <g>go back<g> to the first hallway but you push on.\n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover yet another <g>side entrance<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>end door<g>, silent and unmoving in the darkness.\nThese doors seem to be sealed by the same dark magic as the terraced chamber.\nThe passage seems to continue further west around a <g>turn corner<g>, where the darkness feels heavier.\nAhead, something breathes heavily in the dark. A presence, its movements uneven and unnatural.\nWhatever the creature is, it is blocking the only way forward",
-    "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest as the darkness presses in around you. For a moment, your fear gets the best of you.\nYou consider <g>go back<g> to the first hallway but you push on.\n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover yet another <g>side entrance<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>end door<g>, silent and unmoving in the darkness.\nThese doors seem to be sealed by the same dark magic as the terraced chamber.\nThe passage seems to continue further west around a <g>turn corner<g>"
+    "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on \n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nexcept for the glass door, these doors seem to be sealed by the same dark magic as many others\nyou could go <g>up<g> the corridor\nbut around the corner the other way there seems to be something lurking and grumbling in the darkness, blocking the way <g>down<g> the corridor",
+    "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on \n You discover four doors branching from the passage.The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others \nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nexcept for the glass door, these doors seem to be sealed by the same dark magic as many others\nyou could also go <g>up<g> or <g>down<g> the corridor"
   },
 
   "hallway3": {
@@ -47,7 +47,7 @@
 
   "hallway4": {
     "actions": 0,
-    "description": "You find yourself in the fourth section of the corridor\nIt is quiet and the air is cold and still.\nAt the northern end stands the <g>end door<g>, a heavy door that feels strangely familiar, though your exhausted mind cannot place why.\nTo the east is a <g>side door<g>, slightly ajar\nThe silence here feels unnatural, broken only by the distant hum of the dungeon around you"
+    "description": "You find yourself at another end of the corridor\nIt is quiet and the air is cold and still.\nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>side door<g>, slightly ajar\nThe silence here feels unnatural, broken only by the distant hum of the dungeon around you"
   },
 
   "renovatedroom": {
@@ -66,8 +66,8 @@
 
     "smashingroom": {
         "actions": 0,
-        "description": "You find yourself in a large, mostly open chamber, with tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange obelisk sculptures in rows, \nif you smashed something in here it would get the lurker's attention \nthere are two doors here, one to the corridor at the north end \nand another door at the west end of the chamber",
-        "description2": "You can hear the lurker coming from the corridor, you should leave out the west door"
+        "description": "You find yourself in a large, mostly open chamber, with tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange monolith sculptures in rows, \nif you were to <g>smash<g> something in here it would get the lurker's attention \nthere are two doors here, the <g>main entrance> to the corridor north of you \nand a <g>side door<g> at the west end of the chamber",
+        "description2": "You can hear the lurker coming from the corridor, you should leave out the <g>side entrance<g>"
     },
 
     "eyesroom": {
