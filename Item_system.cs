@@ -300,6 +300,8 @@ internal static class Game
                         takeitem("tablet");
                         takeitem("coint");
                         scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
+                        Thread.Sleep(500);
+                        scrolltext("you hear a loud roar from the side room you cut your way through earlier, and loud angry footsteps \nthe beast is coming, you need to find a way out of the room NOW");
                     }
                 }
                 break;

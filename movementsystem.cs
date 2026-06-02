@@ -115,10 +115,10 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "main entrance":
+            case "corridor":
                 currentRoom = "hallway1";
                 break;
-            case "main room":
+            case "side entrance":
                 if (Game.VinesCut)
                 {
                     currentRoom = "tabletroom";
@@ -146,8 +146,12 @@ public class MovementSystem
             case "side entrance":
                 currentRoom = "vinesroom";
                 break;
-            case "main entrance":
+            case "locked door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    Game.scrolltext("luckily, the tablet you found broke the seal on the door\n, you run through and quickly shut it behind you before the beast enters the room, you seem to have escaped its wraith for now");
                 currentRoom = "hallway2";
+                }
                 break;
             default: 
                 succeeded = false;
@@ -165,15 +169,14 @@ public class MovementSystem
             case "glass door":
                 if (Game.Inventory.ContainsKey("key"))
                 {
-                    currentRoom = "staircase";
-                    break;
+                    Game.EndGame();
                 }
                 else
                 {
                     Game.scrolltext("You do not have a key.");
                     succeeded = false;
-                    break;
                 }
+                break;
             case "up":
                 currentRoom = "hallway1";
                 break;
@@ -181,19 +184,43 @@ public class MovementSystem
                 currentRoom = "hallway3";
                 break;
             case "first door":
-                currentRoom = "renovatedroom";
-                break;
-            case "side door":
-                currentRoom = "spidersroom";
-                break;
-            case "fourth door":
-                if (!Game.LurkerMoved)
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
-                    currentRoom = "smashingroom";
+                    currentRoom = "renovatedroom";
                 }
                 else
                 {
-                    Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
+                break;
+            case "side door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    currentRoom = "spidersroom";
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
+                break;
+            case "fourth door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    if (!Game.LurkerMoved)
+                    {
+                        currentRoom = "smashingroom";
+                    }
+                    else
+                    {
+                        Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                    }
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
                 }
                     break;
             default: 
@@ -214,6 +241,17 @@ public class MovementSystem
                 break;
             case "down":
                 currentRoom = "hallway4";
+                break;
+            case "door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    currentRoom = "eyesroom";
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
                 break;
             default: 
                 succeeded = false;
@@ -313,7 +351,7 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "main entrance":
+            case "door":
                 currentRoom = "hallway4";
                 break;
             default:
