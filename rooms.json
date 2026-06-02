@@ -42,12 +42,12 @@
 
   "hallway3": {
     "actions": 0,
-    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\nAhead, something breathes heavily in the dark. A large presence, its movements uneven and unnatural. \nThe sound of fabric drags softly across the floor as it lets out a low exhausted groan.\nWhatever the creature is, it blocks the only path forward."
+    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\n The is a <g>main entrance<g> on the south facing wall.\nThe corridor continues around a <g>turn corner<g> to the west"
   },
 
   "hallway4": {
     "actions": 0,
-    "description": "The corridor stretches quietly before you.\nAt the northern end stands a heavy door that feels strangely familiar, though your exhausted mind cannot place why.\nTo the east, another doorway sits slightly open, cold air drifting faintly from within."
+    "description": "You find yourself in the fourth section of the corridor\nIt is quiet and the air is cold and still.\nAt the northern end stands the <g>end door<g>, a heavy door that feels strangely familiar, though your exhausted mind cannot place why.\nTo the east is a <g>side door<g>, slightly ajar\nThe silence here feels unnatural, broken only by the distant hum of the dungeon around you"
   },
 
   "renovatedroom": {
