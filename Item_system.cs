@@ -18,42 +18,54 @@ internal static class Game
     //this sucks and i hate it but it works
     public static void scrolltext(string Text, int speed = 10)
     {
-        var matches = Regex.Matches(Text, @"<g>(.*?)<g>");
+        var colorMap = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
+{
+    { "g", ConsoleColor.Green },
+    { "r", ConsoleColor.Red },
+    { "b", ConsoleColor.Blue },
+    { "y", ConsoleColor.Yellow },
+};
+        var matches = Regex.Matches(Text, @"<(\w)>(.*?)<\1>");
         bool skipped = false;
         void Writeportion(string portion, ConsoleColor? color = null)
         {
             for (int i = 0; i < portion.Length; i++)
             {
-                if (!skipped && KeyAvailable)
+                if (!skipped && Console.KeyAvailable)
                 {
-                    var key = ReadKey(true).Key;
+                    var key = Console.ReadKey(true).Key;
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
-                if (color.HasValue) ForegroundColor = color.Value;
+                if (color.HasValue)
+                    Console.ForegroundColor = color.Value;
                 if (skipped)
                 {
-                    Write(portion.Substring(i));
+                    Console.Write(portion.Substring(i));
                     break;
                 }
-                Write(portion[i]);
+                Console.Write(portion[i]);
                 Thread.Sleep(speed);
             }
-            ResetColor();
+            Console.ResetColor();
         }
-
         int lastIndex = 0;
         foreach (Match match in matches)
         {
             if (match.Index > lastIndex)
                 Writeportion(Text.Substring(lastIndex, match.Index - lastIndex));
-            Writeportion(match.Groups[1].Value.ToUpper(), ConsoleColor.Green);
+            string tag = match.Groups[1].Value;
+            string content = match.Groups[2].Value;
+            if (colorMap.TryGetValue(tag, out var color))
+                Writeportion(content.ToUpper(), color);
+            else
+                Writeportion(content);
+            lastIndex = match.Index + match.Length;
             lastIndex = match.Index + match.Length;
         }
         if (lastIndex < Text.Length)
             Writeportion(Text.Substring(lastIndex));
-
-        WriteLine();
+        Console.WriteLine();
     }
     public static void help()
     {
@@ -110,13 +122,9 @@ internal static class Game
             (MovementSystem.currentRoom == "smashingroom") ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed))
-            {
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
-            }
             else
-            {
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-            }
             scrolltext(description);
 
             if (room.TryGetProperty("features", out JsonElement featuresElement))
@@ -129,15 +137,13 @@ internal static class Game
                         if (Inventory.ContainsKey(featureStr))
                             break;
                         else
-                            scrolltext($"You feel: {featureStr}");
+                            scrolltext($"You feel: <y>{featureStr}<y>");
                     }
                 }
             }
         }
         else
-        {
             scrolltext("You don't have that item");
-        }
         actionscompleted++;
     }
     public static void stats()
@@ -354,7 +360,6 @@ internal static class Game
                 break;
         }
     }
-
     private static void takeitem(string item)
     {
         JsonElement itemJSON = (JsonElement)Items[item];
@@ -364,7 +369,6 @@ internal static class Game
         Inventory[item] = Items[item];
         PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
     }
-
     public static void Main()
     {
         // interprets the json as a list of , so we can have a list of items in there for simplicties sake.to get values, needs to be deserialised later
