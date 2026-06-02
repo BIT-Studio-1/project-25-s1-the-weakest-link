@@ -27,7 +27,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet.");
+                    Game.scrolltext("this door needs a tablet");
                     succeeded = false;
                     break;
                 }
@@ -40,7 +40,7 @@ public class MovementSystem
     public static bool sideroom(string movement)
     {
         bool succeeded = true;
-        if (movement == "start room")
+        if (movement == "door")
         {
             currentRoom = "startroom";
         }
@@ -74,7 +74,7 @@ public class MovementSystem
             case "open room":
                 currentRoom = "kniferoom";
                 break;
-            case "south":
+            case "down":
                 currentRoom = "hallway2";
                 break;
             case "locked door":
@@ -99,7 +99,7 @@ public class MovementSystem
     public static bool kniferoom(string movement)
     {
         bool succeeded = true;
-        if (movement == "main entrance")
+        if (movement == "doorway")
         {
             currentRoom = "hallway1";
         }
@@ -116,7 +116,7 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "small room":
+            case "corridor":
                 currentRoom = "hallway1";
                 break;
             case "side entrance":
@@ -147,11 +147,12 @@ public class MovementSystem
             case "side entrance":
                 currentRoom = "vinesroom";
                 break;
-            case "main entrance":
-                if (Inventory.ContainsKey("tablet"))
-                    currentRoom = "locked door";
-                else
-                    scrolltext("this door is locked, you need something to unlock it");
+            case "locked door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    Game.scrolltext("luckily, the tablet you found broke the seal on the door\n, you run through and quickly shut it behind you before the beast enters the room, you seem to have escaped its wraith for now");
+                currentRoom = "hallway2";
+                }
                 break;
             default:
                 succeeded = false;
@@ -169,44 +170,61 @@ public class MovementSystem
             case "glass door":
                 if (Game.Inventory.ContainsKey("key"))
                 {
-                    currentRoom = "staircase";
-                    break;
+                    Game.EndGame();
                 }
                 else
                 {
                     Game.scrolltext("You do not have a key.");
                     succeeded = false;
-                    break;
                 }
-            case "north":
+                break;
+            case "up":
                 currentRoom = "hallway1";
                 break;
-            case "west":
+            case "down":
                 currentRoom = "hallway3";
                 break;
             case "first door":
-                currentRoom = "renovatedroom";
-                break;
-            case "second door":
-                currentRoom = "spidersroom";
-                break;
-            case "go back":
-                currentRoom = "hallway1";
-                break;
-            case "turn corner":
-                currentRoom = "hallway3";
-                break;
-            case "end door":
-                if (!Game.LurkerMoved)
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
-                    currentRoom = "smashingroom";
+                    currentRoom = "renovatedroom";
                 }
                 else
                 {
-                    Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
                 }
                 break;
-            default:
+            case "side door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    currentRoom = "spidersroom";
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
+                break;
+            case "fourth door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    if (!Game.LurkerMoved)
+                    {
+                        currentRoom = "smashingroom";
+                    }
+                    else
+                    {
+                        Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                    }
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
+                    break;
+            default: 
                 succeeded = false;
                 break;
         }
@@ -219,13 +237,24 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "go back":
+            case "up":
                 currentRoom = "hallway2";
                 break;
-            case "turn corner":
+            case "down":
                 currentRoom = "hallway4";
                 break;
-            default:
+            case "door":
+                if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    currentRoom = "eyesroom";
+                }
+                else
+                {
+                    Game.scrolltext("This door needs a tablet.");
+                    succeeded = false;
+                }
+                break;
+            default: 
                 succeeded = false;
                 break;
         }
@@ -238,14 +267,14 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "end door":
+            case "forward door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "startroom";
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet");
+                    Game.scrolltext("This door needs a tablet");
                     succeeded = false;
                 }
                 break;
@@ -256,7 +285,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a tablet.");
+                    Game.scrolltext("This door needs a tablet.");
                     succeeded = false;
                 }
                 break;
@@ -276,8 +305,12 @@ public class MovementSystem
             case "main entrance":
                 currentRoom = "hallway2";
                 break;
-            case "secret door":
-                currentRoom = "eyesroom";
+            case "side door":
+                if (Game.LurkerMoved)
+                {
+                    currentRoom = "eyesroom";
+                }
+                else Console.WriteLine("something feels strange about this door, you can't bring yourself to step through yet");
                 break;
             default:
                 succeeded = false;
@@ -319,7 +352,7 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "main entrance":
+            case "door":
                 currentRoom = "hallway4";
                 break;
             default:

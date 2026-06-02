@@ -111,8 +111,10 @@ internal static class Game
         if (input.Length > 1 && Inventory.ContainsKey(input[1]))
         {
             var item = (JsonElement)Items[input[1]];
-            foreach (var property in item.EnumerateObject())
-                scrolltext($"<g>{property.Name}<g>: {property.Value}");
+            string itemDescription, itemName;
+            itemName = item.GetProperty("name").GetString() ?? throw new MissingFieldException($"items.json has no name for the requested item");
+            itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
+            scrolltext($"<g>{itemName}<g>: {itemDescription}");
         }
         else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
@@ -299,6 +301,8 @@ internal static class Game
                         takeitem("tablet");
                         takeitem("coins");
                         scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
+                        Thread.Sleep(500);
+                        scrolltext("you hear a loud roar from the side room you cut your way through earlier, and loud angry footsteps \nthe beast is coming, you need to find a way out of the room NOW");
                     }
                 }
                 break;
