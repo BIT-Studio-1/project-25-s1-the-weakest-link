@@ -1,14 +1,14 @@
 {
   "startroom": {
     "actions": 3,
-    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, perhaps resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east \nyou feel a <y>book<y> on one of the tables",
-    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, perhaps resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east",
+    "description": "Feeling your way through the darkness, you repeatedly bump \ninto long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east \nyou feel a <y>book<y> on one of the tables",
+    "description2": "Feeling your way through the darkness, you repeatedly bump \ninto long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east",
     "features": [ "book" ]
   },
 
   "sideroom": {
     "actions": 0,
-    "description": "You find yourself in a small side chamber of unknown purpose. The room is cramped and quiet\nThe silence here feels protective rather than threatening, making this seem like a good place to hide if you need to\nThe only exit is the <g>door<g>, leading back to the chamber from which you came"
+    "description": "You find yourself in a small side chamber of unknown purpose. The room is cramped and quiet\nThe silence here feels protective rather than threatening \nthis seems like a good place to hide\nThe only exit is the <g>door<g>, leading back to the chamber from which you came"
   },
 
   "hallway1": {
@@ -25,13 +25,13 @@
 
   "vinesroom": {
     "actions": 0,
-    "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown door choked with thick vines. The passage beyond is completely blocked. You will need to cut through the vines before you can enter the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in",
-    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the<g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in"
+    "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both \nwalls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown door choked with thick vines. The passage beyond is completely blocked. You will need to <y>cut<y> through the <y>vines<y> before you can enter the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in",
+    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both \nwalls with your arms outstretched. The air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the<g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in"
   },
 
   "tabletroom": {
     "actions": 4,
-    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you, forming a terraced chamber that climbs toward the far side of the room.\nAs you carefully make your way forward, your foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables\nThe body lies completely still.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <y>loot<y> is difficult to ignore.\n The <g>locked door<g> to the south is sealed with ancient magic\nyou could also go out through the <g>side entrance<g> you cut your way through before",
+    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you \nforming a terraced chamber that climbs toward the far side of the room.\nAs you carefully make your way forward, your foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables\nThe body lies completely still.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <y>loot<y> is difficult to ignore.\n The <g>locked door<g> to the south is sealed with ancient magic\nyou could also go out through the <g>side entrance<g> you cut your way through before",
     "description2": "You are still in the terraced room\nThe body is still there, its pockets now empty\nthe beast is coming\nyou hope the tablet you found could break the magic seal on the <g>locked door<g>",
     "features": [ "corpse" ]
   },
@@ -44,7 +44,7 @@
 
   "hallway3": {
     "actions": 0,
-    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\n There is a single <g>door<g> on the south facing wall.\nThe corridor continues <down> around a corner at the west end \nyou could also go back <g>up<g> the corridor"
+    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\n There is a single <g>door<g> on the south facing wall.\nThe corridor continues <g>down<g> around a corner at the west end \nyou could also go back <g>up<g> the corridor"
   },
 
   "hallway4": {
@@ -54,22 +54,22 @@
 
   "renovatedroom": {
     "actions": 0,
-    "description": "You find yourself in an strange room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\n Must be a <y>warhammer<y> you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
-    "description2": "You find yourself in an strange room. Dust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
+    "description": "You find yourself in an strange room \nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\n Must be a <y>warhammer<y> you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
+    "description2": "You find yourself in an strange room \nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room\nThe air smells of forged steel, but beneath it lingers something older. as if the room has been stripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown",
     "features": [ "hammer" ]
   },
 
   "spidersroom": {
     "actions": 0,
-    "description": "You find yourself in a small, claustrophobic cave. You feel what appears to be a large egg sac blocking the exit out. Fear grips you as you realise, you are in a monster's nest. \nyou may need to <y>attack<y> \nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>",
-    "description2": "The nest is filled with eggs, sure to hatch at any moment. You should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
+    "description": "You find yourself in a small, claustrophobic cave \nYou feel what appears to be a large egg sac blocking the exit out. \nFear grips you as you realise, you are in a monster's nest. \nyou may need to <y>attack<y> \nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>",
+    "description2": "The nest is filled with eggs, sure to hatch at any moment \nYou should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
     "features": [ "sac" ]
   },
 
     "smashingroom": {
         "actions": 0,
-        "description": "You find yourself in a large, mostly open chamber, with tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange monolith sculptures in rows, \nif you were to <y>smash<y> something in here it would get the lurker's attention \nthere are two doors here, the <g>main entrance> to the corridor north of you \nand a <g>side door<g> at the west end of the chamber",
-        "description2": "You can hear the lurker coming from the corridor, you should leave out the <g>side entrance<g>"
+        "description": "You find yourself in a large, mostly open chamber \nwith tables around the sides and one in the middle \nlike many other rooms, the tables here seem to have many strange monolith sculptures in rows, \nif you were to <y>smash<y> something in here it would get the lurker's attention \nthere are two doors here, the <g>main entrance<g> to the corridor north of you \nand a <g>side entrance<g> at the west end of the chamber",
+        "description2": "You can hear the lurker coming from the corridor \nyou should leave out the <g>side entrance<g>"
     },
 
   "eyesroom": {
@@ -81,7 +81,7 @@
   "keyroom": {
     "actions": 0,
     "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\n As your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>",
-    "description2": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.",
+    "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures \nthe only exit is back through the <g>door<g>",
     "features": [ "key" ]
   }
 }

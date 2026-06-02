@@ -150,9 +150,14 @@ public class MovementSystem
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     Game.scrolltext("luckily, the tablet you found broke the seal on the door\n, you run through and quickly shut it behind you before the beast enters the room, you seem to have escaped its wraith for now");
-                currentRoom = "hallway2";
+                    currentRoom = "hallway1";
                 }
-                break;
+                else
+                {
+                    Console.WriteLine("the door is sealed with a strange magic");
+                    succeeded = false;
+                }
+                    break;
             default:
                 succeeded = false;
                 break;
@@ -215,6 +220,7 @@ public class MovementSystem
                     else
                     {
                         Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                        succeeded = false;
                     }
                 }
                 else
@@ -304,12 +310,16 @@ public class MovementSystem
             case "main entrance":
                 currentRoom = "hallway2";
                 break;
-            case "side door":
+            case "side entrance":
                 if (Game.LurkerMoved)
                 {
                     currentRoom = "eyesroom";
                 }
-                else Console.WriteLine("something feels strange about this door, you can't bring yourself to step through yet");
+                else 
+                {
+                    Console.WriteLine("something feels strange about this door, you can't bring yourself to step through yet"); 
+                    succeeded = false; 
+                }
                 break;
             default:
                 succeeded = false;

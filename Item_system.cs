@@ -112,9 +112,8 @@ internal static class Game
         {
             var item = (JsonElement)Items[input[1]];
             string itemDescription, itemName;
-            itemName = item.GetProperty("name").GetString() ?? throw new MissingFieldException($"items.json has no name for the requested item");
             itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
-            scrolltext($"<g>{itemName}<g>: {itemDescription}");
+            scrolltext(itemDescription);
         }
         else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
         {
@@ -123,9 +122,9 @@ internal static class Game
             if (
             (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
             (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
-            (MovementSystem.currentRoom == "hallway2" && VinesCut && !LurkerMoved) ||
+            (MovementSystem.currentRoom == "hallway2" && LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
-            (MovementSystem.currentRoom == "smashingroom") ||
+            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved) ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed))
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
@@ -287,7 +286,7 @@ internal static class Game
                         takeitem("coins");
                         scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                         Thread.Sleep(500);
-                        scrolltext("you hear a loud roar from the side room you cut your way through earlier, and loud angry footsteps \nthe beast is coming, you need to find a way out of the room NOW");
+                        scrolltext("you hear a loud roar from the side room you cut your way through earlier \nand loud angry footsteps \nthe beast is coming, you need to find a way out of the room NOW");
                     }
                 }
                 break;
@@ -364,20 +363,22 @@ internal static class Game
     }
     public static void EndGame()
     {
-        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you find yourself in?", 30);
+        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 30);
         scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
-        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly descending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
+        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
         scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
         scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
         scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
         scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
         scrolltext("\"It's 4am, go home.\"\r\n", 30);
+        Thread.Sleep(1000);
         scrolltext("THE NEXT DAY.....\r\n", 75);
         scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
-        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the contents...\r\n", 30);
+        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the \ncontents...\r\n", 30);
         PropertyDamage.writebill();
         ReadLine();
-        Thread.Sleep(60000);
+        WriteLine("any key to reset");
+        ReadKey();
         Clear();
 
         condition = true;
