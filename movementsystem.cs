@@ -149,7 +149,7 @@ public class MovementSystem
             case "locked door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
-                    Game.scrolltext("Luckily, the tablet you found broke the seal on the door.\nYou run through and quickly shut it behind you before the beast enters the room.\nYou seem to have escaped its wraith for now");
+                    Game.scrolltext("Luckily, the tablet you found broke the seal on the door.\nYou run through and quickly shut it behind you before the beast enters the room.\nYou seem to have escaped its wrath for now.");
                     currentRoom = "hallway1";
                 }
                 else
@@ -200,7 +200,7 @@ public class MovementSystem
                 }
                 break;
             case "side door":
-                if (Game.Inventory.ContainsKey("tablet"))
+                if (Game.Inventory.ContainsKey("tablet") && Game.SpiderSacBurst)
                 {
                     currentRoom = "spidersroom";
                 }
@@ -379,7 +379,7 @@ public class MovementSystem
             case "side entrance":
                 currentRoom = "spidersroom";
                 break;
-            case "main entrance":
+            case "first door":
                 currentRoom = "hallway2";
                 break;
             default:

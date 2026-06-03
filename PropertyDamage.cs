@@ -15,7 +15,7 @@ public static class PropertyDamage
     {
         string bill = $"""
         To XXXX,
-        you have incurred damages in excess of {totalcost:c2}.
+        you have incurred damages in excess of ${totalcost:n2}.
         You have until next Sunday to pay Otago Polytechnic this cost
         otherwise you risk facing legal action. Attached is an itemised bill of damages.
 
@@ -25,7 +25,7 @@ public static class PropertyDamage
         bill += "Reason".PadRight(50) + "Cost".PadLeft(50) + '\n';
         for (int i = 0; i < damagereasons.Count; i++)
         {
-            bill += damagereasons[i].PadRight(50) + damageamount[i].ToString("c2").PadLeft(50) + '\n';
+            bill += damagereasons[i].PadRight(100) + ("$" + damageamount[i].ToString("n2")).PadLeft(50) + '\n';
         }
 
         Game.scrolltext(bill);

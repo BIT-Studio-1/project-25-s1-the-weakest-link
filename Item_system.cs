@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using AwesomeGame;
@@ -87,6 +88,10 @@ internal static class Game
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
             scrolltext("<b>cut vines<b>: Cuts the vines covering the door");
+        if (MovementSystem.currentRoom == "smashingroom")
+        {
+            scrolltext("<b>smash<b>: Smashes the obelisks");
+        }
         if (secretsenabled)
         {
             scrolltext("<b>goto<b>: sends you to a room");
@@ -236,7 +241,7 @@ internal static class Game
             {
                 EyesSmashed = true;
 
-                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the moniliths they were on lie in pieces.");
+                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.");
                 PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
                 PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
             }
@@ -252,7 +257,7 @@ internal static class Game
                 LurkerMoved = true;
 
                 scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n");
-                scrolltext("It's time to get moving");
+                scrolltext("It's time to get moving.");
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
                 PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
@@ -318,7 +323,7 @@ internal static class Game
                     }
                     else
                     {
-                        scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting");
+                        scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting.");
                         takeitem("hammer");
                     }
                 }
