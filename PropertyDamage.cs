@@ -22,10 +22,10 @@ public static class PropertyDamage
 
         """;
 
-        bill += "Reason".PadRight(50) + "Cost".PadLeft(50) + '\n';
+        bill += "Reason".PadRight(100) + "Cost".PadLeft(25) + '\n';
         for (int i = 0; i < damagereasons.Count; i++)
         {
-            bill += damagereasons[i].PadRight(100) + ("$" + damageamount[i].ToString("n2")).PadLeft(50) + '\n';
+            bill += damagereasons[i].PadRight(100) + ("$" + damageamount[i].ToString("n2")).PadLeft(25) + '\n';
         }
 
         Game.scrolltext(bill);
