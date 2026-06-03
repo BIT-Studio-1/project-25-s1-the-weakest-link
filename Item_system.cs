@@ -460,6 +460,7 @@ internal static class Game
                     smash();
                     break;
                 //switch for looting items
+                case "take":
                 case "loot":
                     loot();
                     break;
