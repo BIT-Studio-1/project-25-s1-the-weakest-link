@@ -26,7 +26,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("this door needs a tablet");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                     break;
                 }
@@ -63,7 +63,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Console.WriteLine("there is a presence in this room, best not to enter");
+                    Game.scrolltext("There is a presence in this room, best not to enter.");
                     succeeded = false;
                 }
                 break;
@@ -83,7 +83,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -149,12 +149,12 @@ public class MovementSystem
             case "locked door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
-                    Game.scrolltext("luckily, the tablet you found broke the seal on the door\n, you run through and quickly shut it behind you before the beast enters the room, you seem to have escaped its wraith for now");
+                    Game.scrolltext("Luckily, the tablet you found broke the seal on the door.\nYou run through and quickly shut it behind you before the beast enters the room.\nYou seem to have escaped its wraith for now");
                     currentRoom = "hallway1";
                 }
                 else
                 {
-                    Console.WriteLine("the door is sealed with a strange magic");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                     break;
@@ -178,7 +178,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("You do not have a key.");
+                    Game.scrolltext("This door is locked by an ancient mechanism. You will need a key.");
                     succeeded = false;
                 }
                 break;
@@ -195,7 +195,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet.");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -219,7 +219,7 @@ public class MovementSystem
                     }
                     else
                     {
-                        Game.scrolltext("you hear the lurker in this room, you shouldn't go in");
+                        Game.scrolltext("You hear the lurker in this room. You shouldn't go in.");
                         succeeded = false;
                     }
                 }
@@ -255,7 +255,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet.");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -279,7 +279,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -290,7 +290,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet.");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -317,7 +317,7 @@ public class MovementSystem
                 }
                 else 
                 {
-                    Console.WriteLine("something feels strange about this door, you can't bring yourself to step through yet"); 
+                    Game.scrolltext("Something feels strange about this door. You can't bring yourself to step through yet."); 
                     succeeded = false; 
                 }
                 break;
@@ -336,7 +336,7 @@ public class MovementSystem
             case "main entrance":
                 if (!Game.SpiderSacBurst)
                 {
-                    Game.scrolltext("The exit is blocked by an egg sac. You should attack it");
+                    Game.scrolltext("The exit is blocked by an egg sac.");
                     succeeded = false;
                 }
                 else
@@ -398,7 +398,7 @@ public class MovementSystem
                 currentRoom = "hallway3";
                 break;
             case "side entrance":
-                Game.scrolltext("The door locked behind you.");
+                Game.scrolltext("The door seemed to lock itself behind you.");
                 break;
             default:
                 succeeded = false;

@@ -28,7 +28,7 @@ public static class PropertyDamage
             bill += damagereasons[i].PadRight(50) + damageamount[i].ToString("c2").PadLeft(50) + '\n';
         }
 
-        Console.WriteLine(bill);
+        Game.scrolltext(bill);
     }
 
     public static void causedamage(string reason, int amount)
@@ -36,5 +36,7 @@ public static class PropertyDamage
         damagereasons.Add(reason);
         damageamount.Add(amount);
         totalcost += amount;
+
+        Game.scrolltext($"You gain {amount} EXP!");
     }
 }

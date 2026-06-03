@@ -105,14 +105,14 @@ internal static class Game
                 scrolltext($"<y>{Inv.Key}<y>");
         }
         else
-            scrolltext("You don't have any items");
+            scrolltext("You don't have any items.");
     }
     public static void inspect()
     {
         if (input.Length > 1 && Inventory.ContainsKey(input[1]))
         {
             var item = (JsonElement)Items[input[1]];
-            string itemDescription, itemName;
+            string itemDescription;
             itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
             scrolltext(itemDescription);
         }
@@ -134,12 +134,12 @@ internal static class Game
             scrolltext(description);
         }
         else
-            scrolltext("You don't have that item");
+            scrolltext("You don't have that item.");
         actionscompleted++;
     }
     public static void stats()
     {
-        scrolltext($"You have {PropertyDamage.totalcost} EXP");
+        scrolltext($"You have {PropertyDamage.totalcost} EXP.");
     }
     public static void give()
     {
@@ -152,10 +152,10 @@ internal static class Game
             }
             else
             {
-                scrolltext("This item does not exist");
+                scrolltext("This item does not exist.");
             }
         }
-        else { scrolltext("You can't do that right now"); }
+        else { scrolltext("You can't do that right now."); }
     }
     public static void cut()
     {
@@ -165,13 +165,11 @@ internal static class Game
             {
                 VinesCut = true;
                 PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                scrolltext("You cut the vines on the door");
+                scrolltext("You slash through the vines covering the door. You should be able to get through now.");
             }
             else
-                scrolltext("You need something sharp to cut these vines");
+                scrolltext("You try to cut the vines, but it seems you need something sharp.");
         }
-        else
-            scrolltext("You can't do that right now");
     }
     public static void do_damage()
     {
@@ -180,15 +178,11 @@ internal static class Game
             PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
             scrolltext("You did a test, you gained 200 EXP!");
         }
-        else
-            scrolltext("You can't do that right now");
     }
     public static void show_bill()
     {
         if (secretsenabled)
             PropertyDamage.writebill();
-        else
-            scrolltext("You can't do that right now");
     }
     public static void go_to()
     {
@@ -206,8 +200,6 @@ internal static class Game
             else
                 scrolltext("This room does not exist");
         }
-        else
-            scrolltext("You can't do that right now");
     }
     public static void exit()
     {
@@ -215,8 +207,8 @@ internal static class Game
     }
     public static void enabledebug()
     {
-        if (!secretsenabled) { secretsenabled = true; scrolltext("enabled"); }
-        else { secretsenabled = false; scrolltext("disabled"); }
+        if (!secretsenabled) { secretsenabled = true; scrolltext("Debug commands enabled"); }
+        else { secretsenabled = false; scrolltext("Debug commands disabled"); }
     }
     public static void attack()
     {
@@ -230,7 +222,7 @@ internal static class Game
                 scrolltext("You stab at the sac, slashing your way through...");
                 Thread.Sleep(500);
 
-                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs. You gain 110 EXP.");
+                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.");
 
                 PropertyDamage.causedamage("Shredded bean bag", 60);
                 PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
@@ -244,13 +236,12 @@ internal static class Game
             {
                 EyesSmashed = true;
 
-                scrolltext("you begin to attack the strange eyes with your hammer \nas you bring it down upon the eyes it meets with more of those strange monoliths, smashing them apart \nyou keep smashing until all the eyes are gone, and the moniliths they were on lie in pieces");
-                PropertyDamage.causedamage("destroyed 20 computers and several monitors in another classroom", 30000);
-                PropertyDamage.causedamage("seriously dude what the fuck, these cleaners don't pay for themselves", 200);
+                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the moniliths they were on lie in pieces.");
+                PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
+                PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
             }
             else scrolltext("how did you get here without a hammer?");
         }
-        else scrolltext("You can't do that right now");
     }
     public static void smash()
     {
@@ -260,15 +251,14 @@ internal static class Game
             {
                 LurkerMoved = true;
 
-                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisks, \nit smashes into pieces that scatter across the table \nyou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door\n");
-                scrolltext("Tt's time to get moving");
+                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n");
+                scrolltext("It's time to get moving");
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
-                PropertyDamage.causedamage("more work for the cleaners, overtime", 100);
+                PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
             }
-            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead, ouch");
+            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!");
         }
-        else scrolltext("You can't do that right now");
     }
     public static void loot()
     {
@@ -283,11 +273,11 @@ internal static class Game
                     }
                     else
                     {
+                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                         takeitem("tablet");
                         takeitem("coins");
-                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
                         Thread.Sleep(500);
-                        scrolltext("you hear a loud roar from the side room you cut your way through earlier \nand loud angry footsteps \nthe beast is coming, you need to find a way out of the room NOW");
+                        scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
                     }
                 }
                 break;
@@ -300,8 +290,8 @@ internal static class Game
                     }
                     else
                     {
-                        takeitem("dagger");
                         scrolltext($"You take a <y>dagger<y> from its position on the bench");
+                        takeitem("dagger");
                     }
                 }
                 break;
@@ -314,8 +304,8 @@ internal static class Game
                     }
                     else
                     {
-                        takeitem("book");
                         scrolltext($"You take the <y>book<y> from the table");
+                        takeitem("book");
                     }
                 }
                 break;
@@ -328,8 +318,8 @@ internal static class Game
                     }
                     else
                     {
-                        takeitem("hammer");
                         scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting");
+                        takeitem("hammer");
                     }
                 }
 
@@ -343,13 +333,13 @@ internal static class Game
                     }
                     else
                     {
-                        takeitem("key");
                         scrolltext($"You take the <y>key<y>");
+                        takeitem("key");
                     }
                 }
                 break;
             default:
-                scrolltext("there is nothing to loot here");
+                scrolltext("There is nothing to loot here");
                 break;
         }
     }
@@ -362,6 +352,8 @@ internal static class Game
         Inventory[item] = Items[item];
         PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
     }
+
+    // Called from movementsystem.cs when entering "glass door" from hallway2
     public static void EndGame()
     {
         scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 30);
@@ -377,8 +369,11 @@ internal static class Game
         scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
         scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the \ncontents...\r\n", 30);
         PropertyDamage.writebill();
-        ReadLine();
-        WriteLine("any key to reset");
+
+        WriteLine();
+        WriteLine();
+
+        scrolltext("Press any key to reset.");
         ReadKey();
         Clear();
 
@@ -403,9 +398,9 @@ internal static class Game
                     condition = false;
                 {
                     if (actionscompleted > room_actions / 2 && actionscompleted < room_actions)
-                        scrolltext("You hear something loud approaching");
+                        scrolltext("You hear something loud approaching.");
                     if (actionscompleted >= room_actions - 1)
-                        scrolltext("You should move on");
+                        scrolltext("You should move on.");
                 }
             }
             scrolltext("(Input <b>help<b> for a current list of actions)", 10);
@@ -479,6 +474,6 @@ internal static class Game
                     break;
             }
         }
-        scrolltext("game is over");
+        scrolltext("<r>GAME OVER<r>");
     }
 }
