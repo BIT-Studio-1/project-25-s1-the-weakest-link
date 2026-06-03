@@ -76,24 +76,24 @@ internal static class Game
     {
         // please add any commands you add to the program to this help section !!!
 
-        scrolltext("<g>inspect<g> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
-        scrolltext("<g>stats<g>: Shows your current EXP");
-        scrolltext("<g>help<g>: Shows a list and description of commands");
-        scrolltext("<g>inventory<g>: Prints contents of the inventory");
+        scrolltext("<b>inspect<b> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
+        scrolltext("<b>stats<b>: Shows your current EXP");
+        scrolltext("<b>help<b>: Shows a list and description of commands");
+        scrolltext("<b>inventory<b>: Prints contents of the inventory");
         scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
         if (currentroomjson.TryGetProperty("features", out _))
-            scrolltext("<g>loot<g> (<g>item<g>/<g>object<g>): Takes an item from the room");
+            scrolltext("<b>loot<b> (<y>item<y>/<y>object<y>): Takes an item from the room");
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
-            scrolltext("<g>cut vines<g>: cuts the vines covering the door");
+            scrolltext("<b>cut vines<b>: Cuts the vines covering the door");
         if (secretsenabled)
         {
-            scrolltext("<g>goto<g>: sends you to a room");
-            scrolltext("<g>give<g>: gives a provided item");
-            scrolltext("<g>do_damage<g>: command to test property damage system");
-            scrolltext("<g>show_bill<g>: command to show the current property damage");
+            scrolltext("<b>goto<b>: sends you to a room");
+            scrolltext("<b>give<b>: gives a provided item");
+            scrolltext("<b>do_damage<b>: command to test property damage system");
+            scrolltext("<b>show_bill<b>: command to show the current property damage");
         }
-        scrolltext("<g>exit<g>: Closes the game");
+        scrolltext("<b>exit<b>: Closes the game");
     }
     public static void inventory()
     {
@@ -407,7 +407,7 @@ internal static class Game
                         scrolltext("You should move on");
                 }
             }
-            scrolltext("(Input <g>help<g> for a current list of actions)", 10);
+            scrolltext("(Input <b>help<b> for a current list of actions)", 10);
             Write("> ");
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
