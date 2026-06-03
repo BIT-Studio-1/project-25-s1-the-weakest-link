@@ -76,7 +76,8 @@ internal static class Game
     {
         // please add any commands you add to the program to this help section !!!
 
-        scrolltext("<b>inspect<b> (item name/<g>room<g>): Inspects item or room with more detail than the description, inspect room");
+        scrolltext("<b>inspect<b> (<y>item name<y>): Describes item to you.");
+        scrolltext("<b>inspect room<b>: Describes the room to you in detail.");
         scrolltext("<b>stats<b>: Shows your current EXP");
         scrolltext("<b>help<b>: Shows a list and description of commands");
         scrolltext("<b>inventory<b>: Prints contents of the inventory");
