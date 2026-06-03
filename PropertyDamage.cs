@@ -14,7 +14,7 @@ public static class PropertyDamage
     public static void writebill()
     {
         string bill = $"""
-        To Mr. XXXX,
+        To XXXX,
         you have incurred damages in excess of {totalcost:c2}.
         You have until next Sunday to pay Otago Polytechnic this cost
         otherwise you risk facing legal action. Attached is an itemised bill of damages.
