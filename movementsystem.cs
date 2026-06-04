@@ -3,9 +3,10 @@ namespace AwesomeGame;
 // Class containing all code for moving between rooms, 
 public class MovementSystem
 {
+
     // Assigns string "startroom" to the currentRoom variable
     public static string currentRoom = "startroom";
-
+    private static bool cleanerpresent = false;
     // Movement system for Start Room
     public static bool startroom(string movement)
     {
@@ -40,7 +41,7 @@ public class MovementSystem
         switch (movement)
         {
             case "starting room":
-                if (!Game.Inventory.ContainsKey("dagger") || Game.Inventory.ContainsKey("tablet"))
+                if (!Game.Inventory.ContainsKey("dagger"))
                 {
                     currentRoom = "startroom";
                 }
@@ -60,9 +61,15 @@ public class MovementSystem
                 currentRoom = "hallway2";
                 break;
             case "locked door":
-                if (Game.Inventory.ContainsKey("tablet"))
+                if (Game.Inventory.ContainsKey("tablet") && !cleanerpresent)
                 {
                     currentRoom = "tabletroom";
+                    succeeded = false;
+                }
+                else if (Game.Inventory.ContainsKey("tablet"))
+                {
+                    Game.scrolltext("listening closely the noise of the beast still trembles from inside this room. \nyou refuse to enter");
+                    succeeded = false;
                 }
                 else
                 {
@@ -128,19 +135,21 @@ public class MovementSystem
         {
             case "side entrance":
                 currentRoom = "vinesroom";
+
                 break;
             case "locked door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     Game.scrolltext("Luckily, the tablet you found broke the seal on the door.\nYou run through and quickly shut it behind you before the beast enters the room.\nYou seem to have escaped its wrath for now.");
                     currentRoom = "hallway1";
+                    cleanerpresent = true;
                 }
                 else
                 {
                     Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
-                    break;
+                break;
             default:
                 succeeded = false;
                 break;
@@ -180,7 +189,7 @@ public class MovementSystem
                     Game.scrolltext("the lurker is further down the hallway, best not to approach it");
                     succeeded = false;
                 }
-                    break;
+                break;
             case "first door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
@@ -230,8 +239,8 @@ public class MovementSystem
                     Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
-                    break;
-            default: 
+                break;
+            default:
                 succeeded = false;
                 break;
         }
@@ -261,7 +270,7 @@ public class MovementSystem
                     succeeded = false;
                 }
                 break;
-            default: 
+            default:
                 succeeded = false;
                 break;
         }
@@ -306,7 +315,7 @@ public class MovementSystem
                 {
                     currentRoom = "hallway3";
                 }
-                    break;
+                break;
             default:
                 succeeded = false;
                 break;
@@ -328,10 +337,10 @@ public class MovementSystem
                 {
                     currentRoom = "eyesroom";
                 }
-                else 
+                else
                 {
-                    Game.scrolltext("Something feels strange about this door. You can't bring yourself to step through yet."); 
-                    succeeded = false; 
+                    Game.scrolltext("Something feels strange about this door. You can't bring yourself to step through yet.");
+                    succeeded = false;
                 }
                 break;
             default:
@@ -421,7 +430,7 @@ public class MovementSystem
                     Game.scrolltext("how are you even here bro");
                     currentRoom = "smashingroom";
                 }
-                    break;
+                break;
             default:
                 succeeded = false;
                 break;

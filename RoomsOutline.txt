@@ -1,5 +1,4 @@
 startRoom		-	janitor	contains a book, maximum	6
-sideRoom 		-	for hiding from janitormax 3
 hallway1 		-	safe space
 knifeRoom 		-	contains knife
 vinesRoom 		-	contains vines, restricted by knife
@@ -15,8 +14,6 @@ smashingroom	-	for distracting lurker, restricted by keycard & requires hammer f
 stairs			-	exit for the game
 
 DOOR NAMES:
-from startroom - "side room" (to sideroom), "main entrance" (to hallway1), "second entrance" (to hallway4)
-from sideroom - "start room" (to startroom)
 from hallway1 - "starting room" (to startroom), "small room" (to vinesroom), "open room" (to knife room), "locked door" (to tabletroom), "turn corner" (to hallway2)
 from tabletroom - "side entrance" (to vinesroom), "main entrance" (to hallway2)
 from hallway2 - "glass door" (to stairs), "first door" (to renovatedroom), "second door" (to spidersroom), "end door" (to smashingroom), "go back" (to hallway1), "turn corner" (to hallway3)

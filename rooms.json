@@ -18,7 +18,6 @@
     "features": [ "dagger" ]
   },
 
-
   "vinesroom": {
     "actions": 0,
     "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched.\nThe air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown door choked with thick vines. The passage beyond is completely blocked. You will need to <b>cut<b> through the <b>vines<b> before you can enter the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in.",
@@ -62,11 +61,11 @@
     "features": [ "sac" ]
   },
 
-    "smashingroom": {
-        "actions": 0,
-        "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <b>smash<b> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
-        "description2": "You can hear the lurker coming from the corridor.\nYou should leave out the <g>side entrance<g>."
-    },
+  "smashingroom": {
+    "actions": 0,
+    "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <b>smash<b> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
+    "description2": "You can hear the lurker coming from the corridor.\nYou should leave out the <g>side entrance<g>."
+  },
 
   "eyesroom": {
     "actions": 0,
