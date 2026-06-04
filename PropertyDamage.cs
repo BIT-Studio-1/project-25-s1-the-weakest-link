@@ -1,5 +1,4 @@
 namespace AwesomeGame;
-
 /* File for keeping track of the various things you have damaged in your adventure
  If you want to make it so that, for example, "cut vines" means damaging network cables,
  causing $2000 in damage, just add PropertyDamage.CauseDamage("Damaged network cables", 2000);
@@ -7,7 +6,7 @@ namespace AwesomeGame;
 */
 public static class PropertyDamage
 {
-    public static int totalcost;
+    public static long totalcost;
     public static List<string> damagereasons = new List<string>();
     public static List<int> damageamount = new List<int>();
 
