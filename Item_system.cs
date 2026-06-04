@@ -283,7 +283,7 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("tablet"))
                     {
-                        scrolltext("You have already looted the corpse.");
+                        scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
                     }
                     else
                     {
@@ -373,13 +373,13 @@ internal static class Game
         scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 35);
         scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 35);
         scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 35);
-        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
-        scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
+        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning!\nYour senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
+        scrolltext("Psyching yourself for danger, you open the door...\r\n", 75);
         scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 35);
         scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
         scrolltext("\"It's 4am, go home.\"\r\n", 30);
         Thread.Sleep(1000);
-        scrolltext("THE NEXT DAY.....\r\n", 75);
+        scrolltext("THE NEXT DAY...\r\n", 75);
         scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
         scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the \ncontents...\r\n", 30);
         PropertyDamage.writebill();
