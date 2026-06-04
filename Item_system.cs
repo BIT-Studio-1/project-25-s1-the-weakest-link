@@ -9,7 +9,7 @@ internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
-    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false, EyesSmashed = false;
+    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false, EyesSmashed = false, unlockeddoor = false;
     public static Dictionary<string, object> Items;
     public static Dictionary<string, object> Rooms;
     public static int actionscompleted = 0;
@@ -276,6 +276,7 @@ internal static class Game
     }
     public static void loot()
     {
+        //just a large switch for each room with interactables
         switch (MovementSystem.currentRoom)
         {
             case "tabletroom":
@@ -376,7 +377,7 @@ internal static class Game
         scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning!\nYour senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
         scrolltext("Psyching yourself for danger, you open the door...\r\n", 75);
         scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 35);
-        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
+        scrolltext("You are on the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
         scrolltext("\"It's 4am, go home.\"\r\n", 30);
         Thread.Sleep(1000);
         scrolltext("THE NEXT DAY...\r\n", 75);
@@ -418,6 +419,8 @@ internal static class Game
                 }
             }
             scrolltext("(Input <b>help<b> for a current list of actions)", 10);
+            Clear();
+            inspect();
             Write("> ");
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
