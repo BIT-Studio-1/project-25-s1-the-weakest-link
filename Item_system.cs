@@ -76,13 +76,12 @@ internal static class Game
     public static void help()
     {
         // please add any commands you add to the program to this help section !!!
-
-        scrolltext("<b>inspect<b> (<y>item name<y>): Describes item to you.");
-        scrolltext("<b>inspect room<b>: Describes the room to you in detail.");
-        scrolltext("<b>stats<b>: Shows your current EXP");
-        scrolltext("<b>help<b>: Shows a list and description of commands");
-        scrolltext("<b>inventory<b>: Prints contents of the inventory");
-        scrolltext("<g>door name<g>: Enter the name of a door to move rooms");
+        scrolltext("<b>inspect<b> (<y>item name<y>): Describes item to you.\n" +
+                   "<b>inspect room<b>: Describes the room to you in detail.\n" +
+                   "<b>stats<b>: Shows your current EXP\n" +
+                   "<b>help<b>: Shows a list and description of commands\n" +
+                   "<b>inventory<b>: Prints contents of the inventory\n" +
+                   "<g>door name<g>: Enter the name of a door to move rooms");
         if (currentroomjson.TryGetProperty("features", out _))
             scrolltext("<b>loot<b> (<y>item<y>/<y>object<y>): Takes an item from the room");
         //these are dev commands, activated by typing 'secret2'
@@ -114,7 +113,27 @@ internal static class Game
     }
     public static void inspect()
     {
-        if (Inventory.Any())
+        void inspectroom()
+        {
+            JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
+            string description;
+            if (
+            (MovementSystem.currentRoom == "startroom" && Inventory.ContainsKey("book")) ||
+            (MovementSystem.currentRoom == "vinesroom" && VinesCut) ||
+            (MovementSystem.currentRoom == "hallway2" && LurkerMoved) ||
+            (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
+            (MovementSystem.currentRoom == "smashingroom" && LurkerMoved) ||
+            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
+            (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
+            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
+            (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")))
+
+                description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
+            else
+                description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
+            scrolltext(description, 5);
+        }
+        if (input != null)
         {
             if (input.Length > 1 && Inventory.ContainsKey(input[1]))
             {
@@ -123,30 +142,15 @@ internal static class Game
                 itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
                 scrolltext(itemDescription);
             }
-            else if (input.Length > 1 && input[1] == "room" || input.Length == 1) //this looks for the word 'room' in the player's command and then inspects the room
-            {
-                JsonElement room = (JsonElement)Rooms[MovementSystem.currentRoom];
-                string description;
-                if (
-                (MovementSystem.currentRoom == "startroom"      && Inventory.ContainsKey("book"))   ||
-                (MovementSystem.currentRoom == "vinesroom"      && VinesCut)                        ||
-                (MovementSystem.currentRoom == "hallway2"       && LurkerMoved)                     ||
-                (MovementSystem.currentRoom == "tabletroom"     && Inventory.ContainsKey("tablet")) ||
-                (MovementSystem.currentRoom == "smashingroom"   && LurkerMoved)                     ||
-                (MovementSystem.currentRoom == "spidersroom"    && SpiderSacBurst)                  ||
-                (MovementSystem.currentRoom == "eyesroom"       && EyesSmashed)                     ||
-                (MovementSystem.currentRoom == "kniferoom"      && Inventory.ContainsKey("dagger")) ||
-                input == null)
 
-                    description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
-                else
-                    description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-                scrolltext(description, 5);
-            }
+            if ((input.Length > 1 && input[1] == "room") || input.Length == 1)
+                inspectroom();
             else
                 scrolltext("You don't have that item.");
-            actionscompleted++;
         }
+        else
+            inspectroom();
+        actionscompleted++;
     }
     public static void stats()
     {
@@ -172,7 +176,7 @@ internal static class Game
     {
         void cutvines()
         {
-            if (Inventory.ContainsKey("dagger"))
+            if (Inventory.ContainsKey("dagger") && VinesCut == false)
             {
                 VinesCut = true;
                 PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
@@ -406,6 +410,7 @@ internal static class Game
         Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");
         scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind?", 50);
+        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
         while (condition == true)
         {
             WriteLine("===============================================");
@@ -422,24 +427,26 @@ internal static class Game
                         scrolltext("You should move on.");
                 }
             }
-            scrolltext("(Input <b>help<b> for a current list of actions)", 10);
-            inspect();
             Write("> ");
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');
             switch (input[0])
             {
+
                 case "help":
+                case "h":
                     help();
                     break;
                 case "inventory":
                     inventory();
                     break;
                 case "inspect":
+                case "i":
                     inspect();
                     break;
                 case "stats":
+                case "s":
                     stats();
                     break;
                 //give command, takes the value from the item dictionary and copies it into inventory
@@ -461,6 +468,8 @@ internal static class Game
                     break;
                 // ^ End of debug commands
                 case "exit":
+                case "quit":
+                case "q":
                     exit();
                     break;
                 case "secret":
@@ -470,6 +479,7 @@ internal static class Game
                     enabledebug();
                     break;
                 case "attack":
+                case "a":
                     attack();
                     break;
                 case "smash":
@@ -481,7 +491,11 @@ internal static class Game
                     loot();
                     break;
                 case "clear":
-                    Clear();
+                case "c":
+                    {
+                        Clear();
+                        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
+                    }
                     break;
                 case "summon":
                 case "summoncow":
@@ -499,7 +513,7 @@ internal static class Game
                     if (movementSucceeded)
                     {
                         actionscompleted = 0;
-                        scrolltext("You move....");
+                        inspect();
                     }
                     break;
             }

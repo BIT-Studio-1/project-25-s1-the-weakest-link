@@ -13,7 +13,7 @@
 
   "hallway1": {
     "actions": 0,
-    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel a door to a <g>small room<g>.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness."
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness."
   },
 
   "kniferoom": {
@@ -32,7 +32,7 @@
 
   "tabletroom": {
     "actions": 4,
-    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you forming a terraced chamber that\nclimbs toward the far side of the room.As you carefully make your way forward \nyour foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables.\nThe body lies completely still, its flesh still warm.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <b>loot<b> is difficult to ignore.\nThe <g>locked door<g> to the south is sealed with ancient magic.\nYou could also go out through the <g>side entrance<g> you cut your way through before.",
+    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you forming a terraced chamber that\nclimbs toward the far side of the room. As you carefully make your way forward \nyour foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables.\nThe body lies completely still, its flesh still warm.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <b>loot<b> is difficult to ignore.\nThe <g>locked door<g> to the south is sealed with ancient magic.\nYou could also go out through the <g>side entrance<g> you cut your way through before.",
     "description2": "You are still in the terraced room.\nThe body is still there, its pockets now empty.\nThe beast is coming.\nYou hope the tablet you found could break the magic seal on the <g>locked door<g>.",
     "features": [ "corpse" ]
   },
