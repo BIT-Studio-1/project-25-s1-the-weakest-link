@@ -16,11 +16,12 @@
     "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel a door to a <g>small room<g>.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness."
   },
 
-    "kniferoom": {
-        "actions": 0,
-        "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
-        "features": [ "dagger" ]
-    },
+  "kniferoom": {
+    "actions": 0,
+    "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
+    "description2": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel strange implements on one of the tables, the space where the dagger was empty.\nThere is only one <g>doorway<g>, back into the corridor",
+    "features": [ "dagger" ]
+  },
 
 
   "vinesroom": {
@@ -68,7 +69,7 @@
 
     "smashingroom": {
         "actions": 0,
-        "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <y>smash<y> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
+        "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <b>smash<b> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
         "description2": "You can hear the lurker coming from the corridor.\nYou should leave out the <g>side entrance<g>."
     },
 

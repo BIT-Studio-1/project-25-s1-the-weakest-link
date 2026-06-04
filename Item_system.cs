@@ -132,7 +132,9 @@ internal static class Game
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom" && LurkerMoved) ||
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
-            (MovementSystem.currentRoom == "eyesroom" && EyesSmashed))
+            (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
+            (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")))
+
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             else
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
