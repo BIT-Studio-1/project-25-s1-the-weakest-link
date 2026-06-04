@@ -475,6 +475,7 @@ internal static class Game
                     loot();
                     break;
                 case "summon":
+                case "summoncow":
                 case "summoncows":
                     scrolltext("the cows are here");
                     break;
