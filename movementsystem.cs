@@ -175,6 +175,7 @@ public class MovementSystem
                 if (Game.Inventory.ContainsKey("key"))
                 {
                     Game.EndGame();
+                    succeeded = false;
                 }
                 else
                 {
