@@ -474,6 +474,10 @@ internal static class Game
                 case "loot":
                     loot();
                     break;
+                case "summon":
+                case "summoncows":
+                    scrolltext("the cows are here");
+                    break;
                 case "endgame":
                     if (secretsenabled == true)
                         EndGame();
