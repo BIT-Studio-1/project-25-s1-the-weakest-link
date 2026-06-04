@@ -477,7 +477,9 @@ internal static class Game
                 case "summon":
                 case "summoncow":
                 case "summoncows":
-                    scrolltext("the cows are here");
+                    scrolltext("the cows are here!");
+                    bool cows = true;
+                    PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
                     break;
                 case "endgame":
                     if (secretsenabled == true)
@@ -495,7 +497,5 @@ internal static class Game
         }
         scrolltext("<r>GAME OVER<r>");
         ReadKey();
-
-
     }
 }
