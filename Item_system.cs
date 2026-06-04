@@ -88,7 +88,7 @@ internal static class Game
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
             scrolltext("<b>cut vines<b>: Cuts the vines covering the door");
-        if (MovementSystem.currentRoom == "smashingroom")
+        if (MovementSystem.currentRoom == "smashingroom" && EyesSmashed == false)
         {
             scrolltext("<b>smash<b>: Smashes the obelisks");
         }
@@ -488,7 +488,7 @@ internal static class Game
                     if (secretsenabled == true)
                         EndGame();
                     break;
-                default:
+                default
                     bool movementSucceeded = MovementSystem.move(inputString);
                     if (movementSucceeded)
                     {
