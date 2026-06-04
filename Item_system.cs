@@ -126,7 +126,8 @@ internal static class Game
             (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
-            (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")))
+            (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")) ||
+            (MovementSystem.currentRoom == "renovatedroom" && Inventory.ContainsKey("hammer")))
 
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             else
@@ -241,7 +242,7 @@ internal static class Game
             {
                 SpiderSacBurst = true;
 
-                scrolltext("You stab at the sac, slashing your way through...");
+                scrolltext("You stab at the sac with you dagger, slashing your way through...");
                 Thread.Sleep(500);
 
                 scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.", 35);
@@ -514,6 +515,11 @@ internal static class Game
                     {
                         actionscompleted = 0;
                         inspect();
+                    }
+                    else
+                    {
+                        scrolltext("Not a valid command");
+                        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
             }

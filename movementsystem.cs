@@ -12,9 +12,6 @@ public class MovementSystem
         bool succeeded = true;
         switch (movement)
         {
-            case "side room":
-                currentRoom = "sideroom";
-                break;
             case "main entrance":
                 currentRoom = "hallway1";
                 break;
@@ -36,21 +33,7 @@ public class MovementSystem
         }
         return succeeded;
     }
-    public static bool sideroom(string movement)
-    {
-        bool succeeded = true;
-        if (movement == "door")
-        {
-            currentRoom = "startroom";
-        }
-        else
-        {
-            succeeded = false;
-        }
-        return succeeded;
-    }
-
-    // Movement system for hel
+    // Movement system for hallway1
     public static bool hallway1(string movement)
     {
         bool succeeded = true;
@@ -190,16 +173,19 @@ public class MovementSystem
                 if (Game.LurkerMoved)
                 {
                     currentRoom = "hallway3";
+                    succeeded = true;
                 }
                 else
                 {
                     Game.scrolltext("the lurker is further down the hallway, best not to approach it");
+                    succeeded = false;
                 }
                     break;
             case "first door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
                     currentRoom = "renovatedroom";
+                    succeeded = true;
                 }
                 else
                 {
@@ -449,8 +435,6 @@ public class MovementSystem
         {
             case "startroom":
                 return startroom(movement);
-            case "sideroom":
-                return sideroom(movement);
             case "hallway1":
                 return hallway1(movement);
             case "kniferoom":
