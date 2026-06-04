@@ -71,7 +71,7 @@ internal static class Game
         }
         if (lastIndex < Text.Length)
             Writeportion(Text.Substring(lastIndex));
-        Console.WriteLine();
+        WriteLine();
     }
     public static void help()
     {
@@ -166,7 +166,7 @@ internal static class Game
     }
     public static void cut()
     {
-        if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
+        void cutvines()
         {
             if (Inventory.ContainsKey("dagger"))
             {
@@ -177,6 +177,13 @@ internal static class Game
             else
                 scrolltext("You try to cut the vines, but it seems you need something sharp.", 35);
         }
+        if (input.Length > 1)
+        {
+            if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
+                cutvines();
+        }
+        else if (input.Length == 1 && MovementSystem.currentRoom == "vinesroom")
+            cutvines();
     }
     public static void do_damage()
     {
@@ -482,5 +489,8 @@ internal static class Game
             }
         }
         scrolltext("<r>GAME OVER<r>");
+        ReadKey();
+
+
     }
 }
