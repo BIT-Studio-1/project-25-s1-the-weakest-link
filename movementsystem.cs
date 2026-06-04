@@ -186,8 +186,15 @@ public class MovementSystem
                 currentRoom = "hallway1";
                 break;
             case "down":
-                currentRoom = "hallway3";
-                break;
+                if (Game.LurkerMoved)
+                {
+                    currentRoom = "hallway3";
+                }
+                else
+                {
+                    Game.scrolltext("the lurker is further down the hallway, best not to approach it");
+                }
+                    break;
             case "first door":
                 if (Game.Inventory.ContainsKey("tablet"))
                 {
@@ -200,13 +207,21 @@ public class MovementSystem
                 }
                 break;
             case "side door":
-                if (Game.Inventory.ContainsKey("tablet") && Game.SpiderSacBurst)
+                if (Game.Inventory.ContainsKey("tablet"))
                 {
-                    currentRoom = "spidersroom";
+                    if (Game.SpiderSacBurst)
+                    {
+                        currentRoom = "spidersroom";
+                    }
+                    else
+                    {
+                        Game.scrolltext("This door won't budge.");
+                        succeeded = false;
+                    }
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet.");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                 break;
@@ -225,7 +240,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door needs a tablet.");
+                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
                     succeeded = false;
                 }
                     break;
@@ -255,7 +270,7 @@ public class MovementSystem
                 }
                 else
                 {
-                    Game.scrolltext("This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.");
+                    Game.scrolltext("How the fuck did you even get here without a tablet you dirty cheater <r>fuck<r> you");
                     succeeded = false;
                 }
                 break;
@@ -294,6 +309,17 @@ public class MovementSystem
                     succeeded = false;
                 }
                 break;
+            case "up":
+                if (Game.VinesCut && !Game.LurkerMoved)
+                {
+                    Game.scrolltext("you can hear something grumbling further up the hallway, best not to approach");
+                    succeeded = false;
+                }
+                else
+                {
+                    currentRoom = "hallway3";
+                }
+                    break;
             default:
                 succeeded = false;
                 break;
@@ -398,8 +424,17 @@ public class MovementSystem
                 currentRoom = "hallway3";
                 break;
             case "side entrance":
-                Game.scrolltext("The door seemed to lock itself behind you.");
-                break;
+                if (Game.LurkerMoved)
+                {
+                    Game.scrolltext("The door seemed to lock itself behind you.");
+                    succeeded = false;
+                }
+                else
+                {
+                    Game.scrolltext("how are you even here bro");
+                    currentRoom = "smashingroom";
+                }
+                    break;
             default:
                 succeeded = false;
                 break;

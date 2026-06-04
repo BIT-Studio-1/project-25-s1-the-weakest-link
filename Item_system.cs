@@ -136,7 +136,7 @@ internal static class Game
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             else
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-            scrolltext(description);
+            scrolltext(description, 35);
         }
         else
             scrolltext("You don't have that item.");
@@ -170,10 +170,10 @@ internal static class Game
             {
                 VinesCut = true;
                 PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                scrolltext("You slash through the vines covering the door. You should be able to get through now.");
+                scrolltext("You slash through the vines covering the door. You should be able to get through now.", 35);
             }
             else
-                scrolltext("You try to cut the vines, but it seems you need something sharp.");
+                scrolltext("You try to cut the vines, but it seems you need something sharp.", 35);
         }
     }
     public static void do_damage()
@@ -227,7 +227,7 @@ internal static class Game
                 scrolltext("You stab at the sac, slashing your way through...");
                 Thread.Sleep(500);
 
-                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.");
+                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.", 35);
 
                 PropertyDamage.causedamage("Shredded bean bag", 60);
                 PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
@@ -241,7 +241,7 @@ internal static class Game
             {
                 EyesSmashed = true;
 
-                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.");
+                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.", 35);
                 PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
                 PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
             }
@@ -256,13 +256,13 @@ internal static class Game
             {
                 LurkerMoved = true;
 
-                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n");
+                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n", 35);
                 scrolltext("It's time to get moving.");
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
                 PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
             }
-            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!");
+            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!", 35);
         }
     }
     public static void loot()
@@ -361,13 +361,13 @@ internal static class Game
     // Called from movementsystem.cs when entering "glass door" from hallway2
     public static void EndGame()
     {
-        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 30);
-        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 30);
-        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 30);
-        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 30);
+        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 35);
+        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 35);
+        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 35);
+        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning! Your senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
         scrolltext("Psyching yourself for danger, you open the door...........\r\n", 75);
-        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 30);
-        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 30);
+        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 35);
+        scrolltext("You are in the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
         scrolltext("\"It's 4am, go home.\"\r\n", 30);
         Thread.Sleep(1000);
         scrolltext("THE NEXT DAY.....\r\n", 75);
@@ -391,7 +391,7 @@ internal static class Game
         string rooms_import = File.ReadAllText("rooms.json");
         Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");
-        scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind, or have you awoken within some forgotten catacomb?", 50);
+        scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind?", 50);
         while (condition == true)
         {
             WriteLine("===============================================");
