@@ -476,7 +476,7 @@ internal static class Game
                     break;
                 case "summon":
                 case "summoncows":
-                    scrolltext("the cows are here");
+                    scrolltext("the cows are here!");
                     bool cows = true;
                     PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
                     break;
