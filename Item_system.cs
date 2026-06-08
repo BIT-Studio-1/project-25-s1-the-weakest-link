@@ -37,23 +37,23 @@ internal static class Game
         {
             for (int i = 0; i < portion.Length; i++)
             {
-                if (!skipped && Console.KeyAvailable)
+                if (!skipped && KeyAvailable)
                 {
-                    var key = Console.ReadKey(true).Key;
+                    var key = ReadKey(true).Key;
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
                 if (colour.HasValue)
-                    Console.ForegroundColor = colour.Value;
+                    ForegroundColor = colour.Value;
                 if (skipped)
                 {
-                    Console.Write(portion.Substring(i));
+                    Write(portion.Substring(i));
                     break;
                 }
-                Console.Write(portion[i]);
+                Write(portion[i]);
                 Thread.Sleep(speed);
             }
-            Console.ResetColor();
+            ResetColor();
         }
         int lastIndex = 0;
         foreach (Match match in matches)
