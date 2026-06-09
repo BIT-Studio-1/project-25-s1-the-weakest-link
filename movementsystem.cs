@@ -422,7 +422,7 @@ public class MovementSystem
             case "side entrance":
                 if (Game.LurkerMoved)
                 {
-                    Game.scrolltext("The door seemed to lock itself behind you.");
+                    Game.scrolltext("The figure from the hallway has moved, the door is now locked.");
                     succeeded = false;
                 }
                 else
