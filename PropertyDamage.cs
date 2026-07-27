@@ -6,7 +6,7 @@ namespace AwesomeGame;
 */
 public static class PropertyDamage
 {
-    public static long totalcost;
+    public static long totalcost, turncost;
     public static List<string> damagereasons = new List<string>();
     public static List<int> damageamount = new List<int>();
 
@@ -35,11 +35,13 @@ public static class PropertyDamage
         damagereasons.Add(reason);
         damageamount.Add(amount);
         totalcost += amount;
+        turncost += amount;
 
-        Game.scrolltext($"You gain {amount} EXP!");
+       
     }
     public static void printdamage(string reason, int amount)
     {
-        Console.WriteLine("PLACEHOLDER FOR FIRST COMMIT :)");
+        Game.scrolltext($"You gain {amount} EXP!");
+        turncost = 0;
     }
 }
