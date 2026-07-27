@@ -38,4 +38,8 @@ public static class PropertyDamage
 
         Game.scrolltext($"You gain {amount} EXP!");
     }
+    public static void printdamage(string reason, int amount)
+    {
+        Console.WriteLine("PLACEHOLDER FOR FIRST COMMIT :)");
+    }
 }
