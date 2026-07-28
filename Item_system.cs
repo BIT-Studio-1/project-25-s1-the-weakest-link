@@ -510,15 +510,15 @@ internal static class Game
                         EndGame();
                     break;
                 default:
-                    bool movementSucceeded = MovementSystem.move(inputString);
-                    if (movementSucceeded)
+                    string newRoom = MovementSystem.ChangeRoom(MovementSystem.currentRoom, null, inputString);
+                    if (newRoom != MovementSystem.currentRoom)
                     {
+                        MovementSystem.currentRoom = newRoom;
                         actionscompleted = 0;
                         inspect();
                     }
                     else
                     {
-                        scrolltext("Not a valid command");
                         scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
