@@ -3,14 +3,9 @@
     "actions": 3,
     "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
     "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
-<<<<<<< HEAD
-    "features": [ "book" ]
-    "aliases":  ["Start Room"]
-=======
     "features": [ "book" ],
     "aliases": [ "main entrance", "starting room", "second entrance", "forward door" ],
     "neighbours": [ "hallway1", "hallway4" ]
->>>>>>> 65ba1cd164d99c86eedb1dd3402e3cad368d5955
   },
 
   "hallway1": {
