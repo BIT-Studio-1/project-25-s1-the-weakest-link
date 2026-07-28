@@ -1,25 +1,92 @@
-startRoom		-	janitor	contains a book, maximum	6
-hallway1 		-	safe space
-knifeRoom 		-	contains knife
-vinesRoom 		-	contains vines, restricted by knife
-tabletRoom 		-	contains corpse, restricted by access to vines room
-hallway2 		-	lurker audible - otherwise safe
-hallway3 		-	lurker present, restricted by making noise
-hallway4 		-	puddle -pool of blood-
-keyRoom 		-	contains key, restricted by keycard
-spidersroom		-	contains spider sack restricted by keycard
-renovatedroom	-	contains hammer, restricted by keycard
-eyesroom		-	after confrontation with lurker, beat the shit out of computers
-smashingroom	-	for distracting lurker, restricted by keycard & requires hammer for smashing
-stairs			-	exit for the game
+START ROOM
+- Second Entrance -> Hallway4
+  Requirement: Tablet
 
-DOOR NAMES:
-from hallway1 - "starting room" (to startroom), "small room" (to vinesroom), "open room" (to knife room), "locked door" (to tabletroom), "turn corner" (to hallway2)
-from tabletroom - "side entrance" (to vinesroom), "main entrance" (to hallway2)
-from hallway2 - "glass door" (to stairs), "first door" (to renovatedroom), "second door" (to spidersroom), "end door" (to smashingroom), "go back" (to hallway1), "turn corner" (to hallway3)
-from renovatedroom - "side entrance" (to spidersroom), "main entrance" (to hallway2)
-from spidersroom - "side entrance" (to renovatedroom), "main entrance" (to hallway2)
-from smashingroom - "main entrance" (to hallway2), "side entrance" (to eyesroom)
-from eyesroom - "main entrance" (to hallway3), "side entrance" (to smashingroom)
-from hallway3 - "go back" (to hallway2), "turn corner" (to hallway4)
-from hallway4 - "side door" (to keyroom), "end door" (to startroom)
+HALLWAY1
+- Starting Room -> Start Room
+  Requirement: Must NOT have Dagger
+
+- Locked Door -> Tablet Room
+  Requirements:
+    - Tablet
+    - CleanerPresent = false
+
+VINES ROOM
+- Side Entrance -> Tablet Room
+  Requirement: VinesCut = true
+
+TABLET ROOM
+- Locked Door -> Hallway1
+  Requirement: Tablet
+  Effect: CleanerPresent = true
+
+HALLWAY2
+- Glass Door -> End Game
+  Requirement: Key
+
+- Down -> Hallway3
+  Requirement: LurkerMoved = true
+
+- First Door -> Renovated Room
+  Requirement: Tablet
+
+- Side Door -> Spiders Room
+  Requirements:
+    - Tablet
+    - SpiderSacBurst = true
+
+- Fourth Door -> Smashing Room
+  Requirements:
+    - Tablet
+    - LurkerMoved = false
+
+HALLWAY3
+- Door -> Eyes Room
+  Requirement: Tablet
+
+HALLWAY4
+- Forward Door -> Start Room
+  Requirement: Tablet
+
+- Side Door -> Key Room
+  Requirement: Tablet
+
+- Up -> Hallway3
+  Blocked when:
+    - VinesCut = true
+    - LurkerMoved = false
+
+SMASHING ROOM
+- Side Entrance -> Eyes Room
+  Requirement: LurkerMoved = true
+
+SPIDERS ROOM
+- Main Entrance -> Hallway2
+  Requirement: SpiderSacBurst = true
+
+EYES ROOM
+- Side Entrance -> Smashing Room
+  Requirement: LurkerMoved = false
+  Blocked when: LurkerMoved = true
+
+Tablet:
+- Access Hallway4
+- Access Tablet Room
+- Access Renovated Room
+- Access Spiders Room
+- Access Smashing Room
+- Access Eyes Room
+- Access Key Room
+
+VinesCut:
+- Access Tablet Room through Vines Room
+
+SpiderSacBurst:
+- Access and leave Spiders Room
+
+LurkerMoved:
+- Access Hallway3
+- Access Eyes Room from Smashing Room
+
+Key:
+- Open Glass Door (win condition)
