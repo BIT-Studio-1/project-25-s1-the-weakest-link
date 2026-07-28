@@ -1,9 +1,10 @@
 {
   "startroom": {
     "actions": 3,
-    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
-    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (Maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
+    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
+    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
     "features": [ "book" ]
+    "aliases":  ["Start Room"]
   },
 
   "hallway1": {

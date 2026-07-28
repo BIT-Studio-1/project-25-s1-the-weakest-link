@@ -1,5 +1,6 @@
-namespace AwesomeGame;
 
+namespace AwesomeGame;
+//this is a comment
 // Class containing all code for moving between rooms, 
 public class MovementSystem
 {
@@ -8,6 +9,24 @@ public class MovementSystem
     public static string currentRoom = "startroom";
     private static bool cleanerpresent = false;
     // Movement system for Start Room
+    public static string RoomChange(string inputstring, Dictionary<string, object> rooms, string currentroom)
+    {
+        inputstring = inputstring.Trim();
+        for (int i = 0; i < rooms.Count; i++ )
+        {
+        if (rooms.ContainsValue(inputstring)) {
+
+        }
+
+        return string newroom;
+    }
+    
+    
+    
+    
+    
+    
+    
     public static bool startroom(string movement)
     {
         bool succeeded = true;
