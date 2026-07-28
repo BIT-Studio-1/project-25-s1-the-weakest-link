@@ -16,16 +16,15 @@ public class MovementSystem
         try
         {
             string json = File.ReadAllText("rooms.json");
-            using (JsonDocument doc = JsonDocument.Parse(json))
+            using (JsonDocument temp = JsonDocument.Parse(json))
             {
-                JsonElement room = doc.RootElement.GetProperty(currentRoom);
+                JsonElement room = temp.RootElement.GetProperty(currentRoom);
                 JsonElement neighbours = room.GetProperty("neighbours");
                 foreach (JsonElement neighbourName in neighbours.EnumerateArray())
                 {
                     string neighbour = neighbourName.GetString() ?? throw new MissingFieldException("Null neighbour in rooms.json");
-                    JsonElement neighbourRoom = doc.RootElement.GetProperty(neighbour);
+                    JsonElement neighbourRoom = temp.RootElement.GetProperty(neighbour);
                     JsonElement aliases = neighbourRoom.GetProperty("aliases");
-
                     foreach (JsonElement alias in aliases.EnumerateArray())
                     {
                         if ((alias.GetString() ?? "").Equals(movement, StringComparison.OrdinalIgnoreCase))
@@ -35,14 +34,7 @@ public class MovementSystem
             }
         }
         catch { }
-
-        Game.scrolltext("That's not a valid exit.");
         return currentRoom;
-    }
-
-    internal static bool ChangeRoom(string currentRoom, object v, string inputString)
-    {
-        throw new NotImplementedException();
     }
 }
 /*

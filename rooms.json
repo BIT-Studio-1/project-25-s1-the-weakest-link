@@ -1,8 +1,8 @@
 {
   "startroom": {
     "actions": 3,
-    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are three exits.\nTo the west lies a small <g>side room<g> (maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
-    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the west lies a small <g>side room<g> (Maybe somewhere you could hide?)\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
+    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
+    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are three exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
     "features": [ "book" ],
     "aliases": [ "main entrance", "starting room", "second entrance", "forward door" ],
     "neighbours": [ "hallway1", "hallway4" ]
@@ -53,7 +53,7 @@
     "actions": 0,
     "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\nThere is a single <g>door<g> on the south facing wall.\nThe corridor continues <g>down<g> around a corner at the west end.\nYou could also go <g>up<g> the corridor the other way.",
     "aliases": [ "down", "up", "door" ],
-    "neighbours": [ "hallway2", "hallway4", "eyesroom" ]
+    "neighbours": [ "hallway4", "hallway2", "eyesroom" ]
   },
 
   "hallway4": {

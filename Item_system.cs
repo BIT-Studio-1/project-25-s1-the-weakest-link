@@ -515,6 +515,7 @@ internal static class Game
                     {
                         MovementSystem.currentRoom = newRoom;
                         actionscompleted = 0;
+                        input = null;
                         inspect();
                     }
                     else
