@@ -522,6 +522,10 @@ internal static class Game
                         scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
+                    case "room":
+                    WriteLine($"You are in: {MovementSystem.currentRoom}");
+                    break;
+
                 case "summon":
                 case "summoncow":
                 case "summoncows":

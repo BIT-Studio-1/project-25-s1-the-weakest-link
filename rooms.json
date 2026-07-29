@@ -16,14 +16,12 @@
   "hallway1": {
     "actions": 0,
     "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
-    "aliases": [ "main entrance", "starting room", "up", "corridor", "doorway", "locked door" ],
+    "aliases": [ "main entrance", "up", "corridor", "doorway", "locked door" ],
     "neighbours": [ "startroom", "kniferoom", "vinesroom", "tabletroom", "hallway2" ],
     "entryRules": {
-      "starting room": [ "safeToReturn" ],
-      "locked door": [ "BeastGone", "HasTablet" ]
+      "locked door": [ "HasTablet" ]
     },
     "FailedEntry": {
-      "starting room": "There is a presence in this room, best not to enter.",
       "locked door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
     }
   },
@@ -32,7 +30,7 @@
     "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
     "description2": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel strange implements on one of the tables, the space where the dagger was empty.\nThere is only one <g>doorway<g>, back into the corridor",
     "features": [ "dagger" ],
-    "aliases": [ "open room", "doorway" ],
+    "aliases": [ "open room" ],
     "neighbours": [ "hallway1" ]
   },
   "vinesroom": {
@@ -62,13 +60,19 @@
     "actions": 0,
     "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west, locked by a key hole.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could go <g>up<g> the corridor, but around the corner <g>down<g> there seems to \nbe something lurking and grumbling in the darkness, blocking the way.",
     "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could also go <g>up<g> or <g>down<g> the corridor.",
-    "aliases": [ "down", "up", "glass door" ],
+    "aliases": [ "down", "main entrance", "up", "glass door" ],
     "neighbours": [ "hallway1", "renovatedroom", "spidersroom", "hallway3", "smashingroom" ],
     "entryRules": {
-      "glass door": [ "HasKey" ]
+      "glass door": [
+        "HasKey"
+      ],
+      "main entrance": [
+        "SacDestroyed"
+      ]
     },
     "FailedEntry": {
-      "glass door": "This door is locked by an ancient mechanism. You will need a key."
+      "glass door": "This door is locked by an ancient mechanism. You will need a key.",
+      "main entrance": "The exit is blocked by an egg sac."
     }
   },
   "hallway3": {
@@ -131,15 +135,13 @@
     "description": "You find yourself in a small, claustrophobic room.\nYou feel what appears to be a large egg sac blocking the exit out.\nFear grips you as you realise, you are in a monster's nest.\nYou may need to <b>attack<b> to get through.\nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>.",
     "description2": "The nest is filled with eggs, sure to hatch at any moment\nYou should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
     "features": [ "sac" ],
-    "aliases": [ "side door", "main entrance", "side entrance" ],
+    "aliases": [ "main entrance", "side entrance" ],
     "neighbours": [ "hallway2", "renovatedroom" ],
     "entryRules": {
-      "main entrance": [ "SacDestroyed" ],
-      "side door": [ "HasTablet" ]
+      "main entrance": [ "SacDestroyed" ]
     },
     "FailedEntry": {
-      "main entrance": "The exit is blocked by an egg sac.",
-      "side door": "This door won't budge."
+      "main entrance": "The exit is blocked by an egg sac."
     }
   },
   "eyesroom": {
