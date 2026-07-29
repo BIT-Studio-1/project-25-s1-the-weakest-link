@@ -8,6 +8,23 @@ public class MovementSystem
 {
     // Assigns string "startroom" to the currentRoom variable
     public static string currentRoom = "startroom";
+
+    private static bool CheckRule(string ruleName)
+    {
+        return ruleName switch
+        {
+            "HasTablet" => Game.Inventory.ContainsKey("tablet"),
+            "VinesCut" => Game.VinesCut,
+            "SacDestroyed" => Game.SacDestroyed,
+            "LurkerMoved" => Game.LurkerMoved,
+            "EyesSmashed" => Game.EyesSmashed,
+            "HasKey" => Game.HasKey,
+            "BeastGone" => !Game.SacDestroyed,
+            "safeToReturn" => true,  // Always allow returning to starting room
+            _ => false
+        };
+    }
+
     public static string ChangeRoom(string currentRoom, string movement)
     {
         try
@@ -22,36 +39,64 @@ public class MovementSystem
                     string neighbour = neighbourName.GetString() ?? throw new MissingFieldException("Null neighbour in rooms.json");
                     JsonElement neighbourRoom = temp.RootElement.GetProperty(neighbour);
                     JsonElement aliases = neighbourRoom.GetProperty("aliases");
-                    JsonElement Rules = neighbourRoom.GetProperty("rule");
-                    JsonElement Failedentries = neighbourRoom.GetProperty("FailedEntry");
+
                     foreach (JsonElement alias in aliases.EnumerateArray())
                     {
-                        if ((alias.GetString() ?? "").Equals(movement, StringComparison.OrdinalIgnoreCase))
+                        string aliasStr = alias.GetString() ?? "";
+                        if (aliasStr.Equals(movement, StringComparison.OrdinalIgnoreCase))
                         {
-                            bool allRulesPassed = true;
-                            foreach (JsonElement rule in Rules.EnumerateArray())
+                            // Found matching alias
+                            if (neighbourRoom.TryGetProperty("entryRules", out JsonElement entryRules))
                             {
-                                if (!rule.GetBoolean())
+                                if (entryRules.TryGetProperty(aliasStr, out JsonElement rulesForAlias))
                                 {
-                                    allRulesPassed = false;
-                                    break;
+                                    // Check all rules
+                                    bool allRulesPassed = true;
+                                    foreach (JsonElement rule in rulesForAlias.EnumerateArray())
+                                    {
+                                        string ruleName = rule.GetString() ?? "";
+                                        if (!CheckRule(ruleName))
+                                        {
+                                            allRulesPassed = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (allRulesPassed)
+                                    {
+                                        return neighbour;
+                                    }
+                                    else
+                                    {
+                                        // Get the failure message
+                                        if (neighbourRoom.TryGetProperty("FailedEntry", out JsonElement failedEntry))
+                                        {
+                                            if (failedEntry.TryGetProperty(aliasStr, out JsonElement failMessage))
+                                            {
+                                                WriteLine(failMessage.GetString());
+                                            }
+                                        }
+                                        return currentRoom;
+                                    }
                                 }
-                            }
-                            if (allRulesPassed)
-                            {
-                                return neighbour;
+                                else
+                                {
+                                    return neighbour;
+                                }
                             }
                             else
                             {
-                                WriteLine(Failedentries.GetString());
-                                return currentRoom;
+                                return neighbour;
                             }
-                        }//if the input matches neighbour aliases return room change
+                        }
                     }
                 }
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            WriteLine($"Error in movement system: {ex.Message}");
+        }
         return currentRoom;
     }
 }
