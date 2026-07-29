@@ -70,7 +70,6 @@ public class MovementSystem
                         }
                     }
                 }
-                WriteLine("You can't go that way.");
             }
         }
         catch (Exception ex)

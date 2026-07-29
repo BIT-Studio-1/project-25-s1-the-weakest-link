@@ -186,7 +186,7 @@ internal static class Game
             {
                 VinesCut = true;
                 PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                PropertyDamage.printdamage(PropertyDamage.turncost);
+                PropertyDamage.printdamage();
                 scrolltext("You slash through the vines covering the door. You should be able to get through now.", 35);
             }
             else
@@ -205,7 +205,7 @@ internal static class Game
         if (secretsenabled)
         {
             PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
-            PropertyDamage.printdamage(PropertyDamage.turncost);
+            PropertyDamage.printdamage();
             scrolltext("You did a test, you gained 200 EXP!");
         }
     }
@@ -256,7 +256,7 @@ internal static class Game
 
                 PropertyDamage.causedamage("Shredded bean bag", 60);
                 PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
-                PropertyDamage.printdamage(PropertyDamage.turncost);
+                PropertyDamage.printdamage();
 
             }
             else scrolltext("How did you get here without a knife?");
@@ -270,7 +270,7 @@ internal static class Game
                 scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.", 35);
                 PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
                 PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
-                PropertyDamage.printdamage(PropertyDamage.turncost);
+                PropertyDamage.printdamage();
             }
             else scrolltext("how did you get here without a hammer?");
         }
@@ -288,7 +288,7 @@ internal static class Game
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
                 PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
-                PropertyDamage.printdamage(PropertyDamage.turncost);
+                PropertyDamage.printdamage();
             }
             else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!", 35);
         }
@@ -386,7 +386,7 @@ internal static class Game
 
         Inventory[item] = Items[item];
         PropertyDamage.causedamage("Stole " + realName, cost);
-        PropertyDamage.printdamage(PropertyDamage.turncost);
+        PropertyDamage.printdamage();
     }
 
     // Called from movementsystem.cs when entering "glass door" from hallway2
@@ -537,7 +537,7 @@ internal static class Game
                 case "summoncows":
                     scrolltext("the cows are here!");
                     PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
-                    PropertyDamage.printdamage(PropertyDamage.turncost);
+                    PropertyDamage.printdamage();
                     break;
                 case "endgame":
                     if (secretsenabled == true)

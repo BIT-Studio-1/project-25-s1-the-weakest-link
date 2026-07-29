@@ -39,7 +39,7 @@ public static class PropertyDamage
 
        
     }
-    public static void printdamage(long turncost)
+    public static void printdamage()
     {
         Game.scrolltext($"You gain {turncost} EXP!");
         turncost = 0;
