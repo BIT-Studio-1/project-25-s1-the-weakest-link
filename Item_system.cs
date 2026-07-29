@@ -9,7 +9,8 @@ internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
-    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false, EyesSmashed = false, unlockeddoor = false;
+
+    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false, HasKey = false;
     public static Dictionary<string, object> Items;
     public static Dictionary<string, object> Rooms;
     public static int actionscompleted = 0;
@@ -123,7 +124,7 @@ internal static class Game
             (MovementSystem.currentRoom == "hallway2" && LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom" && LurkerMoved) ||
-            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
+            (MovementSystem.currentRoom == "spidersroom" && SacDestroyed) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
             (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")) ||
@@ -236,11 +237,11 @@ internal static class Game
     public static void attack()
     {
         // Spider room, Abby's responsibility
-        if (MovementSystem.currentRoom == "spidersroom" && !SpiderSacBurst)
+        if (MovementSystem.currentRoom == "spidersroom" && !SacDestroyed)
         {
             if (Inventory.ContainsKey("dagger"))
             {
-                SpiderSacBurst = true;
+                SacDestroyed = true;
 
                 scrolltext("You stab at the sac with you dagger, slashing your way through...");
                 Thread.Sleep(500);
