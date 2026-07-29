@@ -402,7 +402,11 @@ internal static class Game
         ReadKey();
         Clear();
 
-        condition = true;
+        Inventory.Clear(); // this codeblock clears everything, the inventory, the receipt, and resets all bools set at the beginning to their default values
+        PropertyDamage.damagereasons.Clear(); PropertyDamage.damageamount.Clear(); PropertyDamage.totalcost = 0;
+        VinesCut = false; SpiderSacBurst = false; LurkerMoved = false; EyesSmashed = false; unlockeddoor = false; secretsenabled = false; actionscompleted = 0;
+
+
     }
     public static void Main()
     {
