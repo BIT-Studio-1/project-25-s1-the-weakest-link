@@ -9,13 +9,14 @@ internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
-    public static bool VinesCut = false, SpiderSacBurst = false, LurkerMoved = false, EyesSmashed = false, unlockeddoor = false;
-    public static Dictionary<string, object> Items;
-    public static Dictionary<string, object> Rooms;
+
+    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false, HasKey = false;
+    public static Dictionary<string, object>? Items;
+    public static Dictionary<string, object>? Rooms;
     public static int actionscompleted = 0;
     public static bool condition = true, secretsenabled = false;
     public static JsonElement currentroomjson;
-    static string[] input;
+    static string[]? input;
     public static void scrolltext(string Text, int speed = 10)
     /*  
     this sucks and i hate it but it works
@@ -33,7 +34,7 @@ internal static class Game
         };
         var matches = Regex.Matches(Text, @"<(\w)>(.*?)<\1>");
         bool skipped = false;
-        void Writeportion(string portion, ConsoleColor? colour = null)
+        void Writeportion(string portion, ConsoleColor? textColour = null)
         {
             for (int i = 0; i < portion.Length; i++)
             {
@@ -43,8 +44,8 @@ internal static class Game
                     if (key == ConsoleKey.Spacebar || key == ConsoleKey.Enter)
                         skipped = true;
                 }
-                if (colour.HasValue)
-                    ForegroundColor = colour.Value;
+                if (textColour.HasValue)
+                    ForegroundColor = textColour.Value;
                 if (skipped)
                 {
                     Write(portion.Substring(i));
@@ -67,7 +68,6 @@ internal static class Game
             else
                 Writeportion(content);
             lastIndex = match.Index + match.Length;
-            lastIndex = match.Index + match.Length;
         }
         if (lastIndex < Text.Length)
             Writeportion(Text.Substring(lastIndex));
@@ -87,7 +87,7 @@ internal static class Game
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
             scrolltext("<b>cut vines<b>: Cuts the vines covering the door");
-        if (MovementSystem.currentRoom == "smashingroom" && EyesSmashed == false)
+        if (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == false)
         {
             scrolltext("<b>smash<b>: Smashes the obelisks");
         }
@@ -123,7 +123,7 @@ internal static class Game
             (MovementSystem.currentRoom == "hallway2" && LurkerMoved) ||
             (MovementSystem.currentRoom == "tabletroom" && Inventory.ContainsKey("tablet")) ||
             (MovementSystem.currentRoom == "smashingroom" && LurkerMoved) ||
-            (MovementSystem.currentRoom == "spidersroom" && SpiderSacBurst) ||
+            (MovementSystem.currentRoom == "spidersroom" && SacDestroyed) ||
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
             (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")) ||
@@ -134,23 +134,28 @@ internal static class Game
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
             scrolltext(description, 5);
         }
-        if (input != null)
+        if (input != null && input.Length > 1)
         {
-            if (input.Length > 1 && Inventory.ContainsKey(input[1]))
+            if (Inventory.ContainsKey(input[1]))
             {
                 var item = (JsonElement)Items[input[1]];
                 string itemDescription;
                 itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
                 scrolltext(itemDescription);
             }
-
-            if ((input.Length > 1 && input[1] == "room") || input.Length == 1)
+            else if (input[1] == "room")
+            {
                 inspectroom();
+            }
             else
+            {
                 scrolltext("You don't have that item.");
+            }
         }
         else
+        {
             inspectroom();
+        }
         actionscompleted++;
     }
     public static void stats()
@@ -236,11 +241,11 @@ internal static class Game
     public static void attack()
     {
         // Spider room, Abby's responsibility
-        if (MovementSystem.currentRoom == "spidersroom" && !SpiderSacBurst)
+        if (MovementSystem.currentRoom == "spidersroom" && !SacDestroyed)
         {
             if (Inventory.ContainsKey("dagger"))
             {
-                SpiderSacBurst = true;
+                SacDestroyed = true;
 
                 scrolltext("You stab at the sac with you dagger, slashing your way through...");
                 Thread.Sleep(500);
@@ -359,6 +364,7 @@ internal static class Game
                     {
                         scrolltext($"You take the <y>key<y>");
                         takeitem("key");
+                        HasKey = true;
                     }
                 }
                 break;
@@ -374,7 +380,7 @@ internal static class Game
         int cost = itemJSON.GetProperty("cost").GetInt32();
 
         Inventory[item] = Items[item];
-        PropertyDamage.causedamage("Stole " + itemJSON.GetProperty("real_name").GetString(), cost);
+        PropertyDamage.causedamage("Stole " + realName, cost);
     }
 
     // Called from movementsystem.cs when entering "glass door" from hallway2
@@ -401,7 +407,10 @@ internal static class Game
         ReadKey();
         Clear();
 
-        condition = true;
+        Inventory.Clear(); // this codeblock clears everything, the inventory, the receipt, and resets all bools set at the beginning to their default values
+        PropertyDamage.damagereasons.Clear(); PropertyDamage.damageamount.Clear(); PropertyDamage.totalcost = 0;
+        VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; HasKey = false; secretsenabled = false; actionscompleted = 0;
+        MovementSystem.currentRoom = "startroom";
     }
     public static void Main()
     {
@@ -432,6 +441,21 @@ internal static class Game
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');
+
+            // Special case: the glass door in hallway2 is the win condition, not a normal room transition
+            if (MovementSystem.currentRoom == "hallway2" && inputString == "glass door")
+            {
+                if (Game.HasKey)
+                {
+                    EndGame();
+                }
+                else
+                {
+                    scrolltext("This door is locked by an ancient mechanism. You will need a key.");
+                }
+                continue;
+            }
+
             switch (input[0])
             {
 
@@ -498,11 +522,14 @@ internal static class Game
                         scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
+                    case "room":
+                    WriteLine($"You are in: {MovementSystem.currentRoom}");
+                    break;
+
                 case "summon":
                 case "summoncow":
                 case "summoncows":
                     scrolltext("the cows are here!");
-                    bool cows = true;
                     PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
                     break;
                 case "endgame":
@@ -510,15 +537,16 @@ internal static class Game
                         EndGame();
                     break;
                 default:
-                    bool movementSucceeded = MovementSystem.move(inputString);
-                    if (movementSucceeded)
+                    string newRoom = MovementSystem.ChangeRoom(MovementSystem.currentRoom, inputString);
+                    if (newRoom != MovementSystem.currentRoom)
                     {
+                        MovementSystem.currentRoom = newRoom;
                         actionscompleted = 0;
+                        input = null;
                         inspect();
                     }
                     else
                     {
-                        scrolltext("Not a valid command");
                         scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
