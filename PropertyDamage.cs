@@ -39,9 +39,9 @@ public static class PropertyDamage
 
        
     }
-    public static void printdamage(string reason, int amount)
+    public static void printdamage(long turncost)
     {
-        Game.scrolltext($"You gain {amount} EXP!");
+        Game.scrolltext($"You gain {turncost} EXP!");
         turncost = 0;
     }
 }
