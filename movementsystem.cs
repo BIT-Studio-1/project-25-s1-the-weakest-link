@@ -14,6 +14,7 @@ public class MovementSystem
             "VinesCut" => Game.VinesCut,
             "SacDestroyed" => Game.SacDestroyed,
             "LurkerMoved" => Game.LurkerMoved,
+            "LurkerNotMoved" => !Game.LurkerMoved, 
             "EyesSmashed" => Game.EyesSmashed,
             "HasKey" => Game.HasKey,
             _ => false
