@@ -5,7 +5,7 @@ namespace AwesomeGame;
 
 // A lock on an exit, can require any number of factors and be flipped manually at runtime
 public class Lock
-{//wallahi im so fucking cooked
+{//wallahi im cooked
     public List<string> Requires { get; set; } = new();
     public string MatchType { get; set; } = "all"; // "all" or "any"
     public bool ForceLocked { get; set; } = false;
@@ -112,13 +112,12 @@ public static class MovementSystem
     {
         if (previousRoom == "vinesroom" && roomName == "tabletroom")
         {
-            // cleaner follows you through and seals the way back
-            LockExit("hallway1", "small room");
+            // side entrance seals shut for good once you've crossed through it
+            LockExit("vinesroom", "side entrance", "You hear something growling inside.");
+            LockExit("tabletroom", "side entrance", "You hear something growling inside.");
         }
         else if (previousRoom == "tabletroom" && roomName == "hallway1")
         {
-            // cleaner's moved on, vines room opens back up, something's guarding the corpse room now
-            UnlockExit("hallway1", "small room");
             LockExit("hallway1", "locked door", "You hear something growling inside.");
         }
     }
