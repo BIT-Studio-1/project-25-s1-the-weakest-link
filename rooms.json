@@ -1,233 +1,260 @@
 {
-    "startroom": {
-        "actions": 3,
-        "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are two exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
-        "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are two exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
-        "features": ["book"],
-        "aliases": [
-            "main entrance", "starting room", "second entrance", "forward door"
-        ],
-        "neighbours": [
-            "hallway1", "hallway4"
-        ],
-        "entryRules": {
-            "second entrance": ["HasTablet"]
-        },
-        "FailedEntry": {
-            "second entrance": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
-        }
+  "startroom": {
+    "actions": 3,
+    "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are two exits.\nTo the south is a <g>locked door<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
+    "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are two exits.\nTo the south is a <g>locked door<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
+    "features": [ "book" ],
+    "aliases": [
+      "locked door",
+      "forward door"
+    ],
+    "neighbours": [
+      "hallway1",
+      "hallway4"
+    ],
+    "entryRules": {
+      "locked door": [ "HasTablet" ]
     },
-    "hallway1": {
-        "actions": 0,
-        "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
-        "aliases": [
-            "main entrance",
-            "up",
-            "corridor",
-            "doorway",
-            "locked door"
-        ],
-        "neighbours": [
-            "startroom",
-            "kniferoom",
-            "vinesroom",
-            "tabletroom",
-            "hallway2"
-        ],
-        "entryRules": {
-            "locked door": ["HasTablet"]
-        },
-        "FailedEntry": {
-            "locked door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
-        }
-    },
-    "kniferoom": {
-        "actions": 0,
-        "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
-        "description2": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel strange implements on one of the tables, the space where the dagger was empty.\nThere is only one <g>doorway<g>, back into the corridor",
-        "features": ["dagger"],
-        "aliases": ["open room"],
-        "neighbours": ["hallway1"]
-    },
-    "vinesroom": {
-        "actions": 0,
-        "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched.\nThe air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown door choked with thick vines. The passage beyond is completely blocked. You will need to <b>cut<b> through the <b>vines<b> before you can enter the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in.",
-        "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. \nThe air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in",
-        "aliases": [
-            "small room", "corridor", "side entrance"
-        ],
-        "neighbours": ["hallway1", "tabletroom"]
-    },
-    "tabletroom": {
-        "actions": 4,
-        "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you forming a terraced chamber that\nclimbs toward the far side of the room. As you carefully make your way forward \nyour foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables.\nThe body lies completely still, its flesh still warm.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <b>loot<b> is difficult to ignore.\nThe <g>locked door<g> to the south is sealed with ancient magic.\nYou could also go out through the <g>side entrance<g> you cut your way through before.",
-        "description2": "You are still in the terraced room.\nThe body is still there, its pockets now empty.\nThe beast is coming.\nYou hope the tablet you found could break the magic seal on the <g>locked door<g>.",
-        "features": ["corpse"],
-        "aliases": [
-            "locked door", "side entrance", "second entrance"
-        ],
-        "neighbours": [
-            "hallway1", "vinesroom"
-        ],
-        "entryRules": {
-            "locked door": ["HasTablet"],
-            "side entrance": ["VinesCut"]
-        },
-        "FailedEntry": {
-            "locked door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
-            "side entrance": "Vines have not been cut."
-        }
-    },
-    "hallway2": {
-        "actions": 0,
-        "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west, locked by a key hole.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could go <g>up<g> the corridor, but around the corner <g>down<g> there seems to \nbe something lurking and grumbling in the darkness, blocking the way.",
-        "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could also go <g>up<g> or <g>down<g> the corridor.",
-        "aliases": [
-            "down", "main entrance", "up", "glass door"
-        ],
-        "neighbours": [
-            "hallway1",
-            "renovatedroom",
-            "spidersroom",
-            "hallway3",
-            "smashingroom"
-        ],
-        "entryRules": {
-            "glass door": ["HasKey"],
-            "main entrance": ["LurkerNotMoved"]
-        },
-        "FailedEntry": {
-            "glass door": "This door is locked by an ancient mechanism. You will need a key.",
-            "main entrance": "You hear the lurker's heavy footsteps pounding toward the door — going that way now would put you face to face with it."
-        }
-    },
-    "hallway3": {
-        "actions": 0,
-        "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\nThere is a single <g>door<g> on the south facing wall.\nThe corridor continues <g>down<g> around a corner at the west end.\nYou could also go <g>up<g> the corridor the other way.",
-        "aliases": [
-            "down", "up", "door", "main entrance"
-        ],
-        "neighbours": [
-            "hallway4", "hallway2", "eyesroom"
-        ],
-        "entryRules": {
-            "door": ["HasTablet"],
-            "down": ["LurkerMoved"]
-        },
-        "FailedEntry": {
-            "door": "How the fuck did you even get here without a tablet you dirty cheater fuck you",
-            "down": "the lurker is further down the hallway, best not to approach it"
-        }
-    },
-    "hallway4": {
-        "actions": 0,
-        "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still.\nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>side door<g> that feels important.\nThe silence here feels deafening and imposing, you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
-        "aliases": [
-            "second entrance",
-            "forward door",
-            "up",
-            "down",
-            "door"
-        ],
-        "neighbours": [
-            "startroom", "hallway3", "keyroom"
-        ],
-        "entryRules": {
-            "forward door": ["HasTablet"],
-            "up": ["LurkerMoved", "VinesCut"]
-        },
-        "FailedEntry": {
-            "forward door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
-            "up": "you can hear something grumbling further up the hallway, best not to approach"
-        }
-    },
-    "renovatedroom": {
-        "actions": 0,
-        "description": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\nMust be a <y>hammer<y>, you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
-        "description2": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
-        "features": ["hammer"],
-        "aliases": [
-            "first door", "side entrance"
-        ],
-        "neighbours": [
-            "hallway2", "spidersroom"
-        ],
-        "entryRules": {
-            "first door": ["HasTablet"]
-        },
-        "FailedEntry": {
-            "first door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
-        }
-    },
-    "smashingroom": {
-        "actions": 0,
-        "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <b>smash<b> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
-        "description2": "You can hear the lurker coming from the corridor.\nYou should leave out the <g>side entrance<g>.",
-        "aliases": [
-            "fourth door", "side entrance"
-        ],
-
-        "neighbours": [
-            "hallway2", "eyesroom"
-        ],
-        "entryRules": {
-            "fourth door": ["HasTablet"],
-            "side entrance": ["LurkerNotMoved"]
-        },
-        "FailedEntry": {
-            "fourth door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
-            "side entrance": "You can hear the lurker thrashing about just beyond that door now — going back that way would walk you right into it."
-        }
-    },
-    "spidersroom": {
-        "actions": 0,
-        "description": "You find yourself in a small, claustrophobic room.\nYou feel what appears to be a large egg sac blocking the exit out.\nFear grips you as you realise, you are in a monster's nest.\nYou may need to <b>attack<b> to get through.\nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>.",
-        "description2": "The nest is filled with eggs, sure to hatch at any moment\nYou should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
-        "features": ["sac"],
-        "aliases": [
-            "main entrance", "side entrance"
-        ],
-        "neighbours": [
-            "hallway2", "renovatedroom"
-        ],
-        "entryRules": {
-            "main entrance": ["SacDestroyed"]
-        },
-        "FailedEntry": {
-            "main entrance": "The exit is blocked by an egg sac."
-        }
-    },
-    "eyesroom": {
-        "actions": 0,
-        "description": "You find yourself in another terraced chamber.\nStrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above.\nThere are two doors in this chamber, one <g>side entrance<g> to the other room, and a <g>main entrance<g> out to the corridor.\nYou are in immediate danger and need to <b>attack<b>.",
-        "description2": "You are in a large terraced chamber filled with the remains of strange monoliths you have smashed.\nYou swear these bore glowing red eyes, but darkness has returned...\nWas that real, or is your isolation driving you to insanity?\nThere are two doors, one <g>side entrance<g> to the other room, and a <g>main entrance<g> out to the corridor",
-        "aliases": [
-            "door", "main entrance", "side entrance"
-        ],
-        "neighbours": [
-            "hallway3", "smashingroom"
-        ],
-        "entryRules": {
-            "side entrance": ["LurkerMoved"]
-        },
-        "FailedEntry": {
-            "side entrance": "Something feels strange about this door. You can't bring yourself to step through yet."
-        }
-    },
-    "keyroom": {
-        "actions": 0,
-        "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nAs your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>.",
-        "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nThe only exit is back through the <g>door<g>.",
-        "features": ["key"],
-        "aliases": [
-            "side door", "door"
-        ],
-        "neighbours": ["hallway4"],
-        "entryRules": {
-            "side door": ["HasTablet"]
-        },
-        "FailedEntry": {
-            "side door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
-        }
+    "FailedEntry": {
+      "second entrance": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
     }
+  },
+  "hallway1": {
+    "actions": 0,
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
+    "aliases": [
+      "main entrance",
+      "up",
+      "corridor",
+      "doorway",
+      "locked door"
+    ],
+    "neighbours": [
+      "startroom",
+      "kniferoom",
+      "vinesroom",
+      "tabletroom",
+      "hallway2"
+    ],
+    "entryRules": {
+      "locked door": [ "HasTablet" ]
+    },
+    "FailedEntry": {
+      "locked door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
+    }
+  },
+  "kniferoom": {
+    "actions": 0,
+    "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
+    "description2": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel strange implements on one of the tables, the space where the dagger was empty.\nThere is only one <g>doorway<g>, back into the corridor",
+    "features": [ "dagger" ],
+    "aliases": [ "open room" ],
+    "neighbours": [ "hallway1" ]
+  },
+  "vinesroom": {
+    "actions": 0,
+    "description": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched.\nThe air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east stands an overgrown door choked with thick vines. The passage beyond is completely blocked. You will need to <b>cut<b> through the <b>vines<b> before you can enter the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in.",
+    "description2": "You find yourself in a cramped chamber, small enough that you can nearly touch both walls with your arms outstretched. \nThe air is dry with a strange warm wind that doesn't seem to originate from a single source.\nTo your east the remains of the vines you cut are scattered across the floor in front of the <g>side entrance<g>.\nTo the south is the <g>corridor<g> door, leading back the way you came in",
+    "aliases": [
+      "small room",
+      "corridor",
+      "side entrance"
+    ],
+    "neighbours": [ "hallway1", "tabletroom" ]
+  },
+  "tabletroom": {
+    "actions": 4,
+    "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you forming a terraced chamber that\nclimbs toward the far side of the room. As you carefully make your way forward \nyour foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables.\nThe body lies completely still, its flesh still warm.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <b>loot<b> is difficult to ignore.\nThe <g>locked door<g> to the south is sealed with ancient magic.\nYou could also go out through the <g>side entrance<g> you cut your way through before.",
+    "description2": "You are still in the terraced room.\nThe body is still there, its pockets now empty.\nThe beast is coming.\nYou hope the tablet you found could break the magic seal on the <g>locked door<g>.",
+    "features": [ "corpse" ],
+    "aliases": [
+      "locked door",
+      "side entrance",
+      "second entrance"
+    ],
+    "neighbours": [
+      "hallway1",
+      "vinesroom"
+    ],
+    "entryRules": {
+      "locked door": [ "HasTablet" ],
+      "side entrance": [ "VinesCut" ]
+    },
+    "FailedEntry": {
+      "locked door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
+      "side entrance": "Vines have not been cut."
+    }
+  },
+  "hallway2": {
+    "actions": 0,
+    "description": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west, locked by a key hole.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could go <g>up<g> the corridor, but around the corner <g>down<g> there seems to \nbe something lurking and grumbling in the darkness, blocking the way.",
+    "description2": "You have ventured deeper into the corridor.\nYou hesitate, fear tightening your chest for a moment, but you gather yourself and press on.\nYou discover four doors branching from the passage. The <g>first door<g> to the east feels cold.\nFurther along the eastern wall of the passage, you discover a <g>side door<g>.\nThere is a <g>glass door<g> to the west that seems different from the others.\nAt the far end of the corridor stands the <g>fourth door<g>, silent and unmoving in the darkness.\nExcept for the glass door, these doors seem to be sealed by the same dark magic as many others.\nYou could also go <g>up<g> or <g>down<g> the corridor.",
+    "aliases": [
+      "down",
+      "main entrance",
+      "up",
+      "glass door"
+    ],
+    "neighbours": [
+      "hallway1",
+      "renovatedroom",
+      "spidersroom",
+      "hallway3",
+      "smashingroom"
+    ],
+    "entryRules": {
+      "glass door": [ "HasKey" ],
+      "main entrance": [ "LurkerNotMoved" ]
+    },
+    "FailedEntry": {
+      "glass door": "This door is locked by an ancient mechanism. You will need a key.",
+      "main entrance": "You hear the lurker's heavy footsteps pounding toward the door — going that way now would put you face to face with it."
+    }
+  },
+  "hallway3": {
+    "actions": 0,
+    "description": "The hallway before you stretches into darkness, thick with stale air and the faint smell of sweat and decay.\nThere is a single <g>door<g> on the south facing wall.\nThe corridor continues <g>down<g> around a corner at the west end.\nYou could also go <g>up<g> the corridor the other way.",
+    "aliases": [
+      "down",
+      "up",
+      "door",
+      "main entrance"
+    ],
+    "neighbours": [
+      "hallway4",
+      "hallway2",
+      "eyesroom"
+    ],
+    "entryRules": {
+      "door": [ "HasTablet" ],
+      "down": [ "LurkerMoved" ]
+    },
+    "FailedEntry": {
+      "door": "How the fuck did you even get here without a tablet you dirty cheater fuck you",
+      "down": "the lurker is further down the hallway, best not to approach it"
+    }
+  },
+  "hallway4": {
+    "actions": 0,
+    "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still.\nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>side door<g> that feels important.\nThe silence here feels deafening and imposing, you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
+    "aliases": [
+      "second entrance",
+      "forward door",
+      "up",
+      "down",
+      "door"
+    ],
+    "neighbours": [
+      "startroom",
+      "hallway3",
+      "keyroom"
+    ],
+    "entryRules": {
+      "forward door": [ "HasTablet" ],
+      "up": [ "LurkerMoved", "VinesCut" ]
+    },
+    "FailedEntry": {
+      "forward door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
+      "up": "you can hear something grumbling further up the hallway, best not to approach"
+    }
+  },
+  "renovatedroom": {
+    "actions": 0,
+    "description": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\nMust be a <y>hammer<y>, you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
+    "description2": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
+    "features": [ "hammer" ],
+    "aliases": [
+      "first door",
+      "side entrance"
+    ],
+    "neighbours": [
+      "hallway2",
+      "spidersroom"
+    ],
+    "entryRules": {
+      "first door": [ "HasTablet" ]
+    },
+    "FailedEntry": {
+      "first door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
+    }
+  },
+  "smashingroom": {
+    "actions": 0,
+    "description": "You find yourself in a large, mostly open chamber with tables around the sides and one in the middle.\nLike many other rooms, the tables here seem to have many strange monolith sculptures in rows.\nIf you were to <b>smash<b> something in here it would get the lurker's attention.\nThere are two doors here, the <g>main entrance<g> to the corridor north of you, and a <g>side entrance<g> at the west end of the chamber.",
+    "description2": "You can hear the lurker coming from the corridor.\nYou should leave out the <g>side entrance<g>.",
+    "aliases": [
+      "fourth door",
+      "side entrance"
+    ],
+
+    "neighbours": [
+      "hallway2",
+      "eyesroom"
+    ],
+    "entryRules": {
+      "fourth door": [ "HasTablet" ],
+      "side entrance": [ "LurkerNotMoved" ]
+    },
+    "FailedEntry": {
+      "fourth door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it.",
+      "side entrance": "You can hear the lurker thrashing about just beyond that door now — going back that way would walk you right into it."
+    }
+  },
+  "spidersroom": {
+    "actions": 0,
+    "description": "You find yourself in a small, claustrophobic room.\nYou feel what appears to be a large egg sac blocking the exit out.\nFear grips you as you realise, you are in a monster's nest.\nYou may need to <b>attack<b> to get through.\nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>.",
+    "description2": "The nest is filled with eggs, sure to hatch at any moment\nYou should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
+    "features": [ "sac" ],
+    "aliases": [
+      "main entrance",
+      "side entrance"
+    ],
+    "neighbours": [
+      "hallway2",
+      "renovatedroom"
+    ],
+    "entryRules": {
+      "main entrance": [ "SacDestroyed" ]
+    },
+    "FailedEntry": {
+      "main entrance": "The exit is blocked by an egg sac."
+    }
+  },
+  "eyesroom": {
+    "actions": 0,
+    "description": "You find yourself in another terraced chamber.\nStrangely, despite your blindness you swear you can see several menacing red eyes bearing down on you from above.\nThere are two doors in this chamber, one <g>side entrance<g> to the other room, and a <g>main entrance<g> out to the corridor.\nYou are in immediate danger and need to <b>attack<b>.",
+    "description2": "You are in a large terraced chamber filled with the remains of strange monoliths you have smashed.\nYou swear these bore glowing red eyes, but darkness has returned...\nWas that real, or is your isolation driving you to insanity?\nThere are two doors, one <g>side entrance<g> to the other room, and a <g>main entrance<g> out to the corridor",
+    "aliases": [
+      "door",
+      "main entrance",
+      "side entrance"
+    ],
+    "neighbours": [
+      "hallway3",
+      "smashingroom"
+    ],
+    "entryRules": {
+      "side entrance": [ "LurkerMoved" ]
+    },
+    "FailedEntry": {
+      "side entrance": "Something feels strange about this door. You can't bring yourself to step through yet."
+    }
+  },
+  "keyroom": {
+    "actions": 0,
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nAs your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>.",
+    "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nThe only exit is back through the <g>door<g>.",
+    "features": [ "key" ],
+    "aliases": [
+      "side door",
+      "door"
+    ],
+    "neighbours": [ "hallway4" ],
+    "entryRules": {
+      "side door": [ "HasTablet" ]
+    },
+    "FailedEntry": {
+      "side door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
+    }
+  }
 }
