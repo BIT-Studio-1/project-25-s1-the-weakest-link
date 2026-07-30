@@ -107,14 +107,13 @@ public static class MovementSystem
         return room.Exits.FirstOrDefault(e => e.MatchesInput(direction));
     }
 
-    // scripted lock/unlock events tied to specific rooms, runs whenever the player enters one
-    private static void HandleRoomEnterEvents(string roomName)
+    // scripted lock/unlock events tied to specific room transitions, runs whenever the player moves
+    private static void HandleRoomEnterEvents(string previousRoom, string roomName)
     {
-        if (roomName == "vinesroom")
+        if (previousRoom == "vinesroom" && roomName == "tabletroom")
         {
-            // cleaner shows up, block both ways in until it leaves
+            // cleaner follows you through and seals the way back
             LockExit("hallway1", "small room");
-            LockExit("tabletroom", "side entrance");
         }
         else if (roomName == "hallway2")
         {
@@ -146,7 +145,7 @@ public static class MovementSystem
                 return currentRoomName;
             }
             string destination = exit.Target;
-            HandleRoomEnterEvents(destination);
+            HandleRoomEnterEvents(currentRoomName, destination);
             return destination;
         }
         catch (Exception ex)
