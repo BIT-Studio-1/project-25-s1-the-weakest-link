@@ -10,7 +10,7 @@ internal static class Game
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
 
-    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false, HasKey = false;
+    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false;
     public static Dictionary<string, object>? Items;
     public static Dictionary<string, object>? Rooms;
     public static int actionscompleted = 0;
@@ -369,7 +369,6 @@ internal static class Game
                     {
                         scrolltext($"You take the <y>key<y>");
                         takeitem("key");
-                        HasKey = true;
                     }
                 }
                 break;
@@ -415,7 +414,7 @@ internal static class Game
 
         Inventory.Clear(); // this codeblock clears everything, the inventory, the receipt, and resets all bools set at the beginning to their default values
         PropertyDamage.damagereasons.Clear(); PropertyDamage.damageamount.Clear(); PropertyDamage.totalcost = 0;
-        VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; HasKey = false; secretsenabled = false; actionscompleted = 0;
+        VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; secretsenabled = false; actionscompleted = 0;
         MovementSystem.currentRoom = "startroom";
     }
     public static void Main()
@@ -451,7 +450,7 @@ internal static class Game
             // Special case: the glass door in hallway2 is the win condition, not a normal room transition
             if (MovementSystem.currentRoom == "hallway2" && inputString == "glass door")
             {
-                if (Game.HasKey)
+                if (Inventory.ContainsKey("key"))
                 {
                     EndGame();
                 }

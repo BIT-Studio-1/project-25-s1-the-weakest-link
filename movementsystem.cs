@@ -16,7 +16,7 @@ public class MovementSystem
             "LurkerMoved" => Game.LurkerMoved,
             "LurkerNotMoved" => !Game.LurkerMoved, 
             "EyesSmashed" => Game.EyesSmashed,
-            "HasKey" => Game.HasKey,
+            "HasKey" => Game.Inventory.ContainsKey("key"),
             _ => false
         };
     }
