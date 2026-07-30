@@ -3,12 +3,7 @@ using static System.Console;
 
 namespace AwesomeGame;
 
-/// <summary>
-/// A lock on an exit. Can require any number of factors (rule names),
-/// matched either as "all" (AND) or "any" (OR). ForceLocked lets code
-/// flip an exit locked/unlocked at runtime (a lever, a spell, etc.)
-/// independent of whatever the requires list says.
-/// </summary>
+// A lock on an exit, can require any number of factors and be flipped manually at runtime
 public class Lock
 {
     public List<string> Requires { get; set; } = new();
@@ -16,29 +11,18 @@ public class Lock
     public bool ForceLocked { get; set; } = false;
     public string? FailMessage { get; set; }
 
-    // True if this lock currently blocks passage, checking ForceLocked first
-    // and then falling back to the Requires list (per MatchType).
+    // checks ForceLocked first, then falls back to the Requires list
     public bool IsLocked()
     {
-        if (ForceLocked)
-        {
-            return true;
-        }
-        if (Requires.Count == 0)
-        {
-            return false;
-        }
-
+        if (ForceLocked) return true;
+        if (Requires.Count == 0) return false;
         return MatchType.Equals("any", StringComparison.OrdinalIgnoreCase)
             ? !Requires.Any(MovementSystem.CheckRule)
             : !Requires.All(MovementSystem.CheckRule);
     }
 }
 
-/// <summary>
-/// A single exit from a room: where it leads, what words open it,
-/// and (if any) lock guards passing through.
-/// </summary>
+// One exit from a room - where it leads, what words open it, and any lock guarding it
 public class Exit
 {
     public string Direction { get; set; } = "";
@@ -46,14 +30,12 @@ public class Exit
     public string Target { get; set; } = "";
     public Lock? Lock { get; set; }
 
-    // True if the given input word matches this exit's direction or any of its aliases.
     public bool MatchesInput(string input) =>
         Direction.Equals(input, StringComparison.OrdinalIgnoreCase) ||
         Aliases.Any(a => a.Equals(input, StringComparison.OrdinalIgnoreCase));
 }
 
-// A room loaded from rooms.json: its flavour text, any collectible
-// features, and the list of exits leading out of it.
+// A room loaded from rooms.json
 public class Room
 {
     public List<Exit> Exits { get; set; } = new();
@@ -63,16 +45,11 @@ public class Room
     public int Actions { get; set; }
 }
 
-// Handles loading rooms.json and moving the player between rooms,
-// including checking and managing exit locks.
 public static class MovementSystem
 {
     public static string currentRoom = "startroom";
-
     private static Dictionary<string, Room>? _rooms;
-
-    // Lazily loads and caches rooms.json as a name -> Room lookup,
-    // so the file is only read from disk once.
+    // loads rooms.json once and caches it so that it doesnt re-read every loop
     private static Dictionary<string, Room> Rooms
     {
         get
@@ -88,8 +65,7 @@ public static class MovementSystem
         }
     }
 
-    // Resolves a named factor (used by locks) to its current true/false
-    // state in the game. Add new factors here as the game grows.
+    // resolves a named factor to its current true/false state, add new ones here
     public static bool CheckRule(string ruleName)
     {
         return ruleName switch
@@ -101,48 +77,53 @@ public static class MovementSystem
             "LurkerNotMoved" => !Game.LurkerMoved,
             "EyesSmashed" => Game.EyesSmashed,
             "HasKey" => Game.HasKey,
-            // Add new factors here as you need them:
             // "LeverPulled" => Game.LeverPulled,
             // "KnowsSecretWord" => Game.KnowsSecretWord,
             _ => false
         };
     }
 
-    /// Manually locks an exit at runtime.
-    public static void LockExit(string roomName, string direction)
+    // forces an exit locked regardless of its requires list, optionally overriding the fail message
+    public static void LockExit(string roomName, string direction, string? failMessage = null)
     {
         Exit? exit = FindExit(roomName, direction);
-        if (exit != null)
-        {
-            exit.Lock ??= new Lock();
-            exit.Lock.ForceLocked = true;
-        }
+        if (exit == null) return;
+        exit.Lock ??= new Lock();
+        exit.Lock.ForceLocked = true;
+        if (failMessage != null) exit.Lock.FailMessage = failMessage;
     }
 
-    /// Manually unlocks an exit at runtime.
+    // clears a manual lock set by LockExit
     public static void UnlockExit(string roomName, string direction)
     {
         Exit? exit = FindExit(roomName, direction);
-        if (exit?.Lock != null)
-        {
-            exit.Lock.ForceLocked = false;
-        }
+        if (exit?.Lock != null) exit.Lock.ForceLocked = false;
     }
 
-    // Looks up a specific exit by room name and direction/alias,
-    // used internally by LockExit and UnlockExit.
     private static Exit? FindExit(string roomName, string direction)
     {
-        if (!Rooms.TryGetValue(roomName, out Room? room))
-        {
-            return null;
-        }
+        if (!Rooms.TryGetValue(roomName, out Room? room)) return null;
         return room.Exits.FirstOrDefault(e => e.MatchesInput(direction));
     }
 
-    // Attempts to move the player from currentRoomName whichever
-    // exit that matches "movement". Returns the new room name on success, 
-    // or the original room name if the move fails.
+    // scripted lock/unlock events tied to specific rooms, runs whenever the player enters one
+    private static void HandleRoomEnterEvents(string roomName)
+    {
+        if (roomName == "vinesroom")
+        {
+            // cleaner locks small room
+            LockExit("hallway1", "open room");
+            LockExit("tabletroom", "side entrance");
+        }
+        else if (roomName == "hallway2")
+        {
+            // locks tabletroom after left
+            UnlockExit("hallway1", "open room");
+            UnlockExit("tabletroom", "side entrance");
+            LockExit("hallway1", "locked door", "You hear something growling inside.");
+        }
+    }
+
     public static string ChangeRoom(string currentRoomName, string movement)
     {
         try
@@ -163,7 +144,9 @@ public static class MovementSystem
                 WriteLine(exit.Lock.FailMessage ?? "You cannot go this way right now.");
                 return currentRoomName;
             }
-            return exit.Target;
+            string destination = exit.Target;
+            HandleRoomEnterEvents(destination);
+            return destination;
         }
         catch (Exception ex)
         {

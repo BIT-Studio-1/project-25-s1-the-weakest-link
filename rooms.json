@@ -33,7 +33,7 @@
         "target": "startroom"
       },
       {
-        "direction": "small room",
+        "direction": "open room",
         "aliases": [],
         "target": "kniferoom"
       },
@@ -48,7 +48,7 @@
         }
       },
       {
-        "direction": "open room",
+        "direction": "small room",
         "aliases": [],
         "target": "vinesroom"
       },
