@@ -10,7 +10,7 @@ internal static class Game
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
 
-    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false, HasKey = false;
+    public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false;
     public static Dictionary<string, object>? Items;
     public static Dictionary<string, object>? Rooms;
     public static int actionscompleted = 0;
@@ -186,6 +186,7 @@ internal static class Game
             {
                 VinesCut = true;
                 PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
+                PropertyDamage.printdamage();
                 scrolltext("You slash through the vines covering the door. You should be able to get through now.", 35);
             }
             else
@@ -204,6 +205,7 @@ internal static class Game
         if (secretsenabled)
         {
             PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
+            PropertyDamage.printdamage();
             scrolltext("You did a test, you gained 200 EXP!");
         }
     }
@@ -254,6 +256,7 @@ internal static class Game
 
                 PropertyDamage.causedamage("Shredded bean bag", 60);
                 PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
+                PropertyDamage.printdamage();
 
             }
             else scrolltext("How did you get here without a knife?");
@@ -267,6 +270,7 @@ internal static class Game
                 scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.", 35);
                 PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
                 PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
+                PropertyDamage.printdamage();
             }
             else scrolltext("how did you get here without a hammer?");
         }
@@ -284,6 +288,7 @@ internal static class Game
 
                 PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
                 PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
+                PropertyDamage.printdamage();
             }
             else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!", 35);
         }
@@ -364,7 +369,6 @@ internal static class Game
                     {
                         scrolltext($"You take the <y>key<y>");
                         takeitem("key");
-                        HasKey = true;
                     }
                 }
                 break;
@@ -381,6 +385,7 @@ internal static class Game
 
         Inventory[item] = Items[item];
         PropertyDamage.causedamage("Stole " + realName, cost);
+        PropertyDamage.printdamage();
     }
 
     // Called from movementsystem.cs when entering "glass door" from hallway2
@@ -409,7 +414,7 @@ internal static class Game
 
         Inventory.Clear(); // this codeblock clears everything, the inventory, the receipt, and resets all bools set at the beginning to their default values
         PropertyDamage.damagereasons.Clear(); PropertyDamage.damageamount.Clear(); PropertyDamage.totalcost = 0;
-        VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; HasKey = false; secretsenabled = false; actionscompleted = 0;
+        VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; secretsenabled = false; actionscompleted = 0;
         MovementSystem.currentRoom = "startroom";
     }
     public static void Main()
@@ -445,7 +450,7 @@ internal static class Game
             // Special case: the glass door in hallway2 is the win condition, not a normal room transition
             if (MovementSystem.currentRoom == "hallway2" && inputString == "glass door")
             {
-                if (Game.HasKey)
+                if (Inventory.ContainsKey("key"))
                 {
                     EndGame();
                 }
@@ -531,6 +536,7 @@ internal static class Game
                 case "summoncows":
                     scrolltext("the cows are here!");
                     PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
+                    PropertyDamage.printdamage();
                     break;
                 case "endgame":
                     if (secretsenabled == true)
