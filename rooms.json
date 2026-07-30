@@ -120,7 +120,7 @@
         "lock": {
           "requires": ["VinesCut"],
           "matchType": "all",
-          "failMessage": "Vines have not been cut."
+          "failMessage": "the beast is making noise here, you shouldnt enter."
         }
       }
     ]
