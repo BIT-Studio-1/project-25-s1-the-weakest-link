@@ -33,9 +33,9 @@
         "target": "startroom"
       },
       {
-        "direction": "open room",
+        "direction": "small room",
         "aliases": [],
-        "target": "kniferoom"
+        "target": "vinesroom"
       },
       {
         "direction": "locked door",
@@ -48,9 +48,9 @@
         }
       },
       {
-        "direction": "small room",
+        "direction": "open room",
         "aliases": [],
-        "target": "vinesroom"
+        "target": "kniferoom"
       },
       {
         "direction": "down",
@@ -120,7 +120,7 @@
         "lock": {
           "requires": ["VinesCut"],
           "matchType": "all",
-          "failMessage": "the beast is making noise here, you shouldnt enter."
+          "failMessage": "The beast is making noise here, you shouldn't enter."
         }
       }
     ]

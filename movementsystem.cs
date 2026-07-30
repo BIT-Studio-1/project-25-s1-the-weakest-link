@@ -49,7 +49,8 @@ public static class MovementSystem
 {
     public static string currentRoom = "startroom";
     private static Dictionary<string, Room>? _rooms;
-    // loads rooms.json once and caches it so that it doesnt re-read every loop
+
+    // loads rooms.json once and caches it
     private static Dictionary<string, Room> Rooms
     {
         get
@@ -111,14 +112,14 @@ public static class MovementSystem
     {
         if (roomName == "vinesroom")
         {
-            // cleaner locks small room
-            LockExit("hallway1", "open room");
+            // cleaner shows up, block both ways in until it leaves
+            LockExit("hallway1", "small room");
             LockExit("tabletroom", "side entrance");
         }
         else if (roomName == "hallway2")
         {
-            // locks tabletroom after left
-            UnlockExit("hallway1", "open room");
+            // cleaner's moved on, vines room opens back up, something's guarding the corpse room now
+            UnlockExit("hallway1", "small room");
             UnlockExit("tabletroom", "side entrance");
             LockExit("hallway1", "locked door", "You hear something growling inside.");
         }
