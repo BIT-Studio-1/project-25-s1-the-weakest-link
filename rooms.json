@@ -214,20 +214,22 @@
             "side entrance": "Something feels strange about this door. You can't bring yourself to step through yet."
         }
     },
-    "keyroom": {
-        "actions": 0,
-        "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nAs your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>.",
-        "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nThe only exit is back through the <g>door<g>.",
-        "features": ["key"],
-        "aliases": [
-            "side door", "door"
-        ],
-        "neighbours": ["hallway4"],
-        "entryRules": {
-            "side door": ["HasTablet"]
-        },
-        "FailedEntry": {
-            "side door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
-        }
+  "keyroom": {
+    "actions": 0,
+    "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nAs your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>.",
+    "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nThe only exit is back through the <g>door<g>.",
+    "features": [ "key" ],
+    "aliases": [
+      "side door",
+      "door"
+    ],
+    "neighbours": [ "hallway4" ],
+    "entryRules": {
+      "side door": [ "HasTablet" ]
+    },
+    "FailedEntry": {
+      "side door": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
     }
+  }
+  "bathroom": 
 }
