@@ -58,7 +58,7 @@
         "target": "hallway2"
       },
       {
-        "direction": "strange smelling door",
+        "direction": "bad smelling door",
         "aliases": [],
         "target": "bathroom"
       }
