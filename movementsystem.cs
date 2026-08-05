@@ -3,10 +3,71 @@ using static System.Console;
 
 namespace AwesomeGame;
 
-public class MovementSystem
+// A lock on an exit, can require any number of factors and be flipped manually at runtime
+public class Lock
+{//wallahi im cooked
+    public List<string> Requires { get; set; } = new();
+    public string MatchType { get; set; } = "all"; // "all" or "any"
+    public bool ForceLocked { get; set; } = false;
+    public string? FailMessage { get; set; }
+
+    // checks ForceLocked first, then falls back to the Requires list
+    public bool IsLocked()
+    {
+        if (ForceLocked) return true;
+        if (Requires.Count == 0) return false;
+        return MatchType.Equals("any", StringComparison.OrdinalIgnoreCase)
+            ? !Requires.Any(MovementSystem.CheckRule)
+            : !Requires.All(MovementSystem.CheckRule);
+    }
+}
+
+// One exit from a room - where it leads, what words open it, and any lock guarding it
+public class Exit
+{
+    public string Direction { get; set; } = "";
+    public List<string> Aliases { get; set; } = new();
+    public string Target { get; set; } = "";
+    public Lock? Lock { get; set; }
+
+    public bool MatchesInput(string input) =>
+        Direction.Equals(input, StringComparison.OrdinalIgnoreCase) ||
+        Aliases.Any(a => a.Equals(input, StringComparison.OrdinalIgnoreCase));
+}
+
+// A room loaded from rooms.json
+public class Room
+{
+    public List<Exit> Exits { get; set; } = new();
+    public string? Description { get; set; }
+    public string? Description2 { get; set; }
+    public List<string> Features { get; set; } = new();
+    public int Actions { get; set; }
+}
+
+public static class MovementSystem
 {
     public static string currentRoom = "startroom";
-    private static bool CheckRule(string ruleName)
+    private static Dictionary<string, Room>? _rooms;
+
+    // loads rooms.json once and caches it
+    private static Dictionary<string, Room> Rooms
+    {
+        get
+        {
+            if (_rooms == null)
+            {
+                string json = File.ReadAllText("rooms.json");
+                _rooms = JsonSerializer.Deserialize<Dictionary<string, Room>>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                    ?? new Dictionary<string, Room>();
+            }
+            return _rooms;
+        }
+    }
+
+    // resolves a named factor to its current true/false state, add new ones here
+    public static bool CheckRule(string ruleName)
     {
         return ruleName switch
         {
@@ -14,97 +75,81 @@ public class MovementSystem
             "VinesCut" => Game.VinesCut,
             "SacDestroyed" => Game.SacDestroyed,
             "LurkerMoved" => Game.LurkerMoved,
-            "LurkerNotMoved" => !Game.LurkerMoved, 
+            "LurkerNotMoved" => !Game.LurkerMoved,
             "EyesSmashed" => Game.EyesSmashed,
             "HasKey" => Game.Inventory.ContainsKey("key"),
+            // "LeverPulled" => Game.LeverPulled,
+            // "KnowsSecretWord" => Game.KnowsSecretWord,
             _ => false
         };
     }
+
+    // forces an exit locked regardless of its requires list, optionally overriding the fail message
+    public static void LockExit(string roomName, string direction, string? failMessage = null)
+    {
+        Exit? exit = FindExit(roomName, direction);
+        if (exit == null) return;
+        exit.Lock ??= new Lock();
+        exit.Lock.ForceLocked = true;
+        if (failMessage != null) exit.Lock.FailMessage = failMessage;
+    }
+
+    // clears a manual lock set by LockExit
+    public static void UnlockExit(string roomName, string direction)
+    {
+        Exit? exit = FindExit(roomName, direction);
+        if (exit?.Lock != null) exit.Lock.ForceLocked = false;
+    }
+
+    private static Exit? FindExit(string roomName, string direction)
+    {
+        if (!Rooms.TryGetValue(roomName, out Room? room)) return null;
+        return room.Exits.FirstOrDefault(e => e.MatchesInput(direction));
+    }
+
+    // scripted lock/unlock events tied to specific room transitions, runs whenever the player moves
+    private static void HandleRoomEnterEvents(string previousRoom, string roomName)
+    {
+        if (previousRoom == "vinesroom" && roomName == "tabletroom")
+        {
+            // side entrance seals shut for good once you've crossed through it
+            LockExit("vinesroom", "side entrance", "You hear something growling inside.");
+            LockExit("tabletroom", "side entrance", "You hear something growling inside.");
+        }
+        else if (previousRoom == "tabletroom" && roomName == "hallway1")
+        {
+            LockExit("hallway1", "locked door", "You hear something growling inside.");
+        }
+    }
+
     public static string ChangeRoom(string currentRoomName, string movement)
     {
         try
         {
-            string json = File.ReadAllText("rooms.json");
-            using (JsonDocument doc = JsonDocument.Parse(json))
+            if (!Rooms.TryGetValue(currentRoomName, out Room? room))
             {
-                JsonElement root = doc.RootElement;
-                if (!root.TryGetProperty(currentRoomName, out JsonElement currentRoom))
-                {
-                    WriteLine($"Room '{currentRoomName}' not found.");
-                    return currentRoomName;
-                }
-                JsonElement neighbours = currentRoom.GetProperty("neighbours");
-                // Check all neighbor rooms
-                foreach (JsonElement neighbourElement in neighbours.EnumerateArray())
-                {
-                    string neighbourKey = neighbourElement.GetString() ?? "";
-                    if (!root.TryGetProperty(neighbourKey, out JsonElement neighbourRoom))
-                        continue;
-                    bool isMatch = false;
-                    if (neighbourKey.Equals(movement, StringComparison.OrdinalIgnoreCase))
-                    {
-                        isMatch = true;
-                    }
-                    else if (neighbourRoom.TryGetProperty("aliases", out JsonElement aliases))
-                    {
-                        foreach (JsonElement alias in aliases.EnumerateArray())
-                        {
-                            if (alias.GetString()?.Equals(movement, StringComparison.OrdinalIgnoreCase) ?? false)
-                            {
-                                isMatch = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (isMatch)
-                    {
-                        if (CanEnterRoom(neighbourRoom, movement, out string failMessage))
-                        {
-                            return neighbourKey;
-                        }
-                        else
-                        {
-                            WriteLine(failMessage);
-                            return currentRoomName;
-                        }
-                    }
-                }
+                WriteLine($"Room '{currentRoomName}' not found.");
+                return currentRoomName;
             }
+            Exit? exit = room.Exits.FirstOrDefault(e => e.MatchesInput(movement));
+            if (exit == null)
+            {
+                WriteLine("You can't go that way.");
+                return currentRoomName;
+            }
+            if (exit.Lock != null && exit.Lock.IsLocked())
+            {
+                WriteLine(exit.Lock.FailMessage ?? "You cannot go this way right now.");
+                return currentRoomName;
+            }
+            string destination = exit.Target;
+            HandleRoomEnterEvents(currentRoomName, destination);
+            return destination;
         }
         catch (Exception ex)
         {
             WriteLine($"Error in movement system: {ex.Message}");
+            return currentRoomName;
         }
-        return currentRoomName;
-    }
-    private static bool CanEnterRoom(JsonElement targetRoom, string inputAlias, out string failMessage)
-    {
-        failMessage = "You cannot go this way right now.";
-
-        if (!targetRoom.TryGetProperty("entryRules", out JsonElement entryRules))
-        {
-            return true;
-        }
-
-        foreach (JsonProperty ruleProperty in entryRules.EnumerateObject())
-        {
-            if (ruleProperty.Name.Equals(inputAlias, StringComparison.OrdinalIgnoreCase))
-            {
-                foreach (JsonElement rule in ruleProperty.Value.EnumerateArray())
-                {
-                    if (!CheckRule(rule.GetString() ?? ""))
-                    {
-                        if (targetRoom.TryGetProperty("FailedEntry", out JsonElement failedEntry) &&
-                            failedEntry.TryGetProperty(ruleProperty.Name, out JsonElement msg))
-                        {
-                            failMessage = msg.GetString() ?? failMessage;
-                        }
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
     }
 }
