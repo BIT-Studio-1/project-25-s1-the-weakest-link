@@ -35,5 +35,11 @@
     "weight": 2500,
     "real_name": "hammer",
     "cost": 20
+  },
+  "elixir": {
+    "description": "A strange elixir, it smells retched and bitter, The memory of its taste makes you shiver.",
+    "weight": 100,
+    "real_name": "bleach",
+    "cost": 20
   }
 }

@@ -1,2 +1,2 @@
 # The weakest link project
-A text based adventure game about being blind in a dungeon
+A text based adventure game about being blind in a dungeon and drinking toilet water

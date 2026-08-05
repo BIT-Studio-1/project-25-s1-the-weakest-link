@@ -364,5 +364,19 @@
         }
       }
     ]
+  },
+  
+    "bathroom": {
+    "actions": 0,
+    "description": "You enter a cold chamber the smell of strange chemicals fills floods your nose. Is this some kind of dark magic?.\nYou find a icy cold bowl filled with liquid. Some kind of forgotten shrine.\n An <y>elixir<y> perhaps. It feels dangerous but this could help you fight the boss.\n You find no other doors, the only way out is the <g>hallway<g> you entered from.",
+    "description2": " The is more elixir in the shrine. You gag at the thought of drinking more.\nYou should probably return to the <g>hallway<g>.",
+    "features": [ "elixir" ],
+    "exits": [
+      {
+        "direction": "hallway",
+        "aliases": [],
+        "target": "hallway1"
+      }
+    ]
   }
 }
