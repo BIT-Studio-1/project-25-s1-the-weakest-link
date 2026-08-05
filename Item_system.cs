@@ -373,6 +373,20 @@ internal static class Game
                     }
                 }
                 break;
+                case "bathroom":
+                if (input.Length > 1 && input[1] == "elixir")
+                {
+                    if (Inventory.ContainsKey("elixir"))
+                    {
+                        scrolltext("You already have the <y>elixir<y>.");
+                    }
+                    else
+                    {
+                        scrolltext($"You take the <y>elixir<y>, the taste is revolting.");
+                        takeitem("elixir");
+                    }
+                }
+                break;
             default:
                 scrolltext("There is nothing to loot here");
                 break;
