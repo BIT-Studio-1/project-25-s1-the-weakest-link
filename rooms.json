@@ -25,7 +25,7 @@
 
   "hallway1": {
     "actions": 0,
-    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nTo your right a <g>bad smelling door<g>\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
     "exits": [
       {
         "direction": "starting room",
@@ -56,6 +56,11 @@
         "direction": "down",
         "aliases": ["corridor", "up"],
         "target": "hallway2"
+      },
+      {
+        "direction": "strange smelling door",
+        "aliases": [],
+        "target": "bathroom"
       }
     ]
   },
