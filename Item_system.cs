@@ -480,14 +480,20 @@ internal static class Game
                 case "s":
                     stats();
                     break;
+                    case "cut":
+                    cut();
+                    break;
+                case "secret":
+                    scrolltext("you thought lol");
+                    break;
+                case "secret2":
+                    enabledebug();
+                    break;
+                // Debug commands
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
                     give();
                     break;
-                case "cut":
-                    cut();
-                    break;
-                // Debug commands
                 case "do_damage":
                     do_damage();
                     break;
@@ -503,12 +509,7 @@ internal static class Game
                 case "q":
                     exit();
                     break;
-                case "secret":
-                    scrolltext("you thought lol");
-                    break;
-                case "secret2":
-                    enabledebug();
-                    break;
+
                 case "attack":
                 case "a":
                     attack();
