@@ -223,7 +223,7 @@
 
   "hallway4": {
     "actions": 0,
-    "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still.\nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>door<g> that feels important.\nThe silence here feels deafening and imposing, \nThere is also a <g>side door<g> on the opposide side you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
+    "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still, \nThe silence here feels deafening and imposing. \nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>door<g> that feels important. \nThere is also a <g>side door<g> on the opposide side you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
     "exits": [
       {
         "direction": "forward door",
@@ -402,7 +402,7 @@
 
   "office": {
     "actions": 0,
-    "description": "You find yourself in a small, almost comfortingly small room, with a few shelves around the sides and an altar of sorts in the centre. \nFeeling around on its surface, you can feel a <y>sheet<y> of parchment or something, it has bumps all over it that feel like braille \nThere is only one <g>door<g> in this room, the one you came in through.",
+    "description": "You find yourself in a small, almost comfortingly small room, \nwith a few shelves around the sides and an altar of sorts in the centre. \nFeeling around on its surface, you can feel a <y>sheet<y> of parchment or something, \nit has bumps all over it that feel like braille \nThere is only one <g>door<g> in this room, the one you came in through.",
     "description2": "A small, almost comfortingly small room, with a few shelves around the sides and an altar of sorts in the centre. \nThere is only one <g>door<g> in this room, the one you came in through.",
     "features": [ "sheet" ],
     "exits": [

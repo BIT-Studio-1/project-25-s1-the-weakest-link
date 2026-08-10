@@ -43,9 +43,9 @@
     "cost": 20
   },
   "sheet": {
-    "description": "Trying really hard to read the braille on the sheet, you make out a few words at the top: \"REGARDING THE SUMMONING OF COWS...\" it doesn't seem very important"
+    "description": "Trying really hard to read the braille on the sheet, you make out a few words at the top: \n\"REGARDING THE SUMMONING OF COWS...\" it doesn't seem very important",
     "weight": 10,
     "real_name": "classified documents",
-    "cost":  2000
+    "cost":  500
   }
 }
