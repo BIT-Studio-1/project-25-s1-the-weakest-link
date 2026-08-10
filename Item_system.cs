@@ -295,88 +295,36 @@ internal static class Game
     }
     public static void loot()
     {
-        //just a large switch for each room with interactables
-        switch (MovementSystem.currentRoom)
-        {
-            case "tabletroom":
-                if (input.Length > 1 && input[1] == "corpse")
-                {
-                    if (Inventory.ContainsKey("tablet"))
-                    {
-                        scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
-                    }
-                    else
-                    {
-                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
-                        takeitem("tablet");
-                        takeitem("coins");
-                        Thread.Sleep(500);
-                        scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
-                    }
-                }
-                break;
-            case "kniferoom":
-                if (input.Length > 1 && input[1] == "dagger")
-                {
-                    if (Inventory.ContainsKey("dagger"))
-                    {
-                        scrolltext("You already have the <y>dagger<y>.");
-                    }
-                    else
-                    {
-                        scrolltext($"You take a <y>dagger<y> from its position on the bench");
-                        takeitem("dagger");
-                    }
-                }
-                break;
-            case "startroom":
-                if (input.Length > 1 && input[1] == "book")
-                {
-                    if (Inventory.ContainsKey("book"))
-                    {
-                        scrolltext("You already have the book.");
-                    }
-                    else
-                    {
-                        scrolltext($"You take the <y>book<y> from the table");
-                        takeitem("book");
-                    }
-                }
-                break;
-            case "renovatedroom":
-                if (input.Length > 1 && (input[1] == "hammer" || input[1] == "warhammer"))
-                {
-                    if (Inventory.ContainsKey("hammer"))
-                    {
-                        scrolltext("You already have the <y>hammer<y>.");
-                    }
-                    else
-                    {
-                        scrolltext($"You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting.");
-                        takeitem("hammer");
-                    }
-                }
+        Room? room = MovementSystem.GetCurrentRoom();
+        if (room.Feature != null && !Inventory.ContainsKey(room.Feature))
 
-                break;
-            case "keyroom":
-                if (input.Length > 1 && input[1] == "key")
-                {
-                    if (Inventory.ContainsKey("key"))
-                    {
-                        scrolltext("You already have the <y>key<y>.");
-                    }
-                    else
-                    {
-                        scrolltext($"You take the <y>key<y>");
-                        takeitem("key");
-                    }
-                }
-                break;
-            default:
-                scrolltext("There is nothing to loot here");
-                break;
+            return;
+        if (Items.TryGetValue(room.Feature, out Object raw))
+        {
+            JsonElement item = (JsonElement)raw;
+            if (item.TryGetProperty("flavourtext", out JsonElement Text))
+            {
+                scrolltext(Text.GetString());
+            }
         }
-    }
+        // exception for tabletroom
+        if (MovementSystem.currentRoom == "tabletroom")
+            if (input.Length > 1 && input[1] == "corpse")
+            {
+                if (Inventory.ContainsKey("tablet"))
+                {
+                    scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
+                }
+                else
+                {
+                    scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
+                    takeitem("tablet");
+                    Thread.Sleep(500);
+                    scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
+                }
+            }
+        }
+
     private static void takeitem(string item)
     {
         JsonElement itemJSON = (JsonElement)Items[item];
@@ -527,7 +475,7 @@ internal static class Game
                         scrolltext("(Input <b>help<b> for a current list of actions)", 10);
                     }
                     break;
-                    case "room":
+                case "room":
                     WriteLine($"You are in: {MovementSystem.currentRoom}");
                     break;
 
