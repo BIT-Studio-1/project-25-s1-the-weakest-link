@@ -48,7 +48,7 @@
   },
   "sheet": {
     "description": "Trying really hard to read the braille on the sheet, you make out a few words at the top: \n\"REGARDING THE SUMMONING OF COWS...\" it doesn't seem very important \n\ncome to think of it, you aren't sure how you know how to read braille, \nor even if you read that properly",
-    "flavourtext": "You pick up the braille <y>sheet<y>",
+    "flavourtext": "You pick up the <y>sheet<y>;feeling it, you think it might be braille?",
     "weight": 10,
     "real_name": "classified documents",
     "cost":  500
