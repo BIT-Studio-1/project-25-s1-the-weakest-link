@@ -127,8 +127,10 @@ internal static class Game
             (MovementSystem.currentRoom == "eyesroom" && EyesSmashed) ||
             (MovementSystem.currentRoom == "kniferoom" && Inventory.ContainsKey("dagger")) ||
             (MovementSystem.currentRoom == "keyroom" && Inventory.ContainsKey("key")) ||
-            (MovementSystem.currentRoom == "renovatedroom" && Inventory.ContainsKey("hammer")))
-
+            (MovementSystem.currentRoom == "renovatedroom" && Inventory.ContainsKey("hammer")) ||
+            (MovementSystem.currentRoom == "bathroom" && Inventory.ContainsKey("elixir")) ||
+            (MovementSystem.currentRoom == "office" && Inventory.ContainsKey("sheet"))
+            )
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             else
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
@@ -434,14 +436,20 @@ internal static class Game
                 case "s":
                     stats();
                     break;
+                    case "cut":
+                    cut();
+                    break;
+                case "secret":
+                    scrolltext("you thought lol");
+                    break;
+                case "secret2":
+                    enabledebug();
+                    break;
+                // Debug commands
                 //give command, takes the value from the item dictionary and copies it into inventory
                 case "give":
                     give();
                     break;
-                case "cut":
-                    cut();
-                    break;
-                // Debug commands
                 case "do_damage":
                     do_damage();
                     break;
@@ -457,12 +465,7 @@ internal static class Game
                 case "q":
                     exit();
                     break;
-                case "secret":
-                    scrolltext("you thought lol");
-                    break;
-                case "secret2":
-                    enabledebug();
-                    break;
+
                 case "attack":
                 case "a":
                     attack();

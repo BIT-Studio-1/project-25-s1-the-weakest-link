@@ -5,7 +5,7 @@
     "attack": 10,
     "weight": 100,
     "real_name": "knife from the kitchen",
-    "cost": 5
+    "cost": 15
   },
   "book": {
     "description": "A book, the cover is made out of some sort of card. You tried to read it but you're blind.",
@@ -38,6 +38,19 @@
     "flavourtext": "You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting.",
     "weight": 2500,
     "real_name": "hammer",
+    "cost": 40
+  },
+  "elixir": {
+    "description": "A strange elixir, it smells retched and bitter, The memory of its revolting taste makes you shiver.",
+    "weight": 100,
+    "real_name": "bleach",
     "cost": 20
+  },
+  "sheet": {
+    "description": "Trying really hard to read the braille on the sheet, you make out a few words at the top: \n\"REGARDING THE SUMMONING OF COWS...\" it doesn't seem very important \n\ncome to think of it, you aren't sure how you know how to read braille, \nor even if you read that properly",
+    "flavourtext": "You pick up the braille <y>sheet<y>",
+    "weight": 10,
+    "real_name": "classified documents",
+    "cost":  500
   }
 }

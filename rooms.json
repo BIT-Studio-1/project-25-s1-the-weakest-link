@@ -12,10 +12,10 @@
       },
       {
         "direction": "second entrance",
-        "aliases": ["forward door"],
+        "aliases": [ "forward door" ],
         "target": "hallway4",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -25,11 +25,11 @@
 
   "hallway1": {
     "actions": 0,
-    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nThe air is cold and still, and your footsteps echo into the darkness ahead.\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
+    "description": "You are standing at one end of a long corridor that seems to connect much of the dungeon.\nTo your right a <g>bad smelling door<g>\nYou cannot tell where the corridor ends, but through touch you discover a few doorways nearby.\nOn the north wall is the door to the <g>starting room<g>, the dining hall you first woke up in.\nFurther along the north wall you feel the door to a <g>small room<g>, the door feels warm, this is probably an important room.\nNext to this is a <g>locked door<g> that is sealed shut with a strange magic.\nTo the south is an <g>open room<g>, from which a faint stale smell drifts into the corridor.\nYou may also continue <g>down<g> the corridor, where the passage fades into darkness.",
     "exits": [
       {
         "direction": "starting room",
-        "aliases": ["main entrance"],
+        "aliases": [ "main entrance" ],
         "target": "startroom"
       },
       {
@@ -39,10 +39,10 @@
       },
       {
         "direction": "locked door",
-        "aliases": ["doorway"],
+        "aliases": [ "doorway" ],
         "target": "tabletroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -54,8 +54,13 @@
       },
       {
         "direction": "down",
-        "aliases": ["corridor", "up"],
+        "aliases": [ "corridor", "up" ],
         "target": "hallway2"
+      },
+      {
+        "direction": "bad smelling door",
+        "aliases": [],
+        "target": "bathroom"
       }
     ]
   },
@@ -68,7 +73,7 @@
     "exits": [
       {
         "direction": "open room",
-        "aliases": ["doorway"],
+        "aliases": [ "doorway" ],
         "target": "hallway1"
       }
     ]
@@ -81,7 +86,7 @@
     "exits": [
       {
         "direction": "corridor",
-        "aliases": ["small room"],
+        "aliases": [ "small room" ],
         "target": "hallway1"
       },
       {
@@ -89,7 +94,7 @@
         "aliases": [],
         "target": "tabletroom",
         "lock": {
-          "requires": ["VinesCut"],
+          "requires": [ "VinesCut" ],
           "matchType": "all",
           "failMessage": "Vines have not been cut."
         }
@@ -105,10 +110,10 @@
     "exits": [
       {
         "direction": "locked door",
-        "aliases": ["second entrance"],
+        "aliases": [ "second entrance" ],
         "target": "hallway1",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -118,7 +123,7 @@
         "aliases": [],
         "target": "vinesroom",
         "lock": {
-          "requires": ["VinesCut"],
+          "requires": [ "VinesCut" ],
           "matchType": "all",
           "failMessage": "The beast is making noise here, you shouldn't enter."
         }
@@ -133,10 +138,10 @@
     "exits": [
       {
         "direction": "up",
-        "aliases": ["main entrance"],
+        "aliases": [ "main entrance" ],
         "target": "hallway1",
         "lock": {
-          "requires": ["LurkerNotMoved"],
+          "requires": [ "LurkerNotMoved" ],
           "matchType": "all",
           "failMessage": "You hear the lurker's heavy footsteps pounding toward the door — going that way now would put you face to face with it."
         }
@@ -146,7 +151,7 @@
         "aliases": [],
         "target": "renovatedroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -156,7 +161,7 @@
         "aliases": [],
         "target": "spidersroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -166,17 +171,17 @@
         "aliases": [],
         "target": "hallway3",
         "lock": {
-          "requires": ["HasKey"],
+          "requires": [ "HasKey" ],
           "matchType": "all",
           "failMessage": "This door is locked by an ancient mechanism. You will need a key."
         }
       },
       {
         "direction": "fourth door",
-        "aliases": ["down"],
+        "aliases": [ "down" ],
         "target": "smashingroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -190,7 +195,7 @@
     "exits": [
       {
         "direction": "up",
-        "aliases": ["main entrance"],
+        "aliases": [ "main entrance" ],
         "target": "hallway2"
       },
       {
@@ -198,7 +203,7 @@
         "aliases": [],
         "target": "hallway4",
         "lock": {
-          "requires": ["LurkerMoved"],
+          "requires": [ "LurkerMoved" ],
           "matchType": "all",
           "failMessage": "the lurker is further down the hallway, best not to approach it"
         }
@@ -208,7 +213,7 @@
         "aliases": [],
         "target": "eyesroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "How the fuck did you even get here without a tablet you dirty cheater fuck you"
         }
@@ -218,32 +223,47 @@
 
   "hallway4": {
     "actions": 0,
-    "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still.\nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>side door<g> that feels important.\nThe silence here feels deafening and imposing, you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
+    "description": "You find yourself at another end of the corridor.\nIt is quiet and the air is cold and still, \nThe silence here feels deafening and imposing. \nAt the northern end stands a <g>forward door<g>, this door feels strangely familiar, but you cannot place why.\nTo the east is a <g>door<g> that feels important. \nThere is also a <g>side door<g> on the opposide side you are close, you just need to keep going. \nyou could also go <g>up<g> the corridor",
     "exits": [
       {
         "direction": "forward door",
-        "aliases": ["second entrance"],
+        "aliases": [ "second entrance" ],
         "target": "startroom",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
       },
       {
         "direction": "up",
-        "aliases": ["down"],
+        "aliases": [ "down" ],
         "target": "hallway3",
         "lock": {
-          "requires": ["LurkerMoved", "VinesCut"],
+          "requires": [ "LurkerMoved", "VinesCut" ],
           "matchType": "all",
           "failMessage": "you can hear something grumbling further up the hallway, best not to approach"
         }
       },
       {
+        "direction": "door",
+        "aliases": [],
+        "target": "keyroom",
+        "lock": {
+          "requires": [ "HasTablet" ],
+          "matchtype": "all",
+          "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
+        }
+      },
+      {
         "direction": "side door",
-        "aliases": ["door"],
-        "target": "keyroom"
+        "aliases": [],
+        "target": "office",
+        "lock": {
+          "requires": [ "HasTablet" ],
+          "matchtype": "all",
+          "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
+        }
       }
     ]
   },
@@ -259,7 +279,7 @@
         "aliases": [],
         "target": "hallway2",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -279,10 +299,10 @@
     "exits": [
       {
         "direction": "main entrance",
-        "aliases": ["fourth door"],
+        "aliases": [ "fourth door" ],
         "target": "hallway2",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
@@ -292,7 +312,7 @@
         "aliases": [],
         "target": "eyesroom",
         "lock": {
-          "requires": ["LurkerNotMoved"],
+          "requires": [ "LurkerNotMoved" ],
           "matchType": "all",
           "failMessage": "You can hear the lurker thrashing about just beyond that door now — going back that way would walk you right into it."
         }
@@ -311,7 +331,7 @@
         "aliases": [],
         "target": "hallway2",
         "lock": {
-          "requires": ["SacDestroyed"],
+          "requires": [ "SacDestroyed" ],
           "matchType": "all",
           "failMessage": "The exit is blocked by an egg sac."
         }
@@ -331,7 +351,7 @@
     "exits": [
       {
         "direction": "main entrance",
-        "aliases": ["door"],
+        "aliases": [ "door" ],
         "target": "hallway3"
       },
       {
@@ -339,7 +359,7 @@
         "aliases": [],
         "target": "smashingroom",
         "lock": {
-          "requires": ["LurkerMoved"],
+          "requires": [ "LurkerMoved" ],
           "matchType": "all",
           "failMessage": "Something feels strange about this door. You can't bring yourself to step through yet."
         }
@@ -355,13 +375,41 @@
     "exits": [
       {
         "direction": "side door",
-        "aliases": ["door"],
+        "aliases": [ "door" ],
         "target": "hallway4",
         "lock": {
-          "requires": ["HasTablet"],
+          "requires": [ "HasTablet" ],
           "matchType": "all",
           "failMessage": "This door is sealed with some kind of dark magic, you will need some sort of artifact to access it."
         }
+      }
+    ]
+  },
+
+  "bathroom": {
+    "actions": 0,
+    "description": "A cold chamber, the smell of strange chemicals floods your nose. Is this some kind of dark magic?.\nYou find a icy cold bowl filled with liquid. Some kind of forgotten shrine.\nAn <y>elixir<y> perhaps. It feels dangerous but this could come in helpful later.\nYou find no other doors, the only way out is the <g>hallway<g> you entered from.",
+    "description2": " The is more elixir in the shrine. You gag at the thought of drinking more.\nYou should probably return to the <g>hallway<g>.",
+    "features": [ "elixir" ],
+    "exits": [
+      {
+        "direction": "hallway",
+        "aliases": [],
+        "target": "hallway1"
+      }
+    ]
+  },
+
+  "office": {
+    "actions": 0,
+    "description": "You find yourself in a small, almost comfortingly small room, \nwith a few shelves around the sides and an altar of sorts in the centre. \nFeeling around on its surface, you can feel a <y>sheet<y> of parchment or something, \nit has bumps all over it that feel like braille \nThere is only one <g>door<g> in this room, the one you came in through.",
+    "description2": "A small, almost comfortingly small room, with a few shelves around the sides and an altar of sorts in the centre. \nThere is only one <g>door<g> in this room, the one you came in through.",
+    "features": [ "sheet" ],
+    "exits": [
+      {
+        "direction": "door",
+        "aliases": [],
+        "target":  "hallway4"
       }
     ]
   }
