@@ -390,7 +390,7 @@
     "actions": 0,
     "description": "A cold chamber, the smell of strange chemicals floods your nose. Is this some kind of dark magic?.\nYou find a icy cold bowl filled with liquid. Some kind of forgotten shrine.\nAn <y>elixir<y> perhaps. It feels dangerous but this could come in helpful later.\nYou find no other doors, the only way out is the <g>hallway<g> you entered from.",
     "description2": " The is more elixir in the shrine. You gag at the thought of drinking more.\nYou should probably return to the <g>hallway<g>.",
-    "features": [ "elixir" ],
+    "features": "elixir",
     "exits": [
       {
         "direction": "hallway",
@@ -404,7 +404,7 @@
     "actions": 0,
     "description": "You find yourself in a small, almost comfortingly small room, \nwith a few shelves around the sides and an altar of sorts in the centre. \nFeeling around on its surface, you can feel a <y>sheet<y> of parchment or something, \nit has bumps all over it that feel like braille \nThere is only one <g>door<g> in this room, the one you came in through.",
     "description2": "A small, almost comfortingly small room, with a few shelves around the sides and an altar of sorts in the centre. \nThere is only one <g>door<g> in this room, the one you came in through.",
-    "features": [ "sheet" ],
+    "features": "sheet",
     "exits": [
       {
         "direction": "door",
