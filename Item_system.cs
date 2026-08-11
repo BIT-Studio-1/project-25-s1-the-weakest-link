@@ -298,7 +298,7 @@ internal static class Game
         Room? room = MovementSystem.GetCurrentRoom();
         if (room.Feature.Contains(input[1]))
         {
-            if (room.Feature != null && Inventory.ContainsKey(room.Feature))
+            if (room?.Feature != null && Inventory.ContainsKey(room.Feature))
                 return;
             if (room.Feature != null && Items.TryGetValue(room.Feature, out object? raw))
             {
@@ -319,14 +319,15 @@ internal static class Game
                     }
                     else
                     {
-                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
+                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>.");
                         takeitem("tablet");
                         Thread.Sleep(500);
                         scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
                     }
                 }
-            WriteLine($"Feature: {room?.Feature}");
-            WriteLine($"Room: {MovementSystem.currentRoom}");
+            //debug commands
+            //WriteLine($"Feature: {room?.Feature}");
+            //writeLine($"Room: {MovementSystem.currentRoom}");
 
         }
     }
