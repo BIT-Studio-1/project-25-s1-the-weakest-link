@@ -296,34 +296,40 @@ internal static class Game
     public static void loot()
     {
         Room? room = MovementSystem.GetCurrentRoom();
-        if (room.Feature != null && !Inventory.ContainsKey(room.Feature))
-
-            return;
-        if (Items.TryGetValue(room.Feature, out Object raw))
+        if (room.Feature.Contains(input[1]))
         {
-            JsonElement item = (JsonElement)raw;
-            if (item.TryGetProperty("flavourtext", out JsonElement Text))
+            if (room.Feature != null && Inventory.ContainsKey(room.Feature))
+                return;
+            if (room.Feature != null && Items.TryGetValue(room.Feature, out object? raw))
             {
-                scrolltext(Text.GetString());
-            }
-        }
-        // exception for tabletroom
-        if (MovementSystem.currentRoom == "tabletroom")
-            if (input.Length > 1 && input[1] == "corpse")
-            {
-                if (Inventory.ContainsKey("tablet"))
+                JsonElement item = (JsonElement)raw;
+                if (item.TryGetProperty("flavourtext", out JsonElement Text))
                 {
-                    scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
-                }
-                else
-                {
-                    scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
-                    takeitem("tablet");
-                    Thread.Sleep(500);
-                    scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
+                    scrolltext(Text.GetString());
+                    takeitem(room.Feature);
                 }
             }
+            // exception for tabletroom
+            if (MovementSystem.currentRoom == "tabletroom")
+                if (input.Length > 1 && input[1] == "corpse")
+                {
+                    if (Inventory.ContainsKey("tablet"))
+                    {
+                        scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
+                    }
+                    else
+                    {
+                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>, and an array of <y>coins<y>.");
+                        takeitem("tablet");
+                        Thread.Sleep(500);
+                        scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
+                    }
+                }
+            WriteLine($"Feature: {room?.Feature}");
+            WriteLine($"Room: {MovementSystem.currentRoom}");
+
         }
+    }
 
     private static void takeitem(string item)
     {

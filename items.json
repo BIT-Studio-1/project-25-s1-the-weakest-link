@@ -1,7 +1,7 @@
 {
   "dagger": {
     "description": "A sharp blade, you can feel that too much pressure would cut your finger.",
-    "flavortext": "You take a <y>dagger<y> from its position on the bench",
+    "flavourtext": "You take a <y>dagger<y> from its position on the bench",
     "attack": 10,
     "weight": 100,
     "real_name": "knife from the kitchen",
@@ -9,7 +9,7 @@
   },
   "book": {
     "description": "A book, the cover is made out of some sort of card. You tried to read it but you're blind.",
-    "flavortext": "You take the <y>book<y> from the table",
+    "flavourtext": "You take the <y>book<y> from the table",
     "weight": 2000,
     "real_name": "student's coursebook",
     "cost": 70
@@ -28,14 +28,14 @@
   },
   "key": {
     "description": "A smooth key, made of an unknown metal.",
-    "flavortext": "You take the <y>key<y>",
+    "flavourtext": "You take the <y>key<y>",
     "weight": 10,
     "real_name": "maintenance key",
     "cost": 13
   },
   "hammer": {
     "description": "A hammer, a strangely familiar object for where you find yourself.",
-    "flavortext": "You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting.",
+    "flavourtext": "You take the <y>hammer<y> from its place on the ground, it is cumbersome but comforting.",
     "weight": 2500,
     "real_name": "hammer",
     "cost": 20
