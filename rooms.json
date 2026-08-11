@@ -3,7 +3,7 @@
     "actions": 3,
     "description": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall.\nThere are two exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic.\nThe <g>main entrance<g> seems to be to your east.\nYou feel a <y>book<y> on one of the tables.",
     "description2": "Feeling your way through the darkness, you repeatedly bump into long tables and rows of chairs.\nThe chamber is large, resembling some kind of dining hall\nThere are two exits.\nTo the south is a <g>second entrance<g> that seems sealed with a strange magic\nThe <g>main entrance<g> seems to be to your east.",
-    "features": [ "book" ],
+    "feature": "book",
     "exits": [
       {
         "direction": "main entrance",
@@ -69,7 +69,7 @@
     "actions": 0,
     "description": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel a <y>dagger<y> among other strange implements on one of the tables.\nThere is only one <g>doorway<g>, back into the corridor.",
     "description2": "You are in a small chamber with shelves along the walls.\nThe room is filled with stale smells that are hard to place.\nYou feel strange implements on one of the tables, the space where the dagger was empty.\nThere is only one <g>doorway<g>, back into the corridor",
-    "features": [ "dagger" ],
+    "feature": "dagger",
     "exits": [
       {
         "direction": "open room",
@@ -106,7 +106,7 @@
     "actions": 4,
     "description": "You find yourself in a room of unusual design. A series of wide steps rise away from you forming a terraced chamber that\nclimbs toward the far side of the room. As you carefully make your way forward \nyour foot catches on something. Reaching down, your hands find a <y>corpse<y> lying against one of the tables.\nThe body lies completely still, its flesh still warm.\nIts warmth suggests it has not been here for long.\nEvery instinct tells you to leave it alone, yet the possibility of supplies to <b>loot<b> is difficult to ignore.\nThe <g>locked door<g> to the south is sealed with ancient magic.\nYou could also go out through the <g>side entrance<g> you cut your way through before.",
     "description2": "You are still in the terraced room.\nThe body is still there, its pockets now empty.\nThe beast is coming.\nYou hope the tablet you found could break the magic seal on the <g>locked door<g>.",
-    "features": [ "corpse" ],
+    "feature": "corpse",
     "exits": [
       {
         "direction": "locked door",
@@ -272,7 +272,7 @@
     "actions": 0,
     "description": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nIt feels like tools or maybe weapons are scattered across the floor.\nAs you search through the clutter, your hand closes around a long handle attached to a massive steel head.\nMust be a <y>hammer<y>, you think to yourself.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare.\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
     "description2": "You find yourself in an strange room.\nDust hangs thick in the air, clinging to your skin with every movement.\nThrough touch, you sense exposed timber and cold metal beams all over the walls of the room.\nThe air smells of forged steel, but beneath it lingers something older. As if the room has been \nstripped open and left bare\nBehind you is the <g>first door<g> you entered though.\nOn the south side of the room is a <g>side entrance<g> that leads deeper into the unknown.",
-    "features": [ "hammer" ],
+    "feature": "hammer",
     "exits": [
       {
         "direction": "first door",
@@ -324,7 +324,7 @@
     "actions": 0,
     "description": "You find yourself in a small, claustrophobic room.\nYou feel what appears to be a large egg sac blocking the exit out.\nFear grips you as you realise, you are in a monster's nest.\nYou may need to <b>attack<b> to get through.\nThe room has a <g>side entrance<g> and a blocked <g>main entrance<g>.",
     "description2": "The nest is filled with eggs, sure to hatch at any moment\nYou should escape before they swarm you.\nThe <g>side entrance<g> remains unblocked, while the <g>main entrance<g> is now open",
-    "features": [ "sac" ],
+    "feature": "sac",
     "exits": [
       {
         "direction": "main entrance",
@@ -371,7 +371,7 @@
     "actions": 0,
     "description": "You squeeze into a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nAs your hands move through the clutter, something small and metallic shifts softly in the dark, some sort of <y>key<y>\nTo exit this room you must return through the <g>door<g>.",
     "description2": "You are in a cramped storage chamber lined with shelves filled with strange containers and damp cloth bundles.\nSharp chemical fumes sting your nose, this room must be full of ancient potions and alchemical mixtures.\nThe only exit is back through the <g>door<g>.",
-    "features": [ "key" ],
+    "feature": "key",
     "exits": [
       {
         "direction": "side door",
@@ -390,7 +390,7 @@
     "actions": 0,
     "description": "A cold chamber, the smell of strange chemicals floods your nose. Is this some kind of dark magic?.\nYou find a icy cold bowl filled with liquid. Some kind of forgotten shrine.\nAn <y>elixir<y> perhaps. It feels dangerous but this could come in helpful later.\nYou find no other doors, the only way out is the <g>hallway<g> you entered from.",
     "description2": " The is more elixir in the shrine. You gag at the thought of drinking more.\nYou should probably return to the <g>hallway<g>.",
-    "features": [ "elixir" ],
+    "feature": "elixir",
     "exits": [
       {
         "direction": "hallway",
@@ -404,7 +404,7 @@
     "actions": 0,
     "description": "You find yourself in a small, almost comfortingly small room, \nwith a few shelves around the sides and an altar of sorts in the centre. \nFeeling around on its surface, you can feel a <y>sheet<y> of parchment or something, \nit has bumps all over it that feel like braille \nThere is only one <g>door<g> in this room, the one you came in through.",
     "description2": "A small, almost comfortingly small room, with a few shelves around the sides and an altar of sorts in the centre. \nThere is only one <g>door<g> in this room, the one you came in through.",
-    "features": [ "sheet" ],
+    "feature": "sheet",
     "exits": [
       {
         "direction": "door",

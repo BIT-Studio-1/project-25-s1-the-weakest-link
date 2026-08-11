@@ -41,7 +41,7 @@ public class Room
     public List<Exit> Exits { get; set; } = new();
     public string? Description { get; set; }
     public string? Description2 { get; set; }
-    public List<string> Features { get; set; } = new();
+    public string? Feature { get; set; }
     public int Actions { get; set; }
 }
 
@@ -51,7 +51,7 @@ public static class MovementSystem
     private static Dictionary<string, Room>? _rooms;
 
     // loads rooms.json once and caches it
-    private static Dictionary<string, Room> Rooms
+    public static Dictionary<string, Room> Roomsdict
     {
         get
         {
@@ -93,6 +93,11 @@ public static class MovementSystem
         exit.Lock.ForceLocked = true;
         if (failMessage != null) exit.Lock.FailMessage = failMessage;
     }
+    public static Room? GetCurrentRoom()
+    {
+        return Roomsdict.TryGetValue(currentRoom, out Room? room) ? room : null;
+    }
+
 
     // clears a manual lock set by LockExit
     public static void UnlockExit(string roomName, string direction)
@@ -103,7 +108,7 @@ public static class MovementSystem
 
     private static Exit? FindExit(string roomName, string direction)
     {
-        if (!Rooms.TryGetValue(roomName, out Room? room)) return null;
+        if (!Roomsdict.TryGetValue(roomName, out Room? room)) return null;
         return room.Exits.FirstOrDefault(e => e.MatchesInput(direction));
     }
 
@@ -126,7 +131,7 @@ public static class MovementSystem
     {
         try
         {
-            if (!Rooms.TryGetValue(currentRoomName, out Room? room))
+            if (!Roomsdict.TryGetValue(currentRoomName, out Room? room))
             {
                 WriteLine($"Room '{currentRoomName}' not found.");
                 return currentRoomName;
