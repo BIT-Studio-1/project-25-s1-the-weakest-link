@@ -1,16 +1,16 @@
 namespace AwesomeGame;
 /* File for keeping track of the various things you have damaged in your adventure
  If you want to make it so that, for example, "cut vines" means damaging network cables,
- causing $2000 in damage, just add PropertyDamage.CauseDamage("Damaged network cables", 2000);
- If you want to get the total "EXP", use PropertyDamage.TotalCost
+ causing $2000 in damage, just add propertyDamage.causedDamage("Damaged network cables", 2000);
+ If you want to get the total "EXP", use propertyDamage.TotalCost
 */
-public static class PropertyDamage
+public static class propertyDamage
 {
     public static long totalcost, turncost;
     public static List<string> damagereasons = new List<string>();
     public static List<int> damageamount = new List<int>();
 
-    public static void writebill()
+    public static void writeBill()
     {
         string bill = $"""
         To XXXX,
@@ -27,10 +27,10 @@ public static class PropertyDamage
             bill += damagereasons[i].PadRight(40) + ("$" + damageamount[i].ToString("n2")).PadLeft(25) + '\n';
         }
 
-        Game.scrolltext(bill);
+        Game.scrollText(bill);
     }
 
-    public static void causedamage(string reason, int amount)
+    public static void causedDamage(string reason, int amount)
     {
         damagereasons.Add(reason);
         damageamount.Add(amount);
@@ -39,9 +39,9 @@ public static class PropertyDamage
 
        
     }
-    public static void printdamage()
+    public static void printDamage()
     {
-        Game.scrolltext($"You gain {turncost} EXP!");
+        Game.scrollText($"You gain {turncost} EXP!");
         turncost = 0;
     }
 }

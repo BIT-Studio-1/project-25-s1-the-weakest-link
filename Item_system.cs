@@ -16,7 +16,7 @@ internal static class Game
     public static bool condition = true, secretsenabled = false;
     public static JsonElement currentroomjson;
     static string[]? input;
-    public static void scrolltext(string Text, int speed = 10)
+    public static void scrollText(string Text, int speed = 10)
     /*  
     this sucks and i hate it but it works
     its responsible for printing text in colour and in caps when important, it does this by using tags <g> similar to html
@@ -75,40 +75,40 @@ internal static class Game
     public static void help()
     {
         // please add any commands you add to the program to this help section !!!
-        scrolltext("<b>inspect<b> (<y>item name<y>): Describes item to you.\n" +
+        scrollText("<b>inspect<b> (<y>item name<y>): Describes item to you.\n" +
                    "<b>inspect room<b>: Describes the room to you in detail.\n" +
                    "<b>stats<b>: Shows your current EXP\n" +
                    "<b>help<b>: Shows a list and description of commands\n" +
                    "<b>inventory<b>: Prints contents of the inventory\n" +
                    "<g>door name<g>: Enter the name of a door to move rooms");
         if (currentroomjson.TryGetProperty("features", out _))
-            scrolltext("<b>loot<b> (<y>item<y>/<y>object<y>): Takes an item from the room");
+            scrollText("<b>loot<b> (<y>item<y>/<y>object<y>): Takes an item from the room");
         //these are dev commands, activated by typing 'secret2'
         if (MovementSystem.currentRoom == "vinesroom" && VinesCut == false)
-            scrolltext("<b>cut vines<b>: Cuts the vines covering the door");
+            scrollText("<b>cut vines<b>: Cuts the vines covering the door");
         if (MovementSystem.currentRoom == "smashingroom" && LurkerMoved == false)
         {
-            scrolltext("<b>smash<b>: Smashes the obelisks");
+            scrollText("<b>smash<b>: Smashes the obelisks");
         }
         if (secretsenabled)
         {
-            scrolltext("<b>goto<b>: sends you to a room");
-            scrolltext("<b>give<b>: gives a provided item");
-            scrolltext("<b>do_damage<b>: command to test property damage system");
-            scrolltext("<b>show_bill<b>: command to show the current property damage");
+            scrollText("<b>goto<b>: sends you to a room");
+            scrollText("<b>give<b>: gives a provided item");
+            scrollText("<b>doDamage<b>: command to test property damage system");
+            scrollText("<b>showBill<b>: command to show the current property damage");
         }
-        scrolltext("<b>exit<b>: Closes the game");
+        scrollText("<b>exit<b>: Closes the game");
     }
     public static void inventory()
     {
         if (Inventory.Count > 0)
         {
-            scrolltext("You have:");
+            scrollText("You have:");
             foreach (KeyValuePair<string, object> Inv in Inventory)
-                scrolltext($"<y>{Inv.Key}<y>");
+                scrollText($"<y>{Inv.Key}<y>");
         }
         else
-            scrolltext("You don't have any items.");
+            scrollText("You don't have any items.");
     }
     public static void inspect()
     {
@@ -133,7 +133,7 @@ internal static class Game
                 description = room.GetProperty("description2").GetString() ?? throw new MissingFieldException($"rooms.json has no description2 for {MovementSystem.currentRoom}");
             else
                 description = room.GetProperty("description").GetString() ?? throw new MissingFieldException($"rooms.json has no description for {MovementSystem.currentRoom}");
-            scrolltext(description, 5);
+            scrollText(description, 5);
         }
         if (input != null && input.Length > 1)
         {
@@ -142,7 +142,7 @@ internal static class Game
                 var item = (JsonElement)Items[input[1]];
                 string itemDescription;
                 itemDescription = item.GetProperty("description").GetString() ?? throw new MissingFieldException($"items.json has no description for the requested item");
-                scrolltext(itemDescription);
+                scrollText(itemDescription);
             }
             else if (input[1] == "room")
             {
@@ -150,7 +150,7 @@ internal static class Game
             }
             else
             {
-                scrolltext("You don't have that item.");
+                scrollText("You don't have that item.");
             }
         }
         else
@@ -161,7 +161,7 @@ internal static class Game
     }
     public static void stats()
     {
-        scrolltext($"You have {PropertyDamage.totalcost} EXP.");
+        scrollText($"You have {propertyDamage.totalcost} EXP.");
     }
     public static void give()
     {
@@ -169,53 +169,53 @@ internal static class Game
         {
             if (input.Length > 1 && Items.ContainsKey(input[1]))
             {
-                takeitem(input[1]);
-                scrolltext($"You now have {input[1]}");
+                takeItem(input[1]);
+                scrollText($"You now have {input[1]}");
             }
             else
             {
-                scrolltext("This item does not exist.");
+                scrollText("This item does not exist.");
             }
         }
-        else { scrolltext("You can't do that right now."); }
+        else { scrollText("You can't do that right now."); }
     }
     public static void cut()
     {
-        void cutvines()
+        void cutVines()
         {
             if (Inventory.ContainsKey("dagger") && VinesCut == false)
             {
                 VinesCut = true;
-                PropertyDamage.causedamage("Destroyed cabling in network room", 2000);
-                PropertyDamage.printdamage();
-                scrolltext("You slash through the vines covering the door. You should be able to get through now.", 35);
+                propertyDamage.causedDamage("Destroyed cabling in network room", 2000);
+                propertyDamage.printDamage();
+                scrollText("You slash through the vines covering the door. You should be able to get through now.", 35);
             }
             else
-                scrolltext("You try to cut the vines, but it seems you need something sharp.", 35);
+                scrollText("You try to cut the vines, but it seems you need something sharp.", 35);
         }
         if (input.Length > 1)
         {
             if (input[1] == "vines" && MovementSystem.currentRoom == "vinesroom")
-                cutvines();
+                cutVines();
         }
         else if (input.Length == 1 && MovementSystem.currentRoom == "vinesroom")
-            cutvines();
+            cutVines();
     }
-    public static void do_damage()
+    public static void doDamage()
     {
         if (secretsenabled)
         {
-            PropertyDamage.causedamage("Did a scary test thing that cost $200", 200);
-            PropertyDamage.printdamage();
-            scrolltext("You did a test, you gained 200 EXP!");
+            propertyDamage.causedDamage("Did a scary test thing that cost $200", 200);
+            propertyDamage.printDamage();
+            scrollText("You did a test, you gained 200 EXP!");
         }
     }
-    public static void show_bill()
+    public static void showBill()
     {
         if (secretsenabled)
-            PropertyDamage.writebill();
+            propertyDamage.writeBill();
     }
-    public static void go_to()
+    public static void goTo()
     {
         if (secretsenabled)
         {
@@ -224,22 +224,22 @@ internal static class Game
                 MovementSystem.currentRoom = input[1];
                 if (Rooms.ContainsKey(input[1]))
                 {
-                    scrolltext($"You are now in: {MovementSystem.currentRoom}");
+                    scrollText($"You are now in: {MovementSystem.currentRoom}");
                     actionscompleted = 0;
                 }
             }
             else
-                scrolltext("This room does not exist");
+                scrollText("This room does not exist");
         }
     }
     public static void exit()
     {
         condition = false;
     }
-    public static void enabledebug()
+    public static void enableDebug()
     {
-        if (!secretsenabled) { secretsenabled = true; scrolltext("Debug commands enabled"); }
-        else { secretsenabled = false; scrolltext("Debug commands disabled"); }
+        if (!secretsenabled) { secretsenabled = true; scrollText("Debug commands enabled"); }
+        else { secretsenabled = false; scrollText("Debug commands disabled"); }
     }
     public static void attack()
     {
@@ -250,17 +250,17 @@ internal static class Game
             {
                 SacDestroyed = true;
 
-                scrolltext("You stab at the sac with you dagger, slashing your way through...");
+                scrollText("You stab at the sac with you dagger, slashing your way through...");
                 Thread.Sleep(500);
 
-                scrolltext("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.", 35);
+                scrollText("The sac bursts open, releasing hundreds, possibly thousands of eggs! You can barely walk without crushing dozens of eggs.", 35);
 
-                PropertyDamage.causedamage("Shredded bean bag", 60);
-                PropertyDamage.causedamage("Cleanup of bean bag beans in common room", 50);
-                PropertyDamage.printdamage();
+                propertyDamage.causedDamage("Shredded bean bag", 60);
+                propertyDamage.causedDamage("Cleanup of bean bag beans in common room", 50);
+                propertyDamage.printDamage();
 
             }
-            else scrolltext("How did you get here without a knife?");
+            else scrollText("How did you get here without a knife?");
         }
         else if (MovementSystem.currentRoom == "eyesroom" && !EyesSmashed)
         {
@@ -268,12 +268,12 @@ internal static class Game
             {
                 EyesSmashed = true;
 
-                scrolltext("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.", 35);
-                PropertyDamage.causedamage("Destroyed 20 computers and several monitors in another classroom", 30000);
-                PropertyDamage.causedamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
-                PropertyDamage.printdamage();
+                scrollText("You begin to attack the strange eyes with your hammer.\nAs you bring it down upon the eyes, it meets with more strange monoliths.\nYou smash until all the eyes are gone, and the monoliths they were on lie in pieces.", 35);
+                propertyDamage.causedDamage("Destroyed 20 computers and several monitors in another classroom", 30000);
+                propertyDamage.causedDamage("Seriously dude what the fuck, these cleaners don't pay for themselves", 200);
+                propertyDamage.printDamage();
             }
-            else scrolltext("how did you get here without a hammer?");
+            else scrollText("how did you get here without a hammer?");
         }
     }
     public static void smash()
@@ -284,20 +284,20 @@ internal static class Game
             {
                 LurkerMoved = true;
 
-                scrolltext("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n", 35);
-                scrolltext("It's time to get moving.");
+                scrollText("With a heave, you lift up the warhammer and bring it down upon one of the strange obelisk.\nIt smashes into pieces that scatter across the table.\nYou smash another, and then another, you can hear the lurker, startled, begin to make its way to the main door.\n", 35);
+                scrollText("It's time to get moving.");
 
-                PropertyDamage.causedamage("Destroyed two PCs and a monitor in D201", 5300);
-                PropertyDamage.causedamage("More work for the cleaners, overtime", 100);
-                PropertyDamage.printdamage();
+                propertyDamage.causedDamage("Destroyed two PCs and a monitor in D201", 5300);
+                propertyDamage.causedDamage("More work for the cleaners, overtime", 100);
+                propertyDamage.printDamage();
             }
-            else scrolltext("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!", 35);
+            else scrollText("You tried to smash one of the obelisks, but you just hurt your hand instead. Ouch!", 35);
         }
     }
     public static void loot()
     {
         Room? room = MovementSystem.GetCurrentRoom();
-        if (input.Length > 1 && room.Feature.Contains(input[1]))
+        if (input.Length > 1 && room.Feature.Equals(input[1]))
         {
             if (room?.Feature != null && Inventory.ContainsKey(room.Feature))
                 return;
@@ -306,8 +306,8 @@ internal static class Game
                 JsonElement item = (JsonElement)raw;
                 if (item.TryGetProperty("flavourtext", out JsonElement Text))
                 {
-                    scrolltext(Text.GetString());
-                    takeitem(room.Feature);
+                    scrollText(Text.GetString());
+                    takeItem(room.Feature);
                 }
             }
             // exception for tabletroom
@@ -316,37 +316,37 @@ internal static class Game
                 {
                     if (Inventory.ContainsKey("tablet"))
                     {
-                        scrolltext("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
+                        scrollText("the corpse, now without its items still burns with heat, it must've been a man of great vitality.");
                     }
                     else
                     {
-                        scrolltext($"From the corpse you loot some sort of <y>tablet<y>.");
-                        takeitem("tablet");
+                        scrollText($"From the corpse you loot some sort of <y>tablet<y>.");
+                        takeItem("tablet");
                         Thread.Sleep(500);
-                        scrolltext("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
+                        scrollText("You hear a loud roar and enraged footsteps from the side room you cut your way through earlier.\nThe beast is coming, you need to find a way out of the room NOW.");
                     }
                 }
             //debug commands
             //WriteLine($"Feature: {room?.Feature}");
             //writeLine($"Room: {MovementSystem.currentRoom}");
         }
-        else scrolltext("Type 'Help' for help wth commands");
+        else scrollText("Type 'Help' for help with commands");
     }
     public static void Cows()
     {
-        scrolltext("the cows are here!");
-        PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
-        PropertyDamage.printdamage();
+        scrollText("the cows are here!");
+        propertyDamage.causedDamage("Extermination & removal  of cows", 1985151522);
+        propertyDamage.printDamage();
     }
-    private static void takeitem(string item)
+    private static void takeItem(string item)
     {
         JsonElement itemJSON = (JsonElement)Items[item];
         string realName = itemJSON.GetProperty("real_name").GetString();
         int cost = itemJSON.GetProperty("cost").GetInt32();
 
         Inventory[item] = Items[item];
-        PropertyDamage.causedamage("Stole " + realName, cost);
-        PropertyDamage.printdamage();
+        propertyDamage.causedDamage("Stole " + realName, cost);
+        propertyDamage.printDamage();
     }
     public static void HandleMovement(string inputstring)
     {
@@ -362,29 +362,29 @@ internal static class Game
     public static void EndGame()
     {
         // Called from movementsystem.cs when entering "glass door" from hallway2
-        scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 35);
-        scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 35);
-        scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 35);
-        scrolltext("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning!\nYour senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
-        scrolltext("Psyching yourself for danger, you open the door...\r\n", 75);
-        scrolltext("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 35);
-        scrolltext("You are on the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
-        scrolltext("\"It's 4am, go home.\"\r\n", 30);
+        scrollText("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 35);
+        scrollText("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 35);
+        scrollText("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 35);
+        scrollText("You slowly tread down the stairs, foot by foot, step by step. As you descend, you realise with a shock that your vision is returning!\nYour senses are overwhelmed by a blinding light, radiating from a closed door.\r\n", 35);
+        scrollText("Psyching yourself for danger, you open the door...\r\n", 75);
+        scrollText("\"Hey, the building closed to students four hours ago, it's cleaners only now.\"\r\n", 35);
+        scrollText("You are on the ground floor of the Otago Polytechnic's D block, and you are staring face to face with the janitor.\r\n", 40);
+        scrollText("\"It's 4am, go home.\"\r\n", 30);
         Thread.Sleep(1000);
-        scrolltext("THE NEXT DAY...\r\n", 75);
-        scrolltext("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
-        scrolltext("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the \ncontents...\r\n", 30);
-        PropertyDamage.writebill();
+        scrollText("THE NEXT DAY...\r\n", 75);
+        scrollText("You wake up in your home at 2pm, still exhausted from last night's confusion. You yawn, then get out of bed.", 30);
+        scrollText("You go to check your mailbox and see a letter addressed to you with the polytech's logo. You open it up, and read the \ncontents...\r\n", 30);
+        propertyDamage.writeBill();
 
         WriteLine();
         WriteLine();
 
-        scrolltext("Press any key to reset.");
+        scrollText("Press any key to reset.");
         ReadKey();
         Clear();
 
         Inventory.Clear(); // this codeblock clears everything, the inventory, the receipt, and resets all bools set at the beginning to their default values
-        PropertyDamage.damagereasons.Clear(); PropertyDamage.damageamount.Clear(); PropertyDamage.totalcost = 0;
+        propertyDamage.damagereasons.Clear(); propertyDamage.damageamount.Clear(); propertyDamage.totalcost = 0;
         VinesCut = false; SacDestroyed = false; LurkerMoved = false; EyesSmashed = false; secretsenabled = false; actionscompleted = 0;
         MovementSystem.currentRoom = "startroom";
     }
@@ -395,8 +395,8 @@ internal static class Game
         string rooms_import = File.ReadAllText("rooms.json");
         Items = JsonSerializer.Deserialize<Dictionary<string, object>>(items_import) ?? throw new FileNotFoundException("items.json could not be found");
         Rooms = JsonSerializer.Deserialize<Dictionary<string, object>>(rooms_import) ?? throw new FileNotFoundException("rooms.json could not be found");
-        scrolltext("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind?", 50);
-        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
+        scrollText("You find yourself dazed and confused in a room that is completely pitch black.\nAs you struggle to your feet, your hands meet cold, unforgiving surfaces.\nPanic sets in as you wave a hand before your face and see nothing. Have you gone blind?", 50);
+        scrollText("(Input <b>help<b> for a current list of actions)", 10);
         while (condition == true)
         {
             WriteLine("===============================================");
@@ -408,9 +408,9 @@ internal static class Game
                     condition = false;
                 {
                     if (actionscompleted > room_actions / 2 && actionscompleted < room_actions)
-                        scrolltext("You hear something loud approaching.");
+                        scrollText("You hear something loud approaching.");
                     if (actionscompleted >= room_actions - 1)
-                        scrolltext("You should move on.");
+                        scrollText("You should move on.");
                 }
             }
             Write("> ");
@@ -426,7 +426,7 @@ internal static class Game
                 }
                 else
                 {
-                    scrolltext("This door is locked by an ancient mechanism. You will need a key.");
+                    scrollText("This door is locked by an ancient mechanism. You will need a key.");
                 }
                 continue;
             }
@@ -437,12 +437,12 @@ internal static class Game
                 "inspect" or "i" => inspect,
                 "stats" or "s" => stats,
                 "cut" => cut,
-                "secret" => () => scrolltext("you thought lol"),
-                "secret2" => enabledebug,
+                "secret" => () => scrollText("you thought lol"),
+                "secret2" => enableDebug,
                 "give" => give,
-                "do_damage" => do_damage,
-                "show_bill" => show_bill,
-                "goto" => go_to,
+                "doDamage" => doDamage,
+                "showBill" => showBill,
+                "goto" => goTo,
                 "exit" or "quit" or "q" => exit,
                 "attack" or "a" => attack,
                 "smash" => smash,
@@ -455,7 +455,7 @@ internal static class Game
             };
             command();
         }
-        scrolltext("<r>GAME OVER<r>");
+        scrollText("<r>GAME OVER<r>");
         ReadKey();
     }
 }
