@@ -5,7 +5,7 @@ namespace AwesomeGame;
 
 // A lock on an exit, can require any number of factors and be flipped manually at runtime
 public class Lock
-{//wallahi im cooked
+{
     public List<string> Requires { get; set; } = new();
     public string MatchType { get; set; } = "all"; // "all" or "any"
     public bool ForceLocked { get; set; } = false;
@@ -65,8 +65,8 @@ public static class MovementSystem
             return _rooms;
         }
     }
-
-    // resolves a named factor to its current true/false state, add new ones here
+    
+            // resolves a named factor to its current true/false state, add new ones here
     public static bool CheckRule(string ruleName)
     {
         return ruleName switch

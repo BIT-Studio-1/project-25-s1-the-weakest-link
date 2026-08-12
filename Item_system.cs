@@ -333,7 +333,12 @@ internal static class Game
 
         }
     }
-
+    public static void Cows()
+    {
+        scrolltext("the cows are here!");
+        PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
+        PropertyDamage.printdamage();
+    }
     private static void takeitem(string item)
     {
         JsonElement itemJSON = (JsonElement)Items[item];
@@ -344,7 +349,17 @@ internal static class Game
         PropertyDamage.causedamage("Stole " + realName, cost);
         PropertyDamage.printdamage();
     }
-
+    public static void HandleMovement(string inputstring)
+    {
+        string newRoom = MovementSystem.ChangeRoom(MovementSystem.currentRoom, inputstring);
+        if (newRoom != MovementSystem.currentRoom)
+        {
+            MovementSystem.currentRoom = newRoom;
+            actionscompleted = 0;
+            input = null;
+            inspect();
+        }
+    }
     // Called from movementsystem.cs when entering "glass door" from hallway2
     public static void EndGame()
     {
@@ -418,103 +433,32 @@ internal static class Game
                 continue;
             }
 
-            switch (input[0])
+
+            Action command = input[0] switch
             {
+                "help" or "h" => help,
+                "inventory" => inventory,
+                "inspect" or "i" => inspect,
+                "stats" or "s" => stats,
+                "cut" => cut,
+                "secret" => () => scrolltext("you thought lol"),
+                "secret2" => enabledebug,
+                "give" => give,
+                "do_damage" => do_damage,
+                "show_bill" => show_bill,
+                "goto" => go_to,
+                "exit" or "quit" or "q" => exit,
+                "attack" or "a" => attack,
+                "smash" => smash,
+                "take" or "loot" => loot,
+                "clear" or "c" => Clear,
+                "room" => () => WriteLine($"You are in: {MovementSystem.currentRoom}"),
+                "summon" or "summoncow" or "summoncows" => Cows,
+                "endgame" when secretsenabled => EndGame,
+                _ => () => HandleMovement(inputString)
+            };
 
-                case "help":
-                case "h":
-                    help();
-                    break;
-                case "inventory":
-                    inventory();
-                    break;
-                case "inspect":
-                case "i":
-                    inspect();
-                    break;
-                case "stats":
-                case "s":
-                    stats();
-                    break;
-                    case "cut":
-                    cut();
-                    break;
-                case "secret":
-                    scrolltext("you thought lol");
-                    break;
-                case "secret2":
-                    enabledebug();
-                    break;
-                // Debug commands
-                //give command, takes the value from the item dictionary and copies it into inventory
-                case "give":
-                    give();
-                    break;
-                case "do_damage":
-                    do_damage();
-                    break;
-                case "show_bill":
-                    show_bill();
-                    break;
-                case "goto":
-                    go_to();
-                    break;
-                // ^ End of debug commands
-                case "exit":
-                case "quit":
-                case "q":
-                    exit();
-                    break;
-
-                case "attack":
-                case "a":
-                    attack();
-                    break;
-                case "smash":
-                    smash();
-                    break;
-                //switch for looting items
-                case "take":
-                case "loot":
-                    loot();
-                    break;
-                case "clear":
-                case "c":
-                    {
-                        Clear();
-                        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
-                    }
-                    break;
-                case "room":
-                    WriteLine($"You are in: {MovementSystem.currentRoom}");
-                    break;
-
-                case "summon":
-                case "summoncow":
-                case "summoncows":
-                    scrolltext("the cows are here!");
-                    PropertyDamage.causedamage("Extermination & removal  of cows", 1985151522);
-                    PropertyDamage.printdamage();
-                    break;
-                case "endgame":
-                    if (secretsenabled == true)
-                        EndGame();
-                    break;
-                default:
-                    string newRoom = MovementSystem.ChangeRoom(MovementSystem.currentRoom, inputString);
-                    if (newRoom != MovementSystem.currentRoom)
-                    {
-                        MovementSystem.currentRoom = newRoom;
-                        actionscompleted = 0;
-                        input = null;
-                        inspect();
-                    }
-                    else
-                    {
-                        scrolltext("(Input <b>help<b> for a current list of actions)", 10);
-                    }
-                    break;
-            }
+            command();
         }
         scrolltext("<r>GAME OVER<r>");
         ReadKey();
