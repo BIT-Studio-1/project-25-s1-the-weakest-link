@@ -139,7 +139,6 @@ public static class MovementSystem
             Exit? exit = room.Exits.FirstOrDefault(e => e.MatchesInput(movement));
             if (exit == null)
             {
-                WriteLine("You can't go that way.");
                 return currentRoomName;
             }
             if (exit.Lock != null && exit.Lock.IsLocked())

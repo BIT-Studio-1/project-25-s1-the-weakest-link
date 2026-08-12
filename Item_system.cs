@@ -9,7 +9,6 @@ internal static class Game
 {
     public static Dictionary<string, object> Inventory = new Dictionary<string, object>();
     // Flags to show that an action has been completed
-
     public static bool VinesCut = false, SacDestroyed = false, LurkerMoved = false, EyesSmashed = false;
     public static Dictionary<string, object>? Items;
     public static Dictionary<string, object>? Rooms;
@@ -298,7 +297,7 @@ internal static class Game
     public static void loot()
     {
         Room? room = MovementSystem.GetCurrentRoom();
-        if (room.Feature.Contains(input[1]))
+        if (input.Length > 1 && room.Feature.Contains(input[1]))
         {
             if (room?.Feature != null && Inventory.ContainsKey(room.Feature))
                 return;
@@ -330,8 +329,8 @@ internal static class Game
             //debug commands
             //WriteLine($"Feature: {room?.Feature}");
             //writeLine($"Room: {MovementSystem.currentRoom}");
-
         }
+        else scrolltext("Type 'Help' for help wth commands");
     }
     public static void Cows()
     {
@@ -360,9 +359,9 @@ internal static class Game
             inspect();
         }
     }
-    // Called from movementsystem.cs when entering "glass door" from hallway2
     public static void EndGame()
     {
+        // Called from movementsystem.cs when entering "glass door" from hallway2
         scrolltext("You carefully unlock the glass door and hesitantly push it open. Could this finally be the escape from this prison you \nfind yourself in?", 35);
         scrolltext("You walk inside, hanging close to the wall so as to maintain your sense of direction. Your hand connects with a slender metal bar, as a sudden drop appears before you.\r\n", 35);
         scrolltext("You reach a foot down the cliff, clinging tight to the bar. Your body is bound tight with fear, your foot slowly \ndescending down the edge. Suddenly, your foot finds ground, as you realise a stairwell has appeared before you.\r\n", 35);
@@ -418,7 +417,6 @@ internal static class Game
             // The "??" is to stop everything from breaking if for some reason the game can't read an input
             string inputString = (ReadLine() ?? "").ToLower();
             input = inputString.Split(' ');
-
             // Special case: the glass door in hallway2 is the win condition, not a normal room transition
             if (MovementSystem.currentRoom == "hallway2" && inputString == "glass door")
             {
@@ -432,8 +430,6 @@ internal static class Game
                 }
                 continue;
             }
-
-
             Action command = input[0] switch
             {
                 "help" or "h" => help,
@@ -457,7 +453,6 @@ internal static class Game
                 "endgame" when secretsenabled => EndGame,
                 _ => () => HandleMovement(inputString)
             };
-
             command();
         }
         scrolltext("<r>GAME OVER<r>");
