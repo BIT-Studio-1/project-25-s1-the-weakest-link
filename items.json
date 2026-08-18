@@ -51,6 +51,13 @@
     "flavourtext": "You pick up the <y>sheet<y>;feeling it, you think it might be braille?",
     "weight": 10,
     "real_name": "classified documents",
-    "cost":  500
+    "cost": 500
+  },
+  "alienweaponry": {
+    "description": "It feels cold and metallic with some kind of intricate mechinism",
+    "flavourtext": "You squeeze, something flies out hitting the back wall with a metallic twang.",
+    "weight": 70,
+    "real_name": "stapler",
+    "cost": 10
   }
 }
