@@ -409,8 +409,23 @@
       {
         "direction": "door",
         "aliases": [],
-        "target":  "hallway4"
+        "target": "hallway4"
+      }
+    ]
+  },
+
+  "Cupboard": {
+    "actions": 0,
+    "description": "You enter a small musty room, if you can call it that. You reach out and can feel the walls on all sides. \nThe back wall is hiden by a large shelf packed with scrolls and ancient texts. You search the shelves and find something cold mettalic and dusty. \n You pick it up and squeeze, something flies out hitting the back wall with a metallic twang. Have you discovered some kind of <g>alienweaponry<g>. The only way out of this room is to the <g>hallway<g> you entered from.",
+    "description2": "You enter a small musty room, if you can call it that. You reach out and can feel the walls on all sides. \nThe back wall is hiden by a large shelf packed with scrolls and ancient texts. You search the shelves and find scrolls and dust. The only way out is to the <g>hallway<g> you entered from.",
+    "feature": "alienweaponry",
+    "exits": [
+      {
+        "direction": "hallway",
+        "aliases": [],
+        "target": "hallway1"
       }
     ]
   }
 }
+
